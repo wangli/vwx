@@ -1,0 +1,5 @@
+<div class="scrollView" v-bind:class="{ scrollbottom: lowerY<0 }">
+    <div v-bind:class="{ scroller_h: scrollX }">
+        <slot></slot>
+    </div>
+</div>

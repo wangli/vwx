@@ -1,0 +1,21 @@
+<div id="page">
+    <div id="swiper">
+        <swiper :indicator-dots="true" class="swipercon">
+            <a class="swiper-slide blue-slide"><img src="http://img.ukitchenplus.com/2017410122936771C7CD5B7838DE7EE5C562A246C96F8431.png"></a>
+            <a class="swiper-slide blue-slide"><img src="http://img.ukitchenplus.com/20174101229517242A88AEC89B92BF404B97A101B7A353AF.png"></a>
+        </swiper>
+    </div>
+    <div id="scroll">
+        <scroll-view ref="childTime" id="timelist" scroll-x="true" scroll-y="false" class="wrapper">
+            <div class="weui-cells">
+                <a class="weui-cell weui-cell_access" href="javascript:;" v-for="(val,i) in list">
+                    <div class="weui-cell__bd">
+                        <p>{{val}}</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                    </div>
+                </a>
+            </div>
+        </scroll-view>
+    </div>
+</div>
