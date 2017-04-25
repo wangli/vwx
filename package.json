@@ -1,5 +1,5 @@
 {
-  "name": "vx",
+  "name": "vwx",
   "version": "0.1.1",
   "description": "cww",
   "main": "src/index.js",
@@ -29,10 +29,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wangli/vx.git"
+    "url": "https://github.com/wangli/vwx.git"
   },
   "keywords": [
-    "vx.js"
+    "vwx.js"
   ],
   "author": "wangli",
   "license": "MIT"
