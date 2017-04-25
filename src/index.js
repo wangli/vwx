@@ -1,3 +1,8 @@
+/*
+ * vx.js v0.1.1
+ * (c) 2017-2018 wangli
+ * Released under the MIT License.
+ */
 import Swiper from "./components/swiper/swiper";
 import ScrollView from "./components/scroll-view/scroll-view";
 const components = [

@@ -1,6 +1,6 @@
 import Swiper from 'swiper';
 import _tpl from './swiper.html';
-
+import 'swiper/dist/css/swiper.css';
 let vSwiper = null;
 export default {
 	name: 'swiper',

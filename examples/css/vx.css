@@ -5,7 +5,8 @@ body {
 
 img {
     max-width: 100%;
-}        
+}
+
 .swipercon {
     width: 100%;
     position: relative;
@@ -19,4 +20,7 @@ img {
 #timelist {
     position: relative;
     height: 300px;
+}
+.hoverAct:active {
+    background-color: #ECECEC;
 }

@@ -2,13 +2,14 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     entry: {
         example: "./examples/index.js",
         vendor: ['vue', 'vx']
     },
     output: {
-        path: path.join(__dirname, "dist"),//输出路径
+        path: path.join(__dirname, "dist/examples"),//输出路径
         filename: "[name].js"//输出文件名
     },
     module: {
@@ -25,13 +26,20 @@ module.exports = {
                 test: /\.html$/,
                 loader: 'vue-html-loader',
                 exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: "css-loader"
+                })
             }
         ]
     },
     resolve: {
         alias: {
-            vue: path.resolve(__dirname, './dist/js/vue.js'),
-            vx: path.resolve(__dirname, './src/index.js')
+            'vue$': 'vue/dist/vue.esm.js',
+            vx: path.resolve(__dirname, './src/index.js'),
         }
     },
     plugins: [
@@ -44,13 +52,14 @@ module.exports = {
                 collapseWhitespace: true,
                 removeAttributeQuotes: true
             }
-        }), 
-        new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true,
-            compress: {
-                warnings: false
-            }
         }),
+        new ExtractTextPlugin("[name].css"),
+        /*        new webpack.optimize.UglifyJsPlugin({
+                    sourceMap: true,
+                    compress: {
+                        warnings: false
+                    }
+                }),*/
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             filename: '[name].js',
