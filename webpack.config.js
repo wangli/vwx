@@ -6,7 +6,7 @@ const pkg = require('./package.json');
 
 module.exports = {
     entry: {
-        vx: "./src/index.js"
+        vwx: "./src/index.js"
     },
     output: {
         path: path.join(__dirname, "dist/js"),
