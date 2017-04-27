@@ -6,6 +6,7 @@
 import Swiper from "./components/swiper/swiper";
 import ScrollView from "./components/scroll-view/scroll-view";
 import wx from "./wx";
+import App from "./app";
 const components = [
     Swiper,
     ScrollView
@@ -22,6 +23,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 module.exports = {
     v: '0.1',
     install,
+    App,
     wx,
     Swiper,
     ScrollView

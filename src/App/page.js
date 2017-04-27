@@ -3,7 +3,6 @@ import Axios from 'axios';
 import _ from 'lodash/core';
 
 var _vueConfig = {
-    data: { show: true },
     /*在实例初始化之后，数据观测(data observer) 和 event/watcher 事件配置之前被调用。*/
     beforeCreate: function () { },
     /*实例已经创建完成之后被调用。在这一步，实例已完成以下的配置：数据观测(data observer)，属性和方法的运算， watch/event 事件回调。然而，挂载阶段还没开始，$el 属性目前不可见。*/
@@ -31,7 +30,11 @@ var _vueConfig = {
 };
 
 var _weixConfig = {
-    data: {},
+    template: "<div><slot></slot></div>",
+    data: {
+        show: true,
+        pv: 1,
+    },
     watch: {},
     onLoad: function (options) {
         // 生命周期函数--监听页面加载
@@ -65,21 +68,35 @@ var _weixConfig = {
 };
 
 export default function (_option) {
-    if (typeof _option != "undefined") _.extend(_weixConfig, _option);
-    var unMethodArr = ["onLoad", "onReady", "onShow", "onHide", "onUnload", "onPullDownRefresh", "onReachBottom", "onShareAppMessage", "data", "watch"];
+    if (typeof _option != "undefined") {
+        //默认计算属性data扩展
+        if (_.has(_option, "data")) _.extend(_option.data, _weixConfig.data);
+        _.extend(_weixConfig, _option);
+    }
+    //提取所有非微信方法到methods对象
+    var unMethodArr = ["onLoad", "onReady", "onUnload", "onPullDownRefresh", "onReachBottom", "onShareAppMessage", "data", "watch"];
     var methods = {};
     for (var k in _weixConfig) {
         if (_.indexOf(unMethodArr, k) == -1) {
             methods[k] = _weixConfig[k];
         }
     }
-    _.extend(_vueConfig.data, _weixConfig.data);
+    //处理计算数据data对象
+    _vueConfig.data = function () {
+        return {} = _weixConfig.data;
+    }
+    //模板处理
+    var _template = "<transition name='animRight' v-on:enter-cancelled='onShow' v-on:leave-cancelled='onHide'>";
+    _template += "<div class='cxPage animated' v-if='show'><slot>";
+    _template += _weixConfig.template;
+    _template += "</slot></div>";
+    _template += "</transition>";
+    _vueConfig.template = _template;
+
     _vueConfig.created = _weixConfig.onLoad;
     _vueConfig.mounted = _weixConfig.onReady;
-    _vueConfig.enterCancelled = _weixConfig.onShow;
-    _vueConfig.leaveCancelled = _weixConfig.onHide;
     _vueConfig.destroyed = _weixConfig.onUnload;
     _vueConfig.watch = _weixConfig.watch;
     _vueConfig.methods = methods;
-    return Vue.extend(_vueConfig);
+    return _vueConfig;
 };

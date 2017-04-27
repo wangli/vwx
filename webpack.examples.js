@@ -5,7 +5,7 @@ const CleanPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     entry: {
-        example: "./examples/index.js",
+        example: "./examples/App.js",
         vendor: ['vue', 'vwx']
     },
     output: {

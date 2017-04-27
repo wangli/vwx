@@ -8,9 +8,9 @@
     <div id="scroll">
         <scroll-view ref="childTime" id="timelist" scroll-x="true" scroll-y="false" class="wrapper">
             <div class="weui-cells">
-                <a class="weui-cell weui-cell_access" href="javascript:;" v-for="(val,i) in list">
+                <a class="weui-cell weui-cell_access" href="javascript:;" v-for="(val,i) in list" @click="closed">
                     <div class="weui-cell__bd">
-                        <p>{{val}}</p>
+                        <p>{{val}}{{pv}}</p>
                     </div>
                     <div class="weui-cell__ft">
                     </div>

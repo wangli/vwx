@@ -11,6 +11,84 @@ img {
     max-width: 100%;
 }
 
+.animated {
+  animation-duration: .4s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.1, 0.7, 0.1, 1) initial;
+  -webkit-animation-duration: .4s;
+  -webkit-animation-fill-mode: both;
+  -webkit-animation-timing-function: cubic-bezier(0.1, 0.7, 0.1, 1) initial;
+}
+.animRight-enter-active{
+  -webkit-animation-name: cxpInRight;
+  animation-name: cxpInRight;
+}
+.animRight-leave-active {
+  -webkit-animation-name: cxpOutRight;
+  animation-name: cxpOutRight;
+}
+.animLeft-enter-active{
+  -webkit-animation-name: cxpInLeft;
+  animation-name: cxpInLeft;
+}
+.animLeft-leave-active {
+  -webkit-animation-name: cxpOutLeft;
+  animation-name: cxpOutLeft;
+}
+.cxpInRight {
+  -webkit-animation-name: cxpInRight;
+  animation-name: cxpInRight;
+}
+@-webkit-keyframes cxpInRight {
+  from {transform: translate3d(100%,0,  0);-webkit-transform: translate3d(100%,0,  0);}
+  to {transform: none;-webkit-transform: none;}
+}
+@keyframes cxpInRight {
+  from {transform: translate3d(100%,0,  0);-webkit-transform: translate3d(100%,0,  0);}
+  to {transform: none;-webkit-transform: none;}
+}
+
+.cxpOutRight {
+  -webkit-animation-name: cxpOutRight;
+  animation-name: cxpOutRight;
+}
+@-webkit-keyframes cxpOutRight {
+  to {transform: translate3d(100%,0,  0);-webkit-transform: translate3d(100%,0,  0);}
+}
+@keyframes cxpOutRight {
+  to {transform: translate3d(100%,0,  0);-webkit-transform: translate3d(100%,0,  0);}
+}
+
+.cxpInLeft {
+  -webkit-animation-name: cxpInLeft;
+  animation-name: cxpInLeft;
+}
+@-webkit-keyframes cxpInLeft {
+  from {transform: translate3d(-100%,0,  0);-webkit-transform: translate3d(-100%,0,  0);}
+  to {transform: none;-webkit-transform: none;}
+}
+@keyframes cxpInLeft {
+  from {transform: translate3d(-100%,0,  0);-webkit-transform: translate3d(-100%,0,  0);}
+  to {transform: none;-webkit-transform: none;}
+}
+.cxpOutLeft {
+  -webkit-animation-name: cxpOutLeft;
+  animation-name: cxpOutLeft;
+}
+@-webkit-keyframes cxpOutLeft {
+  to {transform: translate3d(-100%,0,  0);-webkit-transform: translate3d(-100%,0,  0);}
+}
+@keyframes cxpOutLeft {
+  to {transform: translate3d(-100%,0,  0);-webkit-transform: translate3d(-100%,0,  0);}
+}
+.cxPage {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    overflow: auto;
+}
 .swipercon {
     width: 100%;
     position: relative;

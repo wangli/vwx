@@ -1,5 +1,5 @@
 import Page from "./page";
 module.exports = {
-    v: 0.1,
+    v: 'P 0.1',
     Page
 };
