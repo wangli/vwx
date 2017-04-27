@@ -23,7 +23,8 @@ if (typeof window !== 'undefined' && window.Vue) {
 module.exports = {
     v: '0.1',
     install,
-    App,
+    App: App.App,
+    Page: App.Page,
     wx,
     Swiper,
     ScrollView

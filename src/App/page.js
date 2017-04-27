@@ -3,6 +3,7 @@ import Axios from 'axios';
 import _ from 'lodash/core';
 
 var _vueConfig = {
+    name:"namevvs",
     /*在实例初始化之后，数据观测(data observer) 和 event/watcher 事件配置之前被调用。*/
     beforeCreate: function () { },
     /*实例已经创建完成之后被调用。在这一步，实例已完成以下的配置：数据观测(data observer)，属性和方法的运算， watch/event 事件回调。然而，挂载阶段还没开始，$el 属性目前不可见。*/

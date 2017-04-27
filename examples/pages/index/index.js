@@ -1,7 +1,7 @@
-import Vwx from "vwx";
+import { Page, App } from "vwx";
 import _ from 'lodash/core';
-import tpl from "./tpl/index.html";
-module.exports = Vwx.App.Page({
+import tpl from "./index.html";
+module.exports = Page({
     template: tpl,
     data: {
         pv: 2999999,
