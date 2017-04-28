@@ -39,7 +39,7 @@ module.exports = {
     resolve: {
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
-            vwx: path.resolve(__dirname, './src/index.js'),
+            vwx: path.resolve(__dirname, './dist/js/vwx.js'),
         }
     },
     plugins: [

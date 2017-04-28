@@ -1,5 +1,5 @@
 /*
- * vwx.js v0.1.1
+ * vwx.js v0.1.2
  * (c) 2017 wangli
  * Released under the MIT License.
  */

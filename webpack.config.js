@@ -50,7 +50,7 @@ module.exports = {
             }
         }),
         new ExtractTextPlugin("../css/[name].css"),
-        new webpack.BannerPlugin("vx.js v" + pkg.version + " \n(c) 2017-2018 wangli \nReleased under the MIT License."),
+        new webpack.BannerPlugin("vwx.js v" + pkg.version + " \n(c) 2017-2018 wangli \nReleased under the MIT License."),
         new webpack.LoaderOptionsPlugin({
             minimize: true
         })
