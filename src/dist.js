@@ -1,10 +1,9 @@
 /*
- * index.js v0.1.5
+ * vwx.js v0.1.2
  * (c) 2017 wangli
  * Released under the MIT License.
  */
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+
 import Swiper from "./components/swiper/swiper";
 import ScrollView from "./components/scroll-view/scroll-view";
 import wx from "./wx";
@@ -13,22 +12,20 @@ import _ from 'lodash/core';
 const components = [
     Swiper,
     ScrollView
-];
-const _app = function (_obj) {
-    window.wx = wx;
-    Vue.use(VueRouter);
+]
+const install = function (Vue) {
     components.map(component => {
         Vue.component(component.name, component);
     });
-    var routes = [];
-    _.extend(routes, _obj.pages);
-    var router = new VueRouter({ routes: routes });
-    App(Vue, router);
+    window.wx = wx;
 };
+
+if (typeof window !== 'undefined' && window.Vue) {
+    install(window.Vue);
+}
 module.exports = {
     v: '0.1',
-    App: _app,
-    Page,
+    Page: Page,
     wx,
     Swiper,
     ScrollView

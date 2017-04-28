@@ -142,7 +142,7 @@
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 53);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -150,3090 +150,4228 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(Buffer) {
 
+var bind = __webpack_require__(13);
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+/*global toString:true*/
 
-/*!
- * vwx.js v0.1.2 
- * (c) 2017-2018 wangli 
- * Released under the MIT License.
+// utils is a library of generic helper functions non-specific to axios
+
+var toString = Object.prototype.toString;
+
+/**
+ * Determine if a value is an Array
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Array, otherwise false
  */
-!function (t) {
-  function e(r) {
-    if (i[r]) return i[r].exports;var n = i[r] = { i: r, l: !1, exports: {} };return t[r].call(n.exports, n, n.exports, e), n.l = !0, n.exports;
-  }var i = {};e.m = t, e.c = i, e.i = function (t) {
-    return t;
-  }, e.d = function (t, i, r) {
-    e.o(t, i) || Object.defineProperty(t, i, { configurable: !1, enumerable: !0, get: r });
-  }, e.n = function (t) {
-    var i = t && t.__esModule ? function () {
-      return t.default;
-    } : function () {
-      return t;
-    };return e.d(i, "a", i), i;
-  }, e.o = function (t, e) {
-    return Object.prototype.hasOwnProperty.call(t, e);
-  }, e.p = "", e(e.s = 47);
-}([function (t, e, i) {
-  "use strict";
-  (function (e) {
-    function r(t) {
-      return "[object Array]" === E.call(t);
-    }function n(t) {
-      return void 0 !== e && e.isBuffer && e.isBuffer(t);
-    }function s(t) {
-      return "[object ArrayBuffer]" === E.call(t);
-    }function a(t) {
-      return "undefined" != typeof FormData && t instanceof FormData;
-    }function o(t) {
-      return "undefined" != typeof ArrayBuffer && ArrayBuffer.isView ? ArrayBuffer.isView(t) : t && t.buffer && t.buffer instanceof ArrayBuffer;
-    }function l(t) {
-      return "string" == typeof t;
-    }function u(t) {
-      return "number" == typeof t;
-    }function p(t) {
-      return void 0 === t;
-    }function c(t) {
-      return null !== t && "object" == (typeof t === "undefined" ? "undefined" : _typeof(t));
-    }function h(t) {
-      return "[object Date]" === E.call(t);
-    }function d(t) {
-      return "[object File]" === E.call(t);
-    }function f(t) {
-      return "[object Blob]" === E.call(t);
-    }function m(t) {
-      return "[object Function]" === E.call(t);
-    }function g(t) {
-      return c(t) && m(t.pipe);
-    }function v(t) {
-      return "undefined" != typeof URLSearchParams && t instanceof URLSearchParams;
-    }function w(t) {
-      return t.replace(/^\s*/, "").replace(/\s*$/, "");
-    }function y() {
-      return ("undefined" == typeof navigator || "ReactNative" !== navigator.product) && "undefined" != typeof window && "undefined" != typeof document;
-    }function x(t, e) {
-      if (null !== t && void 0 !== t) if ("object" == (typeof t === "undefined" ? "undefined" : _typeof(t)) || r(t) || (t = [t]), r(t)) for (var i = 0, n = t.length; i < n; i++) {
-        e.call(null, t[i], i, t);
-      } else for (var s in t) {
-        Object.prototype.hasOwnProperty.call(t, s) && e.call(null, t[s], s, t);
-      }
-    }function b() {
-      function t(t, i) {
-        "object" == _typeof(e[i]) && "object" == (typeof t === "undefined" ? "undefined" : _typeof(t)) ? e[i] = b(e[i], t) : e[i] = t;
-      }for (var e = {}, i = 0, r = arguments.length; i < r; i++) {
-        x(arguments[i], t);
-      }return e;
-    }function T(t, e, i) {
-      return x(e, function (e, r) {
-        t[r] = i && "function" == typeof e ? S(e, i) : e;
-      }), t;
-    }var S = i(9),
-        E = Object.prototype.toString;t.exports = { isArray: r, isArrayBuffer: s, isBuffer: n, isFormData: a, isArrayBufferView: o, isString: l, isNumber: u, isObject: c, isUndefined: p, isDate: h, isFile: d, isBlob: f, isFunction: m, isStream: g, isURLSearchParams: v, isStandardBrowserEnv: y, forEach: x, merge: b, extend: T, trim: w };
-  }).call(e, i(37).Buffer);
-}, function (t, e, i) {
-  (function (t, r) {
-    var n;(function () {
-      function s(t, e) {
-        return t.push.apply(t, e), t;
-      }function a(t, e, i, r) {
-        for (var n = t.length, s = i + (r ? 1 : -1); r ? s-- : ++s < n;) {
-          if (e(t[s], s, t)) return s;
-        }return -1;
-      }function o(t) {
-        return function (e) {
-          return null == e ? re : e[t];
-        };
-      }function l(t) {
-        return function (e) {
-          return null == t ? re : t[e];
-        };
-      }function u(t, e, i, r, n) {
-        return n(t, function (t, n, s) {
-          i = r ? (r = !1, t) : e(i, t, n, s);
-        }), i;
-      }function p(t, e) {
-        return _(e, function (e) {
-          return t[e];
-        });
-      }function c(t, e) {
-        return function (i) {
-          return t(e(i));
-        };
-      }function h(t) {
-        return t instanceof d ? t : new d(t);
-      }function d(t, e) {
-        this.__wrapped__ = t, this.__actions__ = [], this.__chain__ = !!e;
-      }function f(t, e, i) {
-        var r = t[e];De.call(t, e) && zt(r, i) && (i !== re || e in t) || m(t, e, i);
-      }function m(t, e, i) {
-        t[e] = i;
-      }function g(t, e, i) {
-        if ("function" != typeof t) throw new TypeError(se);return setTimeout(function () {
-          t.apply(re, i);
-        }, e);
-      }function v(t, e) {
-        var i = !0;return Ue(t, function (t, r, n) {
-          return i = !!e(t, r, n);
-        }), i;
-      }function w(t, e, i) {
-        for (var r = -1, n = t.length; ++r < n;) {
-          var s = t[r],
-              a = e(s);if (null != a && (o === re ? a === a && !0 : i(a, o))) var o = a,
-              l = s;
-        }return l;
-      }function y(t, e) {
-        var i = [];return Ue(t, function (t, r, n) {
-          e(t, r, n) && i.push(t);
-        }), i;
-      }function x(t, e, i, r, n) {
-        var a = -1,
-            o = t.length;for (i || (i = J), n || (n = []); ++a < o;) {
-          var l = t[a];e > 0 && i(l) ? e > 1 ? x(l, e - 1, i, r, n) : s(n, l) : r || (n[n.length] = l);
-        }return n;
-      }function b(t, e) {
-        return t && Ve(t, e, ui);
-      }function T(t, e) {
-        return y(e, function (e) {
-          return Bt(t[e]);
-        });
-      }function S(t) {
-        return tt(t);
-      }function E(t, e) {
-        return t > e;
-      }function C(t) {
-        return Xt(t) && S(t) == ge;
-      }function P(t, e, i, r, n) {
-        return t === e || (null == t || null == e || !Xt(t) && !Xt(e) ? t !== t && e !== e : z(t, e, i, r, P, n));
-      }function z(t, e, i, r, n, s) {
-        var a = ti(t),
-            o = ti(e),
-            l = a ? de : S(t),
-            u = o ? de : S(e);l = l == he ? be : l, u = u == he ? be : u;var p = l == be,
-            c = u == be,
-            h = l == u;s || (s = []);var d = Ke(s, function (e) {
-          return e[0] == t;
-        }),
-            f = Ke(s, function (t) {
-          return t[0] == e;
-        });if (d && f) return d[1] == e;if (s.push([t, e]), s.push([e, t]), h && !p) {
-          var m = a ? q(t, e, i, r, n, s) : K(t, e, l, i, r, n, s);return s.pop(), m;
-        }if (!(i & ae)) {
-          var g = p && De.call(t, "__wrapped__"),
-              v = c && De.call(e, "__wrapped__");if (g || v) {
-            var w = g ? t.value() : t,
-                y = v ? e.value() : e,
-                m = n(w, y, i, r, s);return s.pop(), m;
-          }
-        }if (!h) return !1;var m = $(t, e, i, r, n, s);return s.pop(), m;
-      }function M(t) {
-        return Xt(t) && S(t) == Se;
-      }function k(t) {
-        return "function" == typeof t ? t : null == t ? Kt : ("object" == (typeof t === "undefined" ? "undefined" : _typeof(t)) ? Y : o)(t);
-      }function A(t, e) {
-        return t < e;
-      }function _(t, e) {
-        var i = -1,
-            r = Mt(t) ? Array(t.length) : [];return Ue(t, function (t, n, s) {
-          r[++i] = e(t, n, s);
-        }), r;
-      }function Y(t) {
-        var e = We(t);return function (i) {
-          var r = e.length;if (null == i) return !r;for (i = Object(i); r--;) {
-            var n = e[r];if (!(n in i && P(t[n], i[n], ae | oe))) return !1;
-          }return !0;
-        };
-      }function B(t, e) {
-        return t = Object(t), yt(e, function (e, i) {
-          return i in t && (e[i] = t[i]), e;
-        }, {});
-      }function I(t, e) {
-        return qe(et(t, e, Kt), t + "");
-      }function D(t, e, i) {
-        var r = -1,
-            n = t.length;e < 0 && (e = -e > n ? 0 : n + e), i = i > n ? n : i, i < 0 && (i += n), n = e > i ? 0 : i - e >>> 0, e >>>= 0;for (var s = Array(n); ++r < n;) {
-          s[r] = t[r + e];
-        }return s;
-      }function X(t) {
-        return D(t, 0, t.length);
-      }function R(t, e) {
-        var i;return Ue(t, function (t, r, n) {
-          return !(i = e(t, r, n));
-        }), !!i;
-      }function L(t, e) {
-        var i = t;return yt(e, function (t, e) {
-          return e.func.apply(e.thisArg, s([t], e.args));
-        }, i);
-      }function O(t, e) {
-        if (t !== e) {
-          var i = t !== re,
-              r = null === t,
-              n = t === t,
-              s = !1,
-              a = e !== re,
-              o = null === e,
-              l = e === e,
-              u = !1;if (!o && !u && !s && t > e || s && a && l && !o && !u || r && a && l || !i && l || !n) return 1;if (!r && !s && !u && t < e || u && i && n && !r && !s || o && i && n || !a && n || !l) return -1;
-        }return 0;
-      }function H(t, e, i, r) {
-        var n = !i;i || (i = {});for (var s = -1, a = e.length; ++s < a;) {
-          var o = e[s],
-              l = r ? r(i[o], t[o], o, i, t) : re;l === re && (l = t[o]), n ? m(i, o, l) : f(i, o, l);
-        }return i;
-      }function N(t) {
-        return I(function (e, i) {
-          var r = -1,
-              n = i.length,
-              s = n > 1 ? i[n - 1] : re;for (s = t.length > 3 && "function" == typeof s ? (n--, s) : re, e = Object(e); ++r < n;) {
-            var a = i[r];a && t(e, a, r, s);
-          }return e;
-        });
-      }function W(t, e) {
-        return function (i, r) {
-          if (null == i) return i;if (!Mt(i)) return t(i, r);for (var n = i.length, s = e ? n : -1, a = Object(i); (e ? s-- : ++s < n) && r(a[s], s, a) !== !1;) {}return i;
-        };
-      }function G(t) {
-        return function (e, i, r) {
-          for (var n = -1, s = Object(e), a = r(e), o = a.length; o--;) {
-            var l = a[t ? o : ++n];if (i(s[l], l, s) === !1) break;
-          }return e;
-        };
-      }function j(t) {
-        return function () {
-          var e = arguments,
-              i = je(t.prototype),
-              r = t.apply(i, e);return Dt(r) ? r : i;
-        };
-      }function U(t) {
-        return function (e, i, r) {
-          var n = Object(e);if (!Mt(e)) {
-            var s = k(i, 3);e = ui(e), i = function i(t) {
-              return s(n[t], t, n);
-            };
-          }var a = t(e, i, r);return a > -1 ? n[s ? e[a] : a] : re;
-        };
-      }function V(t, e, i, r) {
-        function n() {
-          for (var e = -1, o = arguments.length, l = -1, u = r.length, p = Array(u + o), c = this && this !== Ae && this instanceof n ? a : t; ++l < u;) {
-            p[l] = r[l];
-          }for (; o--;) {
-            p[l++] = arguments[++e];
-          }return c.apply(s ? i : this, p);
-        }if ("function" != typeof t) throw new TypeError(se);var s = e & le,
-            a = j(t);return n;
-      }function F(t, e, i, r) {
-        return t === re || zt(t, Ie[i]) && !De.call(r, i) ? e : t;
-      }function q(t, e, i, r, n, s) {
-        var a = i & ae,
-            o = t.length,
-            l = e.length;if (o != l && !(a && l > o)) return !1;for (var u = -1, p = !0, c = i & oe ? [] : re; ++u < o;) {
-          var h,
-              d = t[u],
-              f = e[u];if (h !== re) {
-            if (h) continue;p = !1;break;
-          }if (c) {
-            if (!R(e, function (t, e) {
-              if (!lt(c, e) && (d === t || n(d, t, i, r, s))) return c.push(e);
-            })) {
-              p = !1;break;
-            }
-          } else if (d !== f && !n(d, f, i, r, s)) {
-            p = !1;break;
-          }
-        }return p;
-      }function K(t, e, i, r, n, s, a) {
-        switch (i) {case me:case ge:case xe:
-            return zt(+t, +e);case ve:
-            return t.name == e.name && t.message == e.message;case Se:case Ee:
-            return t == e + "";}return !1;
-      }function $(t, e, i, r, n, s) {
-        var a = i & ae,
-            o = ui(t),
-            l = o.length;if (l != ui(e).length && !a) return !1;for (var u = l; u--;) {
-          var p = o[u];if (!(a ? p in e : De.call(e, p))) return !1;
-        }for (var c = !0, h = a; ++u < l;) {
-          p = o[u];var d,
-              f = t[p],
-              m = e[p];if (!(d === re ? f === m || n(f, m, i, r, s) : d)) {
-            c = !1;break;
-          }h || (h = "constructor" == p);
-        }if (c && !h) {
-          var g = t.constructor,
-              v = e.constructor;g != v && "constructor" in t && "constructor" in e && !("function" == typeof g && g instanceof g && "function" == typeof v && v instanceof v) && (c = !1);
-        }return c;
-      }function Z(t) {
-        return qe(et(t, re, st), t + "");
-      }function J(t) {
-        return ti(t) || Qe(t);
-      }function Q(t) {
-        var e = [];if (null != t) for (var i in Object(t)) {
-          e.push(i);
-        }return e;
-      }function tt(t) {
-        return Re.call(t);
-      }function et(t, e, i) {
-        return e = Ge(e === re ? t.length - 1 : e, 0), function () {
-          for (var r = arguments, n = -1, s = Ge(r.length - e, 0), a = Array(s); ++n < s;) {
-            a[n] = r[e + n];
-          }n = -1;for (var o = Array(e + 1); ++n < e;) {
-            o[n] = r[n];
-          }return o[e] = i(a), t.apply(this, o);
-        };
-      }function it(t) {
-        return y(t, Boolean);
-      }function rt() {
-        var t = arguments.length;if (!t) return [];for (var e = Array(t - 1), i = arguments[0], r = t; r--;) {
-          e[r - 1] = arguments[r];
-        }return s(ti(i) ? X(i) : [i], x(e, 1));
-      }function nt(t, e, i) {
-        var r = null == t ? 0 : t.length;if (!r) return -1;var n = null == i ? 0 : ri(i);return n < 0 && (n = Ge(r + n, 0)), a(t, k(e, 3), n);
-      }function st(t) {
-        return (null == t ? 0 : t.length) ? x(t, 1) : [];
-      }function at(t) {
-        return (null == t ? 0 : t.length) ? x(t, pe) : [];
-      }function ot(t) {
-        return t && t.length ? t[0] : re;
-      }function lt(t, e, i) {
-        var r = null == t ? 0 : t.length;i = "number" == typeof i ? i < 0 ? Ge(r + i, 0) : i : 0;for (var n = (i || 0) - 1, s = e === e; ++n < r;) {
-          var a = t[n];if (s ? a === e : a !== a) return n;
-        }return -1;
-      }function ut(t) {
-        var e = null == t ? 0 : t.length;return e ? t[e - 1] : re;
-      }function pt(t, e, i) {
-        var r = null == t ? 0 : t.length;return e = null == e ? 0 : +e, i = i === re ? r : +i, r ? D(t, e, i) : [];
-      }function ct(t) {
-        var e = h(t);return e.__chain__ = !0, e;
-      }function ht(t, e) {
-        return e(t), t;
-      }function dt(t, e) {
-        return e(t);
-      }function ft() {
-        return L(this.__wrapped__, this.__actions__);
-      }function mt(t, e, i) {
-        return e = i ? re : e, v(t, k(e));
-      }function gt(t, e) {
-        return y(t, k(e));
-      }function vt(t, e) {
-        return Ue(t, k(e));
-      }function wt(t, e) {
-        return _(t, k(e));
-      }function yt(t, e, i) {
-        return u(t, k(e), i, arguments.length < 3, Ue);
-      }function xt(t) {
-        return null == t ? 0 : (t = Mt(t) ? t : We(t), t.length);
-      }function bt(t, e, i) {
-        return e = i ? re : e, R(t, k(e));
-      }function Tt(t, e) {
-        var i = 0;return e = k(e), _(_(t, function (t, r, n) {
-          return { value: t, index: i++, criteria: e(t, r, n) };
-        }).sort(function (t, e) {
-          return O(t.criteria, e.criteria) || t.index - e.index;
-        }), o("value"));
-      }function St(t, e) {
-        var i;if ("function" != typeof e) throw new TypeError(se);return t = ri(t), function () {
-          return --t > 0 && (i = e.apply(this, arguments)), t <= 1 && (e = re), i;
-        };
-      }function Et(t) {
-        if ("function" != typeof t) throw new TypeError(se);return function () {
-          var e = arguments;return !t.apply(this, e);
-        };
-      }function Ct(t) {
-        return St(2, t);
-      }function Pt(t) {
-        return Dt(t) ? ti(t) ? X(t) : H(t, We(t)) : t;
-      }function zt(t, e) {
-        return t === e || t !== t && e !== e;
-      }function Mt(t) {
-        return null != t && It(t.length) && !Bt(t);
-      }function kt(t) {
-        return t === !0 || t === !1 || Xt(t) && S(t) == me;
-      }function At(t) {
-        return Mt(t) && (ti(t) || Ht(t) || Bt(t.splice) || Qe(t)) ? !t.length : !We(t).length;
-      }function _t(t, e) {
-        return P(t, e);
-      }function Yt(t) {
-        return "number" == typeof t && Ne(t);
-      }function Bt(t) {
-        if (!Dt(t)) return !1;var e = S(t);return e == we || e == ye || e == fe || e == Te;
-      }function It(t) {
-        return "number" == typeof t && t > -1 && t % 1 == 0 && t <= ce;
-      }function Dt(t) {
-        var e = typeof t === "undefined" ? "undefined" : _typeof(t);return null != t && ("object" == e || "function" == e);
-      }function Xt(t) {
-        return null != t && "object" == (typeof t === "undefined" ? "undefined" : _typeof(t));
-      }function Rt(t) {
-        return Ot(t) && t != +t;
-      }function Lt(t) {
-        return null === t;
-      }function Ot(t) {
-        return "number" == typeof t || Xt(t) && S(t) == xe;
-      }function Ht(t) {
-        return "string" == typeof t || !ti(t) && Xt(t) && S(t) == Ee;
-      }function Nt(t) {
-        return t === re;
-      }function Wt(t) {
-        return Mt(t) ? t.length ? X(t) : [] : Ft(t);
-      }function Gt(t) {
-        return "string" == typeof t ? t : null == t ? "" : t + "";
-      }function jt(t, e) {
-        var i = je(t);return null == e ? i : si(i, e);
-      }function Ut(t, e) {
-        return null != t && De.call(t, e);
-      }function Vt(t, e, i) {
-        var r = null == t ? re : t[e];return r === re && (r = i), Bt(r) ? r.call(t) : r;
-      }function Ft(t) {
-        return null == t ? [] : p(t, ui(t));
-      }function qt(t) {
-        return t = Gt(t), t && Pe.test(t) ? t.replace(Ce, Ye) : t;
-      }function Kt(t) {
-        return t;
-      }function $t(t) {
-        return Y(si({}, t));
-      }function Zt(t, e, i) {
-        var r = ui(e),
-            n = T(e, r);null != i || Dt(e) && (n.length || !r.length) || (i = e, e = t, t = this, n = T(e, ui(e)));var a = !(Dt(i) && "chain" in i && !i.chain),
-            o = Bt(t);return Ue(n, function (i) {
-          var r = e[i];t[i] = r, o && (t.prototype[i] = function () {
-            var e = this.__chain__;if (a || e) {
-              var i = t(this.__wrapped__);return (i.__actions__ = X(this.__actions__)).push({ func: r, args: arguments, thisArg: t }), i.__chain__ = e, i;
-            }return r.apply(t, s([this.value()], arguments));
-          });
-        }), t;
-      }function Jt() {
-        return Ae._ === this && (Ae._ = Le), this;
-      }function Qt() {}function te(t) {
-        var e = ++Xe;return Gt(t) + e;
-      }function ee(t) {
-        return t && t.length ? w(t, Kt, E) : re;
-      }function ie(t) {
-        return t && t.length ? w(t, Kt, A) : re;
-      }var re,
-          ne = "4.17.4",
-          se = "Expected a function",
-          ae = 1,
-          oe = 2,
-          le = 1,
-          ue = 32,
-          pe = 1 / 0,
-          ce = 9007199254740991,
-          he = "[object Arguments]",
-          de = "[object Array]",
-          fe = "[object AsyncFunction]",
-          me = "[object Boolean]",
-          ge = "[object Date]",
-          ve = "[object Error]",
-          we = "[object Function]",
-          ye = "[object GeneratorFunction]",
-          xe = "[object Number]",
-          be = "[object Object]",
-          Te = "[object Proxy]",
-          Se = "[object RegExp]",
-          Ee = "[object String]",
-          Ce = /[&<>"']/g,
-          Pe = RegExp(Ce.source),
-          ze = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" },
-          Me = "object" == (typeof t === "undefined" ? "undefined" : _typeof(t)) && t && t.Object === Object && t,
-          ke = "object" == (typeof self === "undefined" ? "undefined" : _typeof(self)) && self && self.Object === Object && self,
-          Ae = Me || ke || Function("return this")(),
-          _e = "object" == (typeof e === "undefined" ? "undefined" : _typeof(e)) && e && !e.nodeType && e,
-          Ye = (_e && "object" == (typeof r === "undefined" ? "undefined" : _typeof(r)) && r && r.nodeType, l(ze)),
-          Be = Array.prototype,
-          Ie = Object.prototype,
-          De = Ie.hasOwnProperty,
-          Xe = 0,
-          Re = Ie.toString,
-          Le = Ae._,
-          Oe = Object.create,
-          He = Ie.propertyIsEnumerable,
-          Ne = Ae.isFinite,
-          We = c(Object.keys, Object),
-          Ge = Math.max,
-          je = function () {
-        function t() {}return function (e) {
-          if (!Dt(e)) return {};if (Oe) return Oe(e);t.prototype = e;var i = new t();return t.prototype = re, i;
-        };
-      }();d.prototype = je(h.prototype), d.prototype.constructor = d;var Ue = W(b),
-          Ve = G(),
-          Fe = Qt,
-          qe = Kt,
-          Ke = U(nt),
-          $e = I(function (t, e, i) {
-        return V(t, le | ue, e, i);
-      }),
-          Ze = I(function (t, e) {
-        return g(t, 1, e);
-      }),
-          Je = I(function (t, e, i) {
-        return g(t, ni(e) || 0, i);
-      }),
-          Qe = Fe(function () {
-        return arguments;
-      }()) ? Fe : function (t) {
-        return Xt(t) && De.call(t, "callee") && !He.call(t, "callee");
-      },
-          ti = Array.isArray,
-          ei = C,
-          ii = M,
-          ri = Number,
-          ni = Number,
-          si = N(function (t, e) {
-        H(e, We(e), t);
-      }),
-          ai = N(function (t, e) {
-        H(e, Q(e), t);
-      }),
-          oi = N(function (t, e, i, r) {
-        H(e, pi(e), t, r);
-      }),
-          li = I(function (t) {
-        return t.push(re, F), oi.apply(re, t);
-      }),
-          ui = We,
-          pi = Q,
-          ci = Z(function (t, e) {
-        return null == t ? {} : B(t, e);
-      }),
-          hi = k;h.assignIn = ai, h.before = St, h.bind = $e, h.chain = ct, h.compact = it, h.concat = rt, h.create = jt, h.defaults = li, h.defer = Ze, h.delay = Je, h.filter = gt, h.flatten = st, h.flattenDeep = at, h.iteratee = hi, h.keys = ui, h.map = wt, h.matches = $t, h.mixin = Zt, h.negate = Et, h.once = Ct, h.pick = ci, h.slice = pt, h.sortBy = Tt, h.tap = ht, h.thru = dt, h.toArray = Wt, h.values = Ft, h.extend = ai, Zt(h, h), h.clone = Pt, h.escape = qt, h.every = mt, h.find = Ke, h.forEach = vt, h.has = Ut, h.head = ot, h.identity = Kt, h.indexOf = lt, h.isArguments = Qe, h.isArray = ti, h.isBoolean = kt, h.isDate = ei, h.isEmpty = At, h.isEqual = _t, h.isFinite = Yt, h.isFunction = Bt, h.isNaN = Rt, h.isNull = Lt, h.isNumber = Ot, h.isObject = Dt, h.isRegExp = ii, h.isString = Ht, h.isUndefined = Nt, h.last = ut, h.max = ee, h.min = ie, h.noConflict = Jt, h.noop = Qt, h.reduce = yt, h.result = Vt, h.size = xt, h.some = bt, h.uniqueId = te, h.each = vt, h.first = ot, Zt(h, function () {
-        var t = {};return b(h, function (e, i) {
-          De.call(h.prototype, i) || (t[i] = e);
-        }), t;
-      }(), { chain: !1 }), h.VERSION = ne, Ue(["pop", "join", "replace", "reverse", "split", "push", "shift", "sort", "splice", "unshift"], function (t) {
-        var e = (/^(?:replace|split)$/.test(t) ? String.prototype : Be)[t],
-            i = /^(?:push|sort|unshift)$/.test(t) ? "tap" : "thru",
-            r = /^(?:pop|join|replace|shift)$/.test(t);h.prototype[t] = function () {
-          var t = arguments;if (r && !this.__chain__) {
-            var n = this.value();return e.apply(ti(n) ? n : [], t);
-          }return this[i](function (i) {
-            return e.apply(ti(i) ? i : [], t);
-          });
-        };
-      }), h.prototype.toJSON = h.prototype.valueOf = h.prototype.value = ft, Ae._ = h, (n = function () {
-        return h;
-      }.call(e, i, e, r)) !== re && (r.exports = n);
-    }).call(this);
-  }).call(e, i(10), i(46)(t));
-}, function (t, e, i) {
-  "use strict";
-  (function (e) {
-    function r(t, e) {
-      !s.isUndefined(t) && s.isUndefined(t["Content-Type"]) && (t["Content-Type"] = e);
-    }function n() {
-      var t;return "undefined" != typeof XMLHttpRequest ? t = i(5) : void 0 !== e && (t = i(5)), t;
-    }var s = i(0),
-        a = i(30),
-        o = { "Content-Type": "application/x-www-form-urlencoded" },
-        l = { adapter: n(), transformRequest: [function (t, e) {
-        return a(e, "Content-Type"), s.isFormData(t) || s.isArrayBuffer(t) || s.isBuffer(t) || s.isStream(t) || s.isFile(t) || s.isBlob(t) ? t : s.isArrayBufferView(t) ? t.buffer : s.isURLSearchParams(t) ? (r(e, "application/x-www-form-urlencoded;charset=utf-8"), t.toString()) : s.isObject(t) ? (r(e, "application/json;charset=utf-8"), JSON.stringify(t)) : t;
-      }], transformResponse: [function (t) {
-        if ("string" == typeof t) try {
-          t = JSON.parse(t);
-        } catch (t) {}return t;
-      }], timeout: 0, xsrfCookieName: "XSRF-TOKEN", xsrfHeaderName: "X-XSRF-TOKEN", maxContentLength: -1, validateStatus: function validateStatus(t) {
-        return t >= 200 && t < 300;
-      } };l.headers = { common: { Accept: "application/json, text/plain, */*" } }, s.forEach(["delete", "get", "head"], function (t) {
-      l.headers[t] = {};
-    }), s.forEach(["post", "put", "patch"], function (t) {
-      l.headers[t] = s.merge(o);
-    }), t.exports = l;
-  }).call(e, i(42));
-}, function (t, e) {
-  t.exports = vue;
-}, function (t, e, i) {
-  t.exports = i(16);
-}, function (t, e, i) {
-  "use strict";
-  var r = i(0),
-      n = i(22),
-      s = i(25),
-      a = i(31),
-      o = i(29),
-      l = i(8),
-      u = "undefined" != typeof window && window.btoa && window.btoa.bind(window) || i(24);t.exports = function (t) {
-    return new Promise(function (e, p) {
-      var c = t.data,
-          h = t.headers;r.isFormData(c) && delete h["Content-Type"];var d = new XMLHttpRequest(),
-          f = "onreadystatechange",
-          m = !1;if ("undefined" == typeof window || !window.XDomainRequest || "withCredentials" in d || o(t.url) || (d = new window.XDomainRequest(), f = "onload", m = !0, d.onprogress = function () {}, d.ontimeout = function () {}), t.auth) {
-        var g = t.auth.username || "",
-            v = t.auth.password || "";h.Authorization = "Basic " + u(g + ":" + v);
-      }if (d.open(t.method.toUpperCase(), s(t.url, t.params, t.paramsSerializer), !0), d.timeout = t.timeout, d[f] = function () {
-        if (d && (4 === d.readyState || m) && (0 !== d.status || d.responseURL && 0 === d.responseURL.indexOf("file:"))) {
-          var i = "getAllResponseHeaders" in d ? a(d.getAllResponseHeaders()) : null;n(e, p, { data: t.responseType && "text" !== t.responseType ? d.response : d.responseText, status: 1223 === d.status ? 204 : d.status, statusText: 1223 === d.status ? "No Content" : d.statusText, headers: i, config: t, request: d }), d = null;
-        }
-      }, d.onerror = function () {
-        p(l("Network Error", t)), d = null;
-      }, d.ontimeout = function () {
-        p(l("timeout of " + t.timeout + "ms exceeded", t, "ECONNABORTED")), d = null;
-      }, r.isStandardBrowserEnv()) {
-        var w = i(27),
-            y = (t.withCredentials || o(t.url)) && t.xsrfCookieName ? w.read(t.xsrfCookieName) : void 0;y && (h[t.xsrfHeaderName] = y);
-      }if ("setRequestHeader" in d && r.forEach(h, function (t, e) {
-        void 0 === c && "content-type" === e.toLowerCase() ? delete h[e] : d.setRequestHeader(e, t);
-      }), t.withCredentials && (d.withCredentials = !0), t.responseType) try {
-        d.responseType = t.responseType;
-      } catch (e) {
-        if ("json" !== t.responseType) throw e;
-      }"function" == typeof t.onDownloadProgress && d.addEventListener("progress", t.onDownloadProgress), "function" == typeof t.onUploadProgress && d.upload && d.upload.addEventListener("progress", t.onUploadProgress), t.cancelToken && t.cancelToken.promise.then(function (t) {
-        d && (d.abort(), p(t), d = null);
-      }), void 0 === c && (c = null), d.send(c);
-    });
-  };
-}, function (t, e, i) {
-  "use strict";
-  function r(t) {
-    this.message = t;
-  }r.prototype.toString = function () {
-    return "Cancel" + (this.message ? ": " + this.message : "");
-  }, r.prototype.__CANCEL__ = !0, t.exports = r;
-}, function (t, e, i) {
-  "use strict";
-  t.exports = function (t) {
-    return !(!t || !t.__CANCEL__);
-  };
-}, function (t, e, i) {
-  "use strict";
-  var r = i(21);t.exports = function (t, e, i, n) {
-    return r(new Error(t), e, i, n);
-  };
-}, function (t, e, i) {
-  "use strict";
-  t.exports = function (t, e) {
-    return function () {
-      for (var i = new Array(arguments.length), r = 0; r < i.length; r++) {
-        i[r] = arguments[r];
-      }return t.apply(e, i);
-    };
-  };
-}, function (t, e) {
-  var i;i = function () {
-    return this;
-  }();try {
-    i = i || Function("return this")() || (0, eval)("this");
-  } catch (t) {
-    "object" == (typeof window === "undefined" ? "undefined" : _typeof(window)) && (i = window);
-  }t.exports = i;
-}, function (t, e, i) {
-  "use strict";
-  function r(t) {
-    return t && t.__esModule ? t : { default: t };
-  }var n = i(34),
-      s = r(n),
-      a = i(33),
-      o = r(a);t.exports = { v: "P 0.1", Page: s.default, App: o.default };
-}, function (t, e, i) {
-  "use strict";
-  function r(t) {
-    return t && t.__esModule ? t : { default: t };
-  }Object.defineProperty(e, "__esModule", { value: !0 });var n = i(41),
-      s = r(n),
-      a = i(44),
-      o = r(a),
-      l = null;e.default = { name: "scroll-view", template: o.default, data: function data() {
-      return { lowerY: 1, readyRen: !1 };
-    }, props: { scrollX: { default: !1 }, scrollY: { default: !0 }, scrollId: { default: ".scrollView" } }, mounted: function mounted() {
-      var t = this;l = new s.default(this.scrollId, { scrollX: t.scrollX, scrollY: t.scrollY, probeType: 3, mouseWheel: !0, disableTouch: !1, disableMouse: !0, eventPassthrough: "horizontal" }), l.on("scrollStart", function () {
-        t.bindscrollstart(this);
-      }), l.on("scrollEnd", function () {
-        t.bindscrollend(this), this.y == this.maxScrollY ? t.bindscrolltolower(this) : 0 == this.y && t.bindscrolltoupper(this);
-      }), l.on("scroll", function () {
-        t.bindscroll(this);
-      });
-    }, methods: { bindscrollstart: function bindscrollstart(t) {
-        this.lowerY <= 0 ? this.readyRen = !0 : this.readyRen = !1, this.$emit("bindscrollstart", t);
-      }, bindscrollend: function bindscrollend(t) {
-        this.$emit("bindscrollend", t);
-      }, bindscrolltoupper: function bindscrolltoupper(t) {
-        this.$emit("bindscrolltoupper", t);
-      }, bindscrolltolower: function bindscrolltolower(t) {
-        this.$emit("bindscrolltolower", t);
-      }, bindscroll: function bindscroll(t) {
-        this.lowerY = parseInt(t.y - t.maxScrollY), this.$emit("bindscroll", t);
-      }, refresh: function refresh() {
-        l.refresh();
-      } } };
-}, function (t, e, i) {
-  "use strict";
-  function r(t) {
-    return t && t.__esModule ? t : { default: t };
-  }Object.defineProperty(e, "__esModule", { value: !0 });var n = i(43),
-      s = r(n),
-      a = i(45),
-      o = r(a);i(38);var l = null;e.default = { name: "swiper", template: o.default, props: { indicatorDots: { default: !1 }, autoplay: { default: !1 }, current: { default: 0 }, interval: { default: 300 }, duration: { default: 500 }, circular: { default: !1 }, swiperId: { default: ".swiper" } }, computed: { pagination: function pagination() {
-        return this.indicatorDots ? ".swiper-pagination" : "";
-      }, intval: function intval() {
-        return this.autoplay ? this.interval : 0;
-      } }, mounted: function mounted() {
-      l = new s.default(this.swiperId, { autoplay: this.intval, pagination: this.pagination, speed: this.duration, initialSlide: this.current, loop: this.circular });
-    }, methods: { refresh: function refresh() {
-        mySwiper.update();
-      } } };
-}, function (t, e, i) {
-  "use strict";
-  function r(t) {
-    return t && t.__esModule ? t : { default: t };
-  }var n = i(35),
-      s = r(n);t.exports = { v: .1, request: s.default };
-}, function (t, e) {
-  t.exports = vue - router;
-}, function (t, e, i) {
-  "use strict";
-  function r(t) {
-    var e = new a(t),
-        i = s(a.prototype.request, e);return n.extend(i, a.prototype, e), n.extend(i, e), i;
-  }var n = i(0),
-      s = i(9),
-      a = i(18),
-      o = i(2),
-      l = r(o);l.Axios = a, l.create = function (t) {
-    return r(n.merge(o, t));
-  }, l.Cancel = i(6), l.CancelToken = i(17), l.isCancel = i(7), l.all = function (t) {
-    return Promise.all(t);
-  }, l.spread = i(32), t.exports = l, t.exports.default = l;
-}, function (t, e, i) {
-  "use strict";
-  function r(t) {
-    if ("function" != typeof t) throw new TypeError("executor must be a function.");var e;this.promise = new Promise(function (t) {
-      e = t;
-    });var i = this;t(function (t) {
-      i.reason || (i.reason = new n(t), e(i.reason));
-    });
-  }var n = i(6);r.prototype.throwIfRequested = function () {
-    if (this.reason) throw this.reason;
-  }, r.source = function () {
-    var t;return { token: new r(function (e) {
-        t = e;
-      }), cancel: t };
-  }, t.exports = r;
-}, function (t, e, i) {
-  "use strict";
-  function r(t) {
-    this.defaults = t, this.interceptors = { request: new a(), response: new a() };
-  }var n = i(2),
-      s = i(0),
-      a = i(19),
-      o = i(20),
-      l = i(28),
-      u = i(26);r.prototype.request = function (t) {
-    "string" == typeof t && (t = s.merge({ url: arguments[0] }, arguments[1])), t = s.merge(n, this.defaults, { method: "get" }, t), t.baseURL && !l(t.url) && (t.url = u(t.baseURL, t.url));var e = [o, void 0],
-        i = Promise.resolve(t);for (this.interceptors.request.forEach(function (t) {
-      e.unshift(t.fulfilled, t.rejected);
-    }), this.interceptors.response.forEach(function (t) {
-      e.push(t.fulfilled, t.rejected);
-    }); e.length;) {
-      i = i.then(e.shift(), e.shift());
-    }return i;
-  }, s.forEach(["delete", "get", "head", "options"], function (t) {
-    r.prototype[t] = function (e, i) {
-      return this.request(s.merge(i || {}, { method: t, url: e }));
-    };
-  }), s.forEach(["post", "put", "patch"], function (t) {
-    r.prototype[t] = function (e, i, r) {
-      return this.request(s.merge(r || {}, { method: t, url: e, data: i }));
-    };
-  }), t.exports = r;
-}, function (t, e, i) {
-  "use strict";
-  function r() {
-    this.handlers = [];
-  }var n = i(0);r.prototype.use = function (t, e) {
-    return this.handlers.push({ fulfilled: t, rejected: e }), this.handlers.length - 1;
-  }, r.prototype.eject = function (t) {
-    this.handlers[t] && (this.handlers[t] = null);
-  }, r.prototype.forEach = function (t) {
-    n.forEach(this.handlers, function (e) {
-      null !== e && t(e);
-    });
-  }, t.exports = r;
-}, function (t, e, i) {
-  "use strict";
-  function r(t) {
-    t.cancelToken && t.cancelToken.throwIfRequested();
-  }var n = i(0),
-      s = i(23),
-      a = i(7),
-      o = i(2);t.exports = function (t) {
-    return r(t), t.headers = t.headers || {}, t.data = s(t.data, t.headers, t.transformRequest), t.headers = n.merge(t.headers.common || {}, t.headers[t.method] || {}, t.headers || {}), n.forEach(["delete", "get", "head", "post", "put", "patch", "common"], function (e) {
-      delete t.headers[e];
-    }), (t.adapter || o.adapter)(t).then(function (e) {
-      return r(t), e.data = s(e.data, e.headers, t.transformResponse), e;
-    }, function (e) {
-      return a(e) || (r(t), e && e.response && (e.response.data = s(e.response.data, e.response.headers, t.transformResponse))), Promise.reject(e);
-    });
-  };
-}, function (t, e, i) {
-  "use strict";
-  t.exports = function (t, e, i, r) {
-    return t.config = e, i && (t.code = i), t.response = r, t;
-  };
-}, function (t, e, i) {
-  "use strict";
-  var r = i(8);t.exports = function (t, e, i) {
-    var n = i.config.validateStatus;i.status && n && !n(i.status) ? e(r("Request failed with status code " + i.status, i.config, null, i)) : t(i);
-  };
-}, function (t, e, i) {
-  "use strict";
-  var r = i(0);t.exports = function (t, e, i) {
-    return r.forEach(i, function (i) {
-      t = i(t, e);
-    }), t;
-  };
-}, function (t, e, i) {
-  "use strict";
-  function r() {
-    this.message = "String contains an invalid character";
-  }function n(t) {
-    for (var e, i, n = String(t), a = "", o = 0, l = s; n.charAt(0 | o) || (l = "=", o % 1); a += l.charAt(63 & e >> 8 - o % 1 * 8)) {
-      if ((i = n.charCodeAt(o += .75)) > 255) throw new r();e = e << 8 | i;
-    }return a;
-  }var s = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";r.prototype = new Error(), r.prototype.code = 5, r.prototype.name = "InvalidCharacterError", t.exports = n;
-}, function (t, e, i) {
-  "use strict";
-  function r(t) {
-    return encodeURIComponent(t).replace(/%40/gi, "@").replace(/%3A/gi, ":").replace(/%24/g, "$").replace(/%2C/gi, ",").replace(/%20/g, "+").replace(/%5B/gi, "[").replace(/%5D/gi, "]");
-  }var n = i(0);t.exports = function (t, e, i) {
-    if (!e) return t;var s;if (i) s = i(e);else if (n.isURLSearchParams(e)) s = e.toString();else {
-      var a = [];n.forEach(e, function (t, e) {
-        null !== t && void 0 !== t && (n.isArray(t) && (e += "[]"), n.isArray(t) || (t = [t]), n.forEach(t, function (t) {
-          n.isDate(t) ? t = t.toISOString() : n.isObject(t) && (t = JSON.stringify(t)), a.push(r(e) + "=" + r(t));
-        }));
-      }), s = a.join("&");
-    }return s && (t += (t.indexOf("?") === -1 ? "?" : "&") + s), t;
-  };
-}, function (t, e, i) {
-  "use strict";
-  t.exports = function (t, e) {
-    return e ? t.replace(/\/+$/, "") + "/" + e.replace(/^\/+/, "") : t;
-  };
-}, function (t, e, i) {
-  "use strict";
-  var r = i(0);t.exports = r.isStandardBrowserEnv() ? function () {
-    return { write: function write(t, e, i, n, s, a) {
-        var o = [];o.push(t + "=" + encodeURIComponent(e)), r.isNumber(i) && o.push("expires=" + new Date(i).toGMTString()), r.isString(n) && o.push("path=" + n), r.isString(s) && o.push("domain=" + s), a === !0 && o.push("secure"), document.cookie = o.join("; ");
-      }, read: function read(t) {
-        var e = document.cookie.match(new RegExp("(^|;\\s*)(" + t + ")=([^;]*)"));return e ? decodeURIComponent(e[3]) : null;
-      }, remove: function remove(t) {
-        this.write(t, "", Date.now() - 864e5);
-      } };
-  }() : function () {
-    return { write: function write() {}, read: function read() {
-        return null;
-      }, remove: function remove() {} };
-  }();
-}, function (t, e, i) {
-  "use strict";
-  t.exports = function (t) {
-    return (/^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(t)
-    );
-  };
-}, function (t, e, i) {
-  "use strict";
-  var r = i(0);t.exports = r.isStandardBrowserEnv() ? function () {
-    function t(t) {
-      var e = t;return i && (n.setAttribute("href", e), e = n.href), n.setAttribute("href", e), { href: n.href, protocol: n.protocol ? n.protocol.replace(/:$/, "") : "", host: n.host, search: n.search ? n.search.replace(/^\?/, "") : "", hash: n.hash ? n.hash.replace(/^#/, "") : "", hostname: n.hostname, port: n.port, pathname: "/" === n.pathname.charAt(0) ? n.pathname : "/" + n.pathname };
-    }var e,
-        i = /(msie|trident)/i.test(navigator.userAgent),
-        n = document.createElement("a");return e = t(window.location.href), function (i) {
-      var n = r.isString(i) ? t(i) : i;return n.protocol === e.protocol && n.host === e.host;
-    };
-  }() : function () {
-    return function () {
-      return !0;
-    };
-  }();
-}, function (t, e, i) {
-  "use strict";
-  var r = i(0);t.exports = function (t, e) {
-    r.forEach(t, function (i, r) {
-      r !== e && r.toUpperCase() === e.toUpperCase() && (t[e] = i, delete t[r]);
-    });
-  };
-}, function (t, e, i) {
-  "use strict";
-  var r = i(0);t.exports = function (t) {
-    var e,
-        i,
-        n,
-        s = {};return t ? (r.forEach(t.split("\n"), function (t) {
-      n = t.indexOf(":"), e = r.trim(t.substr(0, n)).toLowerCase(), i = r.trim(t.substr(n + 1)), e && (s[e] = s[e] ? s[e] + ", " + i : i);
-    }), s) : s;
-  };
-}, function (t, e, i) {
-  "use strict";
-  t.exports = function (t) {
-    return function (e) {
-      return t.apply(null, e);
-    };
-  };
-}, function (t, e, i) {
-  "use strict";
-  var r,
-      n = function n(t, e) {
-    if (void 0 === i) var i = new t({ el: "#app", router: e, template: "<router-view></router-view>" });
-  };"undefined" != typeof window && window.getApp && (window.getApp = function () {
-    return r;
-  }), t.exports = n;
-}, function (t, e, i) {
-  "use strict";
-  function r(t) {
-    return t && t.__esModule ? t : { default: t };
-  }function n(t) {
-    if (null == t) throw new TypeError("Cannot destructure undefined");
-  }Object.defineProperty(e, "__esModule", { value: !0 }), e.default = function (t) {
-    void 0 !== t && (l.default.has(t, "data") && l.default.extend(t.data, p.data), l.default.extend(p, t));var e = ["onLoad", "onReady", "onUnload", "onPullDownRefresh", "onReachBottom", "onShareAppMessage", "data", "watch"],
-        i = {};for (var r in p) {
-      l.default.indexOf(e, r) == -1 && (i[r] = p[r]);
-    }u.data = function () {
-      var t;return t = p.data, n(t), t;
-    };var s = "<transition name='animRight' v-on:enter-cancelled='onShow' v-on:leave-cancelled='onHide'>";return s += "<div class='cxPage animated' v-if='show'><slot>", s += p.template, s += "</slot></div>", s += "</transition>", u.template = s, u.created = p.onLoad, u.mounted = p.onReady, u.destroyed = p.onUnload, u.watch = p.watch, u.methods = i, u;
-  };var s = i(3),
-      a = (r(s), i(4)),
-      o = (r(a), i(1)),
-      l = r(o),
-      u = { name: "namevvs", beforeCreate: function beforeCreate() {}, created: function created() {}, beforeMount: function beforeMount() {}, mounted: function mounted() {}, enterCancelled: function enterCancelled() {}, beforeUpdate: function beforeUpdate() {}, updated: function updated() {}, activated: function activated() {}, deactivated: function deactivated() {}, leaveCancelled: function leaveCancelled() {}, beforeDestroy: function beforeDestroy() {}, destroyed: function destroyed() {} },
-      p = { template: "<div><slot></slot></div>", data: { show: !0, pv: 1 }, watch: {}, onLoad: function onLoad(t) {}, onReady: function onReady() {}, onShow: function onShow() {}, onHide: function onHide() {}, onUnload: function onUnload() {}, onPullDownRefresh: function onPullDownRefresh() {}, onReachBottom: function onReachBottom() {}, onShareAppMessage: function onShareAppMessage() {}, setData: function setData(t) {
-      var e = this;l.default.forEach(data, function (t, i) {
-        e[i] = t;
-      });
-    } };
-}, function (t, e, i) {
-  "use strict";
-  function r(t) {
-    return t && t.__esModule ? t : { default: t };
-  }Object.defineProperty(e, "__esModule", { value: !0 }), e.default = function (t) {
-    var e = {};e.url = "", e.method = "get", e.dataType = "json", e.headers = { "Content-Type": "application/json;charset=utf-8" }, e.success = function (t) {}, e.fail = function (t) {}, e.complete = function (t) {};var i = o.default.clone(e);o.default.has(t, "dataType") && (t.responseType = t.dataType), o.default.extend(i, t), (0, s.default)(i).then(function (t) {
-      i.success(t.data), i.complete(t.data);
-    }).catch(function (t) {
-      i.fail(t), i.complete(t);
-    });
-  };var n = i(4),
-      s = r(n),
-      a = i(1),
-      o = r(a);
-}, function (t, e, i) {
-  "use strict";
-  function r(t) {
-    var e = t.length;if (e % 4 > 0) throw new Error("Invalid string. Length must be a multiple of 4");return "=" === t[e - 2] ? 2 : "=" === t[e - 1] ? 1 : 0;
-  }function n(t) {
-    return 3 * t.length / 4 - r(t);
-  }function s(t) {
-    var e,
-        i,
-        n,
-        s,
-        a,
-        o,
-        l = t.length;a = r(t), o = new c(3 * l / 4 - a), n = a > 0 ? l - 4 : l;var u = 0;for (e = 0, i = 0; e < n; e += 4, i += 3) {
-      s = p[t.charCodeAt(e)] << 18 | p[t.charCodeAt(e + 1)] << 12 | p[t.charCodeAt(e + 2)] << 6 | p[t.charCodeAt(e + 3)], o[u++] = s >> 16 & 255, o[u++] = s >> 8 & 255, o[u++] = 255 & s;
-    }return 2 === a ? (s = p[t.charCodeAt(e)] << 2 | p[t.charCodeAt(e + 1)] >> 4, o[u++] = 255 & s) : 1 === a && (s = p[t.charCodeAt(e)] << 10 | p[t.charCodeAt(e + 1)] << 4 | p[t.charCodeAt(e + 2)] >> 2, o[u++] = s >> 8 & 255, o[u++] = 255 & s), o;
-  }function a(t) {
-    return u[t >> 18 & 63] + u[t >> 12 & 63] + u[t >> 6 & 63] + u[63 & t];
-  }function o(t, e, i) {
-    for (var r, n = [], s = e; s < i; s += 3) {
-      r = (t[s] << 16) + (t[s + 1] << 8) + t[s + 2], n.push(a(r));
-    }return n.join("");
-  }function l(t) {
-    for (var e, i = t.length, r = i % 3, n = "", s = [], a = 16383, l = 0, p = i - r; l < p; l += a) {
-      s.push(o(t, l, l + a > p ? p : l + a));
-    }return 1 === r ? (e = t[i - 1], n += u[e >> 2], n += u[e << 4 & 63], n += "==") : 2 === r && (e = (t[i - 2] << 8) + t[i - 1], n += u[e >> 10], n += u[e >> 4 & 63], n += u[e << 2 & 63], n += "="), s.push(n), s.join("");
-  }e.byteLength = n, e.toByteArray = s, e.fromByteArray = l;for (var u = [], p = [], c = "undefined" != typeof Uint8Array ? Uint8Array : Array, h = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", d = 0, f = h.length; d < f; ++d) {
-    u[d] = h[d], p[h.charCodeAt(d)] = d;
-  }p["-".charCodeAt(0)] = 62, p["_".charCodeAt(0)] = 63;
-}, function (t, e, i) {
-  "use strict";
-  (function (t) {
-    function r() {
-      try {
-        var t = new Uint8Array(1);return t.__proto__ = { __proto__: Uint8Array.prototype, foo: function foo() {
-            return 42;
-          } }, 42 === t.foo() && "function" == typeof t.subarray && 0 === t.subarray(1, 1).byteLength;
-      } catch (t) {
-        return !1;
-      }
-    }function n() {
-      return a.TYPED_ARRAY_SUPPORT ? 2147483647 : 1073741823;
-    }function s(t, e) {
-      if (n() < e) throw new RangeError("Invalid typed array length");return a.TYPED_ARRAY_SUPPORT ? (t = new Uint8Array(e), t.__proto__ = a.prototype) : (null === t && (t = new a(e)), t.length = e), t;
-    }function a(t, e, i) {
-      if (!(a.TYPED_ARRAY_SUPPORT || this instanceof a)) return new a(t, e, i);if ("number" == typeof t) {
-        if ("string" == typeof e) throw new Error("If encoding is specified then the first argument must be a string");return p(this, t);
-      }return o(this, t, e, i);
-    }function o(t, e, i, r) {
-      if ("number" == typeof e) throw new TypeError('"value" argument must not be a number');return "undefined" != typeof ArrayBuffer && e instanceof ArrayBuffer ? d(t, e, i, r) : "string" == typeof e ? c(t, e, i) : f(t, e);
-    }function l(t) {
-      if ("number" != typeof t) throw new TypeError('"size" argument must be a number');if (t < 0) throw new RangeError('"size" argument must not be negative');
-    }function u(t, e, i, r) {
-      return l(e), e <= 0 ? s(t, e) : void 0 !== i ? "string" == typeof r ? s(t, e).fill(i, r) : s(t, e).fill(i) : s(t, e);
-    }function p(t, e) {
-      if (l(e), t = s(t, e < 0 ? 0 : 0 | m(e)), !a.TYPED_ARRAY_SUPPORT) for (var i = 0; i < e; ++i) {
-        t[i] = 0;
-      }return t;
-    }function c(t, e, i) {
-      if ("string" == typeof i && "" !== i || (i = "utf8"), !a.isEncoding(i)) throw new TypeError('"encoding" must be a valid string encoding');var r = 0 | v(e, i);t = s(t, r);var n = t.write(e, i);return n !== r && (t = t.slice(0, n)), t;
-    }function h(t, e) {
-      var i = e.length < 0 ? 0 : 0 | m(e.length);t = s(t, i);for (var r = 0; r < i; r += 1) {
-        t[r] = 255 & e[r];
-      }return t;
-    }function d(t, e, i, r) {
-      if (e.byteLength, i < 0 || e.byteLength < i) throw new RangeError("'offset' is out of bounds");if (e.byteLength < i + (r || 0)) throw new RangeError("'length' is out of bounds");return e = void 0 === i && void 0 === r ? new Uint8Array(e) : void 0 === r ? new Uint8Array(e, i) : new Uint8Array(e, i, r), a.TYPED_ARRAY_SUPPORT ? (t = e, t.__proto__ = a.prototype) : t = h(t, e), t;
-    }function f(t, e) {
-      if (a.isBuffer(e)) {
-        var i = 0 | m(e.length);return t = s(t, i), 0 === t.length ? t : (e.copy(t, 0, 0, i), t);
-      }if (e) {
-        if ("undefined" != typeof ArrayBuffer && e.buffer instanceof ArrayBuffer || "length" in e) return "number" != typeof e.length || $(e.length) ? s(t, 0) : h(t, e);if ("Buffer" === e.type && Q(e.data)) return h(t, e.data);
-      }throw new TypeError("First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.");
-    }function m(t) {
-      if (t >= n()) throw new RangeError("Attempt to allocate Buffer larger than maximum size: 0x" + n().toString(16) + " bytes");return 0 | t;
-    }function g(t) {
-      return +t != t && (t = 0), a.alloc(+t);
-    }function v(t, e) {
-      if (a.isBuffer(t)) return t.length;if ("undefined" != typeof ArrayBuffer && "function" == typeof ArrayBuffer.isView && (ArrayBuffer.isView(t) || t instanceof ArrayBuffer)) return t.byteLength;"string" != typeof t && (t = "" + t);var i = t.length;if (0 === i) return 0;for (var r = !1;;) {
-        switch (e) {case "ascii":case "latin1":case "binary":
-            return i;case "utf8":case "utf-8":case void 0:
-            return U(t).length;case "ucs2":case "ucs-2":case "utf16le":case "utf-16le":
-            return 2 * i;case "hex":
-            return i >>> 1;case "base64":
-            return q(t).length;default:
-            if (r) return U(t).length;e = ("" + e).toLowerCase(), r = !0;}
-      }
-    }function w(t, e, i) {
-      var r = !1;if ((void 0 === e || e < 0) && (e = 0), e > this.length) return "";if ((void 0 === i || i > this.length) && (i = this.length), i <= 0) return "";if (i >>>= 0, e >>>= 0, i <= e) return "";for (t || (t = "utf8");;) {
-        switch (t) {case "hex":
-            return B(this, e, i);case "utf8":case "utf-8":
-            return k(this, e, i);case "ascii":
-            return _(this, e, i);case "latin1":case "binary":
-            return Y(this, e, i);case "base64":
-            return M(this, e, i);case "ucs2":case "ucs-2":case "utf16le":case "utf-16le":
-            return I(this, e, i);default:
-            if (r) throw new TypeError("Unknown encoding: " + t);t = (t + "").toLowerCase(), r = !0;}
-      }
-    }function y(t, e, i) {
-      var r = t[e];t[e] = t[i], t[i] = r;
-    }function x(t, e, i, r, n) {
-      if (0 === t.length) return -1;if ("string" == typeof i ? (r = i, i = 0) : i > 2147483647 ? i = 2147483647 : i < -2147483648 && (i = -2147483648), i = +i, isNaN(i) && (i = n ? 0 : t.length - 1), i < 0 && (i = t.length + i), i >= t.length) {
-        if (n) return -1;i = t.length - 1;
-      } else if (i < 0) {
-        if (!n) return -1;i = 0;
-      }if ("string" == typeof e && (e = a.from(e, r)), a.isBuffer(e)) return 0 === e.length ? -1 : b(t, e, i, r, n);if ("number" == typeof e) return e &= 255, a.TYPED_ARRAY_SUPPORT && "function" == typeof Uint8Array.prototype.indexOf ? n ? Uint8Array.prototype.indexOf.call(t, e, i) : Uint8Array.prototype.lastIndexOf.call(t, e, i) : b(t, [e], i, r, n);throw new TypeError("val must be string, number or Buffer");
-    }function b(t, e, i, r, n) {
-      function s(t, e) {
-        return 1 === a ? t[e] : t.readUInt16BE(e * a);
-      }var a = 1,
-          o = t.length,
-          l = e.length;if (void 0 !== r && ("ucs2" === (r = String(r).toLowerCase()) || "ucs-2" === r || "utf16le" === r || "utf-16le" === r)) {
-        if (t.length < 2 || e.length < 2) return -1;a = 2, o /= 2, l /= 2, i /= 2;
-      }var u;if (n) {
-        var p = -1;for (u = i; u < o; u++) {
-          if (s(t, u) === s(e, p === -1 ? 0 : u - p)) {
-            if (p === -1 && (p = u), u - p + 1 === l) return p * a;
-          } else p !== -1 && (u -= u - p), p = -1;
-        }
-      } else for (i + l > o && (i = o - l), u = i; u >= 0; u--) {
-        for (var c = !0, h = 0; h < l; h++) {
-          if (s(t, u + h) !== s(e, h)) {
-            c = !1;break;
-          }
-        }if (c) return u;
-      }return -1;
-    }function T(t, e, i, r) {
-      i = Number(i) || 0;var n = t.length - i;r ? (r = Number(r)) > n && (r = n) : r = n;var s = e.length;if (s % 2 != 0) throw new TypeError("Invalid hex string");r > s / 2 && (r = s / 2);for (var a = 0; a < r; ++a) {
-        var o = parseInt(e.substr(2 * a, 2), 16);if (isNaN(o)) return a;t[i + a] = o;
-      }return a;
-    }function S(t, e, i, r) {
-      return K(U(e, t.length - i), t, i, r);
-    }function E(t, e, i, r) {
-      return K(V(e), t, i, r);
-    }function C(t, e, i, r) {
-      return E(t, e, i, r);
-    }function P(t, e, i, r) {
-      return K(q(e), t, i, r);
-    }function z(t, e, i, r) {
-      return K(F(e, t.length - i), t, i, r);
-    }function M(t, e, i) {
-      return 0 === e && i === t.length ? Z.fromByteArray(t) : Z.fromByteArray(t.slice(e, i));
-    }function k(t, e, i) {
-      i = Math.min(t.length, i);for (var r = [], n = e; n < i;) {
-        var s = t[n],
-            a = null,
-            o = s > 239 ? 4 : s > 223 ? 3 : s > 191 ? 2 : 1;if (n + o <= i) {
-          var l, u, p, c;switch (o) {case 1:
-              s < 128 && (a = s);break;case 2:
-              l = t[n + 1], 128 == (192 & l) && (c = (31 & s) << 6 | 63 & l) > 127 && (a = c);break;case 3:
-              l = t[n + 1], u = t[n + 2], 128 == (192 & l) && 128 == (192 & u) && (c = (15 & s) << 12 | (63 & l) << 6 | 63 & u) > 2047 && (c < 55296 || c > 57343) && (a = c);break;case 4:
-              l = t[n + 1], u = t[n + 2], p = t[n + 3], 128 == (192 & l) && 128 == (192 & u) && 128 == (192 & p) && (c = (15 & s) << 18 | (63 & l) << 12 | (63 & u) << 6 | 63 & p) > 65535 && c < 1114112 && (a = c);}
-        }null === a ? (a = 65533, o = 1) : a > 65535 && (a -= 65536, r.push(a >>> 10 & 1023 | 55296), a = 56320 | 1023 & a), r.push(a), n += o;
-      }return A(r);
-    }function A(t) {
-      var e = t.length;if (e <= tt) return String.fromCharCode.apply(String, t);for (var i = "", r = 0; r < e;) {
-        i += String.fromCharCode.apply(String, t.slice(r, r += tt));
-      }return i;
-    }function _(t, e, i) {
-      var r = "";i = Math.min(t.length, i);for (var n = e; n < i; ++n) {
-        r += String.fromCharCode(127 & t[n]);
-      }return r;
-    }function Y(t, e, i) {
-      var r = "";i = Math.min(t.length, i);for (var n = e; n < i; ++n) {
-        r += String.fromCharCode(t[n]);
-      }return r;
-    }function B(t, e, i) {
-      var r = t.length;(!e || e < 0) && (e = 0), (!i || i < 0 || i > r) && (i = r);for (var n = "", s = e; s < i; ++s) {
-        n += j(t[s]);
-      }return n;
-    }function I(t, e, i) {
-      for (var r = t.slice(e, i), n = "", s = 0; s < r.length; s += 2) {
-        n += String.fromCharCode(r[s] + 256 * r[s + 1]);
-      }return n;
-    }function D(t, e, i) {
-      if (t % 1 != 0 || t < 0) throw new RangeError("offset is not uint");if (t + e > i) throw new RangeError("Trying to access beyond buffer length");
-    }function X(t, e, i, r, n, s) {
-      if (!a.isBuffer(t)) throw new TypeError('"buffer" argument must be a Buffer instance');if (e > n || e < s) throw new RangeError('"value" argument is out of bounds');if (i + r > t.length) throw new RangeError("Index out of range");
-    }function R(t, e, i, r) {
-      e < 0 && (e = 65535 + e + 1);for (var n = 0, s = Math.min(t.length - i, 2); n < s; ++n) {
-        t[i + n] = (e & 255 << 8 * (r ? n : 1 - n)) >>> 8 * (r ? n : 1 - n);
-      }
-    }function L(t, e, i, r) {
-      e < 0 && (e = 4294967295 + e + 1);for (var n = 0, s = Math.min(t.length - i, 4); n < s; ++n) {
-        t[i + n] = e >>> 8 * (r ? n : 3 - n) & 255;
-      }
-    }function O(t, e, i, r, n, s) {
-      if (i + r > t.length) throw new RangeError("Index out of range");if (i < 0) throw new RangeError("Index out of range");
-    }function H(t, e, i, r, n) {
-      return n || O(t, e, i, 4, 3.4028234663852886e38, -3.4028234663852886e38), J.write(t, e, i, r, 23, 4), i + 4;
-    }function N(t, e, i, r, n) {
-      return n || O(t, e, i, 8, 1.7976931348623157e308, -1.7976931348623157e308), J.write(t, e, i, r, 52, 8), i + 8;
-    }function W(t) {
-      if (t = G(t).replace(et, ""), t.length < 2) return "";for (; t.length % 4 != 0;) {
-        t += "=";
-      }return t;
-    }function G(t) {
-      return t.trim ? t.trim() : t.replace(/^\s+|\s+$/g, "");
-    }function j(t) {
-      return t < 16 ? "0" + t.toString(16) : t.toString(16);
-    }function U(t, e) {
-      e = e || 1 / 0;for (var i, r = t.length, n = null, s = [], a = 0; a < r; ++a) {
-        if ((i = t.charCodeAt(a)) > 55295 && i < 57344) {
-          if (!n) {
-            if (i > 56319) {
-              (e -= 3) > -1 && s.push(239, 191, 189);continue;
-            }if (a + 1 === r) {
-              (e -= 3) > -1 && s.push(239, 191, 189);continue;
-            }n = i;continue;
-          }if (i < 56320) {
-            (e -= 3) > -1 && s.push(239, 191, 189), n = i;continue;
-          }i = 65536 + (n - 55296 << 10 | i - 56320);
-        } else n && (e -= 3) > -1 && s.push(239, 191, 189);if (n = null, i < 128) {
-          if ((e -= 1) < 0) break;s.push(i);
-        } else if (i < 2048) {
-          if ((e -= 2) < 0) break;s.push(i >> 6 | 192, 63 & i | 128);
-        } else if (i < 65536) {
-          if ((e -= 3) < 0) break;s.push(i >> 12 | 224, i >> 6 & 63 | 128, 63 & i | 128);
-        } else {
-          if (!(i < 1114112)) throw new Error("Invalid code point");if ((e -= 4) < 0) break;s.push(i >> 18 | 240, i >> 12 & 63 | 128, i >> 6 & 63 | 128, 63 & i | 128);
-        }
-      }return s;
-    }function V(t) {
-      for (var e = [], i = 0; i < t.length; ++i) {
-        e.push(255 & t.charCodeAt(i));
-      }return e;
-    }function F(t, e) {
-      for (var i, r, n, s = [], a = 0; a < t.length && !((e -= 2) < 0); ++a) {
-        i = t.charCodeAt(a), r = i >> 8, n = i % 256, s.push(n), s.push(r);
-      }return s;
-    }function q(t) {
-      return Z.toByteArray(W(t));
-    }function K(t, e, i, r) {
-      for (var n = 0; n < r && !(n + i >= e.length || n >= t.length); ++n) {
-        e[n + i] = t[n];
-      }return n;
-    }function $(t) {
-      return t !== t;
-    } /*!
-      * The buffer module from node.js, for the browser.
-      *
-      * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
-      * @license  MIT
-      */
-    var Z = i(36),
-        J = i(39),
-        Q = i(40);e.Buffer = a, e.SlowBuffer = g, e.INSPECT_MAX_BYTES = 50, a.TYPED_ARRAY_SUPPORT = void 0 !== t.TYPED_ARRAY_SUPPORT ? t.TYPED_ARRAY_SUPPORT : r(), e.kMaxLength = n(), a.poolSize = 8192, a._augment = function (t) {
-      return t.__proto__ = a.prototype, t;
-    }, a.from = function (t, e, i) {
-      return o(null, t, e, i);
-    }, a.TYPED_ARRAY_SUPPORT && (a.prototype.__proto__ = Uint8Array.prototype, a.__proto__ = Uint8Array, "undefined" != typeof Symbol && Symbol.species && a[Symbol.species] === a && Object.defineProperty(a, Symbol.species, { value: null, configurable: !0 })), a.alloc = function (t, e, i) {
-      return u(null, t, e, i);
-    }, a.allocUnsafe = function (t) {
-      return p(null, t);
-    }, a.allocUnsafeSlow = function (t) {
-      return p(null, t);
-    }, a.isBuffer = function (t) {
-      return !(null == t || !t._isBuffer);
-    }, a.compare = function (t, e) {
-      if (!a.isBuffer(t) || !a.isBuffer(e)) throw new TypeError("Arguments must be Buffers");if (t === e) return 0;for (var i = t.length, r = e.length, n = 0, s = Math.min(i, r); n < s; ++n) {
-        if (t[n] !== e[n]) {
-          i = t[n], r = e[n];break;
-        }
-      }return i < r ? -1 : r < i ? 1 : 0;
-    }, a.isEncoding = function (t) {
-      switch (String(t).toLowerCase()) {case "hex":case "utf8":case "utf-8":case "ascii":case "latin1":case "binary":case "base64":case "ucs2":case "ucs-2":case "utf16le":case "utf-16le":
-          return !0;default:
-          return !1;}
-    }, a.concat = function (t, e) {
-      if (!Q(t)) throw new TypeError('"list" argument must be an Array of Buffers');if (0 === t.length) return a.alloc(0);var i;if (void 0 === e) for (e = 0, i = 0; i < t.length; ++i) {
-        e += t[i].length;
-      }var r = a.allocUnsafe(e),
-          n = 0;for (i = 0; i < t.length; ++i) {
-        var s = t[i];if (!a.isBuffer(s)) throw new TypeError('"list" argument must be an Array of Buffers');s.copy(r, n), n += s.length;
-      }return r;
-    }, a.byteLength = v, a.prototype._isBuffer = !0, a.prototype.swap16 = function () {
-      var t = this.length;if (t % 2 != 0) throw new RangeError("Buffer size must be a multiple of 16-bits");for (var e = 0; e < t; e += 2) {
-        y(this, e, e + 1);
-      }return this;
-    }, a.prototype.swap32 = function () {
-      var t = this.length;if (t % 4 != 0) throw new RangeError("Buffer size must be a multiple of 32-bits");for (var e = 0; e < t; e += 4) {
-        y(this, e, e + 3), y(this, e + 1, e + 2);
-      }return this;
-    }, a.prototype.swap64 = function () {
-      var t = this.length;if (t % 8 != 0) throw new RangeError("Buffer size must be a multiple of 64-bits");for (var e = 0; e < t; e += 8) {
-        y(this, e, e + 7), y(this, e + 1, e + 6), y(this, e + 2, e + 5), y(this, e + 3, e + 4);
-      }return this;
-    }, a.prototype.toString = function () {
-      var t = 0 | this.length;return 0 === t ? "" : 0 === arguments.length ? k(this, 0, t) : w.apply(this, arguments);
-    }, a.prototype.equals = function (t) {
-      if (!a.isBuffer(t)) throw new TypeError("Argument must be a Buffer");return this === t || 0 === a.compare(this, t);
-    }, a.prototype.inspect = function () {
-      var t = "",
-          i = e.INSPECT_MAX_BYTES;return this.length > 0 && (t = this.toString("hex", 0, i).match(/.{2}/g).join(" "), this.length > i && (t += " ... ")), "<Buffer " + t + ">";
-    }, a.prototype.compare = function (t, e, i, r, n) {
-      if (!a.isBuffer(t)) throw new TypeError("Argument must be a Buffer");if (void 0 === e && (e = 0), void 0 === i && (i = t ? t.length : 0), void 0 === r && (r = 0), void 0 === n && (n = this.length), e < 0 || i > t.length || r < 0 || n > this.length) throw new RangeError("out of range index");if (r >= n && e >= i) return 0;if (r >= n) return -1;if (e >= i) return 1;if (e >>>= 0, i >>>= 0, r >>>= 0, n >>>= 0, this === t) return 0;for (var s = n - r, o = i - e, l = Math.min(s, o), u = this.slice(r, n), p = t.slice(e, i), c = 0; c < l; ++c) {
-        if (u[c] !== p[c]) {
-          s = u[c], o = p[c];break;
-        }
-      }return s < o ? -1 : o < s ? 1 : 0;
-    }, a.prototype.includes = function (t, e, i) {
-      return this.indexOf(t, e, i) !== -1;
-    }, a.prototype.indexOf = function (t, e, i) {
-      return x(this, t, e, i, !0);
-    }, a.prototype.lastIndexOf = function (t, e, i) {
-      return x(this, t, e, i, !1);
-    }, a.prototype.write = function (t, e, i, r) {
-      if (void 0 === e) r = "utf8", i = this.length, e = 0;else if (void 0 === i && "string" == typeof e) r = e, i = this.length, e = 0;else {
-        if (!isFinite(e)) throw new Error("Buffer.write(string, encoding, offset[, length]) is no longer supported");e |= 0, isFinite(i) ? (i |= 0, void 0 === r && (r = "utf8")) : (r = i, i = void 0);
-      }var n = this.length - e;if ((void 0 === i || i > n) && (i = n), t.length > 0 && (i < 0 || e < 0) || e > this.length) throw new RangeError("Attempt to write outside buffer bounds");r || (r = "utf8");for (var s = !1;;) {
-        switch (r) {case "hex":
-            return T(this, t, e, i);case "utf8":case "utf-8":
-            return S(this, t, e, i);case "ascii":
-            return E(this, t, e, i);case "latin1":case "binary":
-            return C(this, t, e, i);case "base64":
-            return P(this, t, e, i);case "ucs2":case "ucs-2":case "utf16le":case "utf-16le":
-            return z(this, t, e, i);default:
-            if (s) throw new TypeError("Unknown encoding: " + r);r = ("" + r).toLowerCase(), s = !0;}
-      }
-    }, a.prototype.toJSON = function () {
-      return { type: "Buffer", data: Array.prototype.slice.call(this._arr || this, 0) };
-    };var tt = 4096;a.prototype.slice = function (t, e) {
-      var i = this.length;t = ~~t, e = void 0 === e ? i : ~~e, t < 0 ? (t += i) < 0 && (t = 0) : t > i && (t = i), e < 0 ? (e += i) < 0 && (e = 0) : e > i && (e = i), e < t && (e = t);var r;if (a.TYPED_ARRAY_SUPPORT) r = this.subarray(t, e), r.__proto__ = a.prototype;else {
-        var n = e - t;r = new a(n, void 0);for (var s = 0; s < n; ++s) {
-          r[s] = this[s + t];
-        }
-      }return r;
-    }, a.prototype.readUIntLE = function (t, e, i) {
-      t |= 0, e |= 0, i || D(t, e, this.length);for (var r = this[t], n = 1, s = 0; ++s < e && (n *= 256);) {
-        r += this[t + s] * n;
-      }return r;
-    }, a.prototype.readUIntBE = function (t, e, i) {
-      t |= 0, e |= 0, i || D(t, e, this.length);for (var r = this[t + --e], n = 1; e > 0 && (n *= 256);) {
-        r += this[t + --e] * n;
-      }return r;
-    }, a.prototype.readUInt8 = function (t, e) {
-      return e || D(t, 1, this.length), this[t];
-    }, a.prototype.readUInt16LE = function (t, e) {
-      return e || D(t, 2, this.length), this[t] | this[t + 1] << 8;
-    }, a.prototype.readUInt16BE = function (t, e) {
-      return e || D(t, 2, this.length), this[t] << 8 | this[t + 1];
-    }, a.prototype.readUInt32LE = function (t, e) {
-      return e || D(t, 4, this.length), (this[t] | this[t + 1] << 8 | this[t + 2] << 16) + 16777216 * this[t + 3];
-    }, a.prototype.readUInt32BE = function (t, e) {
-      return e || D(t, 4, this.length), 16777216 * this[t] + (this[t + 1] << 16 | this[t + 2] << 8 | this[t + 3]);
-    }, a.prototype.readIntLE = function (t, e, i) {
-      t |= 0, e |= 0, i || D(t, e, this.length);for (var r = this[t], n = 1, s = 0; ++s < e && (n *= 256);) {
-        r += this[t + s] * n;
-      }return n *= 128, r >= n && (r -= Math.pow(2, 8 * e)), r;
-    }, a.prototype.readIntBE = function (t, e, i) {
-      t |= 0, e |= 0, i || D(t, e, this.length);for (var r = e, n = 1, s = this[t + --r]; r > 0 && (n *= 256);) {
-        s += this[t + --r] * n;
-      }return n *= 128, s >= n && (s -= Math.pow(2, 8 * e)), s;
-    }, a.prototype.readInt8 = function (t, e) {
-      return e || D(t, 1, this.length), 128 & this[t] ? (255 - this[t] + 1) * -1 : this[t];
-    }, a.prototype.readInt16LE = function (t, e) {
-      e || D(t, 2, this.length);var i = this[t] | this[t + 1] << 8;return 32768 & i ? 4294901760 | i : i;
-    }, a.prototype.readInt16BE = function (t, e) {
-      e || D(t, 2, this.length);var i = this[t + 1] | this[t] << 8;return 32768 & i ? 4294901760 | i : i;
-    }, a.prototype.readInt32LE = function (t, e) {
-      return e || D(t, 4, this.length), this[t] | this[t + 1] << 8 | this[t + 2] << 16 | this[t + 3] << 24;
-    }, a.prototype.readInt32BE = function (t, e) {
-      return e || D(t, 4, this.length), this[t] << 24 | this[t + 1] << 16 | this[t + 2] << 8 | this[t + 3];
-    }, a.prototype.readFloatLE = function (t, e) {
-      return e || D(t, 4, this.length), J.read(this, t, !0, 23, 4);
-    }, a.prototype.readFloatBE = function (t, e) {
-      return e || D(t, 4, this.length), J.read(this, t, !1, 23, 4);
-    }, a.prototype.readDoubleLE = function (t, e) {
-      return e || D(t, 8, this.length), J.read(this, t, !0, 52, 8);
-    }, a.prototype.readDoubleBE = function (t, e) {
-      return e || D(t, 8, this.length), J.read(this, t, !1, 52, 8);
-    }, a.prototype.writeUIntLE = function (t, e, i, r) {
-      if (t = +t, e |= 0, i |= 0, !r) {
-        X(this, t, e, i, Math.pow(2, 8 * i) - 1, 0);
-      }var n = 1,
-          s = 0;for (this[e] = 255 & t; ++s < i && (n *= 256);) {
-        this[e + s] = t / n & 255;
-      }return e + i;
-    }, a.prototype.writeUIntBE = function (t, e, i, r) {
-      if (t = +t, e |= 0, i |= 0, !r) {
-        X(this, t, e, i, Math.pow(2, 8 * i) - 1, 0);
-      }var n = i - 1,
-          s = 1;for (this[e + n] = 255 & t; --n >= 0 && (s *= 256);) {
-        this[e + n] = t / s & 255;
-      }return e + i;
-    }, a.prototype.writeUInt8 = function (t, e, i) {
-      return t = +t, e |= 0, i || X(this, t, e, 1, 255, 0), a.TYPED_ARRAY_SUPPORT || (t = Math.floor(t)), this[e] = 255 & t, e + 1;
-    }, a.prototype.writeUInt16LE = function (t, e, i) {
-      return t = +t, e |= 0, i || X(this, t, e, 2, 65535, 0), a.TYPED_ARRAY_SUPPORT ? (this[e] = 255 & t, this[e + 1] = t >>> 8) : R(this, t, e, !0), e + 2;
-    }, a.prototype.writeUInt16BE = function (t, e, i) {
-      return t = +t, e |= 0, i || X(this, t, e, 2, 65535, 0), a.TYPED_ARRAY_SUPPORT ? (this[e] = t >>> 8, this[e + 1] = 255 & t) : R(this, t, e, !1), e + 2;
-    }, a.prototype.writeUInt32LE = function (t, e, i) {
-      return t = +t, e |= 0, i || X(this, t, e, 4, 4294967295, 0), a.TYPED_ARRAY_SUPPORT ? (this[e + 3] = t >>> 24, this[e + 2] = t >>> 16, this[e + 1] = t >>> 8, this[e] = 255 & t) : L(this, t, e, !0), e + 4;
-    }, a.prototype.writeUInt32BE = function (t, e, i) {
-      return t = +t, e |= 0, i || X(this, t, e, 4, 4294967295, 0), a.TYPED_ARRAY_SUPPORT ? (this[e] = t >>> 24, this[e + 1] = t >>> 16, this[e + 2] = t >>> 8, this[e + 3] = 255 & t) : L(this, t, e, !1), e + 4;
-    }, a.prototype.writeIntLE = function (t, e, i, r) {
-      if (t = +t, e |= 0, !r) {
-        var n = Math.pow(2, 8 * i - 1);X(this, t, e, i, n - 1, -n);
-      }var s = 0,
-          a = 1,
-          o = 0;for (this[e] = 255 & t; ++s < i && (a *= 256);) {
-        t < 0 && 0 === o && 0 !== this[e + s - 1] && (o = 1), this[e + s] = (t / a >> 0) - o & 255;
-      }return e + i;
-    }, a.prototype.writeIntBE = function (t, e, i, r) {
-      if (t = +t, e |= 0, !r) {
-        var n = Math.pow(2, 8 * i - 1);X(this, t, e, i, n - 1, -n);
-      }var s = i - 1,
-          a = 1,
-          o = 0;for (this[e + s] = 255 & t; --s >= 0 && (a *= 256);) {
-        t < 0 && 0 === o && 0 !== this[e + s + 1] && (o = 1), this[e + s] = (t / a >> 0) - o & 255;
-      }return e + i;
-    }, a.prototype.writeInt8 = function (t, e, i) {
-      return t = +t, e |= 0, i || X(this, t, e, 1, 127, -128), a.TYPED_ARRAY_SUPPORT || (t = Math.floor(t)), t < 0 && (t = 255 + t + 1), this[e] = 255 & t, e + 1;
-    }, a.prototype.writeInt16LE = function (t, e, i) {
-      return t = +t, e |= 0, i || X(this, t, e, 2, 32767, -32768), a.TYPED_ARRAY_SUPPORT ? (this[e] = 255 & t, this[e + 1] = t >>> 8) : R(this, t, e, !0), e + 2;
-    }, a.prototype.writeInt16BE = function (t, e, i) {
-      return t = +t, e |= 0, i || X(this, t, e, 2, 32767, -32768), a.TYPED_ARRAY_SUPPORT ? (this[e] = t >>> 8, this[e + 1] = 255 & t) : R(this, t, e, !1), e + 2;
-    }, a.prototype.writeInt32LE = function (t, e, i) {
-      return t = +t, e |= 0, i || X(this, t, e, 4, 2147483647, -2147483648), a.TYPED_ARRAY_SUPPORT ? (this[e] = 255 & t, this[e + 1] = t >>> 8, this[e + 2] = t >>> 16, this[e + 3] = t >>> 24) : L(this, t, e, !0), e + 4;
-    }, a.prototype.writeInt32BE = function (t, e, i) {
-      return t = +t, e |= 0, i || X(this, t, e, 4, 2147483647, -2147483648), t < 0 && (t = 4294967295 + t + 1), a.TYPED_ARRAY_SUPPORT ? (this[e] = t >>> 24, this[e + 1] = t >>> 16, this[e + 2] = t >>> 8, this[e + 3] = 255 & t) : L(this, t, e, !1), e + 4;
-    }, a.prototype.writeFloatLE = function (t, e, i) {
-      return H(this, t, e, !0, i);
-    }, a.prototype.writeFloatBE = function (t, e, i) {
-      return H(this, t, e, !1, i);
-    }, a.prototype.writeDoubleLE = function (t, e, i) {
-      return N(this, t, e, !0, i);
-    }, a.prototype.writeDoubleBE = function (t, e, i) {
-      return N(this, t, e, !1, i);
-    }, a.prototype.copy = function (t, e, i, r) {
-      if (i || (i = 0), r || 0 === r || (r = this.length), e >= t.length && (e = t.length), e || (e = 0), r > 0 && r < i && (r = i), r === i) return 0;if (0 === t.length || 0 === this.length) return 0;if (e < 0) throw new RangeError("targetStart out of bounds");if (i < 0 || i >= this.length) throw new RangeError("sourceStart out of bounds");if (r < 0) throw new RangeError("sourceEnd out of bounds");r > this.length && (r = this.length), t.length - e < r - i && (r = t.length - e + i);var n,
-          s = r - i;if (this === t && i < e && e < r) for (n = s - 1; n >= 0; --n) {
-        t[n + e] = this[n + i];
-      } else if (s < 1e3 || !a.TYPED_ARRAY_SUPPORT) for (n = 0; n < s; ++n) {
-        t[n + e] = this[n + i];
-      } else Uint8Array.prototype.set.call(t, this.subarray(i, i + s), e);return s;
-    }, a.prototype.fill = function (t, e, i, r) {
-      if ("string" == typeof t) {
-        if ("string" == typeof e ? (r = e, e = 0, i = this.length) : "string" == typeof i && (r = i, i = this.length), 1 === t.length) {
-          var n = t.charCodeAt(0);n < 256 && (t = n);
-        }if (void 0 !== r && "string" != typeof r) throw new TypeError("encoding must be a string");if ("string" == typeof r && !a.isEncoding(r)) throw new TypeError("Unknown encoding: " + r);
-      } else "number" == typeof t && (t &= 255);if (e < 0 || this.length < e || this.length < i) throw new RangeError("Out of range index");if (i <= e) return this;e >>>= 0, i = void 0 === i ? this.length : i >>> 0, t || (t = 0);var s;if ("number" == typeof t) for (s = e; s < i; ++s) {
-        this[s] = t;
-      } else {
-        var o = a.isBuffer(t) ? t : U(new a(t, r).toString()),
-            l = o.length;for (s = 0; s < i - e; ++s) {
-          this[s + e] = o[s % l];
-        }
-      }return this;
-    };var et = /[^+\/0-9A-Za-z-_]/g;
-  }).call(e, i(10));
-}, function (t, e) {}, function (t, e) {
-  e.read = function (t, e, i, r, n) {
-    var s,
-        a,
-        o = 8 * n - r - 1,
-        l = (1 << o) - 1,
-        u = l >> 1,
-        p = -7,
-        c = i ? n - 1 : 0,
-        h = i ? -1 : 1,
-        d = t[e + c];for (c += h, s = d & (1 << -p) - 1, d >>= -p, p += o; p > 0; s = 256 * s + t[e + c], c += h, p -= 8) {}for (a = s & (1 << -p) - 1, s >>= -p, p += r; p > 0; a = 256 * a + t[e + c], c += h, p -= 8) {}if (0 === s) s = 1 - u;else {
-      if (s === l) return a ? NaN : 1 / 0 * (d ? -1 : 1);a += Math.pow(2, r), s -= u;
-    }return (d ? -1 : 1) * a * Math.pow(2, s - r);
-  }, e.write = function (t, e, i, r, n, s) {
-    var a,
-        o,
-        l,
-        u = 8 * s - n - 1,
-        p = (1 << u) - 1,
-        c = p >> 1,
-        h = 23 === n ? Math.pow(2, -24) - Math.pow(2, -77) : 0,
-        d = r ? 0 : s - 1,
-        f = r ? 1 : -1,
-        m = e < 0 || 0 === e && 1 / e < 0 ? 1 : 0;for (e = Math.abs(e), isNaN(e) || e === 1 / 0 ? (o = isNaN(e) ? 1 : 0, a = p) : (a = Math.floor(Math.log(e) / Math.LN2), e * (l = Math.pow(2, -a)) < 1 && (a--, l *= 2), e += a + c >= 1 ? h / l : h * Math.pow(2, 1 - c), e * l >= 2 && (a++, l /= 2), a + c >= p ? (o = 0, a = p) : a + c >= 1 ? (o = (e * l - 1) * Math.pow(2, n), a += c) : (o = e * Math.pow(2, c - 1) * Math.pow(2, n), a = 0)); n >= 8; t[i + d] = 255 & o, d += f, o /= 256, n -= 8) {}for (a = a << n | o, u += n; u > 0; t[i + d] = 255 & a, d += f, a /= 256, u -= 8) {}t[i + d - f] |= 128 * m;
-  };
-}, function (t, e) {
-  var i = {}.toString;t.exports = Array.isArray || function (t) {
-    return "[object Array]" == i.call(t);
-  };
-}, function (t, e, i) {
-  var r; /*! iScroll v5.2.0-snapshot ~ (c) 2008-2017 Matteo Spinelli ~ http://cubiq.org/license */
-  !function (n, s, a) {
-    function o(t, e) {
-      this.wrapper = "string" == typeof t ? s.querySelector(t) : t, this.scroller = this.wrapper.children[0], this.scrollerStyle = this.scroller.style, this.options = { resizeScrollbars: !0, mouseWheelSpeed: 20, snapThreshold: .334, disablePointer: !c.hasPointer, disableTouch: c.hasPointer || !c.hasTouch, disableMouse: c.hasPointer || c.hasTouch, startX: 0, startY: 0, scrollY: !0, directionLockThreshold: 5, momentum: !0, bounce: !0, bounceTime: 600, bounceEasing: "", preventDefault: !0, preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT)$/ }, HWCompositing: !0, useTransition: !0, useTransform: !0, bindToWrapper: void 0 === n.onmousedown };for (var i in e) {
-        this.options[i] = e[i];
-      }this.translateZ = this.options.HWCompositing && c.hasPerspective ? " translateZ(0)" : "", this.options.useTransition = c.hasTransition && this.options.useTransition, this.options.useTransform = c.hasTransform && this.options.useTransform, this.options.eventPassthrough = this.options.eventPassthrough === !0 ? "vertical" : this.options.eventPassthrough, this.options.preventDefault = !this.options.eventPassthrough && this.options.preventDefault, this.options.scrollY = "vertical" != this.options.eventPassthrough && this.options.scrollY, this.options.scrollX = "horizontal" != this.options.eventPassthrough && this.options.scrollX, this.options.freeScroll = this.options.freeScroll && !this.options.eventPassthrough, this.options.directionLockThreshold = this.options.eventPassthrough ? 0 : this.options.directionLockThreshold, this.options.bounceEasing = "string" == typeof this.options.bounceEasing ? c.ease[this.options.bounceEasing] || c.ease.circular : this.options.bounceEasing, this.options.resizePolling = void 0 === this.options.resizePolling ? 60 : this.options.resizePolling, this.options.tap === !0 && (this.options.tap = "tap"), this.options.useTransition || this.options.useTransform || /relative|absolute/i.test(this.scrollerStyle.position) || (this.scrollerStyle.position = "relative"), "scale" == this.options.shrinkScrollbars && (this.options.useTransition = !1), this.options.invertWheelDirection = this.options.invertWheelDirection ? -1 : 1, 3 == this.options.probeType && (this.options.useTransition = !1), this.x = 0, this.y = 0, this.directionX = 0, this.directionY = 0, this._events = {}, this._init(), this.refresh(), this.scrollTo(this.options.startX, this.options.startY), this.enable();
-    }function l(t, e, i) {
-      var r = s.createElement("div"),
-          n = s.createElement("div");return i === !0 && (r.style.cssText = "position:absolute;z-index:9999", n.style.cssText = "-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:absolute;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.9);border-radius:3px"), n.className = "iScrollIndicator", "h" == t ? (i === !0 && (r.style.cssText += ";height:7px;left:2px;right:2px;bottom:0", n.style.height = "100%"), r.className = "iScrollHorizontalScrollbar") : (i === !0 && (r.style.cssText += ";width:7px;bottom:2px;top:2px;right:1px", n.style.width = "100%"), r.className = "iScrollVerticalScrollbar"), r.style.cssText += ";overflow:hidden", e || (r.style.pointerEvents = "none"), r.appendChild(n), r;
-    }function u(t, e) {
-      this.wrapper = "string" == typeof e.el ? s.querySelector(e.el) : e.el, this.wrapperStyle = this.wrapper.style, this.indicator = this.wrapper.children[0], this.indicatorStyle = this.indicator.style, this.scroller = t, this.options = { listenX: !0, listenY: !0, interactive: !1, resize: !0, defaultScrollbars: !1, shrink: !1, fade: !1, speedRatioX: 0, speedRatioY: 0 };for (var i in e) {
-        this.options[i] = e[i];
-      }if (this.sizeRatioX = 1, this.sizeRatioY = 1, this.maxPosX = 0, this.maxPosY = 0, this.options.interactive && (this.options.disableTouch || (c.addEvent(this.indicator, "touchstart", this), c.addEvent(n, "touchend", this)), this.options.disablePointer || (c.addEvent(this.indicator, c.prefixPointerEvent("pointerdown"), this), c.addEvent(n, c.prefixPointerEvent("pointerup"), this)), this.options.disableMouse || (c.addEvent(this.indicator, "mousedown", this), c.addEvent(n, "mouseup", this))), this.options.fade) {
-        this.wrapperStyle[c.style.transform] = this.scroller.translateZ;var r = c.style.transitionDuration;if (!r) return;this.wrapperStyle[r] = c.isBadAndroid ? "0.0001ms" : "0ms";var a = this;c.isBadAndroid && p(function () {
-          "0.0001ms" === a.wrapperStyle[r] && (a.wrapperStyle[r] = "0s");
-        }), this.wrapperStyle.opacity = "0";
-      }
-    }var p = n.requestAnimationFrame || n.webkitRequestAnimationFrame || n.mozRequestAnimationFrame || n.oRequestAnimationFrame || n.msRequestAnimationFrame || function (t) {
-      n.setTimeout(t, 1e3 / 60);
-    },
-        c = function () {
-      function t(t) {
-        return r !== !1 && ("" === r ? t : r + t.charAt(0).toUpperCase() + t.substr(1));
-      }var e = {},
-          i = s.createElement("div").style,
-          r = function () {
-        for (var t = ["t", "webkitT", "MozT", "msT", "OT"], e = 0, r = t.length; e < r; e++) {
-          if (t[e] + "ransform" in i) return t[e].substr(0, t[e].length - 1);
-        }return !1;
-      }();e.getTime = Date.now || function () {
-        return new Date().getTime();
-      }, e.extend = function (t, e) {
-        for (var i in e) {
-          t[i] = e[i];
-        }
-      }, e.addEvent = function (t, e, i, r) {
-        t.addEventListener(e, i, !!r);
-      }, e.removeEvent = function (t, e, i, r) {
-        t.removeEventListener(e, i, !!r);
-      }, e.prefixPointerEvent = function (t) {
-        return n.MSPointerEvent ? "MSPointer" + t.charAt(7).toUpperCase() + t.substr(8) : t;
-      }, e.momentum = function (t, e, i, r, n, s) {
-        var o,
-            l,
-            u = t - e,
-            p = a.abs(u) / i;return s = void 0 === s ? 6e-4 : s, o = t + p * p / (2 * s) * (u < 0 ? -1 : 1), l = p / s, o < r ? (o = n ? r - n / 2.5 * (p / 8) : r, u = a.abs(o - t), l = u / p) : o > 0 && (o = n ? n / 2.5 * (p / 8) : 0, u = a.abs(t) + o, l = u / p), { destination: a.round(o), duration: l };
-      };var o = t("transform");return e.extend(e, { hasTransform: o !== !1, hasPerspective: t("perspective") in i, hasTouch: "ontouchstart" in n, hasPointer: !(!n.PointerEvent && !n.MSPointerEvent), hasTransition: t("transition") in i }), e.isBadAndroid = function () {
-        var t = n.navigator.appVersion;if (/Android/.test(t) && !/Chrome\/\d/.test(t)) {
-          var e = t.match(/Safari\/(\d+.\d)/);return !(e && "object" == (typeof e === "undefined" ? "undefined" : _typeof(e)) && e.length >= 2) || parseFloat(e[1]) < 535.19;
-        }return !1;
-      }(), e.extend(e.style = {}, { transform: o, transitionTimingFunction: t("transitionTimingFunction"), transitionDuration: t("transitionDuration"), transitionDelay: t("transitionDelay"), transformOrigin: t("transformOrigin"), touchAction: t("touchAction") }), e.hasClass = function (t, e) {
-        return new RegExp("(^|\\s)" + e + "(\\s|$)").test(t.className);
-      }, e.addClass = function (t, i) {
-        if (!e.hasClass(t, i)) {
-          var r = t.className.split(" ");r.push(i), t.className = r.join(" ");
-        }
-      }, e.removeClass = function (t, i) {
-        if (e.hasClass(t, i)) {
-          var r = new RegExp("(^|\\s)" + i + "(\\s|$)", "g");t.className = t.className.replace(r, " ");
-        }
-      }, e.offset = function (t) {
-        for (var e = -t.offsetLeft, i = -t.offsetTop; t = t.offsetParent;) {
-          e -= t.offsetLeft, i -= t.offsetTop;
-        }return { left: e, top: i };
-      }, e.preventDefaultException = function (t, e) {
-        for (var i in e) {
-          if (e[i].test(t[i])) return !0;
-        }return !1;
-      }, e.extend(e.eventType = {}, { touchstart: 1, touchmove: 1, touchend: 1, mousedown: 2, mousemove: 2, mouseup: 2, pointerdown: 3, pointermove: 3, pointerup: 3, MSPointerDown: 3, MSPointerMove: 3, MSPointerUp: 3 }), e.extend(e.ease = {}, { quadratic: { style: "cubic-bezier(0.25, 0.46, 0.45, 0.94)", fn: function fn(t) {
-            return t * (2 - t);
-          } }, circular: { style: "cubic-bezier(0.1, 0.57, 0.1, 1)", fn: function fn(t) {
-            return a.sqrt(1 - --t * t);
-          } }, back: { style: "cubic-bezier(0.175, 0.885, 0.32, 1.275)", fn: function fn(t) {
-            var e = 4;return (t -= 1) * t * ((e + 1) * t + e) + 1;
-          } }, bounce: { style: "", fn: function fn(t) {
-            return (t /= 1) < 1 / 2.75 ? 7.5625 * t * t : t < 2 / 2.75 ? 7.5625 * (t -= 1.5 / 2.75) * t + .75 : t < 2.5 / 2.75 ? 7.5625 * (t -= 2.25 / 2.75) * t + .9375 : 7.5625 * (t -= 2.625 / 2.75) * t + .984375;
-          } }, elastic: { style: "", fn: function fn(t) {
-            var e = .22;return 0 === t ? 0 : 1 == t ? 1 : .4 * a.pow(2, -10 * t) * a.sin((t - e / 4) * (2 * a.PI) / e) + 1;
-          } } }), e.tap = function (t, e) {
-        var i = s.createEvent("Event");i.initEvent(e, !0, !0), i.pageX = t.pageX, i.pageY = t.pageY, t.target.dispatchEvent(i);
-      }, e.click = function (t) {
-        var e,
-            i = t.target;/(SELECT|INPUT|TEXTAREA)/i.test(i.tagName) || (e = s.createEvent(n.MouseEvent ? "MouseEvents" : "Event"), e.initEvent("click", !0, !0), e.view = t.view || n, e.detail = 1, e.screenX = i.screenX || 0, e.screenY = i.screenY || 0, e.clientX = i.clientX || 0, e.clientY = i.clientY || 0, e.ctrlKey = !!t.ctrlKey, e.altKey = !!t.altKey, e.shiftKey = !!t.shiftKey, e.metaKey = !!t.metaKey, e.button = 0, e.relatedTarget = null, e._constructed = !0, i.dispatchEvent(e));
-      }, e.getTouchAction = function (t, e) {
-        var i = "none";return "vertical" === t ? i = "pan-y" : "horizontal" === t && (i = "pan-x"), e && "none" != i && (i += " pinch-zoom"), i;
-      }, e.getRect = function (t) {
-        if (t instanceof SVGElement) {
-          var e = t.getBoundingClientRect();return { top: e.top, left: e.left, width: e.width, height: e.height };
-        }return { top: t.offsetTop, left: t.offsetLeft, width: t.offsetWidth, height: t.offsetHeight };
-      }, e;
-    }();o.prototype = { version: "5.2.0-snapshot", _init: function _init() {
-        this._initEvents(), (this.options.scrollbars || this.options.indicators) && this._initIndicators(), this.options.mouseWheel && this._initWheel(), this.options.snap && this._initSnap(), this.options.keyBindings && this._initKeys();
-      }, destroy: function destroy() {
-        this._initEvents(!0), clearTimeout(this.resizeTimeout), this.resizeTimeout = null, this._execEvent("destroy");
-      }, _transitionEnd: function _transitionEnd(t) {
-        t.target == this.scroller && this.isInTransition && (this._transitionTime(), this.resetPosition(this.options.bounceTime) || (this.isInTransition = !1, this._execEvent("scrollEnd")));
-      }, _start: function _start(t) {
-        if (1 != c.eventType[t.type]) {
-          if (0 !== (t.which ? t.button : t.button < 2 ? 0 : 4 == t.button ? 1 : 2)) return;
-        }if (this.enabled && (!this.initiated || c.eventType[t.type] === this.initiated)) {
-          !this.options.preventDefault || c.isBadAndroid || c.preventDefaultException(t.target, this.options.preventDefaultException) || t.preventDefault();var e,
-              i = t.touches ? t.touches[0] : t;this.initiated = c.eventType[t.type], this.moved = !1, this.distX = 0, this.distY = 0, this.directionX = 0, this.directionY = 0, this.directionLocked = 0, this.startTime = c.getTime(), this.options.useTransition && this.isInTransition ? (this._transitionTime(), this.isInTransition = !1, e = this.getComputedPosition(), this._translate(a.round(e.x), a.round(e.y)), this._execEvent("scrollEnd")) : !this.options.useTransition && this.isAnimating && (this.isAnimating = !1, this._execEvent("scrollEnd")), this.startX = this.x, this.startY = this.y, this.absStartX = this.x, this.absStartY = this.y, this.pointX = i.pageX, this.pointY = i.pageY, this._execEvent("beforeScrollStart");
-        }
-      }, _move: function _move(t) {
-        if (this.enabled && c.eventType[t.type] === this.initiated) {
-          this.options.preventDefault && t.preventDefault();var e,
-              i,
-              r,
-              n,
-              s = t.touches ? t.touches[0] : t,
-              o = s.pageX - this.pointX,
-              l = s.pageY - this.pointY,
-              u = c.getTime();if (this.pointX = s.pageX, this.pointY = s.pageY, this.distX += o, this.distY += l, r = a.abs(this.distX), n = a.abs(this.distY), !(u - this.endTime > 300 && r < 10 && n < 10)) {
-            if (this.directionLocked || this.options.freeScroll || (r > n + this.options.directionLockThreshold ? this.directionLocked = "h" : n >= r + this.options.directionLockThreshold ? this.directionLocked = "v" : this.directionLocked = "n"), "h" == this.directionLocked) {
-              if ("vertical" == this.options.eventPassthrough) t.preventDefault();else if ("horizontal" == this.options.eventPassthrough) return void (this.initiated = !1);l = 0;
-            } else if ("v" == this.directionLocked) {
-              if ("horizontal" == this.options.eventPassthrough) t.preventDefault();else if ("vertical" == this.options.eventPassthrough) return void (this.initiated = !1);o = 0;
-            }o = this.hasHorizontalScroll ? o : 0, l = this.hasVerticalScroll ? l : 0, e = this.x + o, i = this.y + l, (e > 0 || e < this.maxScrollX) && (e = this.options.bounce ? this.x + o / 3 : e > 0 ? 0 : this.maxScrollX), (i > 0 || i < this.maxScrollY) && (i = this.options.bounce ? this.y + l / 3 : i > 0 ? 0 : this.maxScrollY), this.directionX = o > 0 ? -1 : o < 0 ? 1 : 0, this.directionY = l > 0 ? -1 : l < 0 ? 1 : 0, this.moved || this._execEvent("scrollStart"), this.moved = !0, this._translate(e, i), u - this.startTime > 300 && (this.startTime = u, this.startX = this.x, this.startY = this.y, 1 == this.options.probeType && this._execEvent("scroll")), this.options.probeType > 1 && this._execEvent("scroll");
-          }
-        }
-      }, _end: function _end(t) {
-        if (this.enabled && c.eventType[t.type] === this.initiated) {
-          this.options.preventDefault && !c.preventDefaultException(t.target, this.options.preventDefaultException) && t.preventDefault();var e,
-              i,
-              r = (t.changedTouches && t.changedTouches[0], c.getTime() - this.startTime),
-              n = a.round(this.x),
-              s = a.round(this.y),
-              o = a.abs(n - this.startX),
-              l = a.abs(s - this.startY),
-              u = 0,
-              p = "";if (this.isInTransition = 0, this.initiated = 0, this.endTime = c.getTime(), !this.resetPosition(this.options.bounceTime)) {
-            if (this.scrollTo(n, s), !this.moved) return this.options.tap && c.tap(t, this.options.tap), this.options.click && c.click(t), void this._execEvent("scrollCancel");if (this._events.flick && r < 200 && o < 100 && l < 100) return void this._execEvent("flick");if (this.options.momentum && r < 300 && (e = this.hasHorizontalScroll ? c.momentum(this.x, this.startX, r, this.maxScrollX, this.options.bounce ? this.wrapperWidth : 0, this.options.deceleration) : { destination: n, duration: 0 }, i = this.hasVerticalScroll ? c.momentum(this.y, this.startY, r, this.maxScrollY, this.options.bounce ? this.wrapperHeight : 0, this.options.deceleration) : { destination: s, duration: 0 }, n = e.destination, s = i.destination, u = a.max(e.duration, i.duration), this.isInTransition = 1), this.options.snap) {
-              var h = this._nearestSnap(n, s);this.currentPage = h, u = this.options.snapSpeed || a.max(a.max(a.min(a.abs(n - h.x), 1e3), a.min(a.abs(s - h.y), 1e3)), 300), n = h.x, s = h.y, this.directionX = 0, this.directionY = 0, p = this.options.bounceEasing;
-            }if (n != this.x || s != this.y) return (n > 0 || n < this.maxScrollX || s > 0 || s < this.maxScrollY) && (p = c.ease.quadratic), void this.scrollTo(n, s, u, p);this._execEvent("scrollEnd");
-          }
-        }
-      }, _resize: function _resize() {
-        var t = this;clearTimeout(this.resizeTimeout), this.resizeTimeout = setTimeout(function () {
-          t.refresh();
-        }, this.options.resizePolling);
-      }, resetPosition: function resetPosition(t) {
-        var e = this.x,
-            i = this.y;return t = t || 0, !this.hasHorizontalScroll || this.x > 0 ? e = 0 : this.x < this.maxScrollX && (e = this.maxScrollX), !this.hasVerticalScroll || this.y > 0 ? i = 0 : this.y < this.maxScrollY && (i = this.maxScrollY), (e != this.x || i != this.y) && (this.scrollTo(e, i, t, this.options.bounceEasing), !0);
-      }, disable: function disable() {
-        this.enabled = !1;
-      }, enable: function enable() {
-        this.enabled = !0;
-      }, refresh: function refresh() {
-        c.getRect(this.wrapper), this.wrapperWidth = this.wrapper.clientWidth, this.wrapperHeight = this.wrapper.clientHeight;var t = c.getRect(this.scroller);this.scrollerWidth = t.width, this.scrollerHeight = t.height, this.maxScrollX = this.wrapperWidth - this.scrollerWidth, this.maxScrollY = this.wrapperHeight - this.scrollerHeight, this.hasHorizontalScroll = this.options.scrollX && this.maxScrollX < 0, this.hasVerticalScroll = this.options.scrollY && this.maxScrollY < 0, this.hasHorizontalScroll || (this.maxScrollX = 0, this.scrollerWidth = this.wrapperWidth), this.hasVerticalScroll || (this.maxScrollY = 0, this.scrollerHeight = this.wrapperHeight), this.endTime = 0, this.directionX = 0, this.directionY = 0, c.hasPointer && !this.options.disablePointer && (this.wrapper.style[c.style.touchAction] = c.getTouchAction(this.options.eventPassthrough, !0), this.wrapper.style[c.style.touchAction] || (this.wrapper.style[c.style.touchAction] = c.getTouchAction(this.options.eventPassthrough, !1))), this.wrapperOffset = c.offset(this.wrapper), this._execEvent("refresh"), this.resetPosition();
-      }, on: function on(t, e) {
-        this._events[t] || (this._events[t] = []), this._events[t].push(e);
-      }, off: function off(t, e) {
-        if (this._events[t]) {
-          var i = this._events[t].indexOf(e);i > -1 && this._events[t].splice(i, 1);
-        }
-      }, _execEvent: function _execEvent(t) {
-        if (this._events[t]) {
-          var e = 0,
-              i = this._events[t].length;if (i) for (; e < i; e++) {
-            this._events[t][e].apply(this, [].slice.call(arguments, 1));
-          }
-        }
-      }, scrollBy: function scrollBy(t, e, i, r) {
-        t = this.x + t, e = this.y + e, i = i || 0, this.scrollTo(t, e, i, r);
-      }, scrollTo: function scrollTo(t, e, i, r) {
-        r = r || c.ease.circular, this.isInTransition = this.options.useTransition && i > 0;var n = this.options.useTransition && r.style;!i || n ? (n && (this._transitionTimingFunction(r.style), this._transitionTime(i)), this._translate(t, e)) : this._animate(t, e, i, r.fn);
-      }, scrollToElement: function scrollToElement(t, e, i, r, n) {
-        if (t = t.nodeType ? t : this.scroller.querySelector(t)) {
-          var s = c.offset(t);s.left -= this.wrapperOffset.left, s.top -= this.wrapperOffset.top;var o = c.getRect(t),
-              l = c.getRect(this.wrapper);i === !0 && (i = a.round(o.width / 2 - l.width / 2)), r === !0 && (r = a.round(o.height / 2 - l.height / 2)), s.left -= i || 0, s.top -= r || 0, s.left = s.left > 0 ? 0 : s.left < this.maxScrollX ? this.maxScrollX : s.left, s.top = s.top > 0 ? 0 : s.top < this.maxScrollY ? this.maxScrollY : s.top, e = void 0 === e || null === e || "auto" === e ? a.max(a.abs(this.x - s.left), a.abs(this.y - s.top)) : e, this.scrollTo(s.left, s.top, e, n);
-        }
-      }, _transitionTime: function _transitionTime(t) {
-        if (this.options.useTransition) {
-          t = t || 0;var e = c.style.transitionDuration;if (e) {
-            if (this.scrollerStyle[e] = t + "ms", !t && c.isBadAndroid) {
-              this.scrollerStyle[e] = "0.0001ms";var i = this;p(function () {
-                "0.0001ms" === i.scrollerStyle[e] && (i.scrollerStyle[e] = "0s");
-              });
-            }if (this.indicators) for (var r = this.indicators.length; r--;) {
-              this.indicators[r].transitionTime(t);
-            }
-          }
-        }
-      }, _transitionTimingFunction: function _transitionTimingFunction(t) {
-        if (this.scrollerStyle[c.style.transitionTimingFunction] = t, this.indicators) for (var e = this.indicators.length; e--;) {
-          this.indicators[e].transitionTimingFunction(t);
-        }
-      }, _translate: function _translate(t, e) {
-        if (this.options.useTransform ? this.scrollerStyle[c.style.transform] = "translate(" + t + "px," + e + "px)" + this.translateZ : (t = a.round(t), e = a.round(e), this.scrollerStyle.left = t + "px", this.scrollerStyle.top = e + "px"), this.x = t, this.y = e, this.indicators) for (var i = this.indicators.length; i--;) {
-          this.indicators[i].updatePosition();
-        }
-      }, _initEvents: function _initEvents(t) {
-        var e = t ? c.removeEvent : c.addEvent,
-            i = this.options.bindToWrapper ? this.wrapper : n;e(n, "orientationchange", this), e(n, "resize", this), this.options.click && e(this.wrapper, "click", this, !0), this.options.disableMouse || (e(this.wrapper, "mousedown", this), e(i, "mousemove", this), e(i, "mousecancel", this), e(i, "mouseup", this)), c.hasPointer && !this.options.disablePointer && (e(this.wrapper, c.prefixPointerEvent("pointerdown"), this), e(i, c.prefixPointerEvent("pointermove"), this), e(i, c.prefixPointerEvent("pointercancel"), this), e(i, c.prefixPointerEvent("pointerup"), this)), c.hasTouch && !this.options.disableTouch && (e(this.wrapper, "touchstart", this), e(i, "touchmove", this), e(i, "touchcancel", this), e(i, "touchend", this)), e(this.scroller, "transitionend", this), e(this.scroller, "webkitTransitionEnd", this), e(this.scroller, "oTransitionEnd", this), e(this.scroller, "MSTransitionEnd", this);
-      }, getComputedPosition: function getComputedPosition() {
-        var t,
-            e,
-            i = n.getComputedStyle(this.scroller, null);return this.options.useTransform ? (i = i[c.style.transform].split(")")[0].split(", "), t = +(i[12] || i[4]), e = +(i[13] || i[5])) : (t = +i.left.replace(/[^-\d.]/g, ""), e = +i.top.replace(/[^-\d.]/g, "")), { x: t, y: e };
-      }, _initIndicators: function _initIndicators() {
-        function t(t) {
-          if (s.indicators) for (var e = s.indicators.length; e--;) {
-            t.call(s.indicators[e]);
-          }
-        }var e,
-            i = this.options.interactiveScrollbars,
-            r = "string" != typeof this.options.scrollbars,
-            n = [],
-            s = this;this.indicators = [], this.options.scrollbars && (this.options.scrollY && (e = { el: l("v", i, this.options.scrollbars), interactive: i, defaultScrollbars: !0, customStyle: r, resize: this.options.resizeScrollbars, shrink: this.options.shrinkScrollbars, fade: this.options.fadeScrollbars, listenX: !1 }, this.wrapper.appendChild(e.el), n.push(e)), this.options.scrollX && (e = { el: l("h", i, this.options.scrollbars), interactive: i, defaultScrollbars: !0, customStyle: r, resize: this.options.resizeScrollbars, shrink: this.options.shrinkScrollbars, fade: this.options.fadeScrollbars, listenY: !1 }, this.wrapper.appendChild(e.el), n.push(e))), this.options.indicators && (n = n.concat(this.options.indicators));for (var a = n.length; a--;) {
-          this.indicators.push(new u(this, n[a]));
-        }this.options.fadeScrollbars && (this.on("scrollEnd", function () {
-          t(function () {
-            this.fade();
-          });
-        }), this.on("scrollCancel", function () {
-          t(function () {
-            this.fade();
-          });
-        }), this.on("scrollStart", function () {
-          t(function () {
-            this.fade(1);
-          });
-        }), this.on("beforeScrollStart", function () {
-          t(function () {
-            this.fade(1, !0);
-          });
-        })), this.on("refresh", function () {
-          t(function () {
-            this.refresh();
-          });
-        }), this.on("destroy", function () {
-          t(function () {
-            this.destroy();
-          }), delete this.indicators;
-        });
-      }, _initWheel: function _initWheel() {
-        c.addEvent(this.wrapper, "wheel", this), c.addEvent(this.wrapper, "mousewheel", this), c.addEvent(this.wrapper, "DOMMouseScroll", this), this.on("destroy", function () {
-          clearTimeout(this.wheelTimeout), this.wheelTimeout = null, c.removeEvent(this.wrapper, "wheel", this), c.removeEvent(this.wrapper, "mousewheel", this), c.removeEvent(this.wrapper, "DOMMouseScroll", this);
-        });
-      }, _wheel: function _wheel(t) {
-        if (this.enabled) {
-          t.preventDefault();var e,
-              i,
-              r,
-              n,
-              s = this;if (void 0 === this.wheelTimeout && s._execEvent("scrollStart"), clearTimeout(this.wheelTimeout), this.wheelTimeout = setTimeout(function () {
-            s.options.snap || s._execEvent("scrollEnd"), s.wheelTimeout = void 0;
-          }, 400), "deltaX" in t) 1 === t.deltaMode ? (e = -t.deltaX * this.options.mouseWheelSpeed, i = -t.deltaY * this.options.mouseWheelSpeed) : (e = -t.deltaX, i = -t.deltaY);else if ("wheelDeltaX" in t) e = t.wheelDeltaX / 120 * this.options.mouseWheelSpeed, i = t.wheelDeltaY / 120 * this.options.mouseWheelSpeed;else if ("wheelDelta" in t) e = i = t.wheelDelta / 120 * this.options.mouseWheelSpeed;else {
-            if (!("detail" in t)) return;e = i = -t.detail / 3 * this.options.mouseWheelSpeed;
-          }if (e *= this.options.invertWheelDirection, i *= this.options.invertWheelDirection, this.hasVerticalScroll || (e = i, i = 0), this.options.snap) return r = this.currentPage.pageX, n = this.currentPage.pageY, e > 0 ? r-- : e < 0 && r++, i > 0 ? n-- : i < 0 && n++, void this.goToPage(r, n);r = this.x + a.round(this.hasHorizontalScroll ? e : 0), n = this.y + a.round(this.hasVerticalScroll ? i : 0), this.directionX = e > 0 ? -1 : e < 0 ? 1 : 0, this.directionY = i > 0 ? -1 : i < 0 ? 1 : 0, r > 0 ? r = 0 : r < this.maxScrollX && (r = this.maxScrollX), n > 0 ? n = 0 : n < this.maxScrollY && (n = this.maxScrollY), this.scrollTo(r, n, 0), this.options.probeType > 1 && this._execEvent("scroll");
-        }
-      }, _initSnap: function _initSnap() {
-        this.currentPage = {}, "string" == typeof this.options.snap && (this.options.snap = this.scroller.querySelectorAll(this.options.snap)), this.on("refresh", function () {
-          var t,
-              e,
-              i,
-              r,
-              n,
-              s,
-              o,
-              l = 0,
-              u = 0,
-              p = 0,
-              h = this.options.snapStepX || this.wrapperWidth,
-              d = this.options.snapStepY || this.wrapperHeight;if (this.pages = [], this.wrapperWidth && this.wrapperHeight && this.scrollerWidth && this.scrollerHeight) {
-            if (this.options.snap === !0) for (i = a.round(h / 2), r = a.round(d / 2); p > -this.scrollerWidth;) {
-              for (this.pages[l] = [], t = 0, n = 0; n > -this.scrollerHeight;) {
-                this.pages[l][t] = { x: a.max(p, this.maxScrollX), y: a.max(n, this.maxScrollY), width: h, height: d, cx: p - i, cy: n - r }, n -= d, t++;
-              }p -= h, l++;
-            } else for (s = this.options.snap, t = s.length, e = -1; l < t; l++) {
-              o = c.getRect(s[l]), (0 === l || o.left <= c.getRect(s[l - 1]).left) && (u = 0, e++), this.pages[u] || (this.pages[u] = []), p = a.max(-o.left, this.maxScrollX), n = a.max(-o.top, this.maxScrollY), i = p - a.round(o.width / 2), r = n - a.round(o.height / 2), this.pages[u][e] = { x: p, y: n, width: o.width, height: o.height, cx: i, cy: r }, p > this.maxScrollX && u++;
-            }this.goToPage(this.currentPage.pageX || 0, this.currentPage.pageY || 0, 0), this.options.snapThreshold % 1 == 0 ? (this.snapThresholdX = this.options.snapThreshold, this.snapThresholdY = this.options.snapThreshold) : (this.snapThresholdX = a.round(this.pages[this.currentPage.pageX][this.currentPage.pageY].width * this.options.snapThreshold), this.snapThresholdY = a.round(this.pages[this.currentPage.pageX][this.currentPage.pageY].height * this.options.snapThreshold));
-          }
-        }), this.on("flick", function () {
-          var t = this.options.snapSpeed || a.max(a.max(a.min(a.abs(this.x - this.startX), 1e3), a.min(a.abs(this.y - this.startY), 1e3)), 300);this.goToPage(this.currentPage.pageX + this.directionX, this.currentPage.pageY + this.directionY, t);
-        });
-      }, _nearestSnap: function _nearestSnap(t, e) {
-        if (!this.pages.length) return { x: 0, y: 0, pageX: 0, pageY: 0 };var i = 0,
-            r = this.pages.length,
-            n = 0;if (a.abs(t - this.absStartX) < this.snapThresholdX && a.abs(e - this.absStartY) < this.snapThresholdY) return this.currentPage;for (t > 0 ? t = 0 : t < this.maxScrollX && (t = this.maxScrollX), e > 0 ? e = 0 : e < this.maxScrollY && (e = this.maxScrollY); i < r; i++) {
-          if (t >= this.pages[i][0].cx) {
-            t = this.pages[i][0].x;break;
-          }
-        }for (r = this.pages[i].length; n < r; n++) {
-          if (e >= this.pages[0][n].cy) {
-            e = this.pages[0][n].y;break;
-          }
-        }return i == this.currentPage.pageX && (i += this.directionX, i < 0 ? i = 0 : i >= this.pages.length && (i = this.pages.length - 1), t = this.pages[i][0].x), n == this.currentPage.pageY && (n += this.directionY, n < 0 ? n = 0 : n >= this.pages[0].length && (n = this.pages[0].length - 1), e = this.pages[0][n].y), { x: t, y: e, pageX: i, pageY: n };
-      }, goToPage: function goToPage(t, e, i, r) {
-        r = r || this.options.bounceEasing, t >= this.pages.length ? t = this.pages.length - 1 : t < 0 && (t = 0), e >= this.pages[t].length ? e = this.pages[t].length - 1 : e < 0 && (e = 0);var n = this.pages[t][e].x,
-            s = this.pages[t][e].y;i = void 0 === i ? this.options.snapSpeed || a.max(a.max(a.min(a.abs(n - this.x), 1e3), a.min(a.abs(s - this.y), 1e3)), 300) : i, this.currentPage = { x: n, y: s, pageX: t, pageY: e }, this.scrollTo(n, s, i, r);
-      }, next: function next(t, e) {
-        var i = this.currentPage.pageX,
-            r = this.currentPage.pageY;i++, i >= this.pages.length && this.hasVerticalScroll && (i = 0, r++), this.goToPage(i, r, t, e);
-      }, prev: function prev(t, e) {
-        var i = this.currentPage.pageX,
-            r = this.currentPage.pageY;i--, i < 0 && this.hasVerticalScroll && (i = 0, r--), this.goToPage(i, r, t, e);
-      }, _initKeys: function _initKeys(t) {
-        var e,
-            i = { pageUp: 33, pageDown: 34, end: 35, home: 36, left: 37, up: 38, right: 39, down: 40 };if ("object" == _typeof(this.options.keyBindings)) for (e in this.options.keyBindings) {
-          "string" == typeof this.options.keyBindings[e] && (this.options.keyBindings[e] = this.options.keyBindings[e].toUpperCase().charCodeAt(0));
-        } else this.options.keyBindings = {};for (e in i) {
-          this.options.keyBindings[e] = this.options.keyBindings[e] || i[e];
-        }c.addEvent(n, "keydown", this), this.on("destroy", function () {
-          c.removeEvent(n, "keydown", this);
-        });
-      }, _key: function _key(t) {
-        if (this.enabled) {
-          var e,
-              i = this.options.snap,
-              r = i ? this.currentPage.pageX : this.x,
-              n = i ? this.currentPage.pageY : this.y,
-              s = c.getTime(),
-              o = this.keyTime || 0,
-              l = .25;switch (this.options.useTransition && this.isInTransition && (e = this.getComputedPosition(), this._translate(a.round(e.x), a.round(e.y)), this.isInTransition = !1), this.keyAcceleration = s - o < 200 ? a.min(this.keyAcceleration + l, 50) : 0, t.keyCode) {case this.options.keyBindings.pageUp:
-              this.hasHorizontalScroll && !this.hasVerticalScroll ? r += i ? 1 : this.wrapperWidth : n += i ? 1 : this.wrapperHeight;break;case this.options.keyBindings.pageDown:
-              this.hasHorizontalScroll && !this.hasVerticalScroll ? r -= i ? 1 : this.wrapperWidth : n -= i ? 1 : this.wrapperHeight;break;case this.options.keyBindings.end:
-              r = i ? this.pages.length - 1 : this.maxScrollX, n = i ? this.pages[0].length - 1 : this.maxScrollY;break;case this.options.keyBindings.home:
-              r = 0, n = 0;break;case this.options.keyBindings.left:
-              r += i ? -1 : 5 + this.keyAcceleration >> 0;break;case this.options.keyBindings.up:
-              n += i ? 1 : 5 + this.keyAcceleration >> 0;break;case this.options.keyBindings.right:
-              r -= i ? -1 : 5 + this.keyAcceleration >> 0;break;case this.options.keyBindings.down:
-              n -= i ? 1 : 5 + this.keyAcceleration >> 0;break;default:
-              return;}if (i) return void this.goToPage(r, n);r > 0 ? (r = 0, this.keyAcceleration = 0) : r < this.maxScrollX && (r = this.maxScrollX, this.keyAcceleration = 0), n > 0 ? (n = 0, this.keyAcceleration = 0) : n < this.maxScrollY && (n = this.maxScrollY, this.keyAcceleration = 0), this.scrollTo(r, n, 0), this.keyTime = s;
-        }
-      }, _animate: function _animate(t, e, i, r) {
-        function n() {
-          var h,
-              d,
-              f,
-              m = c.getTime();if (m >= u) return s.isAnimating = !1, s._translate(t, e), void (s.resetPosition(s.options.bounceTime) || s._execEvent("scrollEnd"));m = (m - l) / i, f = r(m), h = (t - a) * f + a, d = (e - o) * f + o, s._translate(h, d), s.isAnimating && p(n), 3 == s.options.probeType && s._execEvent("scroll");
-        }var s = this,
-            a = this.x,
-            o = this.y,
-            l = c.getTime(),
-            u = l + i;this.isAnimating = !0, n();
-      }, handleEvent: function handleEvent(t) {
-        switch (t.type) {case "touchstart":case "pointerdown":case "MSPointerDown":case "mousedown":
-            this._start(t);break;case "touchmove":case "pointermove":case "MSPointerMove":case "mousemove":
-            this._move(t);break;case "touchend":case "pointerup":case "MSPointerUp":case "mouseup":case "touchcancel":case "pointercancel":case "MSPointerCancel":case "mousecancel":
-            this._end(t);break;case "orientationchange":case "resize":
-            this._resize();break;case "transitionend":case "webkitTransitionEnd":case "oTransitionEnd":case "MSTransitionEnd":
-            this._transitionEnd(t);break;case "wheel":case "DOMMouseScroll":case "mousewheel":
-            this._wheel(t);break;case "keydown":
-            this._key(t);break;case "click":
-            this.enabled && !t._constructed && (t.preventDefault(), t.stopPropagation());}
-      } }, u.prototype = { handleEvent: function handleEvent(t) {
-        switch (t.type) {case "touchstart":case "pointerdown":case "MSPointerDown":case "mousedown":
-            this._start(t);break;case "touchmove":case "pointermove":case "MSPointerMove":case "mousemove":
-            this._move(t);break;case "touchend":case "pointerup":case "MSPointerUp":case "mouseup":case "touchcancel":case "pointercancel":case "MSPointerCancel":case "mousecancel":
-            this._end(t);}
-      }, destroy: function destroy() {
-        this.options.fadeScrollbars && (clearTimeout(this.fadeTimeout), this.fadeTimeout = null), this.options.interactive && (c.removeEvent(this.indicator, "touchstart", this), c.removeEvent(this.indicator, c.prefixPointerEvent("pointerdown"), this), c.removeEvent(this.indicator, "mousedown", this), c.removeEvent(n, "touchmove", this), c.removeEvent(n, c.prefixPointerEvent("pointermove"), this), c.removeEvent(n, "mousemove", this), c.removeEvent(n, "touchend", this), c.removeEvent(n, c.prefixPointerEvent("pointerup"), this), c.removeEvent(n, "mouseup", this)), this.options.defaultScrollbars && this.wrapper.parentNode && this.wrapper.parentNode.removeChild(this.wrapper);
-      }, _start: function _start(t) {
-        var e = t.touches ? t.touches[0] : t;t.preventDefault(), t.stopPropagation(), this.transitionTime(), this.initiated = !0, this.moved = !1, this.lastPointX = e.pageX, this.lastPointY = e.pageY, this.startTime = c.getTime(), this.options.disableTouch || c.addEvent(n, "touchmove", this), this.options.disablePointer || c.addEvent(n, c.prefixPointerEvent("pointermove"), this), this.options.disableMouse || c.addEvent(n, "mousemove", this), this.scroller._execEvent("beforeScrollStart");
-      }, _move: function _move(t) {
-        var e,
-            i,
-            r,
-            n,
-            s = t.touches ? t.touches[0] : t,
-            a = c.getTime();this.moved || this.scroller._execEvent("scrollStart"), this.moved = !0, e = s.pageX - this.lastPointX, this.lastPointX = s.pageX, i = s.pageY - this.lastPointY, this.lastPointY = s.pageY, r = this.x + e, n = this.y + i, this._pos(r, n), 1 == this.scroller.options.probeType && a - this.startTime > 300 ? (this.startTime = a, this.scroller._execEvent("scroll")) : this.scroller.options.probeType > 1 && this.scroller._execEvent("scroll"), t.preventDefault(), t.stopPropagation();
-      }, _end: function _end(t) {
-        if (this.initiated) {
-          if (this.initiated = !1, t.preventDefault(), t.stopPropagation(), c.removeEvent(n, "touchmove", this), c.removeEvent(n, c.prefixPointerEvent("pointermove"), this), c.removeEvent(n, "mousemove", this), this.scroller.options.snap) {
-            var e = this.scroller._nearestSnap(this.scroller.x, this.scroller.y),
-                i = this.options.snapSpeed || a.max(a.max(a.min(a.abs(this.scroller.x - e.x), 1e3), a.min(a.abs(this.scroller.y - e.y), 1e3)), 300);this.scroller.x == e.x && this.scroller.y == e.y || (this.scroller.directionX = 0, this.scroller.directionY = 0, this.scroller.currentPage = e, this.scroller.scrollTo(e.x, e.y, i, this.scroller.options.bounceEasing));
-          }this.moved && this.scroller._execEvent("scrollEnd");
-        }
-      }, transitionTime: function transitionTime(t) {
-        t = t || 0;var e = c.style.transitionDuration;if (e && (this.indicatorStyle[e] = t + "ms", !t && c.isBadAndroid)) {
-          this.indicatorStyle[e] = "0.0001ms";var i = this;p(function () {
-            "0.0001ms" === i.indicatorStyle[e] && (i.indicatorStyle[e] = "0s");
-          });
-        }
-      }, transitionTimingFunction: function transitionTimingFunction(t) {
-        this.indicatorStyle[c.style.transitionTimingFunction] = t;
-      }, refresh: function refresh() {
-        this.transitionTime(), this.options.listenX && !this.options.listenY ? this.indicatorStyle.display = this.scroller.hasHorizontalScroll ? "block" : "none" : this.options.listenY && !this.options.listenX ? this.indicatorStyle.display = this.scroller.hasVerticalScroll ? "block" : "none" : this.indicatorStyle.display = this.scroller.hasHorizontalScroll || this.scroller.hasVerticalScroll ? "block" : "none", this.scroller.hasHorizontalScroll && this.scroller.hasVerticalScroll ? (c.addClass(this.wrapper, "iScrollBothScrollbars"), c.removeClass(this.wrapper, "iScrollLoneScrollbar"), this.options.defaultScrollbars && this.options.customStyle && (this.options.listenX ? this.wrapper.style.right = "8px" : this.wrapper.style.bottom = "8px")) : (c.removeClass(this.wrapper, "iScrollBothScrollbars"), c.addClass(this.wrapper, "iScrollLoneScrollbar"), this.options.defaultScrollbars && this.options.customStyle && (this.options.listenX ? this.wrapper.style.right = "2px" : this.wrapper.style.bottom = "2px")), c.getRect(this.wrapper), this.options.listenX && (this.wrapperWidth = this.wrapper.clientWidth, this.options.resize ? (this.indicatorWidth = a.max(a.round(this.wrapperWidth * this.wrapperWidth / (this.scroller.scrollerWidth || this.wrapperWidth || 1)), 8), this.indicatorStyle.width = this.indicatorWidth + "px") : this.indicatorWidth = this.indicator.clientWidth, this.maxPosX = this.wrapperWidth - this.indicatorWidth, "clip" == this.options.shrink ? (this.minBoundaryX = 8 - this.indicatorWidth, this.maxBoundaryX = this.wrapperWidth - 8) : (this.minBoundaryX = 0, this.maxBoundaryX = this.maxPosX), this.sizeRatioX = this.options.speedRatioX || this.scroller.maxScrollX && this.maxPosX / this.scroller.maxScrollX), this.options.listenY && (this.wrapperHeight = this.wrapper.clientHeight, this.options.resize ? (this.indicatorHeight = a.max(a.round(this.wrapperHeight * this.wrapperHeight / (this.scroller.scrollerHeight || this.wrapperHeight || 1)), 8), this.indicatorStyle.height = this.indicatorHeight + "px") : this.indicatorHeight = this.indicator.clientHeight, this.maxPosY = this.wrapperHeight - this.indicatorHeight, "clip" == this.options.shrink ? (this.minBoundaryY = 8 - this.indicatorHeight, this.maxBoundaryY = this.wrapperHeight - 8) : (this.minBoundaryY = 0, this.maxBoundaryY = this.maxPosY), this.maxPosY = this.wrapperHeight - this.indicatorHeight, this.sizeRatioY = this.options.speedRatioY || this.scroller.maxScrollY && this.maxPosY / this.scroller.maxScrollY), this.updatePosition();
-      }, updatePosition: function updatePosition() {
-        var t = this.options.listenX && a.round(this.sizeRatioX * this.scroller.x) || 0,
-            e = this.options.listenY && a.round(this.sizeRatioY * this.scroller.y) || 0;this.options.ignoreBoundaries || (t < this.minBoundaryX ? ("scale" == this.options.shrink && (this.width = a.max(this.indicatorWidth + t, 8), this.indicatorStyle.width = this.width + "px"), t = this.minBoundaryX) : t > this.maxBoundaryX ? "scale" == this.options.shrink ? (this.width = a.max(this.indicatorWidth - (t - this.maxPosX), 8), this.indicatorStyle.width = this.width + "px", t = this.maxPosX + this.indicatorWidth - this.width) : t = this.maxBoundaryX : "scale" == this.options.shrink && this.width != this.indicatorWidth && (this.width = this.indicatorWidth, this.indicatorStyle.width = this.width + "px"), e < this.minBoundaryY ? ("scale" == this.options.shrink && (this.height = a.max(this.indicatorHeight + 3 * e, 8), this.indicatorStyle.height = this.height + "px"), e = this.minBoundaryY) : e > this.maxBoundaryY ? "scale" == this.options.shrink ? (this.height = a.max(this.indicatorHeight - 3 * (e - this.maxPosY), 8), this.indicatorStyle.height = this.height + "px", e = this.maxPosY + this.indicatorHeight - this.height) : e = this.maxBoundaryY : "scale" == this.options.shrink && this.height != this.indicatorHeight && (this.height = this.indicatorHeight, this.indicatorStyle.height = this.height + "px")), this.x = t, this.y = e, this.scroller.options.useTransform ? this.indicatorStyle[c.style.transform] = "translate(" + t + "px," + e + "px)" + this.scroller.translateZ : (this.indicatorStyle.left = t + "px", this.indicatorStyle.top = e + "px");
-      }, _pos: function _pos(t, e) {
-        t < 0 ? t = 0 : t > this.maxPosX && (t = this.maxPosX), e < 0 ? e = 0 : e > this.maxPosY && (e = this.maxPosY), t = this.options.listenX ? a.round(t / this.sizeRatioX) : this.scroller.x, e = this.options.listenY ? a.round(e / this.sizeRatioY) : this.scroller.y, this.scroller.scrollTo(t, e);
-      }, fade: function fade(t, e) {
-        if (!e || this.visible) {
-          clearTimeout(this.fadeTimeout), this.fadeTimeout = null;var i = t ? 250 : 500,
-              r = t ? 0 : 300;t = t ? "1" : "0", this.wrapperStyle[c.style.transitionDuration] = i + "ms", this.fadeTimeout = setTimeout(function (t) {
-            this.wrapperStyle.opacity = t, this.visible = +t;
-          }.bind(this, t), r);
-        }
-      } }, o.utils = c, void 0 !== t && t.exports ? t.exports = o : void 0 !== (r = function () {
-      return o;
-    }.call(e, i, e, t)) && (t.exports = r);
-  }(window, document, Math);
-}, function (t, e) {
-  function i() {
-    throw new Error("setTimeout has not been defined");
-  }function r() {
-    throw new Error("clearTimeout has not been defined");
-  }function n(t) {
-    if (p === setTimeout) return setTimeout(t, 0);if ((p === i || !p) && setTimeout) return p = setTimeout, setTimeout(t, 0);try {
-      return p(t, 0);
-    } catch (e) {
-      try {
-        return p.call(null, t, 0);
-      } catch (e) {
-        return p.call(this, t, 0);
+function isArray(val) {
+  return toString.call(val) === '[object Array]';
+}
+
+/**
+ * Determine if a value is a Node Buffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Node Buffer, otherwise false
+ */
+function isBuffer(val) {
+  return ((typeof Buffer !== 'undefined') && (Buffer.isBuffer) && (Buffer.isBuffer(val)));
+}
+
+/**
+ * Determine if a value is an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an ArrayBuffer, otherwise false
+ */
+function isArrayBuffer(val) {
+  return toString.call(val) === '[object ArrayBuffer]';
+}
+
+/**
+ * Determine if a value is a FormData
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an FormData, otherwise false
+ */
+function isFormData(val) {
+  return (typeof FormData !== 'undefined') && (val instanceof FormData);
+}
+
+/**
+ * Determine if a value is a view on an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a view on an ArrayBuffer, otherwise false
+ */
+function isArrayBufferView(val) {
+  var result;
+  if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
+    result = ArrayBuffer.isView(val);
+  } else {
+    result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer);
+  }
+  return result;
+}
+
+/**
+ * Determine if a value is a String
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a String, otherwise false
+ */
+function isString(val) {
+  return typeof val === 'string';
+}
+
+/**
+ * Determine if a value is a Number
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Number, otherwise false
+ */
+function isNumber(val) {
+  return typeof val === 'number';
+}
+
+/**
+ * Determine if a value is undefined
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if the value is undefined, otherwise false
+ */
+function isUndefined(val) {
+  return typeof val === 'undefined';
+}
+
+/**
+ * Determine if a value is an Object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Object, otherwise false
+ */
+function isObject(val) {
+  return val !== null && typeof val === 'object';
+}
+
+/**
+ * Determine if a value is a Date
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Date, otherwise false
+ */
+function isDate(val) {
+  return toString.call(val) === '[object Date]';
+}
+
+/**
+ * Determine if a value is a File
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a File, otherwise false
+ */
+function isFile(val) {
+  return toString.call(val) === '[object File]';
+}
+
+/**
+ * Determine if a value is a Blob
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Blob, otherwise false
+ */
+function isBlob(val) {
+  return toString.call(val) === '[object Blob]';
+}
+
+/**
+ * Determine if a value is a Function
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Function, otherwise false
+ */
+function isFunction(val) {
+  return toString.call(val) === '[object Function]';
+}
+
+/**
+ * Determine if a value is a Stream
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Stream, otherwise false
+ */
+function isStream(val) {
+  return isObject(val) && isFunction(val.pipe);
+}
+
+/**
+ * Determine if a value is a URLSearchParams object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a URLSearchParams object, otherwise false
+ */
+function isURLSearchParams(val) {
+  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
+}
+
+/**
+ * Trim excess whitespace off the beginning and end of a string
+ *
+ * @param {String} str The String to trim
+ * @returns {String} The String freed of excess whitespace
+ */
+function trim(str) {
+  return str.replace(/^\s*/, '').replace(/\s*$/, '');
+}
+
+/**
+ * Determine if we're running in a standard browser environment
+ *
+ * This allows axios to run in a web worker, and react-native.
+ * Both environments support XMLHttpRequest, but not fully standard globals.
+ *
+ * web workers:
+ *  typeof window -> undefined
+ *  typeof document -> undefined
+ *
+ * react-native:
+ *  navigator.product -> 'ReactNative'
+ */
+function isStandardBrowserEnv() {
+  if (typeof navigator !== 'undefined' && navigator.product === 'ReactNative') {
+    return false;
+  }
+  return (
+    typeof window !== 'undefined' &&
+    typeof document !== 'undefined'
+  );
+}
+
+/**
+ * Iterate over an Array or an Object invoking a function for each item.
+ *
+ * If `obj` is an Array callback will be called passing
+ * the value, index, and complete array for each item.
+ *
+ * If 'obj' is an Object callback will be called passing
+ * the value, key, and complete object for each property.
+ *
+ * @param {Object|Array} obj The object to iterate
+ * @param {Function} fn The callback to invoke for each item
+ */
+function forEach(obj, fn) {
+  // Don't bother if no value provided
+  if (obj === null || typeof obj === 'undefined') {
+    return;
+  }
+
+  // Force an array if not already something iterable
+  if (typeof obj !== 'object' && !isArray(obj)) {
+    /*eslint no-param-reassign:0*/
+    obj = [obj];
+  }
+
+  if (isArray(obj)) {
+    // Iterate over array values
+    for (var i = 0, l = obj.length; i < l; i++) {
+      fn.call(null, obj[i], i, obj);
+    }
+  } else {
+    // Iterate over object keys
+    for (var key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        fn.call(null, obj[key], key, obj);
       }
     }
-  }function s(t) {
-    if (c === clearTimeout) return clearTimeout(t);if ((c === r || !c) && clearTimeout) return c = clearTimeout, clearTimeout(t);try {
-      return c(t);
-    } catch (e) {
-      try {
-        return c.call(null, t);
-      } catch (e) {
-        return c.call(this, t);
-      }
+  }
+}
+
+/**
+ * Accepts varargs expecting each argument to be an object, then
+ * immutably merges the properties of each object and returns result.
+ *
+ * When multiple objects contain the same key the later object in
+ * the arguments list will take precedence.
+ *
+ * Example:
+ *
+ * ```js
+ * var result = merge({foo: 123}, {foo: 456});
+ * console.log(result.foo); // outputs 456
+ * ```
+ *
+ * @param {Object} obj1 Object to merge
+ * @returns {Object} Result of all merge properties
+ */
+function merge(/* obj1, obj2, obj3, ... */) {
+  var result = {};
+  function assignValue(val, key) {
+    if (typeof result[key] === 'object' && typeof val === 'object') {
+      result[key] = merge(result[key], val);
+    } else {
+      result[key] = val;
     }
-  }function a() {
-    m && d && (m = !1, d.length ? f = d.concat(f) : g = -1, f.length && o());
-  }function o() {
-    if (!m) {
-      var t = n(a);m = !0;for (var e = f.length; e;) {
-        for (d = f, f = []; ++g < e;) {
-          d && d[g].run();
-        }g = -1, e = f.length;
-      }d = null, m = !1, s(t);
+  }
+
+  for (var i = 0, l = arguments.length; i < l; i++) {
+    forEach(arguments[i], assignValue);
+  }
+  return result;
+}
+
+/**
+ * Extends object a by mutably adding to it the properties of object b.
+ *
+ * @param {Object} a The object to be extended
+ * @param {Object} b The object to copy properties from
+ * @param {Object} thisArg The object to bind function to
+ * @return {Object} The resulting value of object a
+ */
+function extend(a, b, thisArg) {
+  forEach(b, function assignValue(val, key) {
+    if (thisArg && typeof val === 'function') {
+      a[key] = bind(val, thisArg);
+    } else {
+      a[key] = val;
     }
-  }function l(t, e) {
-    this.fun = t, this.array = e;
-  }function u() {}var p,
-      c,
-      h = t.exports = {};!function () {
-    try {
-      p = "function" == typeof setTimeout ? setTimeout : i;
-    } catch (t) {
-      p = i;
-    }try {
-      c = "function" == typeof clearTimeout ? clearTimeout : r;
-    } catch (t) {
-      c = r;
-    }
-  }();var d,
-      f = [],
-      m = !1,
-      g = -1;h.nextTick = function (t) {
-    var e = new Array(arguments.length - 1);if (arguments.length > 1) for (var i = 1; i < arguments.length; i++) {
-      e[i - 1] = arguments[i];
-    }f.push(new l(t, e)), 1 !== f.length || m || n(o);
-  }, l.prototype.run = function () {
-    this.fun.apply(null, this.array);
-  }, h.title = "browser", h.browser = !0, h.env = {}, h.argv = [], h.version = "", h.versions = {}, h.on = u, h.addListener = u, h.once = u, h.off = u, h.removeListener = u, h.removeAllListeners = u, h.emit = u, h.binding = function (t) {
-    throw new Error("process.binding is not supported");
-  }, h.cwd = function () {
-    return "/";
-  }, h.chdir = function (t) {
-    throw new Error("process.chdir is not supported");
-  }, h.umask = function () {
-    return 0;
-  };
-}, function (t, e, i) {
-  !function () {
-    "use strict";
-    function t(t) {
-      t.fn.swiper = function (e) {
-        var r;return t(this).each(function () {
-          var t = new i(this, e);r || (r = t);
-        }), r;
-      };
-    }var e,
-        i = function i(t, n) {
-      function s(t) {
-        return Math.floor(t);
-      }function a() {
-        var t = T.params.autoplay,
-            e = T.slides.eq(T.activeIndex);e.attr("data-swiper-autoplay") && (t = e.attr("data-swiper-autoplay") || T.params.autoplay), T.autoplayTimeoutId = setTimeout(function () {
-          T.params.loop ? (T.fixLoop(), T._slideNext(), T.emit("onAutoplay", T)) : T.isEnd ? n.autoplayStopOnLast ? T.stopAutoplay() : (T._slideTo(0), T.emit("onAutoplay", T)) : (T._slideNext(), T.emit("onAutoplay", T));
-        }, t);
-      }function o(t, i) {
-        var r = e(t.target);if (!r.is(i)) if ("string" == typeof i) r = r.parents(i);else if (i.nodeType) {
-          var n;return r.parents().each(function (t, e) {
-            e === i && (n = i);
-          }), n ? i : void 0;
-        }if (0 !== r.length) return r[0];
-      }function l(t, e) {
-        e = e || {};var i = window.MutationObserver || window.WebkitMutationObserver,
-            r = new i(function (t) {
-          t.forEach(function (t) {
-            T.onResize(!0), T.emit("onObserverUpdate", T, t);
-          });
-        });r.observe(t, { attributes: void 0 === e.attributes || e.attributes, childList: void 0 === e.childList || e.childList, characterData: void 0 === e.characterData || e.characterData }), T.observers.push(r);
-      }function u(t) {
-        t.originalEvent && (t = t.originalEvent);var e = t.keyCode || t.charCode;if (!T.params.allowSwipeToNext && (T.isHorizontal() && 39 === e || !T.isHorizontal() && 40 === e)) return !1;if (!T.params.allowSwipeToPrev && (T.isHorizontal() && 37 === e || !T.isHorizontal() && 38 === e)) return !1;if (!(t.shiftKey || t.altKey || t.ctrlKey || t.metaKey || document.activeElement && document.activeElement.nodeName && ("input" === document.activeElement.nodeName.toLowerCase() || "textarea" === document.activeElement.nodeName.toLowerCase()))) {
-          if (37 === e || 39 === e || 38 === e || 40 === e) {
-            var i = !1;if (T.container.parents("." + T.params.slideClass).length > 0 && 0 === T.container.parents("." + T.params.slideActiveClass).length) return;var r = { left: window.pageXOffset, top: window.pageYOffset },
-                n = window.innerWidth,
-                s = window.innerHeight,
-                a = T.container.offset();T.rtl && (a.left = a.left - T.container[0].scrollLeft);for (var o = [[a.left, a.top], [a.left + T.width, a.top], [a.left, a.top + T.height], [a.left + T.width, a.top + T.height]], l = 0; l < o.length; l++) {
-              var u = o[l];u[0] >= r.left && u[0] <= r.left + n && u[1] >= r.top && u[1] <= r.top + s && (i = !0);
-            }if (!i) return;
-          }T.isHorizontal() ? (37 !== e && 39 !== e || (t.preventDefault ? t.preventDefault() : t.returnValue = !1), (39 === e && !T.rtl || 37 === e && T.rtl) && T.slideNext(), (37 === e && !T.rtl || 39 === e && T.rtl) && T.slidePrev()) : (38 !== e && 40 !== e || (t.preventDefault ? t.preventDefault() : t.returnValue = !1), 40 === e && T.slideNext(), 38 === e && T.slidePrev()), T.emit("onKeyPress", T, e);
-        }
-      }function p() {
-        var t = "onwheel",
-            e = t in document;if (!e) {
-          var i = document.createElement("div");i.setAttribute(t, "return;"), e = "function" == typeof i[t];
-        }return !e && document.implementation && document.implementation.hasFeature && document.implementation.hasFeature("", "") !== !0 && (e = document.implementation.hasFeature("Events.wheel", "3.0")), e;
-      }function c(t) {
-        var e = 10,
-            i = 40,
-            r = 800,
-            n = 0,
-            s = 0,
-            a = 0,
-            o = 0;return "detail" in t && (s = t.detail), "wheelDelta" in t && (s = -t.wheelDelta / 120), "wheelDeltaY" in t && (s = -t.wheelDeltaY / 120), "wheelDeltaX" in t && (n = -t.wheelDeltaX / 120), "axis" in t && t.axis === t.HORIZONTAL_AXIS && (n = s, s = 0), a = n * e, o = s * e, "deltaY" in t && (o = t.deltaY), "deltaX" in t && (a = t.deltaX), (a || o) && t.deltaMode && (1 === t.deltaMode ? (a *= i, o *= i) : (a *= r, o *= r)), a && !n && (n = a < 1 ? -1 : 1), o && !s && (s = o < 1 ? -1 : 1), { spinX: n, spinY: s, pixelX: a, pixelY: o };
-      }function h(t) {
-        t.originalEvent && (t = t.originalEvent);var e = 0,
-            i = T.rtl ? -1 : 1,
-            r = c(t);if (T.params.mousewheelForceToAxis) {
-          if (T.isHorizontal()) {
-            if (!(Math.abs(r.pixelX) > Math.abs(r.pixelY))) return;e = r.pixelX * i;
-          } else {
-            if (!(Math.abs(r.pixelY) > Math.abs(r.pixelX))) return;e = r.pixelY;
-          }
-        } else e = Math.abs(r.pixelX) > Math.abs(r.pixelY) ? -r.pixelX * i : -r.pixelY;if (0 !== e) {
-          if (T.params.mousewheelInvert && (e = -e), T.params.freeMode) {
-            var n = T.getWrapperTranslate() + e * T.params.mousewheelSensitivity,
-                s = T.isBeginning,
-                a = T.isEnd;if (n >= T.minTranslate() && (n = T.minTranslate()), n <= T.maxTranslate() && (n = T.maxTranslate()), T.setWrapperTransition(0), T.setWrapperTranslate(n), T.updateProgress(), T.updateActiveIndex(), (!s && T.isBeginning || !a && T.isEnd) && T.updateClasses(), T.params.freeModeSticky ? (clearTimeout(T.mousewheel.timeout), T.mousewheel.timeout = setTimeout(function () {
-              T.slideReset();
-            }, 300)) : T.params.lazyLoading && T.lazy && T.lazy.load(), T.emit("onScroll", T, t), T.params.autoplay && T.params.autoplayDisableOnInteraction && T.stopAutoplay(), 0 === n || n === T.maxTranslate()) return;
-          } else {
-            if (new window.Date().getTime() - T.mousewheel.lastScrollTime > 60) if (e < 0) {
-              if (T.isEnd && !T.params.loop || T.animating) {
-                if (T.params.mousewheelReleaseOnEdges) return !0;
-              } else T.slideNext(), T.emit("onScroll", T, t);
-            } else if (T.isBeginning && !T.params.loop || T.animating) {
-              if (T.params.mousewheelReleaseOnEdges) return !0;
-            } else T.slidePrev(), T.emit("onScroll", T, t);T.mousewheel.lastScrollTime = new window.Date().getTime();
-          }return t.preventDefault ? t.preventDefault() : t.returnValue = !1, !1;
-        }
-      }function d(t, i) {
-        t = e(t);var r,
-            n,
-            s,
-            a = T.rtl ? -1 : 1;r = t.attr("data-swiper-parallax") || "0", n = t.attr("data-swiper-parallax-x"), s = t.attr("data-swiper-parallax-y"), n || s ? (n = n || "0", s = s || "0") : T.isHorizontal() ? (n = r, s = "0") : (s = r, n = "0"), n = n.indexOf("%") >= 0 ? parseInt(n, 10) * i * a + "%" : n * i * a + "px", s = s.indexOf("%") >= 0 ? parseInt(s, 10) * i + "%" : s * i + "px", t.transform("translate3d(" + n + ", " + s + ",0px)");
-      }function f(t) {
-        return 0 !== t.indexOf("on") && (t = t[0] !== t[0].toUpperCase() ? "on" + t[0].toUpperCase() + t.substring(1) : "on" + t), t;
-      }if (!(this instanceof i)) return new i(t, n);var m = { direction: "horizontal", touchEventsTarget: "container", initialSlide: 0, speed: 300, autoplay: !1, autoplayDisableOnInteraction: !0, autoplayStopOnLast: !1, iOSEdgeSwipeDetection: !1, iOSEdgeSwipeThreshold: 20, freeMode: !1, freeModeMomentum: !0, freeModeMomentumRatio: 1, freeModeMomentumBounce: !0, freeModeMomentumBounceRatio: 1, freeModeMomentumVelocityRatio: 1, freeModeSticky: !1, freeModeMinimumVelocity: .02, autoHeight: !1, setWrapperSize: !1, virtualTranslate: !1, effect: "slide", coverflow: { rotate: 50, stretch: 0, depth: 100, modifier: 1, slideShadows: !0 }, flip: { slideShadows: !0, limitRotation: !0 }, cube: { slideShadows: !0, shadow: !0, shadowOffset: 20, shadowScale: .94 }, fade: { crossFade: !1 }, parallax: !1, zoom: !1, zoomMax: 3, zoomMin: 1, zoomToggle: !0, scrollbar: null, scrollbarHide: !0, scrollbarDraggable: !1, scrollbarSnapOnRelease: !1, keyboardControl: !1, mousewheelControl: !1, mousewheelReleaseOnEdges: !1, mousewheelInvert: !1, mousewheelForceToAxis: !1, mousewheelSensitivity: 1, mousewheelEventsTarged: "container", hashnav: !1, hashnavWatchState: !1, history: !1, replaceState: !1, breakpoints: void 0, spaceBetween: 0, slidesPerView: 1, slidesPerColumn: 1, slidesPerColumnFill: "column", slidesPerGroup: 1, centeredSlides: !1, slidesOffsetBefore: 0, slidesOffsetAfter: 0, roundLengths: !1, touchRatio: 1, touchAngle: 45, simulateTouch: !0, shortSwipes: !0, longSwipes: !0, longSwipesRatio: .5, longSwipesMs: 300, followFinger: !0, onlyExternal: !1, threshold: 0, touchMoveStopPropagation: !0, touchReleaseOnEdges: !1, uniqueNavElements: !0, pagination: null, paginationElement: "span", paginationClickable: !1, paginationHide: !1, paginationBulletRender: null, paginationProgressRender: null, paginationFractionRender: null, paginationCustomRender: null, paginationType: "bullets", resistance: !0, resistanceRatio: .85, nextButton: null, prevButton: null, watchSlidesProgress: !1, watchSlidesVisibility: !1, grabCursor: !1, preventClicks: !0, preventClicksPropagation: !0, slideToClickedSlide: !1, lazyLoading: !1, lazyLoadingInPrevNext: !1, lazyLoadingInPrevNextAmount: 1, lazyLoadingOnTransitionStart: !1, preloadImages: !0, updateOnImagesReady: !0, loop: !1, loopAdditionalSlides: 0, loopedSlides: null, control: void 0, controlInverse: !1, controlBy: "slide", normalizeSlideIndex: !0, allowSwipeToPrev: !0, allowSwipeToNext: !0, swipeHandler: null, noSwiping: !0, noSwipingClass: "swiper-no-swiping", passiveListeners: !0, containerModifierClass: "swiper-container-", slideClass: "swiper-slide", slideActiveClass: "swiper-slide-active", slideDuplicateActiveClass: "swiper-slide-duplicate-active", slideVisibleClass: "swiper-slide-visible", slideDuplicateClass: "swiper-slide-duplicate", slideNextClass: "swiper-slide-next", slideDuplicateNextClass: "swiper-slide-duplicate-next", slidePrevClass: "swiper-slide-prev", slideDuplicatePrevClass: "swiper-slide-duplicate-prev", wrapperClass: "swiper-wrapper", bulletClass: "swiper-pagination-bullet", bulletActiveClass: "swiper-pagination-bullet-active", buttonDisabledClass: "swiper-button-disabled", paginationCurrentClass: "swiper-pagination-current", paginationTotalClass: "swiper-pagination-total", paginationHiddenClass: "swiper-pagination-hidden", paginationProgressbarClass: "swiper-pagination-progressbar", paginationClickableClass: "swiper-pagination-clickable", paginationModifierClass: "swiper-pagination-", lazyLoadingClass: "swiper-lazy", lazyStatusLoadingClass: "swiper-lazy-loading", lazyStatusLoadedClass: "swiper-lazy-loaded", lazyPreloaderClass: "swiper-lazy-preloader", notificationClass: "swiper-notification", preloaderClass: "preloader", zoomContainerClass: "swiper-zoom-container", observer: !1, observeParents: !1, a11y: !1, prevSlideMessage: "Previous slide", nextSlideMessage: "Next slide", firstSlideMessage: "This is the first slide", lastSlideMessage: "This is the last slide", paginationBulletMessage: "Go to slide {{index}}", runCallbacksOnInit: !0 },
-          g = n && n.virtualTranslate;n = n || {};var v = {};for (var w in n) {
-        if ("object" != _typeof(n[w]) || null === n[w] || n[w].nodeType || n[w] === window || n[w] === document || void 0 !== r && n[w] instanceof r || "undefined" != typeof jQuery && n[w] instanceof jQuery) v[w] = n[w];else {
-          v[w] = {};for (var y in n[w]) {
-            v[w][y] = n[w][y];
-          }
-        }
-      }for (var x in m) {
-        if (void 0 === n[x]) n[x] = m[x];else if ("object" == _typeof(n[x])) for (var b in m[x]) {
-          void 0 === n[x][b] && (n[x][b] = m[x][b]);
-        }
-      }var T = this;if (T.params = n, T.originalParams = v, T.classNames = [], void 0 !== e && void 0 !== r && (e = r), (void 0 !== e || (e = void 0 === r ? window.Dom7 || window.Zepto || window.jQuery : r)) && (T.$ = e, T.currentBreakpoint = void 0, T.getActiveBreakpoint = function () {
-        if (!T.params.breakpoints) return !1;var t,
-            e = !1,
-            i = [];for (t in T.params.breakpoints) {
-          T.params.breakpoints.hasOwnProperty(t) && i.push(t);
-        }i.sort(function (t, e) {
-          return parseInt(t, 10) > parseInt(e, 10);
-        });for (var r = 0; r < i.length; r++) {
-          (t = i[r]) >= window.innerWidth && !e && (e = t);
-        }return e || "max";
-      }, T.setBreakpoint = function () {
-        var t = T.getActiveBreakpoint();if (t && T.currentBreakpoint !== t) {
-          var e = t in T.params.breakpoints ? T.params.breakpoints[t] : T.originalParams,
-              i = T.params.loop && e.slidesPerView !== T.params.slidesPerView;for (var r in e) {
-            T.params[r] = e[r];
-          }T.currentBreakpoint = t, i && T.destroyLoop && T.reLoop(!0);
-        }
-      }, T.params.breakpoints && T.setBreakpoint(), T.container = e(t), 0 !== T.container.length)) {
-        if (T.container.length > 1) {
-          var S = [];return T.container.each(function () {
-            S.push(new i(this, n));
-          }), S;
-        }T.container[0].swiper = T, T.container.data("swiper", T), T.classNames.push(T.params.containerModifierClass + T.params.direction), T.params.freeMode && T.classNames.push(T.params.containerModifierClass + "free-mode"), T.support.flexbox || (T.classNames.push(T.params.containerModifierClass + "no-flexbox"), T.params.slidesPerColumn = 1), T.params.autoHeight && T.classNames.push(T.params.containerModifierClass + "autoheight"), (T.params.parallax || T.params.watchSlidesVisibility) && (T.params.watchSlidesProgress = !0), T.params.touchReleaseOnEdges && (T.params.resistanceRatio = 0), ["cube", "coverflow", "flip"].indexOf(T.params.effect) >= 0 && (T.support.transforms3d ? (T.params.watchSlidesProgress = !0, T.classNames.push(T.params.containerModifierClass + "3d")) : T.params.effect = "slide"), "slide" !== T.params.effect && T.classNames.push(T.params.containerModifierClass + T.params.effect), "cube" === T.params.effect && (T.params.resistanceRatio = 0, T.params.slidesPerView = 1, T.params.slidesPerColumn = 1, T.params.slidesPerGroup = 1, T.params.centeredSlides = !1, T.params.spaceBetween = 0, T.params.virtualTranslate = !0), "fade" !== T.params.effect && "flip" !== T.params.effect || (T.params.slidesPerView = 1, T.params.slidesPerColumn = 1, T.params.slidesPerGroup = 1, T.params.watchSlidesProgress = !0, T.params.spaceBetween = 0, void 0 === g && (T.params.virtualTranslate = !0)), T.params.grabCursor && T.support.touch && (T.params.grabCursor = !1), T.wrapper = T.container.children("." + T.params.wrapperClass), T.params.pagination && (T.paginationContainer = e(T.params.pagination), T.params.uniqueNavElements && "string" == typeof T.params.pagination && T.paginationContainer.length > 1 && 1 === T.container.find(T.params.pagination).length && (T.paginationContainer = T.container.find(T.params.pagination)), "bullets" === T.params.paginationType && T.params.paginationClickable ? T.paginationContainer.addClass(T.params.paginationModifierClass + "clickable") : T.params.paginationClickable = !1, T.paginationContainer.addClass(T.params.paginationModifierClass + T.params.paginationType)), (T.params.nextButton || T.params.prevButton) && (T.params.nextButton && (T.nextButton = e(T.params.nextButton), T.params.uniqueNavElements && "string" == typeof T.params.nextButton && T.nextButton.length > 1 && 1 === T.container.find(T.params.nextButton).length && (T.nextButton = T.container.find(T.params.nextButton))), T.params.prevButton && (T.prevButton = e(T.params.prevButton), T.params.uniqueNavElements && "string" == typeof T.params.prevButton && T.prevButton.length > 1 && 1 === T.container.find(T.params.prevButton).length && (T.prevButton = T.container.find(T.params.prevButton)))), T.isHorizontal = function () {
-          return "horizontal" === T.params.direction;
-        }, T.rtl = T.isHorizontal() && ("rtl" === T.container[0].dir.toLowerCase() || "rtl" === T.container.css("direction")), T.rtl && T.classNames.push(T.params.containerModifierClass + "rtl"), T.rtl && (T.wrongRTL = "-webkit-box" === T.wrapper.css("display")), T.params.slidesPerColumn > 1 && T.classNames.push(T.params.containerModifierClass + "multirow"), T.device.android && T.classNames.push(T.params.containerModifierClass + "android"), T.container.addClass(T.classNames.join(" ")), T.translate = 0, T.progress = 0, T.velocity = 0, T.lockSwipeToNext = function () {
-          T.params.allowSwipeToNext = !1, T.params.allowSwipeToPrev === !1 && T.params.grabCursor && T.unsetGrabCursor();
-        }, T.lockSwipeToPrev = function () {
-          T.params.allowSwipeToPrev = !1, T.params.allowSwipeToNext === !1 && T.params.grabCursor && T.unsetGrabCursor();
-        }, T.lockSwipes = function () {
-          T.params.allowSwipeToNext = T.params.allowSwipeToPrev = !1, T.params.grabCursor && T.unsetGrabCursor();
-        }, T.unlockSwipeToNext = function () {
-          T.params.allowSwipeToNext = !0, T.params.allowSwipeToPrev === !0 && T.params.grabCursor && T.setGrabCursor();
-        }, T.unlockSwipeToPrev = function () {
-          T.params.allowSwipeToPrev = !0, T.params.allowSwipeToNext === !0 && T.params.grabCursor && T.setGrabCursor();
-        }, T.unlockSwipes = function () {
-          T.params.allowSwipeToNext = T.params.allowSwipeToPrev = !0, T.params.grabCursor && T.setGrabCursor();
-        }, T.setGrabCursor = function (t) {
-          T.container[0].style.cursor = "move", T.container[0].style.cursor = t ? "-webkit-grabbing" : "-webkit-grab", T.container[0].style.cursor = t ? "-moz-grabbin" : "-moz-grab", T.container[0].style.cursor = t ? "grabbing" : "grab";
-        }, T.unsetGrabCursor = function () {
-          T.container[0].style.cursor = "";
-        }, T.params.grabCursor && T.setGrabCursor(), T.imagesToLoad = [], T.imagesLoaded = 0, T.loadImage = function (t, e, i, r, n, s) {
-          function a() {
-            s && s();
-          }var o;t.complete && n ? a() : e ? (o = new window.Image(), o.onload = a, o.onerror = a, r && (o.sizes = r), i && (o.srcset = i), e && (o.src = e)) : a();
-        }, T.preloadImages = function () {
-          function t() {
-            void 0 !== T && null !== T && T && (void 0 !== T.imagesLoaded && T.imagesLoaded++, T.imagesLoaded === T.imagesToLoad.length && (T.params.updateOnImagesReady && T.update(), T.emit("onImagesReady", T)));
-          }T.imagesToLoad = T.container.find("img");for (var e = 0; e < T.imagesToLoad.length; e++) {
-            T.loadImage(T.imagesToLoad[e], T.imagesToLoad[e].currentSrc || T.imagesToLoad[e].getAttribute("src"), T.imagesToLoad[e].srcset || T.imagesToLoad[e].getAttribute("srcset"), T.imagesToLoad[e].sizes || T.imagesToLoad[e].getAttribute("sizes"), !0, t);
-          }
-        }, T.autoplayTimeoutId = void 0, T.autoplaying = !1, T.autoplayPaused = !1, T.startAutoplay = function () {
-          return void 0 === T.autoplayTimeoutId && !!T.params.autoplay && !T.autoplaying && (T.autoplaying = !0, T.emit("onAutoplayStart", T), void a());
-        }, T.stopAutoplay = function (t) {
-          T.autoplayTimeoutId && (T.autoplayTimeoutId && clearTimeout(T.autoplayTimeoutId), T.autoplaying = !1, T.autoplayTimeoutId = void 0, T.emit("onAutoplayStop", T));
-        }, T.pauseAutoplay = function (t) {
-          T.autoplayPaused || (T.autoplayTimeoutId && clearTimeout(T.autoplayTimeoutId), T.autoplayPaused = !0, 0 === t ? (T.autoplayPaused = !1, a()) : T.wrapper.transitionEnd(function () {
-            T && (T.autoplayPaused = !1, T.autoplaying ? a() : T.stopAutoplay());
-          }));
-        }, T.minTranslate = function () {
-          return -T.snapGrid[0];
-        }, T.maxTranslate = function () {
-          return -T.snapGrid[T.snapGrid.length - 1];
-        }, T.updateAutoHeight = function () {
-          var t,
-              e = [],
-              i = 0;if ("auto" !== T.params.slidesPerView && T.params.slidesPerView > 1) for (t = 0; t < Math.ceil(T.params.slidesPerView); t++) {
-            var r = T.activeIndex + t;if (r > T.slides.length) break;e.push(T.slides.eq(r)[0]);
-          } else e.push(T.slides.eq(T.activeIndex)[0]);for (t = 0; t < e.length; t++) {
-            if (void 0 !== e[t]) {
-              var n = e[t].offsetHeight;i = n > i ? n : i;
-            }
-          }i && T.wrapper.css("height", i + "px");
-        }, T.updateContainerSize = function () {
-          var t, e;t = void 0 !== T.params.width ? T.params.width : T.container[0].clientWidth, e = void 0 !== T.params.height ? T.params.height : T.container[0].clientHeight, 0 === t && T.isHorizontal() || 0 === e && !T.isHorizontal() || (t = t - parseInt(T.container.css("padding-left"), 10) - parseInt(T.container.css("padding-right"), 10), e = e - parseInt(T.container.css("padding-top"), 10) - parseInt(T.container.css("padding-bottom"), 10), T.width = t, T.height = e, T.size = T.isHorizontal() ? T.width : T.height);
-        }, T.updateSlidesSize = function () {
-          T.slides = T.wrapper.children("." + T.params.slideClass), T.snapGrid = [], T.slidesGrid = [], T.slidesSizesGrid = [];var t,
-              e = T.params.spaceBetween,
-              i = -T.params.slidesOffsetBefore,
-              r = 0,
-              n = 0;if (void 0 !== T.size) {
-            "string" == typeof e && e.indexOf("%") >= 0 && (e = parseFloat(e.replace("%", "")) / 100 * T.size), T.virtualSize = -e, T.rtl ? T.slides.css({ marginLeft: "", marginTop: "" }) : T.slides.css({ marginRight: "", marginBottom: "" });var a;T.params.slidesPerColumn > 1 && (a = Math.floor(T.slides.length / T.params.slidesPerColumn) === T.slides.length / T.params.slidesPerColumn ? T.slides.length : Math.ceil(T.slides.length / T.params.slidesPerColumn) * T.params.slidesPerColumn, "auto" !== T.params.slidesPerView && "row" === T.params.slidesPerColumnFill && (a = Math.max(a, T.params.slidesPerView * T.params.slidesPerColumn)));var o,
-                l = T.params.slidesPerColumn,
-                u = a / l,
-                p = u - (T.params.slidesPerColumn * u - T.slides.length);for (t = 0; t < T.slides.length; t++) {
-              o = 0;var c = T.slides.eq(t);if (T.params.slidesPerColumn > 1) {
-                var h, d, f;"column" === T.params.slidesPerColumnFill ? (d = Math.floor(t / l), f = t - d * l, (d > p || d === p && f === l - 1) && ++f >= l && (f = 0, d++), h = d + f * a / l, c.css({ "-webkit-box-ordinal-group": h, "-moz-box-ordinal-group": h, "-ms-flex-order": h, "-webkit-order": h, order: h })) : (f = Math.floor(t / u), d = t - f * u), c.css("margin-" + (T.isHorizontal() ? "top" : "left"), 0 !== f && T.params.spaceBetween && T.params.spaceBetween + "px").attr("data-swiper-column", d).attr("data-swiper-row", f);
-              }"none" !== c.css("display") && ("auto" === T.params.slidesPerView ? (o = T.isHorizontal() ? c.outerWidth(!0) : c.outerHeight(!0), T.params.roundLengths && (o = s(o))) : (o = (T.size - (T.params.slidesPerView - 1) * e) / T.params.slidesPerView, T.params.roundLengths && (o = s(o)), T.isHorizontal() ? T.slides[t].style.width = o + "px" : T.slides[t].style.height = o + "px"), T.slides[t].swiperSlideSize = o, T.slidesSizesGrid.push(o), T.params.centeredSlides ? (i = i + o / 2 + r / 2 + e, 0 === r && 0 !== t && (i = i - T.size / 2 - e), 0 === t && (i = i - T.size / 2 - e), Math.abs(i) < .001 && (i = 0), n % T.params.slidesPerGroup == 0 && T.snapGrid.push(i), T.slidesGrid.push(i)) : (n % T.params.slidesPerGroup == 0 && T.snapGrid.push(i), T.slidesGrid.push(i), i = i + o + e), T.virtualSize += o + e, r = o, n++);
-            }T.virtualSize = Math.max(T.virtualSize, T.size) + T.params.slidesOffsetAfter;var m;if (T.rtl && T.wrongRTL && ("slide" === T.params.effect || "coverflow" === T.params.effect) && T.wrapper.css({ width: T.virtualSize + T.params.spaceBetween + "px" }), T.support.flexbox && !T.params.setWrapperSize || (T.isHorizontal() ? T.wrapper.css({ width: T.virtualSize + T.params.spaceBetween + "px" }) : T.wrapper.css({ height: T.virtualSize + T.params.spaceBetween + "px" })), T.params.slidesPerColumn > 1 && (T.virtualSize = (o + T.params.spaceBetween) * a, T.virtualSize = Math.ceil(T.virtualSize / T.params.slidesPerColumn) - T.params.spaceBetween, T.isHorizontal() ? T.wrapper.css({ width: T.virtualSize + T.params.spaceBetween + "px" }) : T.wrapper.css({ height: T.virtualSize + T.params.spaceBetween + "px" }), T.params.centeredSlides)) {
-              for (m = [], t = 0; t < T.snapGrid.length; t++) {
-                T.snapGrid[t] < T.virtualSize + T.snapGrid[0] && m.push(T.snapGrid[t]);
-              }T.snapGrid = m;
-            }if (!T.params.centeredSlides) {
-              for (m = [], t = 0; t < T.snapGrid.length; t++) {
-                T.snapGrid[t] <= T.virtualSize - T.size && m.push(T.snapGrid[t]);
-              }T.snapGrid = m, Math.floor(T.virtualSize - T.size) - Math.floor(T.snapGrid[T.snapGrid.length - 1]) > 1 && T.snapGrid.push(T.virtualSize - T.size);
-            }0 === T.snapGrid.length && (T.snapGrid = [0]), 0 !== T.params.spaceBetween && (T.isHorizontal() ? T.rtl ? T.slides.css({ marginLeft: e + "px" }) : T.slides.css({ marginRight: e + "px" }) : T.slides.css({ marginBottom: e + "px" })), T.params.watchSlidesProgress && T.updateSlidesOffset();
-          }
-        }, T.updateSlidesOffset = function () {
-          for (var t = 0; t < T.slides.length; t++) {
-            T.slides[t].swiperSlideOffset = T.isHorizontal() ? T.slides[t].offsetLeft : T.slides[t].offsetTop;
-          }
-        }, T.currentSlidesPerView = function () {
-          var t,
-              e,
-              i = 1;if (T.params.centeredSlides) {
-            var r,
-                n = T.slides[T.activeIndex].swiperSlideSize;for (t = T.activeIndex + 1; t < T.slides.length; t++) {
-              T.slides[t] && !r && (n += T.slides[t].swiperSlideSize, i++, n > T.size && (r = !0));
-            }for (e = T.activeIndex - 1; e >= 0; e--) {
-              T.slides[e] && !r && (n += T.slides[e].swiperSlideSize, i++, n > T.size && (r = !0));
-            }
-          } else for (t = T.activeIndex + 1; t < T.slides.length; t++) {
-            T.slidesGrid[t] - T.slidesGrid[T.activeIndex] < T.size && i++;
-          }return i;
-        }, T.updateSlidesProgress = function (t) {
-          if (void 0 === t && (t = T.translate || 0), 0 !== T.slides.length) {
-            void 0 === T.slides[0].swiperSlideOffset && T.updateSlidesOffset();var e = -t;T.rtl && (e = t), T.slides.removeClass(T.params.slideVisibleClass);for (var i = 0; i < T.slides.length; i++) {
-              var r = T.slides[i],
-                  n = (e + (T.params.centeredSlides ? T.minTranslate() : 0) - r.swiperSlideOffset) / (r.swiperSlideSize + T.params.spaceBetween);if (T.params.watchSlidesVisibility) {
-                var s = -(e - r.swiperSlideOffset),
-                    a = s + T.slidesSizesGrid[i];(s >= 0 && s < T.size || a > 0 && a <= T.size || s <= 0 && a >= T.size) && T.slides.eq(i).addClass(T.params.slideVisibleClass);
-              }r.progress = T.rtl ? -n : n;
-            }
-          }
-        }, T.updateProgress = function (t) {
-          void 0 === t && (t = T.translate || 0);var e = T.maxTranslate() - T.minTranslate(),
-              i = T.isBeginning,
-              r = T.isEnd;0 === e ? (T.progress = 0, T.isBeginning = T.isEnd = !0) : (T.progress = (t - T.minTranslate()) / e, T.isBeginning = T.progress <= 0, T.isEnd = T.progress >= 1), T.isBeginning && !i && T.emit("onReachBeginning", T), T.isEnd && !r && T.emit("onReachEnd", T), T.params.watchSlidesProgress && T.updateSlidesProgress(t), T.emit("onProgress", T, T.progress);
-        }, T.updateActiveIndex = function () {
-          var t,
-              e,
-              i,
-              r = T.rtl ? T.translate : -T.translate;for (e = 0; e < T.slidesGrid.length; e++) {
-            void 0 !== T.slidesGrid[e + 1] ? r >= T.slidesGrid[e] && r < T.slidesGrid[e + 1] - (T.slidesGrid[e + 1] - T.slidesGrid[e]) / 2 ? t = e : r >= T.slidesGrid[e] && r < T.slidesGrid[e + 1] && (t = e + 1) : r >= T.slidesGrid[e] && (t = e);
-          }T.params.normalizeSlideIndex && (t < 0 || void 0 === t) && (t = 0), i = Math.floor(t / T.params.slidesPerGroup), i >= T.snapGrid.length && (i = T.snapGrid.length - 1), t !== T.activeIndex && (T.snapIndex = i, T.previousIndex = T.activeIndex, T.activeIndex = t, T.updateClasses(), T.updateRealIndex());
-        }, T.updateRealIndex = function () {
-          T.realIndex = parseInt(T.slides.eq(T.activeIndex).attr("data-swiper-slide-index") || T.activeIndex, 10);
-        }, T.updateClasses = function () {
-          T.slides.removeClass(T.params.slideActiveClass + " " + T.params.slideNextClass + " " + T.params.slidePrevClass + " " + T.params.slideDuplicateActiveClass + " " + T.params.slideDuplicateNextClass + " " + T.params.slideDuplicatePrevClass);var t = T.slides.eq(T.activeIndex);t.addClass(T.params.slideActiveClass), n.loop && (t.hasClass(T.params.slideDuplicateClass) ? T.wrapper.children("." + T.params.slideClass + ":not(." + T.params.slideDuplicateClass + ')[data-swiper-slide-index="' + T.realIndex + '"]').addClass(T.params.slideDuplicateActiveClass) : T.wrapper.children("." + T.params.slideClass + "." + T.params.slideDuplicateClass + '[data-swiper-slide-index="' + T.realIndex + '"]').addClass(T.params.slideDuplicateActiveClass));var i = t.next("." + T.params.slideClass).addClass(T.params.slideNextClass);T.params.loop && 0 === i.length && (i = T.slides.eq(0), i.addClass(T.params.slideNextClass));var r = t.prev("." + T.params.slideClass).addClass(T.params.slidePrevClass);if (T.params.loop && 0 === r.length && (r = T.slides.eq(-1), r.addClass(T.params.slidePrevClass)), n.loop && (i.hasClass(T.params.slideDuplicateClass) ? T.wrapper.children("." + T.params.slideClass + ":not(." + T.params.slideDuplicateClass + ')[data-swiper-slide-index="' + i.attr("data-swiper-slide-index") + '"]').addClass(T.params.slideDuplicateNextClass) : T.wrapper.children("." + T.params.slideClass + "." + T.params.slideDuplicateClass + '[data-swiper-slide-index="' + i.attr("data-swiper-slide-index") + '"]').addClass(T.params.slideDuplicateNextClass), r.hasClass(T.params.slideDuplicateClass) ? T.wrapper.children("." + T.params.slideClass + ":not(." + T.params.slideDuplicateClass + ')[data-swiper-slide-index="' + r.attr("data-swiper-slide-index") + '"]').addClass(T.params.slideDuplicatePrevClass) : T.wrapper.children("." + T.params.slideClass + "." + T.params.slideDuplicateClass + '[data-swiper-slide-index="' + r.attr("data-swiper-slide-index") + '"]').addClass(T.params.slideDuplicatePrevClass)), T.paginationContainer && T.paginationContainer.length > 0) {
-            var s,
-                a = T.params.loop ? Math.ceil((T.slides.length - 2 * T.loopedSlides) / T.params.slidesPerGroup) : T.snapGrid.length;if (T.params.loop ? (s = Math.ceil((T.activeIndex - T.loopedSlides) / T.params.slidesPerGroup), s > T.slides.length - 1 - 2 * T.loopedSlides && (s -= T.slides.length - 2 * T.loopedSlides), s > a - 1 && (s -= a), s < 0 && "bullets" !== T.params.paginationType && (s = a + s)) : s = void 0 !== T.snapIndex ? T.snapIndex : T.activeIndex || 0, "bullets" === T.params.paginationType && T.bullets && T.bullets.length > 0 && (T.bullets.removeClass(T.params.bulletActiveClass), T.paginationContainer.length > 1 ? T.bullets.each(function () {
-              e(this).index() === s && e(this).addClass(T.params.bulletActiveClass);
-            }) : T.bullets.eq(s).addClass(T.params.bulletActiveClass)), "fraction" === T.params.paginationType && (T.paginationContainer.find("." + T.params.paginationCurrentClass).text(s + 1), T.paginationContainer.find("." + T.params.paginationTotalClass).text(a)), "progress" === T.params.paginationType) {
-              var o = (s + 1) / a,
-                  l = o,
-                  u = 1;T.isHorizontal() || (u = o, l = 1), T.paginationContainer.find("." + T.params.paginationProgressbarClass).transform("translate3d(0,0,0) scaleX(" + l + ") scaleY(" + u + ")").transition(T.params.speed);
-            }"custom" === T.params.paginationType && T.params.paginationCustomRender && (T.paginationContainer.html(T.params.paginationCustomRender(T, s + 1, a)), T.emit("onPaginationRendered", T, T.paginationContainer[0]));
-          }T.params.loop || (T.params.prevButton && T.prevButton && T.prevButton.length > 0 && (T.isBeginning ? (T.prevButton.addClass(T.params.buttonDisabledClass), T.params.a11y && T.a11y && T.a11y.disable(T.prevButton)) : (T.prevButton.removeClass(T.params.buttonDisabledClass), T.params.a11y && T.a11y && T.a11y.enable(T.prevButton))), T.params.nextButton && T.nextButton && T.nextButton.length > 0 && (T.isEnd ? (T.nextButton.addClass(T.params.buttonDisabledClass), T.params.a11y && T.a11y && T.a11y.disable(T.nextButton)) : (T.nextButton.removeClass(T.params.buttonDisabledClass), T.params.a11y && T.a11y && T.a11y.enable(T.nextButton))));
-        }, T.updatePagination = function () {
-          if (T.params.pagination && T.paginationContainer && T.paginationContainer.length > 0) {
-            var t = "";if ("bullets" === T.params.paginationType) {
-              for (var e = T.params.loop ? Math.ceil((T.slides.length - 2 * T.loopedSlides) / T.params.slidesPerGroup) : T.snapGrid.length, i = 0; i < e; i++) {
-                t += T.params.paginationBulletRender ? T.params.paginationBulletRender(T, i, T.params.bulletClass) : "<" + T.params.paginationElement + ' class="' + T.params.bulletClass + '"></' + T.params.paginationElement + ">";
-              }T.paginationContainer.html(t), T.bullets = T.paginationContainer.find("." + T.params.bulletClass), T.params.paginationClickable && T.params.a11y && T.a11y && T.a11y.initPagination();
-            }"fraction" === T.params.paginationType && (t = T.params.paginationFractionRender ? T.params.paginationFractionRender(T, T.params.paginationCurrentClass, T.params.paginationTotalClass) : '<span class="' + T.params.paginationCurrentClass + '"></span> / <span class="' + T.params.paginationTotalClass + '"></span>', T.paginationContainer.html(t)), "progress" === T.params.paginationType && (t = T.params.paginationProgressRender ? T.params.paginationProgressRender(T, T.params.paginationProgressbarClass) : '<span class="' + T.params.paginationProgressbarClass + '"></span>', T.paginationContainer.html(t)), "custom" !== T.params.paginationType && T.emit("onPaginationRendered", T, T.paginationContainer[0]);
-          }
-        }, T.update = function (t) {
-          function e() {
-            T.rtl, T.translate;i = Math.min(Math.max(T.translate, T.maxTranslate()), T.minTranslate()), T.setWrapperTranslate(i), T.updateActiveIndex(), T.updateClasses();
-          }if (T) {
-            T.updateContainerSize(), T.updateSlidesSize(), T.updateProgress(), T.updatePagination(), T.updateClasses(), T.params.scrollbar && T.scrollbar && T.scrollbar.set();var i;if (t) {
-              T.controller && T.controller.spline && (T.controller.spline = void 0), T.params.freeMode ? (e(), T.params.autoHeight && T.updateAutoHeight()) : (("auto" === T.params.slidesPerView || T.params.slidesPerView > 1) && T.isEnd && !T.params.centeredSlides ? T.slideTo(T.slides.length - 1, 0, !1, !0) : T.slideTo(T.activeIndex, 0, !1, !0)) || e();
-            } else T.params.autoHeight && T.updateAutoHeight();
-          }
-        }, T.onResize = function (t) {
-          T.params.onBeforeResize && T.params.onBeforeResize(T), T.params.breakpoints && T.setBreakpoint();var e = T.params.allowSwipeToPrev,
-              i = T.params.allowSwipeToNext;T.params.allowSwipeToPrev = T.params.allowSwipeToNext = !0, T.updateContainerSize(), T.updateSlidesSize(), ("auto" === T.params.slidesPerView || T.params.freeMode || t) && T.updatePagination(), T.params.scrollbar && T.scrollbar && T.scrollbar.set(), T.controller && T.controller.spline && (T.controller.spline = void 0);var r = !1;if (T.params.freeMode) {
-            var n = Math.min(Math.max(T.translate, T.maxTranslate()), T.minTranslate());T.setWrapperTranslate(n), T.updateActiveIndex(), T.updateClasses(), T.params.autoHeight && T.updateAutoHeight();
-          } else T.updateClasses(), r = ("auto" === T.params.slidesPerView || T.params.slidesPerView > 1) && T.isEnd && !T.params.centeredSlides ? T.slideTo(T.slides.length - 1, 0, !1, !0) : T.slideTo(T.activeIndex, 0, !1, !0);T.params.lazyLoading && !r && T.lazy && T.lazy.load(), T.params.allowSwipeToPrev = e, T.params.allowSwipeToNext = i, T.params.onAfterResize && T.params.onAfterResize(T);
-        }, T.touchEventsDesktop = { start: "mousedown", move: "mousemove", end: "mouseup" }, window.navigator.pointerEnabled ? T.touchEventsDesktop = { start: "pointerdown", move: "pointermove", end: "pointerup" } : window.navigator.msPointerEnabled && (T.touchEventsDesktop = { start: "MSPointerDown", move: "MSPointerMove", end: "MSPointerUp" }), T.touchEvents = { start: T.support.touch || !T.params.simulateTouch ? "touchstart" : T.touchEventsDesktop.start, move: T.support.touch || !T.params.simulateTouch ? "touchmove" : T.touchEventsDesktop.move, end: T.support.touch || !T.params.simulateTouch ? "touchend" : T.touchEventsDesktop.end }, (window.navigator.pointerEnabled || window.navigator.msPointerEnabled) && ("container" === T.params.touchEventsTarget ? T.container : T.wrapper).addClass("swiper-wp8-" + T.params.direction), T.initEvents = function (t) {
-          var e = t ? "off" : "on",
-              i = t ? "removeEventListener" : "addEventListener",
-              r = "container" === T.params.touchEventsTarget ? T.container[0] : T.wrapper[0],
-              s = T.support.touch ? r : document,
-              a = !!T.params.nested;if (T.browser.ie) r[i](T.touchEvents.start, T.onTouchStart, !1), s[i](T.touchEvents.move, T.onTouchMove, a), s[i](T.touchEvents.end, T.onTouchEnd, !1);else {
-            if (T.support.touch) {
-              var o = !("touchstart" !== T.touchEvents.start || !T.support.passiveListener || !T.params.passiveListeners) && { passive: !0, capture: !1 };r[i](T.touchEvents.start, T.onTouchStart, o), r[i](T.touchEvents.move, T.onTouchMove, a), r[i](T.touchEvents.end, T.onTouchEnd, o);
-            }(n.simulateTouch && !T.device.ios && !T.device.android || n.simulateTouch && !T.support.touch && T.device.ios) && (r[i]("mousedown", T.onTouchStart, !1), document[i]("mousemove", T.onTouchMove, a), document[i]("mouseup", T.onTouchEnd, !1));
-          }window[i]("resize", T.onResize), T.params.nextButton && T.nextButton && T.nextButton.length > 0 && (T.nextButton[e]("click", T.onClickNext), T.params.a11y && T.a11y && T.nextButton[e]("keydown", T.a11y.onEnterKey)), T.params.prevButton && T.prevButton && T.prevButton.length > 0 && (T.prevButton[e]("click", T.onClickPrev), T.params.a11y && T.a11y && T.prevButton[e]("keydown", T.a11y.onEnterKey)), T.params.pagination && T.params.paginationClickable && (T.paginationContainer[e]("click", "." + T.params.bulletClass, T.onClickIndex), T.params.a11y && T.a11y && T.paginationContainer[e]("keydown", "." + T.params.bulletClass, T.a11y.onEnterKey)), (T.params.preventClicks || T.params.preventClicksPropagation) && r[i]("click", T.preventClicks, !0);
-        }, T.attachEvents = function () {
-          T.initEvents();
-        }, T.detachEvents = function () {
-          T.initEvents(!0);
-        }, T.allowClick = !0, T.preventClicks = function (t) {
-          T.allowClick || (T.params.preventClicks && t.preventDefault(), T.params.preventClicksPropagation && T.animating && (t.stopPropagation(), t.stopImmediatePropagation()));
-        }, T.onClickNext = function (t) {
-          t.preventDefault(), T.isEnd && !T.params.loop || T.slideNext();
-        }, T.onClickPrev = function (t) {
-          t.preventDefault(), T.isBeginning && !T.params.loop || T.slidePrev();
-        }, T.onClickIndex = function (t) {
-          t.preventDefault();var i = e(this).index() * T.params.slidesPerGroup;T.params.loop && (i += T.loopedSlides), T.slideTo(i);
-        }, T.updateClickedSlide = function (t) {
-          var i = o(t, "." + T.params.slideClass),
-              r = !1;if (i) for (var n = 0; n < T.slides.length; n++) {
-            T.slides[n] === i && (r = !0);
-          }if (!i || !r) return T.clickedSlide = void 0, void (T.clickedIndex = void 0);if (T.clickedSlide = i, T.clickedIndex = e(i).index(), T.params.slideToClickedSlide && void 0 !== T.clickedIndex && T.clickedIndex !== T.activeIndex) {
-            var s,
-                a = T.clickedIndex,
-                l = "auto" === T.params.slidesPerView ? T.currentSlidesPerView() : T.params.slidesPerView;if (T.params.loop) {
-              if (T.animating) return;s = parseInt(e(T.clickedSlide).attr("data-swiper-slide-index"), 10), T.params.centeredSlides ? a < T.loopedSlides - l / 2 || a > T.slides.length - T.loopedSlides + l / 2 ? (T.fixLoop(), a = T.wrapper.children("." + T.params.slideClass + '[data-swiper-slide-index="' + s + '"]:not(.' + T.params.slideDuplicateClass + ")").eq(0).index(), setTimeout(function () {
-                T.slideTo(a);
-              }, 0)) : T.slideTo(a) : a > T.slides.length - l ? (T.fixLoop(), a = T.wrapper.children("." + T.params.slideClass + '[data-swiper-slide-index="' + s + '"]:not(.' + T.params.slideDuplicateClass + ")").eq(0).index(), setTimeout(function () {
-                T.slideTo(a);
-              }, 0)) : T.slideTo(a);
-            } else T.slideTo(a);
-          }
-        };var E,
-            C,
-            P,
-            z,
-            M,
-            k,
-            A,
-            _,
-            Y,
-            B,
-            I = "input, select, textarea, button, video",
-            D = Date.now(),
-            X = [];T.animating = !1, T.touches = { startX: 0, startY: 0, currentX: 0, currentY: 0, diff: 0 };var R, L;T.onTouchStart = function (t) {
-          if (t.originalEvent && (t = t.originalEvent), (R = "touchstart" === t.type) || !("which" in t) || 3 !== t.which) {
-            if (T.params.noSwiping && o(t, "." + T.params.noSwipingClass)) return void (T.allowClick = !0);if (!T.params.swipeHandler || o(t, T.params.swipeHandler)) {
-              var i = T.touches.currentX = "touchstart" === t.type ? t.targetTouches[0].pageX : t.pageX,
-                  r = T.touches.currentY = "touchstart" === t.type ? t.targetTouches[0].pageY : t.pageY;if (!(T.device.ios && T.params.iOSEdgeSwipeDetection && i <= T.params.iOSEdgeSwipeThreshold)) {
-                if (E = !0, C = !1, P = !0, M = void 0, L = void 0, T.touches.startX = i, T.touches.startY = r, z = Date.now(), T.allowClick = !0, T.updateContainerSize(), T.swipeDirection = void 0, T.params.threshold > 0 && (_ = !1), "touchstart" !== t.type) {
-                  var n = !0;e(t.target).is(I) && (n = !1), document.activeElement && e(document.activeElement).is(I) && document.activeElement.blur(), n && t.preventDefault();
-                }T.emit("onTouchStart", T, t);
-              }
-            }
-          }
-        }, T.onTouchMove = function (t) {
-          if (t.originalEvent && (t = t.originalEvent), !R || "mousemove" !== t.type) {
-            if (t.preventedByNestedSwiper) return T.touches.startX = "touchmove" === t.type ? t.targetTouches[0].pageX : t.pageX, void (T.touches.startY = "touchmove" === t.type ? t.targetTouches[0].pageY : t.pageY);if (T.params.onlyExternal) return T.allowClick = !1, void (E && (T.touches.startX = T.touches.currentX = "touchmove" === t.type ? t.targetTouches[0].pageX : t.pageX, T.touches.startY = T.touches.currentY = "touchmove" === t.type ? t.targetTouches[0].pageY : t.pageY, z = Date.now()));if (R && T.params.touchReleaseOnEdges && !T.params.loop) if (T.isHorizontal()) {
-              if (T.touches.currentX < T.touches.startX && T.translate <= T.maxTranslate() || T.touches.currentX > T.touches.startX && T.translate >= T.minTranslate()) return;
-            } else if (T.touches.currentY < T.touches.startY && T.translate <= T.maxTranslate() || T.touches.currentY > T.touches.startY && T.translate >= T.minTranslate()) return;if (R && document.activeElement && t.target === document.activeElement && e(t.target).is(I)) return C = !0, void (T.allowClick = !1);if (P && T.emit("onTouchMove", T, t), !(t.targetTouches && t.targetTouches.length > 1)) {
-              if (T.touches.currentX = "touchmove" === t.type ? t.targetTouches[0].pageX : t.pageX, T.touches.currentY = "touchmove" === t.type ? t.targetTouches[0].pageY : t.pageY, void 0 === M) {
-                var i;T.isHorizontal() && T.touches.currentY === T.touches.startY || !T.isHorizontal() && T.touches.currentX === T.touches.startX ? M = !1 : (i = 180 * Math.atan2(Math.abs(T.touches.currentY - T.touches.startY), Math.abs(T.touches.currentX - T.touches.startX)) / Math.PI, M = T.isHorizontal() ? i > T.params.touchAngle : 90 - i > T.params.touchAngle);
-              }if (M && T.emit("onTouchMoveOpposite", T, t), void 0 === L && (T.touches.currentX === T.touches.startX && T.touches.currentY === T.touches.startY || (L = !0)), E) {
-                if (M) return void (E = !1);if (L) {
-                  T.allowClick = !1, T.emit("onSliderMove", T, t), t.preventDefault(), T.params.touchMoveStopPropagation && !T.params.nested && t.stopPropagation(), C || (n.loop && T.fixLoop(), A = T.getWrapperTranslate(), T.setWrapperTransition(0), T.animating && T.wrapper.trigger("webkitTransitionEnd transitionend oTransitionEnd MSTransitionEnd msTransitionEnd"), T.params.autoplay && T.autoplaying && (T.params.autoplayDisableOnInteraction ? T.stopAutoplay() : T.pauseAutoplay()), B = !1, !T.params.grabCursor || T.params.allowSwipeToNext !== !0 && T.params.allowSwipeToPrev !== !0 || T.setGrabCursor(!0)), C = !0;var r = T.touches.diff = T.isHorizontal() ? T.touches.currentX - T.touches.startX : T.touches.currentY - T.touches.startY;r *= T.params.touchRatio, T.rtl && (r = -r), T.swipeDirection = r > 0 ? "prev" : "next", k = r + A;var s = !0;if (r > 0 && k > T.minTranslate() ? (s = !1, T.params.resistance && (k = T.minTranslate() - 1 + Math.pow(-T.minTranslate() + A + r, T.params.resistanceRatio))) : r < 0 && k < T.maxTranslate() && (s = !1, T.params.resistance && (k = T.maxTranslate() + 1 - Math.pow(T.maxTranslate() - A - r, T.params.resistanceRatio))), s && (t.preventedByNestedSwiper = !0), !T.params.allowSwipeToNext && "next" === T.swipeDirection && k < A && (k = A), !T.params.allowSwipeToPrev && "prev" === T.swipeDirection && k > A && (k = A), T.params.threshold > 0) {
-                    if (!(Math.abs(r) > T.params.threshold || _)) return void (k = A);if (!_) return _ = !0, T.touches.startX = T.touches.currentX, T.touches.startY = T.touches.currentY, k = A, void (T.touches.diff = T.isHorizontal() ? T.touches.currentX - T.touches.startX : T.touches.currentY - T.touches.startY);
-                  }T.params.followFinger && ((T.params.freeMode || T.params.watchSlidesProgress) && T.updateActiveIndex(), T.params.freeMode && (0 === X.length && X.push({ position: T.touches[T.isHorizontal() ? "startX" : "startY"], time: z }), X.push({ position: T.touches[T.isHorizontal() ? "currentX" : "currentY"], time: new window.Date().getTime() })), T.updateProgress(k), T.setWrapperTranslate(k));
-                }
-              }
-            }
-          }
-        }, T.onTouchEnd = function (t) {
-          if (t.originalEvent && (t = t.originalEvent), P && T.emit("onTouchEnd", T, t), P = !1, E) {
-            T.params.grabCursor && C && E && (T.params.allowSwipeToNext === !0 || T.params.allowSwipeToPrev === !0) && T.setGrabCursor(!1);var i = Date.now(),
-                r = i - z;if (T.allowClick && (T.updateClickedSlide(t), T.emit("onTap", T, t), r < 300 && i - D > 300 && (Y && clearTimeout(Y), Y = setTimeout(function () {
-              T && (T.params.paginationHide && T.paginationContainer.length > 0 && !e(t.target).hasClass(T.params.bulletClass) && T.paginationContainer.toggleClass(T.params.paginationHiddenClass), T.emit("onClick", T, t));
-            }, 300)), r < 300 && i - D < 300 && (Y && clearTimeout(Y), T.emit("onDoubleTap", T, t))), D = Date.now(), setTimeout(function () {
-              T && (T.allowClick = !0);
-            }, 0), !E || !C || !T.swipeDirection || 0 === T.touches.diff || k === A) return void (E = C = !1);E = C = !1;var n;if (n = T.params.followFinger ? T.rtl ? T.translate : -T.translate : -k, T.params.freeMode) {
-              if (n < -T.minTranslate()) return void T.slideTo(T.activeIndex);if (n > -T.maxTranslate()) return void (T.slides.length < T.snapGrid.length ? T.slideTo(T.snapGrid.length - 1) : T.slideTo(T.slides.length - 1));if (T.params.freeModeMomentum) {
-                if (X.length > 1) {
-                  var s = X.pop(),
-                      a = X.pop(),
-                      o = s.position - a.position,
-                      l = s.time - a.time;T.velocity = o / l, T.velocity = T.velocity / 2, Math.abs(T.velocity) < T.params.freeModeMinimumVelocity && (T.velocity = 0), (l > 150 || new window.Date().getTime() - s.time > 300) && (T.velocity = 0);
-                } else T.velocity = 0;T.velocity = T.velocity * T.params.freeModeMomentumVelocityRatio, X.length = 0;var u = 1e3 * T.params.freeModeMomentumRatio,
-                    p = T.velocity * u,
-                    c = T.translate + p;T.rtl && (c = -c);var h,
-                    d = !1,
-                    f = 20 * Math.abs(T.velocity) * T.params.freeModeMomentumBounceRatio;if (c < T.maxTranslate()) T.params.freeModeMomentumBounce ? (c + T.maxTranslate() < -f && (c = T.maxTranslate() - f), h = T.maxTranslate(), d = !0, B = !0) : c = T.maxTranslate();else if (c > T.minTranslate()) T.params.freeModeMomentumBounce ? (c - T.minTranslate() > f && (c = T.minTranslate() + f), h = T.minTranslate(), d = !0, B = !0) : c = T.minTranslate();else if (T.params.freeModeSticky) {
-                  var m,
-                      g = 0;for (g = 0; g < T.snapGrid.length; g += 1) {
-                    if (T.snapGrid[g] > -c) {
-                      m = g;break;
-                    }
-                  }c = Math.abs(T.snapGrid[m] - c) < Math.abs(T.snapGrid[m - 1] - c) || "next" === T.swipeDirection ? T.snapGrid[m] : T.snapGrid[m - 1], T.rtl || (c = -c);
-                }if (0 !== T.velocity) u = T.rtl ? Math.abs((-c - T.translate) / T.velocity) : Math.abs((c - T.translate) / T.velocity);else if (T.params.freeModeSticky) return void T.slideReset();T.params.freeModeMomentumBounce && d ? (T.updateProgress(h), T.setWrapperTransition(u), T.setWrapperTranslate(c), T.onTransitionStart(), T.animating = !0, T.wrapper.transitionEnd(function () {
-                  T && B && (T.emit("onMomentumBounce", T), T.setWrapperTransition(T.params.speed), T.setWrapperTranslate(h), T.wrapper.transitionEnd(function () {
-                    T && T.onTransitionEnd();
-                  }));
-                })) : T.velocity ? (T.updateProgress(c), T.setWrapperTransition(u), T.setWrapperTranslate(c), T.onTransitionStart(), T.animating || (T.animating = !0, T.wrapper.transitionEnd(function () {
-                  T && T.onTransitionEnd();
-                }))) : T.updateProgress(c), T.updateActiveIndex();
-              }return void ((!T.params.freeModeMomentum || r >= T.params.longSwipesMs) && (T.updateProgress(), T.updateActiveIndex()));
-            }var v,
-                w = 0,
-                y = T.slidesSizesGrid[0];for (v = 0; v < T.slidesGrid.length; v += T.params.slidesPerGroup) {
-              void 0 !== T.slidesGrid[v + T.params.slidesPerGroup] ? n >= T.slidesGrid[v] && n < T.slidesGrid[v + T.params.slidesPerGroup] && (w = v, y = T.slidesGrid[v + T.params.slidesPerGroup] - T.slidesGrid[v]) : n >= T.slidesGrid[v] && (w = v, y = T.slidesGrid[T.slidesGrid.length - 1] - T.slidesGrid[T.slidesGrid.length - 2]);
-            }var x = (n - T.slidesGrid[w]) / y;if (r > T.params.longSwipesMs) {
-              if (!T.params.longSwipes) return void T.slideTo(T.activeIndex);"next" === T.swipeDirection && (x >= T.params.longSwipesRatio ? T.slideTo(w + T.params.slidesPerGroup) : T.slideTo(w)), "prev" === T.swipeDirection && (x > 1 - T.params.longSwipesRatio ? T.slideTo(w + T.params.slidesPerGroup) : T.slideTo(w));
-            } else {
-              if (!T.params.shortSwipes) return void T.slideTo(T.activeIndex);"next" === T.swipeDirection && T.slideTo(w + T.params.slidesPerGroup), "prev" === T.swipeDirection && T.slideTo(w);
-            }
-          }
-        }, T._slideTo = function (t, e) {
-          return T.slideTo(t, e, !0, !0);
-        }, T.slideTo = function (t, e, i, r) {
-          void 0 === i && (i = !0), void 0 === t && (t = 0), t < 0 && (t = 0), T.snapIndex = Math.floor(t / T.params.slidesPerGroup), T.snapIndex >= T.snapGrid.length && (T.snapIndex = T.snapGrid.length - 1);var n = -T.snapGrid[T.snapIndex];if (T.params.autoplay && T.autoplaying && (r || !T.params.autoplayDisableOnInteraction ? T.pauseAutoplay(e) : T.stopAutoplay()), T.updateProgress(n), T.params.normalizeSlideIndex) for (var s = 0; s < T.slidesGrid.length; s++) {
-            -Math.floor(100 * n) >= Math.floor(100 * T.slidesGrid[s]) && (t = s);
-          }return !(!T.params.allowSwipeToNext && n < T.translate && n < T.minTranslate()) && !(!T.params.allowSwipeToPrev && n > T.translate && n > T.maxTranslate() && (T.activeIndex || 0) !== t) && (void 0 === e && (e = T.params.speed), T.previousIndex = T.activeIndex || 0, T.activeIndex = t, T.updateRealIndex(), T.rtl && -n === T.translate || !T.rtl && n === T.translate ? (T.params.autoHeight && T.updateAutoHeight(), T.updateClasses(), "slide" !== T.params.effect && T.setWrapperTranslate(n), !1) : (T.updateClasses(), T.onTransitionStart(i), 0 === e || T.browser.lteIE9 ? (T.setWrapperTranslate(n), T.setWrapperTransition(0), T.onTransitionEnd(i)) : (T.setWrapperTranslate(n), T.setWrapperTransition(e), T.animating || (T.animating = !0, T.wrapper.transitionEnd(function () {
-            T && T.onTransitionEnd(i);
-          }))), !0));
-        }, T.onTransitionStart = function (t) {
-          void 0 === t && (t = !0), T.params.autoHeight && T.updateAutoHeight(), T.lazy && T.lazy.onTransitionStart(), t && (T.emit("onTransitionStart", T), T.activeIndex !== T.previousIndex && (T.emit("onSlideChangeStart", T), T.activeIndex > T.previousIndex ? T.emit("onSlideNextStart", T) : T.emit("onSlidePrevStart", T)));
-        }, T.onTransitionEnd = function (t) {
-          T.animating = !1, T.setWrapperTransition(0), void 0 === t && (t = !0), T.lazy && T.lazy.onTransitionEnd(), t && (T.emit("onTransitionEnd", T), T.activeIndex !== T.previousIndex && (T.emit("onSlideChangeEnd", T), T.activeIndex > T.previousIndex ? T.emit("onSlideNextEnd", T) : T.emit("onSlidePrevEnd", T))), T.params.history && T.history && T.history.setHistory(T.params.history, T.activeIndex), T.params.hashnav && T.hashnav && T.hashnav.setHash();
-        }, T.slideNext = function (t, e, i) {
-          if (T.params.loop) {
-            if (T.animating) return !1;T.fixLoop();T.container[0].clientLeft;return T.slideTo(T.activeIndex + T.params.slidesPerGroup, e, t, i);
-          }return T.slideTo(T.activeIndex + T.params.slidesPerGroup, e, t, i);
-        }, T._slideNext = function (t) {
-          return T.slideNext(!0, t, !0);
-        }, T.slidePrev = function (t, e, i) {
-          if (T.params.loop) {
-            if (T.animating) return !1;T.fixLoop();T.container[0].clientLeft;return T.slideTo(T.activeIndex - 1, e, t, i);
-          }return T.slideTo(T.activeIndex - 1, e, t, i);
-        }, T._slidePrev = function (t) {
-          return T.slidePrev(!0, t, !0);
-        }, T.slideReset = function (t, e, i) {
-          return T.slideTo(T.activeIndex, e, t);
-        }, T.disableTouchControl = function () {
-          return T.params.onlyExternal = !0, !0;
-        }, T.enableTouchControl = function () {
-          return T.params.onlyExternal = !1, !0;
-        }, T.setWrapperTransition = function (t, e) {
-          T.wrapper.transition(t), "slide" !== T.params.effect && T.effects[T.params.effect] && T.effects[T.params.effect].setTransition(t), T.params.parallax && T.parallax && T.parallax.setTransition(t), T.params.scrollbar && T.scrollbar && T.scrollbar.setTransition(t), T.params.control && T.controller && T.controller.setTransition(t, e), T.emit("onSetTransition", T, t);
-        }, T.setWrapperTranslate = function (t, e, i) {
-          var r = 0,
-              n = 0;T.isHorizontal() ? r = T.rtl ? -t : t : n = t, T.params.roundLengths && (r = s(r), n = s(n)), T.params.virtualTranslate || (T.support.transforms3d ? T.wrapper.transform("translate3d(" + r + "px, " + n + "px, 0px)") : T.wrapper.transform("translate(" + r + "px, " + n + "px)")), T.translate = T.isHorizontal() ? r : n;var a,
-              o = T.maxTranslate() - T.minTranslate();a = 0 === o ? 0 : (t - T.minTranslate()) / o, a !== T.progress && T.updateProgress(t), e && T.updateActiveIndex(), "slide" !== T.params.effect && T.effects[T.params.effect] && T.effects[T.params.effect].setTranslate(T.translate), T.params.parallax && T.parallax && T.parallax.setTranslate(T.translate), T.params.scrollbar && T.scrollbar && T.scrollbar.setTranslate(T.translate), T.params.control && T.controller && T.controller.setTranslate(T.translate, i), T.emit("onSetTranslate", T, T.translate);
-        }, T.getTranslate = function (t, e) {
-          var i, r, n, s;return void 0 === e && (e = "x"), T.params.virtualTranslate ? T.rtl ? -T.translate : T.translate : (n = window.getComputedStyle(t, null), window.WebKitCSSMatrix ? (r = n.transform || n.webkitTransform, r.split(",").length > 6 && (r = r.split(", ").map(function (t) {
-            return t.replace(",", ".");
-          }).join(", ")), s = new window.WebKitCSSMatrix("none" === r ? "" : r)) : (s = n.MozTransform || n.OTransform || n.MsTransform || n.msTransform || n.transform || n.getPropertyValue("transform").replace("translate(", "matrix(1, 0, 0, 1,"), i = s.toString().split(",")), "x" === e && (r = window.WebKitCSSMatrix ? s.m41 : 16 === i.length ? parseFloat(i[12]) : parseFloat(i[4])), "y" === e && (r = window.WebKitCSSMatrix ? s.m42 : 16 === i.length ? parseFloat(i[13]) : parseFloat(i[5])), T.rtl && r && (r = -r), r || 0);
-        }, T.getWrapperTranslate = function (t) {
-          return void 0 === t && (t = T.isHorizontal() ? "x" : "y"), T.getTranslate(T.wrapper[0], t);
-        }, T.observers = [], T.initObservers = function () {
-          if (T.params.observeParents) for (var t = T.container.parents(), e = 0; e < t.length; e++) {
-            l(t[e]);
-          }l(T.container[0], { childList: !1 }), l(T.wrapper[0], { attributes: !1 });
-        }, T.disconnectObservers = function () {
-          for (var t = 0; t < T.observers.length; t++) {
-            T.observers[t].disconnect();
-          }T.observers = [];
-        }, T.createLoop = function () {
-          T.wrapper.children("." + T.params.slideClass + "." + T.params.slideDuplicateClass).remove();var t = T.wrapper.children("." + T.params.slideClass);"auto" !== T.params.slidesPerView || T.params.loopedSlides || (T.params.loopedSlides = t.length), T.loopedSlides = parseInt(T.params.loopedSlides || T.params.slidesPerView, 10), T.loopedSlides = T.loopedSlides + T.params.loopAdditionalSlides, T.loopedSlides > t.length && (T.loopedSlides = t.length);var i,
-              r = [],
-              n = [];for (t.each(function (i, s) {
-            var a = e(this);i < T.loopedSlides && n.push(s), i < t.length && i >= t.length - T.loopedSlides && r.push(s), a.attr("data-swiper-slide-index", i);
-          }), i = 0; i < n.length; i++) {
-            T.wrapper.append(e(n[i].cloneNode(!0)).addClass(T.params.slideDuplicateClass));
-          }for (i = r.length - 1; i >= 0; i--) {
-            T.wrapper.prepend(e(r[i].cloneNode(!0)).addClass(T.params.slideDuplicateClass));
-          }
-        }, T.destroyLoop = function () {
-          T.wrapper.children("." + T.params.slideClass + "." + T.params.slideDuplicateClass).remove(), T.slides.removeAttr("data-swiper-slide-index");
-        }, T.reLoop = function (t) {
-          var e = T.activeIndex - T.loopedSlides;T.destroyLoop(), T.createLoop(), T.updateSlidesSize(), t && T.slideTo(e + T.loopedSlides, 0, !1);
-        }, T.fixLoop = function () {
-          var t;T.activeIndex < T.loopedSlides ? (t = T.slides.length - 3 * T.loopedSlides + T.activeIndex, t += T.loopedSlides, T.slideTo(t, 0, !1, !0)) : ("auto" === T.params.slidesPerView && T.activeIndex >= 2 * T.loopedSlides || T.activeIndex > T.slides.length - 2 * T.params.slidesPerView) && (t = -T.slides.length + T.activeIndex + T.loopedSlides, t += T.loopedSlides, T.slideTo(t, 0, !1, !0));
-        }, T.appendSlide = function (t) {
-          if (T.params.loop && T.destroyLoop(), "object" == (typeof t === "undefined" ? "undefined" : _typeof(t)) && t.length) for (var e = 0; e < t.length; e++) {
-            t[e] && T.wrapper.append(t[e]);
-          } else T.wrapper.append(t);T.params.loop && T.createLoop(), T.params.observer && T.support.observer || T.update(!0);
-        }, T.prependSlide = function (t) {
-          T.params.loop && T.destroyLoop();var e = T.activeIndex + 1;if ("object" == (typeof t === "undefined" ? "undefined" : _typeof(t)) && t.length) {
-            for (var i = 0; i < t.length; i++) {
-              t[i] && T.wrapper.prepend(t[i]);
-            }e = T.activeIndex + t.length;
-          } else T.wrapper.prepend(t);T.params.loop && T.createLoop(), T.params.observer && T.support.observer || T.update(!0), T.slideTo(e, 0, !1);
-        }, T.removeSlide = function (t) {
-          T.params.loop && (T.destroyLoop(), T.slides = T.wrapper.children("." + T.params.slideClass));var e,
-              i = T.activeIndex;if ("object" == (typeof t === "undefined" ? "undefined" : _typeof(t)) && t.length) {
-            for (var r = 0; r < t.length; r++) {
-              e = t[r], T.slides[e] && T.slides.eq(e).remove(), e < i && i--;
-            }i = Math.max(i, 0);
-          } else e = t, T.slides[e] && T.slides.eq(e).remove(), e < i && i--, i = Math.max(i, 0);T.params.loop && T.createLoop(), T.params.observer && T.support.observer || T.update(!0), T.params.loop ? T.slideTo(i + T.loopedSlides, 0, !1) : T.slideTo(i, 0, !1);
-        }, T.removeAllSlides = function () {
-          for (var t = [], e = 0; e < T.slides.length; e++) {
-            t.push(e);
-          }T.removeSlide(t);
-        }, T.effects = { fade: { setTranslate: function setTranslate() {
-              for (var t = 0; t < T.slides.length; t++) {
-                var e = T.slides.eq(t),
-                    i = e[0].swiperSlideOffset,
-                    r = -i;T.params.virtualTranslate || (r -= T.translate);var n = 0;T.isHorizontal() || (n = r, r = 0);var s = T.params.fade.crossFade ? Math.max(1 - Math.abs(e[0].progress), 0) : 1 + Math.min(Math.max(e[0].progress, -1), 0);e.css({ opacity: s }).transform("translate3d(" + r + "px, " + n + "px, 0px)");
-              }
-            }, setTransition: function setTransition(t) {
-              if (T.slides.transition(t), T.params.virtualTranslate && 0 !== t) {
-                var e = !1;T.slides.transitionEnd(function () {
-                  if (!e && T) {
-                    e = !0, T.animating = !1;for (var t = ["webkitTransitionEnd", "transitionend", "oTransitionEnd", "MSTransitionEnd", "msTransitionEnd"], i = 0; i < t.length; i++) {
-                      T.wrapper.trigger(t[i]);
-                    }
-                  }
-                });
-              }
-            } }, flip: { setTranslate: function setTranslate() {
-              for (var t = 0; t < T.slides.length; t++) {
-                var i = T.slides.eq(t),
-                    r = i[0].progress;T.params.flip.limitRotation && (r = Math.max(Math.min(i[0].progress, 1), -1));var n = i[0].swiperSlideOffset,
-                    s = -180 * r,
-                    a = s,
-                    o = 0,
-                    l = -n,
-                    u = 0;if (T.isHorizontal() ? T.rtl && (a = -a) : (u = l, l = 0, o = -a, a = 0), i[0].style.zIndex = -Math.abs(Math.round(r)) + T.slides.length, T.params.flip.slideShadows) {
-                  var p = T.isHorizontal() ? i.find(".swiper-slide-shadow-left") : i.find(".swiper-slide-shadow-top"),
-                      c = T.isHorizontal() ? i.find(".swiper-slide-shadow-right") : i.find(".swiper-slide-shadow-bottom");0 === p.length && (p = e('<div class="swiper-slide-shadow-' + (T.isHorizontal() ? "left" : "top") + '"></div>'), i.append(p)), 0 === c.length && (c = e('<div class="swiper-slide-shadow-' + (T.isHorizontal() ? "right" : "bottom") + '"></div>'), i.append(c)), p.length && (p[0].style.opacity = Math.max(-r, 0)), c.length && (c[0].style.opacity = Math.max(r, 0));
-                }i.transform("translate3d(" + l + "px, " + u + "px, 0px) rotateX(" + o + "deg) rotateY(" + a + "deg)");
-              }
-            }, setTransition: function setTransition(t) {
-              if (T.slides.transition(t).find(".swiper-slide-shadow-top, .swiper-slide-shadow-right, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left").transition(t), T.params.virtualTranslate && 0 !== t) {
-                var i = !1;T.slides.eq(T.activeIndex).transitionEnd(function () {
-                  if (!i && T && e(this).hasClass(T.params.slideActiveClass)) {
-                    i = !0, T.animating = !1;for (var t = ["webkitTransitionEnd", "transitionend", "oTransitionEnd", "MSTransitionEnd", "msTransitionEnd"], r = 0; r < t.length; r++) {
-                      T.wrapper.trigger(t[r]);
-                    }
-                  }
-                });
-              }
-            } }, cube: { setTranslate: function setTranslate() {
-              var t,
-                  i = 0;T.params.cube.shadow && (T.isHorizontal() ? (t = T.wrapper.find(".swiper-cube-shadow"), 0 === t.length && (t = e('<div class="swiper-cube-shadow"></div>'), T.wrapper.append(t)), t.css({ height: T.width + "px" })) : (t = T.container.find(".swiper-cube-shadow"), 0 === t.length && (t = e('<div class="swiper-cube-shadow"></div>'), T.container.append(t))));for (var r = 0; r < T.slides.length; r++) {
-                var n = T.slides.eq(r),
-                    s = 90 * r,
-                    a = Math.floor(s / 360);T.rtl && (s = -s, a = Math.floor(-s / 360));var o = Math.max(Math.min(n[0].progress, 1), -1),
-                    l = 0,
-                    u = 0,
-                    p = 0;r % 4 == 0 ? (l = 4 * -a * T.size, p = 0) : (r - 1) % 4 == 0 ? (l = 0, p = 4 * -a * T.size) : (r - 2) % 4 == 0 ? (l = T.size + 4 * a * T.size, p = T.size) : (r - 3) % 4 == 0 && (l = -T.size, p = 3 * T.size + 4 * T.size * a), T.rtl && (l = -l), T.isHorizontal() || (u = l, l = 0);var c = "rotateX(" + (T.isHorizontal() ? 0 : -s) + "deg) rotateY(" + (T.isHorizontal() ? s : 0) + "deg) translate3d(" + l + "px, " + u + "px, " + p + "px)";if (o <= 1 && o > -1 && (i = 90 * r + 90 * o, T.rtl && (i = 90 * -r - 90 * o)), n.transform(c), T.params.cube.slideShadows) {
-                  var h = T.isHorizontal() ? n.find(".swiper-slide-shadow-left") : n.find(".swiper-slide-shadow-top"),
-                      d = T.isHorizontal() ? n.find(".swiper-slide-shadow-right") : n.find(".swiper-slide-shadow-bottom");0 === h.length && (h = e('<div class="swiper-slide-shadow-' + (T.isHorizontal() ? "left" : "top") + '"></div>'), n.append(h)), 0 === d.length && (d = e('<div class="swiper-slide-shadow-' + (T.isHorizontal() ? "right" : "bottom") + '"></div>'), n.append(d)), h.length && (h[0].style.opacity = Math.max(-o, 0)), d.length && (d[0].style.opacity = Math.max(o, 0));
-                }
-              }if (T.wrapper.css({ "-webkit-transform-origin": "50% 50% -" + T.size / 2 + "px", "-moz-transform-origin": "50% 50% -" + T.size / 2 + "px", "-ms-transform-origin": "50% 50% -" + T.size / 2 + "px", "transform-origin": "50% 50% -" + T.size / 2 + "px" }), T.params.cube.shadow) if (T.isHorizontal()) t.transform("translate3d(0px, " + (T.width / 2 + T.params.cube.shadowOffset) + "px, " + -T.width / 2 + "px) rotateX(90deg) rotateZ(0deg) scale(" + T.params.cube.shadowScale + ")");else {
-                var f = Math.abs(i) - 90 * Math.floor(Math.abs(i) / 90),
-                    m = 1.5 - (Math.sin(2 * f * Math.PI / 360) / 2 + Math.cos(2 * f * Math.PI / 360) / 2),
-                    g = T.params.cube.shadowScale,
-                    v = T.params.cube.shadowScale / m,
-                    w = T.params.cube.shadowOffset;t.transform("scale3d(" + g + ", 1, " + v + ") translate3d(0px, " + (T.height / 2 + w) + "px, " + -T.height / 2 / v + "px) rotateX(-90deg)");
-              }var y = T.isSafari || T.isUiWebView ? -T.size / 2 : 0;T.wrapper.transform("translate3d(0px,0," + y + "px) rotateX(" + (T.isHorizontal() ? 0 : i) + "deg) rotateY(" + (T.isHorizontal() ? -i : 0) + "deg)");
-            }, setTransition: function setTransition(t) {
-              T.slides.transition(t).find(".swiper-slide-shadow-top, .swiper-slide-shadow-right, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left").transition(t), T.params.cube.shadow && !T.isHorizontal() && T.container.find(".swiper-cube-shadow").transition(t);
-            } }, coverflow: { setTranslate: function setTranslate() {
-              for (var t = T.translate, i = T.isHorizontal() ? -t + T.width / 2 : -t + T.height / 2, r = T.isHorizontal() ? T.params.coverflow.rotate : -T.params.coverflow.rotate, n = T.params.coverflow.depth, s = 0, a = T.slides.length; s < a; s++) {
-                var o = T.slides.eq(s),
-                    l = T.slidesSizesGrid[s],
-                    u = o[0].swiperSlideOffset,
-                    p = (i - u - l / 2) / l * T.params.coverflow.modifier,
-                    c = T.isHorizontal() ? r * p : 0,
-                    h = T.isHorizontal() ? 0 : r * p,
-                    d = -n * Math.abs(p),
-                    f = T.isHorizontal() ? 0 : T.params.coverflow.stretch * p,
-                    m = T.isHorizontal() ? T.params.coverflow.stretch * p : 0;Math.abs(m) < .001 && (m = 0), Math.abs(f) < .001 && (f = 0), Math.abs(d) < .001 && (d = 0), Math.abs(c) < .001 && (c = 0), Math.abs(h) < .001 && (h = 0);var g = "translate3d(" + m + "px," + f + "px," + d + "px)  rotateX(" + h + "deg) rotateY(" + c + "deg)";if (o.transform(g), o[0].style.zIndex = 1 - Math.abs(Math.round(p)), T.params.coverflow.slideShadows) {
-                  var v = T.isHorizontal() ? o.find(".swiper-slide-shadow-left") : o.find(".swiper-slide-shadow-top"),
-                      w = T.isHorizontal() ? o.find(".swiper-slide-shadow-right") : o.find(".swiper-slide-shadow-bottom");0 === v.length && (v = e('<div class="swiper-slide-shadow-' + (T.isHorizontal() ? "left" : "top") + '"></div>'), o.append(v)), 0 === w.length && (w = e('<div class="swiper-slide-shadow-' + (T.isHorizontal() ? "right" : "bottom") + '"></div>'), o.append(w)), v.length && (v[0].style.opacity = p > 0 ? p : 0), w.length && (w[0].style.opacity = -p > 0 ? -p : 0);
-                }
-              }if (T.browser.ie) {
-                T.wrapper[0].style.perspectiveOrigin = i + "px 50%";
-              }
-            }, setTransition: function setTransition(t) {
-              T.slides.transition(t).find(".swiper-slide-shadow-top, .swiper-slide-shadow-right, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left").transition(t);
-            } } }, T.lazy = { initialImageLoaded: !1, loadImageInSlide: function loadImageInSlide(t, i) {
-            if (void 0 !== t && (void 0 === i && (i = !0), 0 !== T.slides.length)) {
-              var r = T.slides.eq(t),
-                  n = r.find("." + T.params.lazyLoadingClass + ":not(." + T.params.lazyStatusLoadedClass + "):not(." + T.params.lazyStatusLoadingClass + ")");!r.hasClass(T.params.lazyLoadingClass) || r.hasClass(T.params.lazyStatusLoadedClass) || r.hasClass(T.params.lazyStatusLoadingClass) || (n = n.add(r[0])), 0 !== n.length && n.each(function () {
-                var t = e(this);t.addClass(T.params.lazyStatusLoadingClass);var n = t.attr("data-background"),
-                    s = t.attr("data-src"),
-                    a = t.attr("data-srcset"),
-                    o = t.attr("data-sizes");T.loadImage(t[0], s || n, a, o, !1, function () {
-                  if (void 0 !== T && null !== T && T) {
-                    if (n ? (t.css("background-image", 'url("' + n + '")'), t.removeAttr("data-background")) : (a && (t.attr("srcset", a), t.removeAttr("data-srcset")), o && (t.attr("sizes", o), t.removeAttr("data-sizes")), s && (t.attr("src", s), t.removeAttr("data-src"))), t.addClass(T.params.lazyStatusLoadedClass).removeClass(T.params.lazyStatusLoadingClass), r.find("." + T.params.lazyPreloaderClass + ", ." + T.params.preloaderClass).remove(), T.params.loop && i) {
-                      var e = r.attr("data-swiper-slide-index");if (r.hasClass(T.params.slideDuplicateClass)) {
-                        var l = T.wrapper.children('[data-swiper-slide-index="' + e + '"]:not(.' + T.params.slideDuplicateClass + ")");T.lazy.loadImageInSlide(l.index(), !1);
-                      } else {
-                        var u = T.wrapper.children("." + T.params.slideDuplicateClass + '[data-swiper-slide-index="' + e + '"]');T.lazy.loadImageInSlide(u.index(), !1);
-                      }
-                    }T.emit("onLazyImageReady", T, r[0], t[0]);
-                  }
-                }), T.emit("onLazyImageLoad", T, r[0], t[0]);
-              });
-            }
-          }, load: function load() {
-            var t,
-                i = T.params.slidesPerView;if ("auto" === i && (i = 0), T.lazy.initialImageLoaded || (T.lazy.initialImageLoaded = !0), T.params.watchSlidesVisibility) T.wrapper.children("." + T.params.slideVisibleClass).each(function () {
-              T.lazy.loadImageInSlide(e(this).index());
-            });else if (i > 1) for (t = T.activeIndex; t < T.activeIndex + i; t++) {
-              T.slides[t] && T.lazy.loadImageInSlide(t);
-            } else T.lazy.loadImageInSlide(T.activeIndex);if (T.params.lazyLoadingInPrevNext) if (i > 1 || T.params.lazyLoadingInPrevNextAmount && T.params.lazyLoadingInPrevNextAmount > 1) {
-              var r = T.params.lazyLoadingInPrevNextAmount,
-                  n = i,
-                  s = Math.min(T.activeIndex + n + Math.max(r, n), T.slides.length),
-                  a = Math.max(T.activeIndex - Math.max(n, r), 0);for (t = T.activeIndex + i; t < s; t++) {
-                T.slides[t] && T.lazy.loadImageInSlide(t);
-              }for (t = a; t < T.activeIndex; t++) {
-                T.slides[t] && T.lazy.loadImageInSlide(t);
-              }
-            } else {
-              var o = T.wrapper.children("." + T.params.slideNextClass);o.length > 0 && T.lazy.loadImageInSlide(o.index());var l = T.wrapper.children("." + T.params.slidePrevClass);l.length > 0 && T.lazy.loadImageInSlide(l.index());
-            }
-          }, onTransitionStart: function onTransitionStart() {
-            T.params.lazyLoading && (T.params.lazyLoadingOnTransitionStart || !T.params.lazyLoadingOnTransitionStart && !T.lazy.initialImageLoaded) && T.lazy.load();
-          }, onTransitionEnd: function onTransitionEnd() {
-            T.params.lazyLoading && !T.params.lazyLoadingOnTransitionStart && T.lazy.load();
-          } }, T.scrollbar = { isTouched: !1, setDragPosition: function setDragPosition(t) {
-            var e = T.scrollbar,
-                i = T.isHorizontal() ? "touchstart" === t.type || "touchmove" === t.type ? t.targetTouches[0].pageX : t.pageX || t.clientX : "touchstart" === t.type || "touchmove" === t.type ? t.targetTouches[0].pageY : t.pageY || t.clientY,
-                r = i - e.track.offset()[T.isHorizontal() ? "left" : "top"] - e.dragSize / 2,
-                n = -T.minTranslate() * e.moveDivider,
-                s = -T.maxTranslate() * e.moveDivider;r < n ? r = n : r > s && (r = s), r = -r / e.moveDivider, T.updateProgress(r), T.setWrapperTranslate(r, !0);
-          }, dragStart: function dragStart(t) {
-            var e = T.scrollbar;e.isTouched = !0, t.preventDefault(), t.stopPropagation(), e.setDragPosition(t), clearTimeout(e.dragTimeout), e.track.transition(0), T.params.scrollbarHide && e.track.css("opacity", 1), T.wrapper.transition(100), e.drag.transition(100), T.emit("onScrollbarDragStart", T);
-          }, dragMove: function dragMove(t) {
-            var e = T.scrollbar;e.isTouched && (t.preventDefault ? t.preventDefault() : t.returnValue = !1, e.setDragPosition(t), T.wrapper.transition(0), e.track.transition(0), e.drag.transition(0), T.emit("onScrollbarDragMove", T));
-          }, dragEnd: function dragEnd(t) {
-            var e = T.scrollbar;e.isTouched && (e.isTouched = !1, T.params.scrollbarHide && (clearTimeout(e.dragTimeout), e.dragTimeout = setTimeout(function () {
-              e.track.css("opacity", 0), e.track.transition(400);
-            }, 1e3)), T.emit("onScrollbarDragEnd", T), T.params.scrollbarSnapOnRelease && T.slideReset());
-          }, draggableEvents: function () {
-            return T.params.simulateTouch !== !1 || T.support.touch ? T.touchEvents : T.touchEventsDesktop;
-          }(), enableDraggable: function enableDraggable() {
-            var t = T.scrollbar,
-                i = T.support.touch ? t.track : document;e(t.track).on(t.draggableEvents.start, t.dragStart), e(i).on(t.draggableEvents.move, t.dragMove), e(i).on(t.draggableEvents.end, t.dragEnd);
-          }, disableDraggable: function disableDraggable() {
-            var t = T.scrollbar,
-                i = T.support.touch ? t.track : document;e(t.track).off(t.draggableEvents.start, t.dragStart), e(i).off(t.draggableEvents.move, t.dragMove), e(i).off(t.draggableEvents.end, t.dragEnd);
-          }, set: function set() {
-            if (T.params.scrollbar) {
-              var t = T.scrollbar;t.track = e(T.params.scrollbar), T.params.uniqueNavElements && "string" == typeof T.params.scrollbar && t.track.length > 1 && 1 === T.container.find(T.params.scrollbar).length && (t.track = T.container.find(T.params.scrollbar)), t.drag = t.track.find(".swiper-scrollbar-drag"), 0 === t.drag.length && (t.drag = e('<div class="swiper-scrollbar-drag"></div>'), t.track.append(t.drag)), t.drag[0].style.width = "", t.drag[0].style.height = "", t.trackSize = T.isHorizontal() ? t.track[0].offsetWidth : t.track[0].offsetHeight, t.divider = T.size / T.virtualSize, t.moveDivider = t.divider * (t.trackSize / T.size), t.dragSize = t.trackSize * t.divider, T.isHorizontal() ? t.drag[0].style.width = t.dragSize + "px" : t.drag[0].style.height = t.dragSize + "px", t.divider >= 1 ? t.track[0].style.display = "none" : t.track[0].style.display = "", T.params.scrollbarHide && (t.track[0].style.opacity = 0);
-            }
-          }, setTranslate: function setTranslate() {
-            if (T.params.scrollbar) {
-              var t,
-                  e = T.scrollbar,
-                  i = (T.translate, e.dragSize);t = (e.trackSize - e.dragSize) * T.progress, T.rtl && T.isHorizontal() ? (t = -t, t > 0 ? (i = e.dragSize - t, t = 0) : -t + e.dragSize > e.trackSize && (i = e.trackSize + t)) : t < 0 ? (i = e.dragSize + t, t = 0) : t + e.dragSize > e.trackSize && (i = e.trackSize - t), T.isHorizontal() ? (T.support.transforms3d ? e.drag.transform("translate3d(" + t + "px, 0, 0)") : e.drag.transform("translateX(" + t + "px)"), e.drag[0].style.width = i + "px") : (T.support.transforms3d ? e.drag.transform("translate3d(0px, " + t + "px, 0)") : e.drag.transform("translateY(" + t + "px)"), e.drag[0].style.height = i + "px"), T.params.scrollbarHide && (clearTimeout(e.timeout), e.track[0].style.opacity = 1, e.timeout = setTimeout(function () {
-                e.track[0].style.opacity = 0, e.track.transition(400);
-              }, 1e3));
-            }
-          }, setTransition: function setTransition(t) {
-            T.params.scrollbar && T.scrollbar.drag.transition(t);
-          } }, T.controller = { LinearSpline: function LinearSpline(t, e) {
-            var i = function () {
-              var t, e, i;return function (r, n) {
-                for (e = -1, t = r.length; t - e > 1;) {
-                  r[i = t + e >> 1] <= n ? e = i : t = i;
-                }return t;
-              };
-            }();this.x = t, this.y = e, this.lastIndex = t.length - 1;var r, n;this.x.length;this.interpolate = function (t) {
-              return t ? (n = i(this.x, t), r = n - 1, (t - this.x[r]) * (this.y[n] - this.y[r]) / (this.x[n] - this.x[r]) + this.y[r]) : 0;
-            };
-          }, getInterpolateFunction: function getInterpolateFunction(t) {
-            T.controller.spline || (T.controller.spline = T.params.loop ? new T.controller.LinearSpline(T.slidesGrid, t.slidesGrid) : new T.controller.LinearSpline(T.snapGrid, t.snapGrid));
-          }, setTranslate: function setTranslate(t, e) {
-            function r(e) {
-              t = e.rtl && "horizontal" === e.params.direction ? -T.translate : T.translate, "slide" === T.params.controlBy && (T.controller.getInterpolateFunction(e), s = -T.controller.spline.interpolate(-t)), s && "container" !== T.params.controlBy || (n = (e.maxTranslate() - e.minTranslate()) / (T.maxTranslate() - T.minTranslate()), s = (t - T.minTranslate()) * n + e.minTranslate()), T.params.controlInverse && (s = e.maxTranslate() - s), e.updateProgress(s), e.setWrapperTranslate(s, !1, T), e.updateActiveIndex();
-            }var n,
-                s,
-                a = T.params.control;if (Array.isArray(a)) for (var o = 0; o < a.length; o++) {
-              a[o] !== e && a[o] instanceof i && r(a[o]);
-            } else a instanceof i && e !== a && r(a);
-          }, setTransition: function setTransition(t, e) {
-            function r(e) {
-              e.setWrapperTransition(t, T), 0 !== t && (e.onTransitionStart(), e.wrapper.transitionEnd(function () {
-                s && (e.params.loop && "slide" === T.params.controlBy && e.fixLoop(), e.onTransitionEnd());
-              }));
-            }var n,
-                s = T.params.control;if (Array.isArray(s)) for (n = 0; n < s.length; n++) {
-              s[n] !== e && s[n] instanceof i && r(s[n]);
-            } else s instanceof i && e !== s && r(s);
-          } }, T.hashnav = { onHashCange: function onHashCange(t, e) {
-            var i = document.location.hash.replace("#", "");i !== T.slides.eq(T.activeIndex).attr("data-hash") && T.slideTo(T.wrapper.children("." + T.params.slideClass + '[data-hash="' + i + '"]').index());
-          }, attachEvents: function attachEvents(t) {
-            var i = t ? "off" : "on";e(window)[i]("hashchange", T.hashnav.onHashCange);
-          }, setHash: function setHash() {
-            if (T.hashnav.initialized && T.params.hashnav) if (T.params.replaceState && window.history && window.history.replaceState) window.history.replaceState(null, null, "#" + T.slides.eq(T.activeIndex).attr("data-hash") || "");else {
-              var t = T.slides.eq(T.activeIndex),
-                  e = t.attr("data-hash") || t.attr("data-history");document.location.hash = e || "";
-            }
-          }, init: function init() {
-            if (T.params.hashnav && !T.params.history) {
-              T.hashnav.initialized = !0;var t = document.location.hash.replace("#", "");if (t) for (var e = 0, i = 0, r = T.slides.length; i < r; i++) {
-                var n = T.slides.eq(i),
-                    s = n.attr("data-hash") || n.attr("data-history");if (s === t && !n.hasClass(T.params.slideDuplicateClass)) {
-                  var a = n.index();T.slideTo(a, e, T.params.runCallbacksOnInit, !0);
-                }
-              }T.params.hashnavWatchState && T.hashnav.attachEvents();
-            }
-          }, destroy: function destroy() {
-            T.params.hashnavWatchState && T.hashnav.attachEvents(!0);
-          } }, T.history = { init: function init() {
-            if (T.params.history) {
-              if (!window.history || !window.history.pushState) return T.params.history = !1, void (T.params.hashnav = !0);T.history.initialized = !0, this.paths = this.getPathValues(), (this.paths.key || this.paths.value) && (this.scrollToSlide(0, this.paths.value, T.params.runCallbacksOnInit), T.params.replaceState || window.addEventListener("popstate", this.setHistoryPopState));
-            }
-          }, setHistoryPopState: function setHistoryPopState() {
-            T.history.paths = T.history.getPathValues(), T.history.scrollToSlide(T.params.speed, T.history.paths.value, !1);
-          }, getPathValues: function getPathValues() {
-            var t = window.location.pathname.slice(1).split("/"),
-                e = t.length;return { key: t[e - 2], value: t[e - 1] };
-          }, setHistory: function setHistory(t, e) {
-            if (T.history.initialized && T.params.history) {
-              var i = T.slides.eq(e),
-                  r = this.slugify(i.attr("data-history"));window.location.pathname.includes(t) || (r = t + "/" + r), T.params.replaceState ? window.history.replaceState(null, null, r) : window.history.pushState(null, null, r);
-            }
-          }, slugify: function slugify(t) {
-            return t.toString().toLowerCase().replace(/\s+/g, "-").replace(/[^\w\-]+/g, "").replace(/\-\-+/g, "-").replace(/^-+/, "").replace(/-+$/, "");
-          }, scrollToSlide: function scrollToSlide(t, e, i) {
-            if (e) for (var r = 0, n = T.slides.length; r < n; r++) {
-              var s = T.slides.eq(r),
-                  a = this.slugify(s.attr("data-history"));if (a === e && !s.hasClass(T.params.slideDuplicateClass)) {
-                var o = s.index();T.slideTo(o, t, i);
-              }
-            } else T.slideTo(0, t, i);
-          } }, T.disableKeyboardControl = function () {
-          T.params.keyboardControl = !1, e(document).off("keydown", u);
-        }, T.enableKeyboardControl = function () {
-          T.params.keyboardControl = !0, e(document).on("keydown", u);
-        }, T.mousewheel = { event: !1, lastScrollTime: new window.Date().getTime() }, T.params.mousewheelControl && (T.mousewheel.event = navigator.userAgent.indexOf("firefox") > -1 ? "DOMMouseScroll" : p() ? "wheel" : "mousewheel"), T.disableMousewheelControl = function () {
-          if (!T.mousewheel.event) return !1;var t = T.container;return "container" !== T.params.mousewheelEventsTarged && (t = e(T.params.mousewheelEventsTarged)), t.off(T.mousewheel.event, h), T.params.mousewheelControl = !1, !0;
-        }, T.enableMousewheelControl = function () {
-          if (!T.mousewheel.event) return !1;var t = T.container;return "container" !== T.params.mousewheelEventsTarged && (t = e(T.params.mousewheelEventsTarged)), t.on(T.mousewheel.event, h), T.params.mousewheelControl = !0, !0;
-        }, T.parallax = { setTranslate: function setTranslate() {
-            T.container.children("[data-swiper-parallax], [data-swiper-parallax-x], [data-swiper-parallax-y]").each(function () {
-              d(this, T.progress);
-            }), T.slides.each(function () {
-              var t = e(this);t.find("[data-swiper-parallax], [data-swiper-parallax-x], [data-swiper-parallax-y]").each(function () {
-                d(this, Math.min(Math.max(t[0].progress, -1), 1));
-              });
-            });
-          }, setTransition: function setTransition(t) {
-            void 0 === t && (t = T.params.speed), T.container.find("[data-swiper-parallax], [data-swiper-parallax-x], [data-swiper-parallax-y]").each(function () {
-              var i = e(this),
-                  r = parseInt(i.attr("data-swiper-parallax-duration"), 10) || t;0 === t && (r = 0), i.transition(r);
-            });
-          } }, T.zoom = { scale: 1, currentScale: 1, isScaling: !1, gesture: { slide: void 0, slideWidth: void 0, slideHeight: void 0, image: void 0, imageWrap: void 0, zoomMax: T.params.zoomMax }, image: { isTouched: void 0, isMoved: void 0, currentX: void 0, currentY: void 0, minX: void 0, minY: void 0, maxX: void 0, maxY: void 0, width: void 0, height: void 0, startX: void 0, startY: void 0, touchesStart: {}, touchesCurrent: {} }, velocity: { x: void 0, y: void 0, prevPositionX: void 0, prevPositionY: void 0, prevTime: void 0 }, getDistanceBetweenTouches: function getDistanceBetweenTouches(t) {
-            if (t.targetTouches.length < 2) return 1;var e = t.targetTouches[0].pageX,
-                i = t.targetTouches[0].pageY,
-                r = t.targetTouches[1].pageX,
-                n = t.targetTouches[1].pageY;return Math.sqrt(Math.pow(r - e, 2) + Math.pow(n - i, 2));
-          }, onGestureStart: function onGestureStart(t) {
-            var i = T.zoom;if (!T.support.gestures) {
-              if ("touchstart" !== t.type || "touchstart" === t.type && t.targetTouches.length < 2) return;i.gesture.scaleStart = i.getDistanceBetweenTouches(t);
-            }if (!(i.gesture.slide && i.gesture.slide.length || (i.gesture.slide = e(this), 0 === i.gesture.slide.length && (i.gesture.slide = T.slides.eq(T.activeIndex)), i.gesture.image = i.gesture.slide.find("img, svg, canvas"), i.gesture.imageWrap = i.gesture.image.parent("." + T.params.zoomContainerClass), i.gesture.zoomMax = i.gesture.imageWrap.attr("data-swiper-zoom") || T.params.zoomMax, 0 !== i.gesture.imageWrap.length))) return void (i.gesture.image = void 0);i.gesture.image.transition(0), i.isScaling = !0;
-          }, onGestureChange: function onGestureChange(t) {
-            var e = T.zoom;if (!T.support.gestures) {
-              if ("touchmove" !== t.type || "touchmove" === t.type && t.targetTouches.length < 2) return;e.gesture.scaleMove = e.getDistanceBetweenTouches(t);
-            }e.gesture.image && 0 !== e.gesture.image.length && (T.support.gestures ? e.scale = t.scale * e.currentScale : e.scale = e.gesture.scaleMove / e.gesture.scaleStart * e.currentScale, e.scale > e.gesture.zoomMax && (e.scale = e.gesture.zoomMax - 1 + Math.pow(e.scale - e.gesture.zoomMax + 1, .5)), e.scale < T.params.zoomMin && (e.scale = T.params.zoomMin + 1 - Math.pow(T.params.zoomMin - e.scale + 1, .5)), e.gesture.image.transform("translate3d(0,0,0) scale(" + e.scale + ")"));
-          }, onGestureEnd: function onGestureEnd(t) {
-            var e = T.zoom;!T.support.gestures && ("touchend" !== t.type || "touchend" === t.type && t.changedTouches.length < 2) || e.gesture.image && 0 !== e.gesture.image.length && (e.scale = Math.max(Math.min(e.scale, e.gesture.zoomMax), T.params.zoomMin), e.gesture.image.transition(T.params.speed).transform("translate3d(0,0,0) scale(" + e.scale + ")"), e.currentScale = e.scale, e.isScaling = !1, 1 === e.scale && (e.gesture.slide = void 0));
-          }, onTouchStart: function onTouchStart(t, e) {
-            var i = t.zoom;i.gesture.image && 0 !== i.gesture.image.length && (i.image.isTouched || ("android" === t.device.os && e.preventDefault(), i.image.isTouched = !0, i.image.touchesStart.x = "touchstart" === e.type ? e.targetTouches[0].pageX : e.pageX, i.image.touchesStart.y = "touchstart" === e.type ? e.targetTouches[0].pageY : e.pageY));
-          }, onTouchMove: function onTouchMove(t) {
-            var e = T.zoom;if (e.gesture.image && 0 !== e.gesture.image.length && (T.allowClick = !1, e.image.isTouched && e.gesture.slide)) {
-              e.image.isMoved || (e.image.width = e.gesture.image[0].offsetWidth, e.image.height = e.gesture.image[0].offsetHeight, e.image.startX = T.getTranslate(e.gesture.imageWrap[0], "x") || 0, e.image.startY = T.getTranslate(e.gesture.imageWrap[0], "y") || 0, e.gesture.slideWidth = e.gesture.slide[0].offsetWidth, e.gesture.slideHeight = e.gesture.slide[0].offsetHeight, e.gesture.imageWrap.transition(0), T.rtl && (e.image.startX = -e.image.startX), T.rtl && (e.image.startY = -e.image.startY));var i = e.image.width * e.scale,
-                  r = e.image.height * e.scale;if (!(i < e.gesture.slideWidth && r < e.gesture.slideHeight)) {
-                if (e.image.minX = Math.min(e.gesture.slideWidth / 2 - i / 2, 0), e.image.maxX = -e.image.minX, e.image.minY = Math.min(e.gesture.slideHeight / 2 - r / 2, 0), e.image.maxY = -e.image.minY, e.image.touchesCurrent.x = "touchmove" === t.type ? t.targetTouches[0].pageX : t.pageX, e.image.touchesCurrent.y = "touchmove" === t.type ? t.targetTouches[0].pageY : t.pageY, !e.image.isMoved && !e.isScaling) {
-                  if (T.isHorizontal() && Math.floor(e.image.minX) === Math.floor(e.image.startX) && e.image.touchesCurrent.x < e.image.touchesStart.x || Math.floor(e.image.maxX) === Math.floor(e.image.startX) && e.image.touchesCurrent.x > e.image.touchesStart.x) return void (e.image.isTouched = !1);if (!T.isHorizontal() && Math.floor(e.image.minY) === Math.floor(e.image.startY) && e.image.touchesCurrent.y < e.image.touchesStart.y || Math.floor(e.image.maxY) === Math.floor(e.image.startY) && e.image.touchesCurrent.y > e.image.touchesStart.y) return void (e.image.isTouched = !1);
-                }t.preventDefault(), t.stopPropagation(), e.image.isMoved = !0, e.image.currentX = e.image.touchesCurrent.x - e.image.touchesStart.x + e.image.startX, e.image.currentY = e.image.touchesCurrent.y - e.image.touchesStart.y + e.image.startY, e.image.currentX < e.image.minX && (e.image.currentX = e.image.minX + 1 - Math.pow(e.image.minX - e.image.currentX + 1, .8)), e.image.currentX > e.image.maxX && (e.image.currentX = e.image.maxX - 1 + Math.pow(e.image.currentX - e.image.maxX + 1, .8)), e.image.currentY < e.image.minY && (e.image.currentY = e.image.minY + 1 - Math.pow(e.image.minY - e.image.currentY + 1, .8)), e.image.currentY > e.image.maxY && (e.image.currentY = e.image.maxY - 1 + Math.pow(e.image.currentY - e.image.maxY + 1, .8)), e.velocity.prevPositionX || (e.velocity.prevPositionX = e.image.touchesCurrent.x), e.velocity.prevPositionY || (e.velocity.prevPositionY = e.image.touchesCurrent.y), e.velocity.prevTime || (e.velocity.prevTime = Date.now()), e.velocity.x = (e.image.touchesCurrent.x - e.velocity.prevPositionX) / (Date.now() - e.velocity.prevTime) / 2, e.velocity.y = (e.image.touchesCurrent.y - e.velocity.prevPositionY) / (Date.now() - e.velocity.prevTime) / 2, Math.abs(e.image.touchesCurrent.x - e.velocity.prevPositionX) < 2 && (e.velocity.x = 0), Math.abs(e.image.touchesCurrent.y - e.velocity.prevPositionY) < 2 && (e.velocity.y = 0), e.velocity.prevPositionX = e.image.touchesCurrent.x, e.velocity.prevPositionY = e.image.touchesCurrent.y, e.velocity.prevTime = Date.now(), e.gesture.imageWrap.transform("translate3d(" + e.image.currentX + "px, " + e.image.currentY + "px,0)");
-              }
-            }
-          }, onTouchEnd: function onTouchEnd(t, e) {
-            var i = t.zoom;if (i.gesture.image && 0 !== i.gesture.image.length) {
-              if (!i.image.isTouched || !i.image.isMoved) return i.image.isTouched = !1, void (i.image.isMoved = !1);i.image.isTouched = !1, i.image.isMoved = !1;var r = 300,
-                  n = 300,
-                  s = i.velocity.x * r,
-                  a = i.image.currentX + s,
-                  o = i.velocity.y * n,
-                  l = i.image.currentY + o;0 !== i.velocity.x && (r = Math.abs((a - i.image.currentX) / i.velocity.x)), 0 !== i.velocity.y && (n = Math.abs((l - i.image.currentY) / i.velocity.y));var u = Math.max(r, n);i.image.currentX = a, i.image.currentY = l;var p = i.image.width * i.scale,
-                  c = i.image.height * i.scale;i.image.minX = Math.min(i.gesture.slideWidth / 2 - p / 2, 0), i.image.maxX = -i.image.minX, i.image.minY = Math.min(i.gesture.slideHeight / 2 - c / 2, 0), i.image.maxY = -i.image.minY, i.image.currentX = Math.max(Math.min(i.image.currentX, i.image.maxX), i.image.minX), i.image.currentY = Math.max(Math.min(i.image.currentY, i.image.maxY), i.image.minY), i.gesture.imageWrap.transition(u).transform("translate3d(" + i.image.currentX + "px, " + i.image.currentY + "px,0)");
-            }
-          }, onTransitionEnd: function onTransitionEnd(t) {
-            var e = t.zoom;e.gesture.slide && t.previousIndex !== t.activeIndex && (e.gesture.image.transform("translate3d(0,0,0) scale(1)"), e.gesture.imageWrap.transform("translate3d(0,0,0)"), e.gesture.slide = e.gesture.image = e.gesture.imageWrap = void 0, e.scale = e.currentScale = 1);
-          }, toggleZoom: function toggleZoom(t, i) {
-            var r = t.zoom;if (r.gesture.slide || (r.gesture.slide = t.clickedSlide ? e(t.clickedSlide) : t.slides.eq(t.activeIndex), r.gesture.image = r.gesture.slide.find("img, svg, canvas"), r.gesture.imageWrap = r.gesture.image.parent("." + t.params.zoomContainerClass)), r.gesture.image && 0 !== r.gesture.image.length) {
-              var n, s, a, o, l, u, p, c, h, d, f, m, g, v, w, y, x, b;void 0 === r.image.touchesStart.x && i ? (n = "touchend" === i.type ? i.changedTouches[0].pageX : i.pageX, s = "touchend" === i.type ? i.changedTouches[0].pageY : i.pageY) : (n = r.image.touchesStart.x, s = r.image.touchesStart.y), r.scale && 1 !== r.scale ? (r.scale = r.currentScale = 1, r.gesture.imageWrap.transition(300).transform("translate3d(0,0,0)"), r.gesture.image.transition(300).transform("translate3d(0,0,0) scale(1)"), r.gesture.slide = void 0) : (r.scale = r.currentScale = r.gesture.imageWrap.attr("data-swiper-zoom") || t.params.zoomMax, i ? (x = r.gesture.slide[0].offsetWidth, b = r.gesture.slide[0].offsetHeight, a = r.gesture.slide.offset().left, o = r.gesture.slide.offset().top, l = a + x / 2 - n, u = o + b / 2 - s, h = r.gesture.image[0].offsetWidth, d = r.gesture.image[0].offsetHeight, f = h * r.scale, m = d * r.scale, g = Math.min(x / 2 - f / 2, 0), v = Math.min(b / 2 - m / 2, 0), w = -g, y = -v, p = l * r.scale, c = u * r.scale, p < g && (p = g), p > w && (p = w), c < v && (c = v), c > y && (c = y)) : (p = 0, c = 0), r.gesture.imageWrap.transition(300).transform("translate3d(" + p + "px, " + c + "px,0)"), r.gesture.image.transition(300).transform("translate3d(0,0,0) scale(" + r.scale + ")"));
-            }
-          }, attachEvents: function attachEvents(t) {
-            var i = t ? "off" : "on";if (T.params.zoom) {
-              var r = (T.slides, !("touchstart" !== T.touchEvents.start || !T.support.passiveListener || !T.params.passiveListeners) && { passive: !0, capture: !1 });T.support.gestures ? (T.slides[i]("gesturestart", T.zoom.onGestureStart, r), T.slides[i]("gesturechange", T.zoom.onGestureChange, r), T.slides[i]("gestureend", T.zoom.onGestureEnd, r)) : "touchstart" === T.touchEvents.start && (T.slides[i](T.touchEvents.start, T.zoom.onGestureStart, r), T.slides[i](T.touchEvents.move, T.zoom.onGestureChange, r), T.slides[i](T.touchEvents.end, T.zoom.onGestureEnd, r)), T[i]("touchStart", T.zoom.onTouchStart), T.slides.each(function (t, r) {
-                e(r).find("." + T.params.zoomContainerClass).length > 0 && e(r)[i](T.touchEvents.move, T.zoom.onTouchMove);
-              }), T[i]("touchEnd", T.zoom.onTouchEnd), T[i]("transitionEnd", T.zoom.onTransitionEnd), T.params.zoomToggle && T.on("doubleTap", T.zoom.toggleZoom);
-            }
-          }, init: function init() {
-            T.zoom.attachEvents();
-          }, destroy: function destroy() {
-            T.zoom.attachEvents(!0);
-          } }, T._plugins = [];for (var O in T.plugins) {
-          var H = T.plugins[O](T, T.params[O]);H && T._plugins.push(H);
-        }return T.callPlugins = function (t) {
-          for (var e = 0; e < T._plugins.length; e++) {
-            t in T._plugins[e] && T._plugins[e][t](arguments[1], arguments[2], arguments[3], arguments[4], arguments[5]);
-          }
-        }, T.emitterEventListeners = {}, T.emit = function (t) {
-          T.params[t] && T.params[t](arguments[1], arguments[2], arguments[3], arguments[4], arguments[5]);var e;if (T.emitterEventListeners[t]) for (e = 0; e < T.emitterEventListeners[t].length; e++) {
-            T.emitterEventListeners[t][e](arguments[1], arguments[2], arguments[3], arguments[4], arguments[5]);
-          }T.callPlugins && T.callPlugins(t, arguments[1], arguments[2], arguments[3], arguments[4], arguments[5]);
-        }, T.on = function (t, e) {
-          return t = f(t), T.emitterEventListeners[t] || (T.emitterEventListeners[t] = []), T.emitterEventListeners[t].push(e), T;
-        }, T.off = function (t, e) {
-          var i;if (t = f(t), void 0 === e) return T.emitterEventListeners[t] = [], T;if (T.emitterEventListeners[t] && 0 !== T.emitterEventListeners[t].length) {
-            for (i = 0; i < T.emitterEventListeners[t].length; i++) {
-              T.emitterEventListeners[t][i] === e && T.emitterEventListeners[t].splice(i, 1);
-            }return T;
-          }
-        }, T.once = function (t, e) {
-          t = f(t);var i = function i() {
-            e(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4]), T.off(t, i);
-          };return T.on(t, i), T;
-        }, T.a11y = { makeFocusable: function makeFocusable(t) {
-            return t.attr("tabIndex", "0"), t;
-          }, addRole: function addRole(t, e) {
-            return t.attr("role", e), t;
-          }, addLabel: function addLabel(t, e) {
-            return t.attr("aria-label", e), t;
-          }, disable: function disable(t) {
-            return t.attr("aria-disabled", !0), t;
-          }, enable: function enable(t) {
-            return t.attr("aria-disabled", !1), t;
-          }, onEnterKey: function onEnterKey(t) {
-            13 === t.keyCode && (e(t.target).is(T.params.nextButton) ? (T.onClickNext(t), T.isEnd ? T.a11y.notify(T.params.lastSlideMessage) : T.a11y.notify(T.params.nextSlideMessage)) : e(t.target).is(T.params.prevButton) && (T.onClickPrev(t), T.isBeginning ? T.a11y.notify(T.params.firstSlideMessage) : T.a11y.notify(T.params.prevSlideMessage)), e(t.target).is("." + T.params.bulletClass) && e(t.target)[0].click());
-          }, liveRegion: e('<span class="' + T.params.notificationClass + '" aria-live="assertive" aria-atomic="true"></span>'), notify: function notify(t) {
-            var e = T.a11y.liveRegion;0 !== e.length && (e.html(""), e.html(t));
-          }, init: function init() {
-            T.params.nextButton && T.nextButton && T.nextButton.length > 0 && (T.a11y.makeFocusable(T.nextButton), T.a11y.addRole(T.nextButton, "button"), T.a11y.addLabel(T.nextButton, T.params.nextSlideMessage)), T.params.prevButton && T.prevButton && T.prevButton.length > 0 && (T.a11y.makeFocusable(T.prevButton), T.a11y.addRole(T.prevButton, "button"), T.a11y.addLabel(T.prevButton, T.params.prevSlideMessage)), e(T.container).append(T.a11y.liveRegion);
-          }, initPagination: function initPagination() {
-            T.params.pagination && T.params.paginationClickable && T.bullets && T.bullets.length && T.bullets.each(function () {
-              var t = e(this);T.a11y.makeFocusable(t), T.a11y.addRole(t, "button"), T.a11y.addLabel(t, T.params.paginationBulletMessage.replace(/{{index}}/, t.index() + 1));
-            });
-          }, destroy: function destroy() {
-            T.a11y.liveRegion && T.a11y.liveRegion.length > 0 && T.a11y.liveRegion.remove();
-          } }, T.init = function () {
-          T.params.loop && T.createLoop(), T.updateContainerSize(), T.updateSlidesSize(), T.updatePagination(), T.params.scrollbar && T.scrollbar && (T.scrollbar.set(), T.params.scrollbarDraggable && T.scrollbar.enableDraggable()), "slide" !== T.params.effect && T.effects[T.params.effect] && (T.params.loop || T.updateProgress(), T.effects[T.params.effect].setTranslate()), T.params.loop ? T.slideTo(T.params.initialSlide + T.loopedSlides, 0, T.params.runCallbacksOnInit) : (T.slideTo(T.params.initialSlide, 0, T.params.runCallbacksOnInit), 0 === T.params.initialSlide && (T.parallax && T.params.parallax && T.parallax.setTranslate(), T.lazy && T.params.lazyLoading && (T.lazy.load(), T.lazy.initialImageLoaded = !0))), T.attachEvents(), T.params.observer && T.support.observer && T.initObservers(), T.params.preloadImages && !T.params.lazyLoading && T.preloadImages(), T.params.zoom && T.zoom && T.zoom.init(), T.params.autoplay && T.startAutoplay(), T.params.keyboardControl && T.enableKeyboardControl && T.enableKeyboardControl(), T.params.mousewheelControl && T.enableMousewheelControl && T.enableMousewheelControl(), T.params.hashnavReplaceState && (T.params.replaceState = T.params.hashnavReplaceState), T.params.history && T.history && T.history.init(), T.params.hashnav && T.hashnav && T.hashnav.init(), T.params.a11y && T.a11y && T.a11y.init(), T.emit("onInit", T);
-        }, T.cleanupStyles = function () {
-          T.container.removeClass(T.classNames.join(" ")).removeAttr("style"), T.wrapper.removeAttr("style"), T.slides && T.slides.length && T.slides.removeClass([T.params.slideVisibleClass, T.params.slideActiveClass, T.params.slideNextClass, T.params.slidePrevClass].join(" ")).removeAttr("style").removeAttr("data-swiper-column").removeAttr("data-swiper-row"), T.paginationContainer && T.paginationContainer.length && T.paginationContainer.removeClass(T.params.paginationHiddenClass), T.bullets && T.bullets.length && T.bullets.removeClass(T.params.bulletActiveClass), T.params.prevButton && e(T.params.prevButton).removeClass(T.params.buttonDisabledClass), T.params.nextButton && e(T.params.nextButton).removeClass(T.params.buttonDisabledClass), T.params.scrollbar && T.scrollbar && (T.scrollbar.track && T.scrollbar.track.length && T.scrollbar.track.removeAttr("style"), T.scrollbar.drag && T.scrollbar.drag.length && T.scrollbar.drag.removeAttr("style"));
-        }, T.destroy = function (t, e) {
-          T.detachEvents(), T.stopAutoplay(), T.params.scrollbar && T.scrollbar && T.params.scrollbarDraggable && T.scrollbar.disableDraggable(), T.params.loop && T.destroyLoop(), e && T.cleanupStyles(), T.disconnectObservers(), T.params.zoom && T.zoom && T.zoom.destroy(), T.params.keyboardControl && T.disableKeyboardControl && T.disableKeyboardControl(), T.params.mousewheelControl && T.disableMousewheelControl && T.disableMousewheelControl(), T.params.a11y && T.a11y && T.a11y.destroy(), T.params.history && !T.params.replaceState && window.removeEventListener("popstate", T.history.setHistoryPopState), T.params.hashnav && T.hashnav && T.hashnav.destroy(), T.emit("onDestroy"), t !== !1 && (T = null);
-        }, T.init(), T;
-      }
-    };i.prototype = { isSafari: function () {
-        var t = window.navigator.userAgent.toLowerCase();return t.indexOf("safari") >= 0 && t.indexOf("chrome") < 0 && t.indexOf("android") < 0;
-      }(), isUiWebView: /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(window.navigator.userAgent), isArray: function isArray(t) {
-        return "[object Array]" === Object.prototype.toString.apply(t);
-      }, browser: { ie: window.navigator.pointerEnabled || window.navigator.msPointerEnabled, ieTouch: window.navigator.msPointerEnabled && window.navigator.msMaxTouchPoints > 1 || window.navigator.pointerEnabled && window.navigator.maxTouchPoints > 1, lteIE9: function () {
-          var t = document.createElement("div");return t.innerHTML = "<!--[if lte IE 9]><i></i><![endif]-->", 1 === t.getElementsByTagName("i").length;
-        }() }, device: function () {
-        var t = window.navigator.userAgent,
-            e = t.match(/(Android);?[\s\/]+([\d.]+)?/),
-            i = t.match(/(iPad).*OS\s([\d_]+)/),
-            r = t.match(/(iPod)(.*OS\s([\d_]+))?/),
-            n = !i && t.match(/(iPhone\sOS|iOS)\s([\d_]+)/);return { ios: i || n || r, android: e };
-      }(), support: { touch: window.Modernizr && Modernizr.touch === !0 || function () {
-          return !!("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch);
-        }(), transforms3d: window.Modernizr && Modernizr.csstransforms3d === !0 || function () {
-          var t = document.createElement("div").style;return "webkitPerspective" in t || "MozPerspective" in t || "OPerspective" in t || "MsPerspective" in t || "perspective" in t;
-        }(), flexbox: function () {
-          for (var t = document.createElement("div").style, e = "alignItems webkitAlignItems webkitBoxAlign msFlexAlign mozBoxAlign webkitFlexDirection msFlexDirection mozBoxDirection mozBoxOrient webkitBoxDirection webkitBoxOrient".split(" "), i = 0; i < e.length; i++) {
-            if (e[i] in t) return !0;
-          }
-        }(), observer: function () {
-          return "MutationObserver" in window || "WebkitMutationObserver" in window;
-        }(), passiveListener: function () {
-          var t = !1;try {
-            var e = Object.defineProperty({}, "passive", { get: function get() {
-                t = !0;
-              } });window.addEventListener("testPassiveListener", null, e);
-          } catch (t) {}return t;
-        }(), gestures: function () {
-          return "ongesturestart" in window;
-        }() }, plugins: {} };for (var r = function () {
-      var t = function t(_t2) {
-        var e = this,
-            i = 0;for (i = 0; i < _t2.length; i++) {
-          e[i] = _t2[i];
-        }return e.length = _t2.length, this;
-      },
-          e = function e(_e2, i) {
-        var r = [],
-            n = 0;if (_e2 && !i && _e2 instanceof t) return _e2;if (_e2) if ("string" == typeof _e2) {
-          var s,
-              a,
-              o = _e2.trim();if (o.indexOf("<") >= 0 && o.indexOf(">") >= 0) {
-            var l = "div";for (0 === o.indexOf("<li") && (l = "ul"), 0 === o.indexOf("<tr") && (l = "tbody"), 0 !== o.indexOf("<td") && 0 !== o.indexOf("<th") || (l = "tr"), 0 === o.indexOf("<tbody") && (l = "table"), 0 === o.indexOf("<option") && (l = "select"), a = document.createElement(l), a.innerHTML = _e2, n = 0; n < a.childNodes.length; n++) {
-              r.push(a.childNodes[n]);
-            }
-          } else for (s = i || "#" !== _e2[0] || _e2.match(/[ .<>:~]/) ? (i || document).querySelectorAll(_e2) : [document.getElementById(_e2.split("#")[1])], n = 0; n < s.length; n++) {
-            s[n] && r.push(s[n]);
-          }
-        } else if (_e2.nodeType || _e2 === window || _e2 === document) r.push(_e2);else if (_e2.length > 0 && _e2[0].nodeType) for (n = 0; n < _e2.length; n++) {
-          r.push(_e2[n]);
-        }return new t(r);
-      };return t.prototype = { addClass: function addClass(t) {
-          if (void 0 === t) return this;for (var e = t.split(" "), i = 0; i < e.length; i++) {
-            for (var r = 0; r < this.length; r++) {
-              this[r].classList.add(e[i]);
-            }
-          }return this;
-        }, removeClass: function removeClass(t) {
-          for (var e = t.split(" "), i = 0; i < e.length; i++) {
-            for (var r = 0; r < this.length; r++) {
-              this[r].classList.remove(e[i]);
-            }
-          }return this;
-        }, hasClass: function hasClass(t) {
-          return !!this[0] && this[0].classList.contains(t);
-        }, toggleClass: function toggleClass(t) {
-          for (var e = t.split(" "), i = 0; i < e.length; i++) {
-            for (var r = 0; r < this.length; r++) {
-              this[r].classList.toggle(e[i]);
-            }
-          }return this;
-        }, attr: function attr(t, e) {
-          if (1 === arguments.length && "string" == typeof t) return this[0] ? this[0].getAttribute(t) : void 0;for (var i = 0; i < this.length; i++) {
-            if (2 === arguments.length) this[i].setAttribute(t, e);else for (var r in t) {
-              this[i][r] = t[r], this[i].setAttribute(r, t[r]);
-            }
-          }return this;
-        }, removeAttr: function removeAttr(t) {
-          for (var e = 0; e < this.length; e++) {
-            this[e].removeAttribute(t);
-          }return this;
-        }, data: function data(t, e) {
-          if (void 0 !== e) {
-            for (var i = 0; i < this.length; i++) {
-              var r = this[i];r.dom7ElementDataStorage || (r.dom7ElementDataStorage = {}), r.dom7ElementDataStorage[t] = e;
-            }return this;
-          }if (this[0]) {
-            var n = this[0].getAttribute("data-" + t);return n ? n : this[0].dom7ElementDataStorage && (t in this[0].dom7ElementDataStorage) ? this[0].dom7ElementDataStorage[t] : void 0;
-          }
-        }, transform: function transform(t) {
-          for (var e = 0; e < this.length; e++) {
-            var i = this[e].style;i.webkitTransform = i.MsTransform = i.msTransform = i.MozTransform = i.OTransform = i.transform = t;
-          }return this;
-        }, transition: function transition(t) {
-          "string" != typeof t && (t += "ms");for (var e = 0; e < this.length; e++) {
-            var i = this[e].style;i.webkitTransitionDuration = i.MsTransitionDuration = i.msTransitionDuration = i.MozTransitionDuration = i.OTransitionDuration = i.transitionDuration = t;
-          }return this;
-        }, on: function on(t, i, r, n) {
-          function s(t) {
-            var n = t.target;if (e(n).is(i)) r.call(n, t);else for (var s = e(n).parents(), a = 0; a < s.length; a++) {
-              e(s[a]).is(i) && r.call(s[a], t);
-            }
-          }var a,
-              o,
-              l = t.split(" ");for (a = 0; a < this.length; a++) {
-            if ("function" == typeof i || i === !1) for ("function" == typeof i && (r = arguments[1], n = arguments[2] || !1), o = 0; o < l.length; o++) {
-              this[a].addEventListener(l[o], r, n);
-            } else for (o = 0; o < l.length; o++) {
-              this[a].dom7LiveListeners || (this[a].dom7LiveListeners = []), this[a].dom7LiveListeners.push({ listener: r, liveListener: s }), this[a].addEventListener(l[o], s, n);
-            }
-          }return this;
-        }, off: function off(t, e, i, r) {
-          for (var n = t.split(" "), s = 0; s < n.length; s++) {
-            for (var a = 0; a < this.length; a++) {
-              if ("function" == typeof e || e === !1) "function" == typeof e && (i = arguments[1], r = arguments[2] || !1), this[a].removeEventListener(n[s], i, r);else if (this[a].dom7LiveListeners) for (var o = 0; o < this[a].dom7LiveListeners.length; o++) {
-                this[a].dom7LiveListeners[o].listener === i && this[a].removeEventListener(n[s], this[a].dom7LiveListeners[o].liveListener, r);
-              }
-            }
-          }return this;
-        }, once: function once(t, e, i, r) {
-          function n(a) {
-            i(a), s.off(t, e, n, r);
-          }var s = this;"function" == typeof e && (e = !1, i = arguments[1], r = arguments[2]), s.on(t, e, n, r);
-        }, trigger: function trigger(t, e) {
-          for (var i = 0; i < this.length; i++) {
-            var r;try {
-              r = new window.CustomEvent(t, { detail: e, bubbles: !0, cancelable: !0 });
-            } catch (i) {
-              r = document.createEvent("Event"), r.initEvent(t, !0, !0), r.detail = e;
-            }this[i].dispatchEvent(r);
-          }return this;
-        }, transitionEnd: function transitionEnd(t) {
-          function e(s) {
-            if (s.target === this) for (t.call(this, s), i = 0; i < r.length; i++) {
-              n.off(r[i], e);
-            }
-          }var i,
-              r = ["webkitTransitionEnd", "transitionend", "oTransitionEnd", "MSTransitionEnd", "msTransitionEnd"],
-              n = this;if (t) for (i = 0; i < r.length; i++) {
-            n.on(r[i], e);
-          }return this;
-        }, width: function width() {
-          return this[0] === window ? window.innerWidth : this.length > 0 ? parseFloat(this.css("width")) : null;
-        }, outerWidth: function outerWidth(t) {
-          return this.length > 0 ? t ? this[0].offsetWidth + parseFloat(this.css("margin-right")) + parseFloat(this.css("margin-left")) : this[0].offsetWidth : null;
-        }, height: function height() {
-          return this[0] === window ? window.innerHeight : this.length > 0 ? parseFloat(this.css("height")) : null;
-        }, outerHeight: function outerHeight(t) {
-          return this.length > 0 ? t ? this[0].offsetHeight + parseFloat(this.css("margin-top")) + parseFloat(this.css("margin-bottom")) : this[0].offsetHeight : null;
-        }, offset: function offset() {
-          if (this.length > 0) {
-            var t = this[0],
-                e = t.getBoundingClientRect(),
-                i = document.body,
-                r = t.clientTop || i.clientTop || 0,
-                n = t.clientLeft || i.clientLeft || 0,
-                s = window.pageYOffset || t.scrollTop,
-                a = window.pageXOffset || t.scrollLeft;return { top: e.top + s - r, left: e.left + a - n };
-          }return null;
-        }, css: function css(t, e) {
-          var i;if (1 === arguments.length) {
-            if ("string" != typeof t) {
-              for (i = 0; i < this.length; i++) {
-                for (var r in t) {
-                  this[i].style[r] = t[r];
-                }
-              }return this;
-            }if (this[0]) return window.getComputedStyle(this[0], null).getPropertyValue(t);
-          }if (2 === arguments.length && "string" == typeof t) {
-            for (i = 0; i < this.length; i++) {
-              this[i].style[t] = e;
-            }return this;
-          }return this;
-        }, each: function each(t) {
-          for (var e = 0; e < this.length; e++) {
-            t.call(this[e], e, this[e]);
-          }return this;
-        }, html: function html(t) {
-          if (void 0 === t) return this[0] ? this[0].innerHTML : void 0;for (var e = 0; e < this.length; e++) {
-            this[e].innerHTML = t;
-          }return this;
-        }, text: function text(t) {
-          if (void 0 === t) return this[0] ? this[0].textContent.trim() : null;for (var e = 0; e < this.length; e++) {
-            this[e].textContent = t;
-          }return this;
-        }, is: function is(i) {
-          if (!this[0]) return !1;var r, n;if ("string" == typeof i) {
-            var s = this[0];if (s === document) return i === document;if (s === window) return i === window;if (s.matches) return s.matches(i);if (s.webkitMatchesSelector) return s.webkitMatchesSelector(i);if (s.mozMatchesSelector) return s.mozMatchesSelector(i);if (s.msMatchesSelector) return s.msMatchesSelector(i);for (r = e(i), n = 0; n < r.length; n++) {
-              if (r[n] === this[0]) return !0;
-            }return !1;
-          }if (i === document) return this[0] === document;if (i === window) return this[0] === window;if (i.nodeType || i instanceof t) {
-            for (r = i.nodeType ? [i] : i, n = 0; n < r.length; n++) {
-              if (r[n] === this[0]) return !0;
-            }return !1;
-          }return !1;
-        }, index: function index() {
-          if (this[0]) {
-            for (var t = this[0], e = 0; null !== (t = t.previousSibling);) {
-              1 === t.nodeType && e++;
-            }return e;
-          }
-        }, eq: function eq(e) {
-          if (void 0 === e) return this;var i,
-              r = this.length;return e > r - 1 ? new t([]) : e < 0 ? (i = r + e, new t(i < 0 ? [] : [this[i]])) : new t([this[e]]);
-        }, append: function append(e) {
-          var i, r;for (i = 0; i < this.length; i++) {
-            if ("string" == typeof e) {
-              var n = document.createElement("div");for (n.innerHTML = e; n.firstChild;) {
-                this[i].appendChild(n.firstChild);
-              }
-            } else if (e instanceof t) for (r = 0; r < e.length; r++) {
-              this[i].appendChild(e[r]);
-            } else this[i].appendChild(e);
-          }return this;
-        }, prepend: function prepend(e) {
-          var i, r;for (i = 0; i < this.length; i++) {
-            if ("string" == typeof e) {
-              var n = document.createElement("div");for (n.innerHTML = e, r = n.childNodes.length - 1; r >= 0; r--) {
-                this[i].insertBefore(n.childNodes[r], this[i].childNodes[0]);
-              }
-            } else if (e instanceof t) for (r = 0; r < e.length; r++) {
-              this[i].insertBefore(e[r], this[i].childNodes[0]);
-            } else this[i].insertBefore(e, this[i].childNodes[0]);
-          }return this;
-        }, insertBefore: function insertBefore(t) {
-          for (var i = e(t), r = 0; r < this.length; r++) {
-            if (1 === i.length) i[0].parentNode.insertBefore(this[r], i[0]);else if (i.length > 1) for (var n = 0; n < i.length; n++) {
-              i[n].parentNode.insertBefore(this[r].cloneNode(!0), i[n]);
-            }
-          }
-        }, insertAfter: function insertAfter(t) {
-          for (var i = e(t), r = 0; r < this.length; r++) {
-            if (1 === i.length) i[0].parentNode.insertBefore(this[r], i[0].nextSibling);else if (i.length > 1) for (var n = 0; n < i.length; n++) {
-              i[n].parentNode.insertBefore(this[r].cloneNode(!0), i[n].nextSibling);
-            }
-          }
-        }, next: function next(i) {
-          return new t(this.length > 0 ? i ? this[0].nextElementSibling && e(this[0].nextElementSibling).is(i) ? [this[0].nextElementSibling] : [] : this[0].nextElementSibling ? [this[0].nextElementSibling] : [] : []);
-        }, nextAll: function nextAll(i) {
-          var r = [],
-              n = this[0];if (!n) return new t([]);for (; n.nextElementSibling;) {
-            var s = n.nextElementSibling;i ? e(s).is(i) && r.push(s) : r.push(s), n = s;
-          }return new t(r);
-        }, prev: function prev(i) {
-          return new t(this.length > 0 ? i ? this[0].previousElementSibling && e(this[0].previousElementSibling).is(i) ? [this[0].previousElementSibling] : [] : this[0].previousElementSibling ? [this[0].previousElementSibling] : [] : []);
-        }, prevAll: function prevAll(i) {
-          var r = [],
-              n = this[0];if (!n) return new t([]);for (; n.previousElementSibling;) {
-            var s = n.previousElementSibling;i ? e(s).is(i) && r.push(s) : r.push(s), n = s;
-          }return new t(r);
-        }, parent: function parent(t) {
-          for (var i = [], r = 0; r < this.length; r++) {
-            t ? e(this[r].parentNode).is(t) && i.push(this[r].parentNode) : i.push(this[r].parentNode);
-          }return e(e.unique(i));
-        }, parents: function parents(t) {
-          for (var i = [], r = 0; r < this.length; r++) {
-            for (var n = this[r].parentNode; n;) {
-              t ? e(n).is(t) && i.push(n) : i.push(n), n = n.parentNode;
-            }
-          }return e(e.unique(i));
-        }, find: function find(e) {
-          for (var i = [], r = 0; r < this.length; r++) {
-            for (var n = this[r].querySelectorAll(e), s = 0; s < n.length; s++) {
-              i.push(n[s]);
-            }
-          }return new t(i);
-        }, children: function children(i) {
-          for (var r = [], n = 0; n < this.length; n++) {
-            for (var s = this[n].childNodes, a = 0; a < s.length; a++) {
-              i ? 1 === s[a].nodeType && e(s[a]).is(i) && r.push(s[a]) : 1 === s[a].nodeType && r.push(s[a]);
-            }
-          }return new t(e.unique(r));
-        }, remove: function remove() {
-          for (var t = 0; t < this.length; t++) {
-            this[t].parentNode && this[t].parentNode.removeChild(this[t]);
-          }return this;
-        }, add: function add() {
-          var t,
-              i,
-              r = this;for (t = 0; t < arguments.length; t++) {
-            var n = e(arguments[t]);for (i = 0; i < n.length; i++) {
-              r[r.length] = n[i], r.length++;
-            }
-          }return r;
-        } }, e.fn = t.prototype, e.unique = function (t) {
-        for (var e = [], i = 0; i < t.length; i++) {
-          e.indexOf(t[i]) === -1 && e.push(t[i]);
-        }return e;
-      }, e;
-    }(), n = ["jQuery", "Zepto", "Dom7"], s = 0; s < n.length; s++) {
-      window[n[s]] && t(window[n[s]]);
-    }var a;a = void 0 === r ? window.Dom7 || window.Zepto || window.jQuery : r, a && ("transitionEnd" in a.fn || (a.fn.transitionEnd = function (t) {
-      function e(s) {
-        if (s.target === this) for (t.call(this, s), i = 0; i < r.length; i++) {
-          n.off(r[i], e);
-        }
-      }var i,
-          r = ["webkitTransitionEnd", "transitionend", "oTransitionEnd", "MSTransitionEnd", "msTransitionEnd"],
-          n = this;if (t) for (i = 0; i < r.length; i++) {
-        n.on(r[i], e);
-      }return this;
-    }), "transform" in a.fn || (a.fn.transform = function (t) {
-      for (var e = 0; e < this.length; e++) {
-        var i = this[e].style;i.webkitTransform = i.MsTransform = i.msTransform = i.MozTransform = i.OTransform = i.transform = t;
-      }return this;
-    }), "transition" in a.fn || (a.fn.transition = function (t) {
-      "string" != typeof t && (t += "ms");for (var e = 0; e < this.length; e++) {
-        var i = this[e].style;i.webkitTransitionDuration = i.MsTransitionDuration = i.msTransitionDuration = i.MozTransitionDuration = i.OTransitionDuration = i.transitionDuration = t;
-      }return this;
-    }), "outerWidth" in a.fn || (a.fn.outerWidth = function (t) {
-      return this.length > 0 ? t ? this[0].offsetWidth + parseFloat(this.css("margin-right")) + parseFloat(this.css("margin-left")) : this[0].offsetWidth : null;
-    })), window.Swiper = i;
-  }(), t.exports = window.Swiper;
-}, function (t, e) {
-  t.exports = '<div class=scrollView v-bind:class="{ scrollbottom: lowerY<0 }"> <div v-bind:class="{ scroller_h: scrollX }"> <slot></slot> </div> </div>';
-}, function (t, e) {
-  t.exports = "<div class=swiper> <div class=swiper-wrapper> <slot></slot> </div> <div class=swiper-pagination></div> </div>";
-}, function (t, e) {
-  t.exports = function (t) {
-    return t.webpackPolyfill || (t.deprecate = function () {}, t.paths = [], t.children || (t.children = []), Object.defineProperty(t, "loaded", { enumerable: !0, get: function get() {
-        return t.l;
-      } }), Object.defineProperty(t, "id", { enumerable: !0, get: function get() {
-        return t.i;
-      } }), t.webpackPolyfill = 1), t;
-  };
-}, function (t, e, i) {
-  "use strict";
-  function r(t) {
-    return t && t.__esModule ? t : { default: t };
-  }var n = i(3),
-      s = r(n),
-      a = i(15),
-      o = r(a),
-      l = i(13),
-      u = r(l),
-      p = i(12),
-      c = r(p),
-      h = i(14),
-      d = r(h),
-      f = i(11),
-      m = i(1),
-      g = r(m),
-      v = [u.default, c.default],
-      w = function w(t, e) {
-    t.use(e), v.map(function (e) {
-      t.component(e.name, e);
-    }), window.wx = d.default;
-  },
-      y = function y(t) {
-    var e = [];w(s.default, o.default), g.default.extend(e, t.pages);var i = new o.default({ routes: e });(0, f.App)(s.default, i);
-  };"undefined" != typeof window && window.Vue && w(window.Vue, o.default), t.exports = { v: "0.1", App: y, Page: f.Page, wx: d.default, Swiper: u.default, ScrollView: c.default };
-}]);
+  });
+  return a;
+}
+
+module.exports = {
+  isArray: isArray,
+  isArrayBuffer: isArrayBuffer,
+  isBuffer: isBuffer,
+  isFormData: isFormData,
+  isArrayBufferView: isArrayBufferView,
+  isString: isString,
+  isNumber: isNumber,
+  isObject: isObject,
+  isUndefined: isUndefined,
+  isDate: isDate,
+  isFile: isFile,
+  isBlob: isBlob,
+  isFunction: isFunction,
+  isStream: isStream,
+  isURLSearchParams: isURLSearchParams,
+  isStandardBrowserEnv: isStandardBrowserEnv,
+  forEach: forEach,
+  merge: merge,
+  extend: extend,
+  trim: trim
+};
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14).Buffer))
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _vue = __webpack_require__(7);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _vueRouter = __webpack_require__(6);
+
+var _vueRouter2 = _interopRequireDefault(_vueRouter);
+
+var _swiper = __webpack_require__(39);
+
+var _swiper2 = _interopRequireDefault(_swiper);
+
+var _scrollView = __webpack_require__(38);
+
+var _scrollView2 = _interopRequireDefault(_scrollView);
+
+var _wx = __webpack_require__(40);
+
+var _wx2 = _interopRequireDefault(_wx);
+
+var _app2 = __webpack_require__(36);
+
+var _core = __webpack_require__(2);
+
+var _core2 = _interopRequireDefault(_core);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var components = [_swiper2.default, _scrollView2.default]; /*
+                                                            * index.js v0.1.5
+                                                            * (c) 2017 wangli
+                                                            * Released under the MIT License.
+                                                            */
+
+var _app = function _app(_obj) {
+    window.wx = _wx2.default;
+    _vue2.default.use(_vueRouter2.default);
+    components.map(function (component) {
+        _vue2.default.component(component.name, component);
+    });
+    var routes = [];
+    _core2.default.extend(routes, _obj.pages);
+    var router = new _vueRouter2.default({ routes: routes });
+    (0, _app2.App)(_vue2.default, router);
+};
+module.exports = {
+    v: '0.1',
+    App: _app,
+    Page: _app2.Page,
+    wx: _wx2.default,
+    Swiper: _swiper2.default,
+    ScrollView: _scrollView2.default
+};
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
+ * @license
+ * Lodash (Custom Build) <https://lodash.com/>
+ * Build: `lodash core -o ./dist/lodash.core.js`
+ * Copyright JS Foundation and other contributors <https://js.foundation/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */
+;(function() {
+
+  /** Used as a safe reference for `undefined` in pre-ES5 environments. */
+  var undefined;
+
+  /** Used as the semantic version number. */
+  var VERSION = '4.17.4';
+
+  /** Error message constants. */
+  var FUNC_ERROR_TEXT = 'Expected a function';
+
+  /** Used to compose bitmasks for value comparisons. */
+  var COMPARE_PARTIAL_FLAG = 1,
+      COMPARE_UNORDERED_FLAG = 2;
+
+  /** Used to compose bitmasks for function metadata. */
+  var WRAP_BIND_FLAG = 1,
+      WRAP_PARTIAL_FLAG = 32;
+
+  /** Used as references for various `Number` constants. */
+  var INFINITY = 1 / 0,
+      MAX_SAFE_INTEGER = 9007199254740991;
+
+  /** `Object#toString` result references. */
+  var argsTag = '[object Arguments]',
+      arrayTag = '[object Array]',
+      asyncTag = '[object AsyncFunction]',
+      boolTag = '[object Boolean]',
+      dateTag = '[object Date]',
+      errorTag = '[object Error]',
+      funcTag = '[object Function]',
+      genTag = '[object GeneratorFunction]',
+      numberTag = '[object Number]',
+      objectTag = '[object Object]',
+      proxyTag = '[object Proxy]',
+      regexpTag = '[object RegExp]',
+      stringTag = '[object String]';
+
+  /** Used to match HTML entities and HTML characters. */
+  var reUnescapedHtml = /[&<>"']/g,
+      reHasUnescapedHtml = RegExp(reUnescapedHtml.source);
+
+  /** Used to map characters to HTML entities. */
+  var htmlEscapes = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  };
+
+  /** Detect free variable `global` from Node.js. */
+  var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+  /** Detect free variable `self`. */
+  var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+  /** Used as a reference to the global object. */
+  var root = freeGlobal || freeSelf || Function('return this')();
+
+  /** Detect free variable `exports`. */
+  var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
+
+  /** Detect free variable `module`. */
+  var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
+
+  /*--------------------------------------------------------------------------*/
+
+  /**
+   * Appends the elements of `values` to `array`.
+   *
+   * @private
+   * @param {Array} array The array to modify.
+   * @param {Array} values The values to append.
+   * @returns {Array} Returns `array`.
+   */
+  function arrayPush(array, values) {
+    array.push.apply(array, values);
+    return array;
+  }
+
+  /**
+   * The base implementation of `_.findIndex` and `_.findLastIndex` without
+   * support for iteratee shorthands.
+   *
+   * @private
+   * @param {Array} array The array to inspect.
+   * @param {Function} predicate The function invoked per iteration.
+   * @param {number} fromIndex The index to search from.
+   * @param {boolean} [fromRight] Specify iterating from right to left.
+   * @returns {number} Returns the index of the matched value, else `-1`.
+   */
+  function baseFindIndex(array, predicate, fromIndex, fromRight) {
+    var length = array.length,
+        index = fromIndex + (fromRight ? 1 : -1);
+
+    while ((fromRight ? index-- : ++index < length)) {
+      if (predicate(array[index], index, array)) {
+        return index;
+      }
+    }
+    return -1;
+  }
+
+  /**
+   * The base implementation of `_.property` without support for deep paths.
+   *
+   * @private
+   * @param {string} key The key of the property to get.
+   * @returns {Function} Returns the new accessor function.
+   */
+  function baseProperty(key) {
+    return function(object) {
+      return object == null ? undefined : object[key];
+    };
+  }
+
+  /**
+   * The base implementation of `_.propertyOf` without support for deep paths.
+   *
+   * @private
+   * @param {Object} object The object to query.
+   * @returns {Function} Returns the new accessor function.
+   */
+  function basePropertyOf(object) {
+    return function(key) {
+      return object == null ? undefined : object[key];
+    };
+  }
+
+  /**
+   * The base implementation of `_.reduce` and `_.reduceRight`, without support
+   * for iteratee shorthands, which iterates over `collection` using `eachFunc`.
+   *
+   * @private
+   * @param {Array|Object} collection The collection to iterate over.
+   * @param {Function} iteratee The function invoked per iteration.
+   * @param {*} accumulator The initial value.
+   * @param {boolean} initAccum Specify using the first or last element of
+   *  `collection` as the initial value.
+   * @param {Function} eachFunc The function to iterate over `collection`.
+   * @returns {*} Returns the accumulated value.
+   */
+  function baseReduce(collection, iteratee, accumulator, initAccum, eachFunc) {
+    eachFunc(collection, function(value, index, collection) {
+      accumulator = initAccum
+        ? (initAccum = false, value)
+        : iteratee(accumulator, value, index, collection);
+    });
+    return accumulator;
+  }
+
+  /**
+   * The base implementation of `_.values` and `_.valuesIn` which creates an
+   * array of `object` property values corresponding to the property names
+   * of `props`.
+   *
+   * @private
+   * @param {Object} object The object to query.
+   * @param {Array} props The property names to get values for.
+   * @returns {Object} Returns the array of property values.
+   */
+  function baseValues(object, props) {
+    return baseMap(props, function(key) {
+      return object[key];
+    });
+  }
+
+  /**
+   * Used by `_.escape` to convert characters to HTML entities.
+   *
+   * @private
+   * @param {string} chr The matched character to escape.
+   * @returns {string} Returns the escaped character.
+   */
+  var escapeHtmlChar = basePropertyOf(htmlEscapes);
+
+  /**
+   * Creates a unary function that invokes `func` with its argument transformed.
+   *
+   * @private
+   * @param {Function} func The function to wrap.
+   * @param {Function} transform The argument transform.
+   * @returns {Function} Returns the new function.
+   */
+  function overArg(func, transform) {
+    return function(arg) {
+      return func(transform(arg));
+    };
+  }
+
+  /*--------------------------------------------------------------------------*/
+
+  /** Used for built-in method references. */
+  var arrayProto = Array.prototype,
+      objectProto = Object.prototype;
+
+  /** Used to check objects for own properties. */
+  var hasOwnProperty = objectProto.hasOwnProperty;
+
+  /** Used to generate unique IDs. */
+  var idCounter = 0;
+
+  /**
+   * Used to resolve the
+   * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+   * of values.
+   */
+  var nativeObjectToString = objectProto.toString;
+
+  /** Used to restore the original `_` reference in `_.noConflict`. */
+  var oldDash = root._;
+
+  /** Built-in value references. */
+  var objectCreate = Object.create,
+      propertyIsEnumerable = objectProto.propertyIsEnumerable;
+
+  /* Built-in method references for those with the same name as other `lodash` methods. */
+  var nativeIsFinite = root.isFinite,
+      nativeKeys = overArg(Object.keys, Object),
+      nativeMax = Math.max;
+
+  /*------------------------------------------------------------------------*/
+
+  /**
+   * Creates a `lodash` object which wraps `value` to enable implicit method
+   * chain sequences. Methods that operate on and return arrays, collections,
+   * and functions can be chained together. Methods that retrieve a single value
+   * or may return a primitive value will automatically end the chain sequence
+   * and return the unwrapped value. Otherwise, the value must be unwrapped
+   * with `_#value`.
+   *
+   * Explicit chain sequences, which must be unwrapped with `_#value`, may be
+   * enabled using `_.chain`.
+   *
+   * The execution of chained methods is lazy, that is, it's deferred until
+   * `_#value` is implicitly or explicitly called.
+   *
+   * Lazy evaluation allows several methods to support shortcut fusion.
+   * Shortcut fusion is an optimization to merge iteratee calls; this avoids
+   * the creation of intermediate arrays and can greatly reduce the number of
+   * iteratee executions. Sections of a chain sequence qualify for shortcut
+   * fusion if the section is applied to an array and iteratees accept only
+   * one argument. The heuristic for whether a section qualifies for shortcut
+   * fusion is subject to change.
+   *
+   * Chaining is supported in custom builds as long as the `_#value` method is
+   * directly or indirectly included in the build.
+   *
+   * In addition to lodash methods, wrappers have `Array` and `String` methods.
+   *
+   * The wrapper `Array` methods are:
+   * `concat`, `join`, `pop`, `push`, `shift`, `sort`, `splice`, and `unshift`
+   *
+   * The wrapper `String` methods are:
+   * `replace` and `split`
+   *
+   * The wrapper methods that support shortcut fusion are:
+   * `at`, `compact`, `drop`, `dropRight`, `dropWhile`, `filter`, `find`,
+   * `findLast`, `head`, `initial`, `last`, `map`, `reject`, `reverse`, `slice`,
+   * `tail`, `take`, `takeRight`, `takeRightWhile`, `takeWhile`, and `toArray`
+   *
+   * The chainable wrapper methods are:
+   * `after`, `ary`, `assign`, `assignIn`, `assignInWith`, `assignWith`, `at`,
+   * `before`, `bind`, `bindAll`, `bindKey`, `castArray`, `chain`, `chunk`,
+   * `commit`, `compact`, `concat`, `conforms`, `constant`, `countBy`, `create`,
+   * `curry`, `debounce`, `defaults`, `defaultsDeep`, `defer`, `delay`,
+   * `difference`, `differenceBy`, `differenceWith`, `drop`, `dropRight`,
+   * `dropRightWhile`, `dropWhile`, `extend`, `extendWith`, `fill`, `filter`,
+   * `flatMap`, `flatMapDeep`, `flatMapDepth`, `flatten`, `flattenDeep`,
+   * `flattenDepth`, `flip`, `flow`, `flowRight`, `fromPairs`, `functions`,
+   * `functionsIn`, `groupBy`, `initial`, `intersection`, `intersectionBy`,
+   * `intersectionWith`, `invert`, `invertBy`, `invokeMap`, `iteratee`, `keyBy`,
+   * `keys`, `keysIn`, `map`, `mapKeys`, `mapValues`, `matches`, `matchesProperty`,
+   * `memoize`, `merge`, `mergeWith`, `method`, `methodOf`, `mixin`, `negate`,
+   * `nthArg`, `omit`, `omitBy`, `once`, `orderBy`, `over`, `overArgs`,
+   * `overEvery`, `overSome`, `partial`, `partialRight`, `partition`, `pick`,
+   * `pickBy`, `plant`, `property`, `propertyOf`, `pull`, `pullAll`, `pullAllBy`,
+   * `pullAllWith`, `pullAt`, `push`, `range`, `rangeRight`, `rearg`, `reject`,
+   * `remove`, `rest`, `reverse`, `sampleSize`, `set`, `setWith`, `shuffle`,
+   * `slice`, `sort`, `sortBy`, `splice`, `spread`, `tail`, `take`, `takeRight`,
+   * `takeRightWhile`, `takeWhile`, `tap`, `throttle`, `thru`, `toArray`,
+   * `toPairs`, `toPairsIn`, `toPath`, `toPlainObject`, `transform`, `unary`,
+   * `union`, `unionBy`, `unionWith`, `uniq`, `uniqBy`, `uniqWith`, `unset`,
+   * `unshift`, `unzip`, `unzipWith`, `update`, `updateWith`, `values`,
+   * `valuesIn`, `without`, `wrap`, `xor`, `xorBy`, `xorWith`, `zip`,
+   * `zipObject`, `zipObjectDeep`, and `zipWith`
+   *
+   * The wrapper methods that are **not** chainable by default are:
+   * `add`, `attempt`, `camelCase`, `capitalize`, `ceil`, `clamp`, `clone`,
+   * `cloneDeep`, `cloneDeepWith`, `cloneWith`, `conformsTo`, `deburr`,
+   * `defaultTo`, `divide`, `each`, `eachRight`, `endsWith`, `eq`, `escape`,
+   * `escapeRegExp`, `every`, `find`, `findIndex`, `findKey`, `findLast`,
+   * `findLastIndex`, `findLastKey`, `first`, `floor`, `forEach`, `forEachRight`,
+   * `forIn`, `forInRight`, `forOwn`, `forOwnRight`, `get`, `gt`, `gte`, `has`,
+   * `hasIn`, `head`, `identity`, `includes`, `indexOf`, `inRange`, `invoke`,
+   * `isArguments`, `isArray`, `isArrayBuffer`, `isArrayLike`, `isArrayLikeObject`,
+   * `isBoolean`, `isBuffer`, `isDate`, `isElement`, `isEmpty`, `isEqual`,
+   * `isEqualWith`, `isError`, `isFinite`, `isFunction`, `isInteger`, `isLength`,
+   * `isMap`, `isMatch`, `isMatchWith`, `isNaN`, `isNative`, `isNil`, `isNull`,
+   * `isNumber`, `isObject`, `isObjectLike`, `isPlainObject`, `isRegExp`,
+   * `isSafeInteger`, `isSet`, `isString`, `isUndefined`, `isTypedArray`,
+   * `isWeakMap`, `isWeakSet`, `join`, `kebabCase`, `last`, `lastIndexOf`,
+   * `lowerCase`, `lowerFirst`, `lt`, `lte`, `max`, `maxBy`, `mean`, `meanBy`,
+   * `min`, `minBy`, `multiply`, `noConflict`, `noop`, `now`, `nth`, `pad`,
+   * `padEnd`, `padStart`, `parseInt`, `pop`, `random`, `reduce`, `reduceRight`,
+   * `repeat`, `result`, `round`, `runInContext`, `sample`, `shift`, `size`,
+   * `snakeCase`, `some`, `sortedIndex`, `sortedIndexBy`, `sortedLastIndex`,
+   * `sortedLastIndexBy`, `startCase`, `startsWith`, `stubArray`, `stubFalse`,
+   * `stubObject`, `stubString`, `stubTrue`, `subtract`, `sum`, `sumBy`,
+   * `template`, `times`, `toFinite`, `toInteger`, `toJSON`, `toLength`,
+   * `toLower`, `toNumber`, `toSafeInteger`, `toString`, `toUpper`, `trim`,
+   * `trimEnd`, `trimStart`, `truncate`, `unescape`, `uniqueId`, `upperCase`,
+   * `upperFirst`, `value`, and `words`
+   *
+   * @name _
+   * @constructor
+   * @category Seq
+   * @param {*} value The value to wrap in a `lodash` instance.
+   * @returns {Object} Returns the new `lodash` wrapper instance.
+   * @example
+   *
+   * function square(n) {
+   *   return n * n;
+   * }
+   *
+   * var wrapped = _([1, 2, 3]);
+   *
+   * // Returns an unwrapped value.
+   * wrapped.reduce(_.add);
+   * // => 6
+   *
+   * // Returns a wrapped value.
+   * var squares = wrapped.map(square);
+   *
+   * _.isArray(squares);
+   * // => false
+   *
+   * _.isArray(squares.value());
+   * // => true
+   */
+  function lodash(value) {
+    return value instanceof LodashWrapper
+      ? value
+      : new LodashWrapper(value);
+  }
+
+  /**
+   * The base implementation of `_.create` without support for assigning
+   * properties to the created object.
+   *
+   * @private
+   * @param {Object} proto The object to inherit from.
+   * @returns {Object} Returns the new object.
+   */
+  var baseCreate = (function() {
+    function object() {}
+    return function(proto) {
+      if (!isObject(proto)) {
+        return {};
+      }
+      if (objectCreate) {
+        return objectCreate(proto);
+      }
+      object.prototype = proto;
+      var result = new object;
+      object.prototype = undefined;
+      return result;
+    };
+  }());
+
+  /**
+   * The base constructor for creating `lodash` wrapper objects.
+   *
+   * @private
+   * @param {*} value The value to wrap.
+   * @param {boolean} [chainAll] Enable explicit method chain sequences.
+   */
+  function LodashWrapper(value, chainAll) {
+    this.__wrapped__ = value;
+    this.__actions__ = [];
+    this.__chain__ = !!chainAll;
+  }
+
+  LodashWrapper.prototype = baseCreate(lodash.prototype);
+  LodashWrapper.prototype.constructor = LodashWrapper;
+
+  /*------------------------------------------------------------------------*/
+
+  /**
+   * Assigns `value` to `key` of `object` if the existing value is not equivalent
+   * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+   * for equality comparisons.
+   *
+   * @private
+   * @param {Object} object The object to modify.
+   * @param {string} key The key of the property to assign.
+   * @param {*} value The value to assign.
+   */
+  function assignValue(object, key, value) {
+    var objValue = object[key];
+    if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) ||
+        (value === undefined && !(key in object))) {
+      baseAssignValue(object, key, value);
+    }
+  }
+
+  /**
+   * The base implementation of `assignValue` and `assignMergeValue` without
+   * value checks.
+   *
+   * @private
+   * @param {Object} object The object to modify.
+   * @param {string} key The key of the property to assign.
+   * @param {*} value The value to assign.
+   */
+  function baseAssignValue(object, key, value) {
+    object[key] = value;
+  }
+
+  /**
+   * The base implementation of `_.delay` and `_.defer` which accepts `args`
+   * to provide to `func`.
+   *
+   * @private
+   * @param {Function} func The function to delay.
+   * @param {number} wait The number of milliseconds to delay invocation.
+   * @param {Array} args The arguments to provide to `func`.
+   * @returns {number|Object} Returns the timer id or timeout object.
+   */
+  function baseDelay(func, wait, args) {
+    if (typeof func != 'function') {
+      throw new TypeError(FUNC_ERROR_TEXT);
+    }
+    return setTimeout(function() { func.apply(undefined, args); }, wait);
+  }
+
+  /**
+   * The base implementation of `_.forEach` without support for iteratee shorthands.
+   *
+   * @private
+   * @param {Array|Object} collection The collection to iterate over.
+   * @param {Function} iteratee The function invoked per iteration.
+   * @returns {Array|Object} Returns `collection`.
+   */
+  var baseEach = createBaseEach(baseForOwn);
+
+  /**
+   * The base implementation of `_.every` without support for iteratee shorthands.
+   *
+   * @private
+   * @param {Array|Object} collection The collection to iterate over.
+   * @param {Function} predicate The function invoked per iteration.
+   * @returns {boolean} Returns `true` if all elements pass the predicate check,
+   *  else `false`
+   */
+  function baseEvery(collection, predicate) {
+    var result = true;
+    baseEach(collection, function(value, index, collection) {
+      result = !!predicate(value, index, collection);
+      return result;
+    });
+    return result;
+  }
+
+  /**
+   * The base implementation of methods like `_.max` and `_.min` which accepts a
+   * `comparator` to determine the extremum value.
+   *
+   * @private
+   * @param {Array} array The array to iterate over.
+   * @param {Function} iteratee The iteratee invoked per iteration.
+   * @param {Function} comparator The comparator used to compare values.
+   * @returns {*} Returns the extremum value.
+   */
+  function baseExtremum(array, iteratee, comparator) {
+    var index = -1,
+        length = array.length;
+
+    while (++index < length) {
+      var value = array[index],
+          current = iteratee(value);
+
+      if (current != null && (computed === undefined
+            ? (current === current && !false)
+            : comparator(current, computed)
+          )) {
+        var computed = current,
+            result = value;
+      }
+    }
+    return result;
+  }
+
+  /**
+   * The base implementation of `_.filter` without support for iteratee shorthands.
+   *
+   * @private
+   * @param {Array|Object} collection The collection to iterate over.
+   * @param {Function} predicate The function invoked per iteration.
+   * @returns {Array} Returns the new filtered array.
+   */
+  function baseFilter(collection, predicate) {
+    var result = [];
+    baseEach(collection, function(value, index, collection) {
+      if (predicate(value, index, collection)) {
+        result.push(value);
+      }
+    });
+    return result;
+  }
+
+  /**
+   * The base implementation of `_.flatten` with support for restricting flattening.
+   *
+   * @private
+   * @param {Array} array The array to flatten.
+   * @param {number} depth The maximum recursion depth.
+   * @param {boolean} [predicate=isFlattenable] The function invoked per iteration.
+   * @param {boolean} [isStrict] Restrict to values that pass `predicate` checks.
+   * @param {Array} [result=[]] The initial result value.
+   * @returns {Array} Returns the new flattened array.
+   */
+  function baseFlatten(array, depth, predicate, isStrict, result) {
+    var index = -1,
+        length = array.length;
+
+    predicate || (predicate = isFlattenable);
+    result || (result = []);
+
+    while (++index < length) {
+      var value = array[index];
+      if (depth > 0 && predicate(value)) {
+        if (depth > 1) {
+          // Recursively flatten arrays (susceptible to call stack limits).
+          baseFlatten(value, depth - 1, predicate, isStrict, result);
+        } else {
+          arrayPush(result, value);
+        }
+      } else if (!isStrict) {
+        result[result.length] = value;
+      }
+    }
+    return result;
+  }
+
+  /**
+   * The base implementation of `baseForOwn` which iterates over `object`
+   * properties returned by `keysFunc` and invokes `iteratee` for each property.
+   * Iteratee functions may exit iteration early by explicitly returning `false`.
+   *
+   * @private
+   * @param {Object} object The object to iterate over.
+   * @param {Function} iteratee The function invoked per iteration.
+   * @param {Function} keysFunc The function to get the keys of `object`.
+   * @returns {Object} Returns `object`.
+   */
+  var baseFor = createBaseFor();
+
+  /**
+   * The base implementation of `_.forOwn` without support for iteratee shorthands.
+   *
+   * @private
+   * @param {Object} object The object to iterate over.
+   * @param {Function} iteratee The function invoked per iteration.
+   * @returns {Object} Returns `object`.
+   */
+  function baseForOwn(object, iteratee) {
+    return object && baseFor(object, iteratee, keys);
+  }
+
+  /**
+   * The base implementation of `_.functions` which creates an array of
+   * `object` function property names filtered from `props`.
+   *
+   * @private
+   * @param {Object} object The object to inspect.
+   * @param {Array} props The property names to filter.
+   * @returns {Array} Returns the function names.
+   */
+  function baseFunctions(object, props) {
+    return baseFilter(props, function(key) {
+      return isFunction(object[key]);
+    });
+  }
+
+  /**
+   * The base implementation of `getTag` without fallbacks for buggy environments.
+   *
+   * @private
+   * @param {*} value The value to query.
+   * @returns {string} Returns the `toStringTag`.
+   */
+  function baseGetTag(value) {
+    return objectToString(value);
+  }
+
+  /**
+   * The base implementation of `_.gt` which doesn't coerce arguments.
+   *
+   * @private
+   * @param {*} value The value to compare.
+   * @param {*} other The other value to compare.
+   * @returns {boolean} Returns `true` if `value` is greater than `other`,
+   *  else `false`.
+   */
+  function baseGt(value, other) {
+    return value > other;
+  }
+
+  /**
+   * The base implementation of `_.isArguments`.
+   *
+   * @private
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+   */
+  var baseIsArguments = noop;
+
+  /**
+   * The base implementation of `_.isDate` without Node.js optimizations.
+   *
+   * @private
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a date object, else `false`.
+   */
+  function baseIsDate(value) {
+    return isObjectLike(value) && baseGetTag(value) == dateTag;
+  }
+
+  /**
+   * The base implementation of `_.isEqual` which supports partial comparisons
+   * and tracks traversed objects.
+   *
+   * @private
+   * @param {*} value The value to compare.
+   * @param {*} other The other value to compare.
+   * @param {boolean} bitmask The bitmask flags.
+   *  1 - Unordered comparison
+   *  2 - Partial comparison
+   * @param {Function} [customizer] The function to customize comparisons.
+   * @param {Object} [stack] Tracks traversed `value` and `other` objects.
+   * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+   */
+  function baseIsEqual(value, other, bitmask, customizer, stack) {
+    if (value === other) {
+      return true;
+    }
+    if (value == null || other == null || (!isObjectLike(value) && !isObjectLike(other))) {
+      return value !== value && other !== other;
+    }
+    return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual, stack);
+  }
+
+  /**
+   * A specialized version of `baseIsEqual` for arrays and objects which performs
+   * deep comparisons and tracks traversed objects enabling objects with circular
+   * references to be compared.
+   *
+   * @private
+   * @param {Object} object The object to compare.
+   * @param {Object} other The other object to compare.
+   * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+   * @param {Function} customizer The function to customize comparisons.
+   * @param {Function} equalFunc The function to determine equivalents of values.
+   * @param {Object} [stack] Tracks traversed `object` and `other` objects.
+   * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+   */
+  function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
+    var objIsArr = isArray(object),
+        othIsArr = isArray(other),
+        objTag = objIsArr ? arrayTag : baseGetTag(object),
+        othTag = othIsArr ? arrayTag : baseGetTag(other);
+
+    objTag = objTag == argsTag ? objectTag : objTag;
+    othTag = othTag == argsTag ? objectTag : othTag;
+
+    var objIsObj = objTag == objectTag,
+        othIsObj = othTag == objectTag,
+        isSameTag = objTag == othTag;
+
+    stack || (stack = []);
+    var objStack = find(stack, function(entry) {
+      return entry[0] == object;
+    });
+    var othStack = find(stack, function(entry) {
+      return entry[0] == other;
+    });
+    if (objStack && othStack) {
+      return objStack[1] == other;
+    }
+    stack.push([object, other]);
+    stack.push([other, object]);
+    if (isSameTag && !objIsObj) {
+      var result = (objIsArr)
+        ? equalArrays(object, other, bitmask, customizer, equalFunc, stack)
+        : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
+      stack.pop();
+      return result;
+    }
+    if (!(bitmask & COMPARE_PARTIAL_FLAG)) {
+      var objIsWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
+          othIsWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
+
+      if (objIsWrapped || othIsWrapped) {
+        var objUnwrapped = objIsWrapped ? object.value() : object,
+            othUnwrapped = othIsWrapped ? other.value() : other;
+
+        var result = equalFunc(objUnwrapped, othUnwrapped, bitmask, customizer, stack);
+        stack.pop();
+        return result;
+      }
+    }
+    if (!isSameTag) {
+      return false;
+    }
+    var result = equalObjects(object, other, bitmask, customizer, equalFunc, stack);
+    stack.pop();
+    return result;
+  }
+
+  /**
+   * The base implementation of `_.isRegExp` without Node.js optimizations.
+   *
+   * @private
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a regexp, else `false`.
+   */
+  function baseIsRegExp(value) {
+    return isObjectLike(value) && baseGetTag(value) == regexpTag;
+  }
+
+  /**
+   * The base implementation of `_.iteratee`.
+   *
+   * @private
+   * @param {*} [value=_.identity] The value to convert to an iteratee.
+   * @returns {Function} Returns the iteratee.
+   */
+  function baseIteratee(func) {
+    if (typeof func == 'function') {
+      return func;
+    }
+    if (func == null) {
+      return identity;
+    }
+    return (typeof func == 'object' ? baseMatches : baseProperty)(func);
+  }
+
+  /**
+   * The base implementation of `_.lt` which doesn't coerce arguments.
+   *
+   * @private
+   * @param {*} value The value to compare.
+   * @param {*} other The other value to compare.
+   * @returns {boolean} Returns `true` if `value` is less than `other`,
+   *  else `false`.
+   */
+  function baseLt(value, other) {
+    return value < other;
+  }
+
+  /**
+   * The base implementation of `_.map` without support for iteratee shorthands.
+   *
+   * @private
+   * @param {Array|Object} collection The collection to iterate over.
+   * @param {Function} iteratee The function invoked per iteration.
+   * @returns {Array} Returns the new mapped array.
+   */
+  function baseMap(collection, iteratee) {
+    var index = -1,
+        result = isArrayLike(collection) ? Array(collection.length) : [];
+
+    baseEach(collection, function(value, key, collection) {
+      result[++index] = iteratee(value, key, collection);
+    });
+    return result;
+  }
+
+  /**
+   * The base implementation of `_.matches` which doesn't clone `source`.
+   *
+   * @private
+   * @param {Object} source The object of property values to match.
+   * @returns {Function} Returns the new spec function.
+   */
+  function baseMatches(source) {
+    var props = nativeKeys(source);
+    return function(object) {
+      var length = props.length;
+      if (object == null) {
+        return !length;
+      }
+      object = Object(object);
+      while (length--) {
+        var key = props[length];
+        if (!(key in object &&
+              baseIsEqual(source[key], object[key], COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG)
+            )) {
+          return false;
+        }
+      }
+      return true;
+    };
+  }
+
+  /**
+   * The base implementation of `_.pick` without support for individual
+   * property identifiers.
+   *
+   * @private
+   * @param {Object} object The source object.
+   * @param {string[]} paths The property paths to pick.
+   * @returns {Object} Returns the new object.
+   */
+  function basePick(object, props) {
+    object = Object(object);
+    return reduce(props, function(result, key) {
+      if (key in object) {
+        result[key] = object[key];
+      }
+      return result;
+    }, {});
+  }
+
+  /**
+   * The base implementation of `_.rest` which doesn't validate or coerce arguments.
+   *
+   * @private
+   * @param {Function} func The function to apply a rest parameter to.
+   * @param {number} [start=func.length-1] The start position of the rest parameter.
+   * @returns {Function} Returns the new function.
+   */
+  function baseRest(func, start) {
+    return setToString(overRest(func, start, identity), func + '');
+  }
+
+  /**
+   * The base implementation of `_.slice` without an iteratee call guard.
+   *
+   * @private
+   * @param {Array} array The array to slice.
+   * @param {number} [start=0] The start position.
+   * @param {number} [end=array.length] The end position.
+   * @returns {Array} Returns the slice of `array`.
+   */
+  function baseSlice(array, start, end) {
+    var index = -1,
+        length = array.length;
+
+    if (start < 0) {
+      start = -start > length ? 0 : (length + start);
+    }
+    end = end > length ? length : end;
+    if (end < 0) {
+      end += length;
+    }
+    length = start > end ? 0 : ((end - start) >>> 0);
+    start >>>= 0;
+
+    var result = Array(length);
+    while (++index < length) {
+      result[index] = array[index + start];
+    }
+    return result;
+  }
+
+  /**
+   * Copies the values of `source` to `array`.
+   *
+   * @private
+   * @param {Array} source The array to copy values from.
+   * @param {Array} [array=[]] The array to copy values to.
+   * @returns {Array} Returns `array`.
+   */
+  function copyArray(source) {
+    return baseSlice(source, 0, source.length);
+  }
+
+  /**
+   * The base implementation of `_.some` without support for iteratee shorthands.
+   *
+   * @private
+   * @param {Array|Object} collection The collection to iterate over.
+   * @param {Function} predicate The function invoked per iteration.
+   * @returns {boolean} Returns `true` if any element passes the predicate check,
+   *  else `false`.
+   */
+  function baseSome(collection, predicate) {
+    var result;
+
+    baseEach(collection, function(value, index, collection) {
+      result = predicate(value, index, collection);
+      return !result;
+    });
+    return !!result;
+  }
+
+  /**
+   * The base implementation of `wrapperValue` which returns the result of
+   * performing a sequence of actions on the unwrapped `value`, where each
+   * successive action is supplied the return value of the previous.
+   *
+   * @private
+   * @param {*} value The unwrapped value.
+   * @param {Array} actions Actions to perform to resolve the unwrapped value.
+   * @returns {*} Returns the resolved value.
+   */
+  function baseWrapperValue(value, actions) {
+    var result = value;
+    return reduce(actions, function(result, action) {
+      return action.func.apply(action.thisArg, arrayPush([result], action.args));
+    }, result);
+  }
+
+  /**
+   * Compares values to sort them in ascending order.
+   *
+   * @private
+   * @param {*} value The value to compare.
+   * @param {*} other The other value to compare.
+   * @returns {number} Returns the sort order indicator for `value`.
+   */
+  function compareAscending(value, other) {
+    if (value !== other) {
+      var valIsDefined = value !== undefined,
+          valIsNull = value === null,
+          valIsReflexive = value === value,
+          valIsSymbol = false;
+
+      var othIsDefined = other !== undefined,
+          othIsNull = other === null,
+          othIsReflexive = other === other,
+          othIsSymbol = false;
+
+      if ((!othIsNull && !othIsSymbol && !valIsSymbol && value > other) ||
+          (valIsSymbol && othIsDefined && othIsReflexive && !othIsNull && !othIsSymbol) ||
+          (valIsNull && othIsDefined && othIsReflexive) ||
+          (!valIsDefined && othIsReflexive) ||
+          !valIsReflexive) {
+        return 1;
+      }
+      if ((!valIsNull && !valIsSymbol && !othIsSymbol && value < other) ||
+          (othIsSymbol && valIsDefined && valIsReflexive && !valIsNull && !valIsSymbol) ||
+          (othIsNull && valIsDefined && valIsReflexive) ||
+          (!othIsDefined && valIsReflexive) ||
+          !othIsReflexive) {
+        return -1;
+      }
+    }
+    return 0;
+  }
+
+  /**
+   * Copies properties of `source` to `object`.
+   *
+   * @private
+   * @param {Object} source The object to copy properties from.
+   * @param {Array} props The property identifiers to copy.
+   * @param {Object} [object={}] The object to copy properties to.
+   * @param {Function} [customizer] The function to customize copied values.
+   * @returns {Object} Returns `object`.
+   */
+  function copyObject(source, props, object, customizer) {
+    var isNew = !object;
+    object || (object = {});
+
+    var index = -1,
+        length = props.length;
+
+    while (++index < length) {
+      var key = props[index];
+
+      var newValue = customizer
+        ? customizer(object[key], source[key], key, object, source)
+        : undefined;
+
+      if (newValue === undefined) {
+        newValue = source[key];
+      }
+      if (isNew) {
+        baseAssignValue(object, key, newValue);
+      } else {
+        assignValue(object, key, newValue);
+      }
+    }
+    return object;
+  }
+
+  /**
+   * Creates a function like `_.assign`.
+   *
+   * @private
+   * @param {Function} assigner The function to assign values.
+   * @returns {Function} Returns the new assigner function.
+   */
+  function createAssigner(assigner) {
+    return baseRest(function(object, sources) {
+      var index = -1,
+          length = sources.length,
+          customizer = length > 1 ? sources[length - 1] : undefined;
+
+      customizer = (assigner.length > 3 && typeof customizer == 'function')
+        ? (length--, customizer)
+        : undefined;
+
+      object = Object(object);
+      while (++index < length) {
+        var source = sources[index];
+        if (source) {
+          assigner(object, source, index, customizer);
+        }
+      }
+      return object;
+    });
+  }
+
+  /**
+   * Creates a `baseEach` or `baseEachRight` function.
+   *
+   * @private
+   * @param {Function} eachFunc The function to iterate over a collection.
+   * @param {boolean} [fromRight] Specify iterating from right to left.
+   * @returns {Function} Returns the new base function.
+   */
+  function createBaseEach(eachFunc, fromRight) {
+    return function(collection, iteratee) {
+      if (collection == null) {
+        return collection;
+      }
+      if (!isArrayLike(collection)) {
+        return eachFunc(collection, iteratee);
+      }
+      var length = collection.length,
+          index = fromRight ? length : -1,
+          iterable = Object(collection);
+
+      while ((fromRight ? index-- : ++index < length)) {
+        if (iteratee(iterable[index], index, iterable) === false) {
+          break;
+        }
+      }
+      return collection;
+    };
+  }
+
+  /**
+   * Creates a base function for methods like `_.forIn` and `_.forOwn`.
+   *
+   * @private
+   * @param {boolean} [fromRight] Specify iterating from right to left.
+   * @returns {Function} Returns the new base function.
+   */
+  function createBaseFor(fromRight) {
+    return function(object, iteratee, keysFunc) {
+      var index = -1,
+          iterable = Object(object),
+          props = keysFunc(object),
+          length = props.length;
+
+      while (length--) {
+        var key = props[fromRight ? length : ++index];
+        if (iteratee(iterable[key], key, iterable) === false) {
+          break;
+        }
+      }
+      return object;
+    };
+  }
+
+  /**
+   * Creates a function that produces an instance of `Ctor` regardless of
+   * whether it was invoked as part of a `new` expression or by `call` or `apply`.
+   *
+   * @private
+   * @param {Function} Ctor The constructor to wrap.
+   * @returns {Function} Returns the new wrapped function.
+   */
+  function createCtor(Ctor) {
+    return function() {
+      // Use a `switch` statement to work with class constructors. See
+      // http://ecma-international.org/ecma-262/7.0/#sec-ecmascript-function-objects-call-thisargument-argumentslist
+      // for more details.
+      var args = arguments;
+      var thisBinding = baseCreate(Ctor.prototype),
+          result = Ctor.apply(thisBinding, args);
+
+      // Mimic the constructor's `return` behavior.
+      // See https://es5.github.io/#x13.2.2 for more details.
+      return isObject(result) ? result : thisBinding;
+    };
+  }
+
+  /**
+   * Creates a `_.find` or `_.findLast` function.
+   *
+   * @private
+   * @param {Function} findIndexFunc The function to find the collection index.
+   * @returns {Function} Returns the new find function.
+   */
+  function createFind(findIndexFunc) {
+    return function(collection, predicate, fromIndex) {
+      var iterable = Object(collection);
+      if (!isArrayLike(collection)) {
+        var iteratee = baseIteratee(predicate, 3);
+        collection = keys(collection);
+        predicate = function(key) { return iteratee(iterable[key], key, iterable); };
+      }
+      var index = findIndexFunc(collection, predicate, fromIndex);
+      return index > -1 ? iterable[iteratee ? collection[index] : index] : undefined;
+    };
+  }
+
+  /**
+   * Creates a function that wraps `func` to invoke it with the `this` binding
+   * of `thisArg` and `partials` prepended to the arguments it receives.
+   *
+   * @private
+   * @param {Function} func The function to wrap.
+   * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
+   * @param {*} thisArg The `this` binding of `func`.
+   * @param {Array} partials The arguments to prepend to those provided to
+   *  the new function.
+   * @returns {Function} Returns the new wrapped function.
+   */
+  function createPartial(func, bitmask, thisArg, partials) {
+    if (typeof func != 'function') {
+      throw new TypeError(FUNC_ERROR_TEXT);
+    }
+    var isBind = bitmask & WRAP_BIND_FLAG,
+        Ctor = createCtor(func);
+
+    function wrapper() {
+      var argsIndex = -1,
+          argsLength = arguments.length,
+          leftIndex = -1,
+          leftLength = partials.length,
+          args = Array(leftLength + argsLength),
+          fn = (this && this !== root && this instanceof wrapper) ? Ctor : func;
+
+      while (++leftIndex < leftLength) {
+        args[leftIndex] = partials[leftIndex];
+      }
+      while (argsLength--) {
+        args[leftIndex++] = arguments[++argsIndex];
+      }
+      return fn.apply(isBind ? thisArg : this, args);
+    }
+    return wrapper;
+  }
+
+  /**
+   * Used by `_.defaults` to customize its `_.assignIn` use to assign properties
+   * of source objects to the destination object for all destination properties
+   * that resolve to `undefined`.
+   *
+   * @private
+   * @param {*} objValue The destination value.
+   * @param {*} srcValue The source value.
+   * @param {string} key The key of the property to assign.
+   * @param {Object} object The parent object of `objValue`.
+   * @returns {*} Returns the value to assign.
+   */
+  function customDefaultsAssignIn(objValue, srcValue, key, object) {
+    if (objValue === undefined ||
+        (eq(objValue, objectProto[key]) && !hasOwnProperty.call(object, key))) {
+      return srcValue;
+    }
+    return objValue;
+  }
+
+  /**
+   * A specialized version of `baseIsEqualDeep` for arrays with support for
+   * partial deep comparisons.
+   *
+   * @private
+   * @param {Array} array The array to compare.
+   * @param {Array} other The other array to compare.
+   * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+   * @param {Function} customizer The function to customize comparisons.
+   * @param {Function} equalFunc The function to determine equivalents of values.
+   * @param {Object} stack Tracks traversed `array` and `other` objects.
+   * @returns {boolean} Returns `true` if the arrays are equivalent, else `false`.
+   */
+  function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
+    var isPartial = bitmask & COMPARE_PARTIAL_FLAG,
+        arrLength = array.length,
+        othLength = other.length;
+
+    if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
+      return false;
+    }
+    var index = -1,
+        result = true,
+        seen = (bitmask & COMPARE_UNORDERED_FLAG) ? [] : undefined;
+
+    // Ignore non-index properties.
+    while (++index < arrLength) {
+      var arrValue = array[index],
+          othValue = other[index];
+
+      var compared;
+      if (compared !== undefined) {
+        if (compared) {
+          continue;
+        }
+        result = false;
+        break;
+      }
+      // Recursively compare arrays (susceptible to call stack limits).
+      if (seen) {
+        if (!baseSome(other, function(othValue, othIndex) {
+              if (!indexOf(seen, othIndex) &&
+                  (arrValue === othValue || equalFunc(arrValue, othValue, bitmask, customizer, stack))) {
+                return seen.push(othIndex);
+              }
+            })) {
+          result = false;
+          break;
+        }
+      } else if (!(
+            arrValue === othValue ||
+              equalFunc(arrValue, othValue, bitmask, customizer, stack)
+          )) {
+        result = false;
+        break;
+      }
+    }
+    return result;
+  }
+
+  /**
+   * A specialized version of `baseIsEqualDeep` for comparing objects of
+   * the same `toStringTag`.
+   *
+   * **Note:** This function only supports comparing values with tags of
+   * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
+   *
+   * @private
+   * @param {Object} object The object to compare.
+   * @param {Object} other The other object to compare.
+   * @param {string} tag The `toStringTag` of the objects to compare.
+   * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+   * @param {Function} customizer The function to customize comparisons.
+   * @param {Function} equalFunc The function to determine equivalents of values.
+   * @param {Object} stack Tracks traversed `object` and `other` objects.
+   * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+   */
+  function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
+    switch (tag) {
+
+      case boolTag:
+      case dateTag:
+      case numberTag:
+        // Coerce booleans to `1` or `0` and dates to milliseconds.
+        // Invalid dates are coerced to `NaN`.
+        return eq(+object, +other);
+
+      case errorTag:
+        return object.name == other.name && object.message == other.message;
+
+      case regexpTag:
+      case stringTag:
+        // Coerce regexes to strings and treat strings, primitives and objects,
+        // as equal. See http://www.ecma-international.org/ecma-262/7.0/#sec-regexp.prototype.tostring
+        // for more details.
+        return object == (other + '');
+
+    }
+    return false;
+  }
+
+  /**
+   * A specialized version of `baseIsEqualDeep` for objects with support for
+   * partial deep comparisons.
+   *
+   * @private
+   * @param {Object} object The object to compare.
+   * @param {Object} other The other object to compare.
+   * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+   * @param {Function} customizer The function to customize comparisons.
+   * @param {Function} equalFunc The function to determine equivalents of values.
+   * @param {Object} stack Tracks traversed `object` and `other` objects.
+   * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+   */
+  function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
+    var isPartial = bitmask & COMPARE_PARTIAL_FLAG,
+        objProps = keys(object),
+        objLength = objProps.length,
+        othProps = keys(other),
+        othLength = othProps.length;
+
+    if (objLength != othLength && !isPartial) {
+      return false;
+    }
+    var index = objLength;
+    while (index--) {
+      var key = objProps[index];
+      if (!(isPartial ? key in other : hasOwnProperty.call(other, key))) {
+        return false;
+      }
+    }
+    var result = true;
+
+    var skipCtor = isPartial;
+    while (++index < objLength) {
+      key = objProps[index];
+      var objValue = object[key],
+          othValue = other[key];
+
+      var compared;
+      // Recursively compare objects (susceptible to call stack limits).
+      if (!(compared === undefined
+            ? (objValue === othValue || equalFunc(objValue, othValue, bitmask, customizer, stack))
+            : compared
+          )) {
+        result = false;
+        break;
+      }
+      skipCtor || (skipCtor = key == 'constructor');
+    }
+    if (result && !skipCtor) {
+      var objCtor = object.constructor,
+          othCtor = other.constructor;
+
+      // Non `Object` object instances with different constructors are not equal.
+      if (objCtor != othCtor &&
+          ('constructor' in object && 'constructor' in other) &&
+          !(typeof objCtor == 'function' && objCtor instanceof objCtor &&
+            typeof othCtor == 'function' && othCtor instanceof othCtor)) {
+        result = false;
+      }
+    }
+    return result;
+  }
+
+  /**
+   * A specialized version of `baseRest` which flattens the rest array.
+   *
+   * @private
+   * @param {Function} func The function to apply a rest parameter to.
+   * @returns {Function} Returns the new function.
+   */
+  function flatRest(func) {
+    return setToString(overRest(func, undefined, flatten), func + '');
+  }
+
+  /**
+   * Checks if `value` is a flattenable `arguments` object or array.
+   *
+   * @private
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is flattenable, else `false`.
+   */
+  function isFlattenable(value) {
+    return isArray(value) || isArguments(value);
+  }
+
+  /**
+   * This function is like
+   * [`Object.keys`](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+   * except that it includes inherited enumerable properties.
+   *
+   * @private
+   * @param {Object} object The object to query.
+   * @returns {Array} Returns the array of property names.
+   */
+  function nativeKeysIn(object) {
+    var result = [];
+    if (object != null) {
+      for (var key in Object(object)) {
+        result.push(key);
+      }
+    }
+    return result;
+  }
+
+  /**
+   * Converts `value` to a string using `Object.prototype.toString`.
+   *
+   * @private
+   * @param {*} value The value to convert.
+   * @returns {string} Returns the converted string.
+   */
+  function objectToString(value) {
+    return nativeObjectToString.call(value);
+  }
+
+  /**
+   * A specialized version of `baseRest` which transforms the rest array.
+   *
+   * @private
+   * @param {Function} func The function to apply a rest parameter to.
+   * @param {number} [start=func.length-1] The start position of the rest parameter.
+   * @param {Function} transform The rest array transform.
+   * @returns {Function} Returns the new function.
+   */
+  function overRest(func, start, transform) {
+    start = nativeMax(start === undefined ? (func.length - 1) : start, 0);
+    return function() {
+      var args = arguments,
+          index = -1,
+          length = nativeMax(args.length - start, 0),
+          array = Array(length);
+
+      while (++index < length) {
+        array[index] = args[start + index];
+      }
+      index = -1;
+      var otherArgs = Array(start + 1);
+      while (++index < start) {
+        otherArgs[index] = args[index];
+      }
+      otherArgs[start] = transform(array);
+      return func.apply(this, otherArgs);
+    };
+  }
+
+  /**
+   * Sets the `toString` method of `func` to return `string`.
+   *
+   * @private
+   * @param {Function} func The function to modify.
+   * @param {Function} string The `toString` result.
+   * @returns {Function} Returns `func`.
+   */
+  var setToString = identity;
+
+  /*------------------------------------------------------------------------*/
+
+  /**
+   * Creates an array with all falsey values removed. The values `false`, `null`,
+   * `0`, `""`, `undefined`, and `NaN` are falsey.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Array
+   * @param {Array} array The array to compact.
+   * @returns {Array} Returns the new array of filtered values.
+   * @example
+   *
+   * _.compact([0, 1, false, 2, '', 3]);
+   * // => [1, 2, 3]
+   */
+  function compact(array) {
+    return baseFilter(array, Boolean);
+  }
+
+  /**
+   * Creates a new array concatenating `array` with any additional arrays
+   * and/or values.
+   *
+   * @static
+   * @memberOf _
+   * @since 4.0.0
+   * @category Array
+   * @param {Array} array The array to concatenate.
+   * @param {...*} [values] The values to concatenate.
+   * @returns {Array} Returns the new concatenated array.
+   * @example
+   *
+   * var array = [1];
+   * var other = _.concat(array, 2, [3], [[4]]);
+   *
+   * console.log(other);
+   * // => [1, 2, 3, [4]]
+   *
+   * console.log(array);
+   * // => [1]
+   */
+  function concat() {
+    var length = arguments.length;
+    if (!length) {
+      return [];
+    }
+    var args = Array(length - 1),
+        array = arguments[0],
+        index = length;
+
+    while (index--) {
+      args[index - 1] = arguments[index];
+    }
+    return arrayPush(isArray(array) ? copyArray(array) : [array], baseFlatten(args, 1));
+  }
+
+  /**
+   * This method is like `_.find` except that it returns the index of the first
+   * element `predicate` returns truthy for instead of the element itself.
+   *
+   * @static
+   * @memberOf _
+   * @since 1.1.0
+   * @category Array
+   * @param {Array} array The array to inspect.
+   * @param {Function} [predicate=_.identity] The function invoked per iteration.
+   * @param {number} [fromIndex=0] The index to search from.
+   * @returns {number} Returns the index of the found element, else `-1`.
+   * @example
+   *
+   * var users = [
+   *   { 'user': 'barney',  'active': false },
+   *   { 'user': 'fred',    'active': false },
+   *   { 'user': 'pebbles', 'active': true }
+   * ];
+   *
+   * _.findIndex(users, function(o) { return o.user == 'barney'; });
+   * // => 0
+   *
+   * // The `_.matches` iteratee shorthand.
+   * _.findIndex(users, { 'user': 'fred', 'active': false });
+   * // => 1
+   *
+   * // The `_.matchesProperty` iteratee shorthand.
+   * _.findIndex(users, ['active', false]);
+   * // => 0
+   *
+   * // The `_.property` iteratee shorthand.
+   * _.findIndex(users, 'active');
+   * // => 2
+   */
+  function findIndex(array, predicate, fromIndex) {
+    var length = array == null ? 0 : array.length;
+    if (!length) {
+      return -1;
+    }
+    var index = fromIndex == null ? 0 : toInteger(fromIndex);
+    if (index < 0) {
+      index = nativeMax(length + index, 0);
+    }
+    return baseFindIndex(array, baseIteratee(predicate, 3), index);
+  }
+
+  /**
+   * Flattens `array` a single level deep.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Array
+   * @param {Array} array The array to flatten.
+   * @returns {Array} Returns the new flattened array.
+   * @example
+   *
+   * _.flatten([1, [2, [3, [4]], 5]]);
+   * // => [1, 2, [3, [4]], 5]
+   */
+  function flatten(array) {
+    var length = array == null ? 0 : array.length;
+    return length ? baseFlatten(array, 1) : [];
+  }
+
+  /**
+   * Recursively flattens `array`.
+   *
+   * @static
+   * @memberOf _
+   * @since 3.0.0
+   * @category Array
+   * @param {Array} array The array to flatten.
+   * @returns {Array} Returns the new flattened array.
+   * @example
+   *
+   * _.flattenDeep([1, [2, [3, [4]], 5]]);
+   * // => [1, 2, 3, 4, 5]
+   */
+  function flattenDeep(array) {
+    var length = array == null ? 0 : array.length;
+    return length ? baseFlatten(array, INFINITY) : [];
+  }
+
+  /**
+   * Gets the first element of `array`.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @alias first
+   * @category Array
+   * @param {Array} array The array to query.
+   * @returns {*} Returns the first element of `array`.
+   * @example
+   *
+   * _.head([1, 2, 3]);
+   * // => 1
+   *
+   * _.head([]);
+   * // => undefined
+   */
+  function head(array) {
+    return (array && array.length) ? array[0] : undefined;
+  }
+
+  /**
+   * Gets the index at which the first occurrence of `value` is found in `array`
+   * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+   * for equality comparisons. If `fromIndex` is negative, it's used as the
+   * offset from the end of `array`.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Array
+   * @param {Array} array The array to inspect.
+   * @param {*} value The value to search for.
+   * @param {number} [fromIndex=0] The index to search from.
+   * @returns {number} Returns the index of the matched value, else `-1`.
+   * @example
+   *
+   * _.indexOf([1, 2, 1, 2], 2);
+   * // => 1
+   *
+   * // Search from the `fromIndex`.
+   * _.indexOf([1, 2, 1, 2], 2, 2);
+   * // => 3
+   */
+  function indexOf(array, value, fromIndex) {
+    var length = array == null ? 0 : array.length;
+    if (typeof fromIndex == 'number') {
+      fromIndex = fromIndex < 0 ? nativeMax(length + fromIndex, 0) : fromIndex;
+    } else {
+      fromIndex = 0;
+    }
+    var index = (fromIndex || 0) - 1,
+        isReflexive = value === value;
+
+    while (++index < length) {
+      var other = array[index];
+      if ((isReflexive ? other === value : other !== other)) {
+        return index;
+      }
+    }
+    return -1;
+  }
+
+  /**
+   * Gets the last element of `array`.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Array
+   * @param {Array} array The array to query.
+   * @returns {*} Returns the last element of `array`.
+   * @example
+   *
+   * _.last([1, 2, 3]);
+   * // => 3
+   */
+  function last(array) {
+    var length = array == null ? 0 : array.length;
+    return length ? array[length - 1] : undefined;
+  }
+
+  /**
+   * Creates a slice of `array` from `start` up to, but not including, `end`.
+   *
+   * **Note:** This method is used instead of
+   * [`Array#slice`](https://mdn.io/Array/slice) to ensure dense arrays are
+   * returned.
+   *
+   * @static
+   * @memberOf _
+   * @since 3.0.0
+   * @category Array
+   * @param {Array} array The array to slice.
+   * @param {number} [start=0] The start position.
+   * @param {number} [end=array.length] The end position.
+   * @returns {Array} Returns the slice of `array`.
+   */
+  function slice(array, start, end) {
+    var length = array == null ? 0 : array.length;
+    start = start == null ? 0 : +start;
+    end = end === undefined ? length : +end;
+    return length ? baseSlice(array, start, end) : [];
+  }
+
+  /*------------------------------------------------------------------------*/
+
+  /**
+   * Creates a `lodash` wrapper instance that wraps `value` with explicit method
+   * chain sequences enabled. The result of such sequences must be unwrapped
+   * with `_#value`.
+   *
+   * @static
+   * @memberOf _
+   * @since 1.3.0
+   * @category Seq
+   * @param {*} value The value to wrap.
+   * @returns {Object} Returns the new `lodash` wrapper instance.
+   * @example
+   *
+   * var users = [
+   *   { 'user': 'barney',  'age': 36 },
+   *   { 'user': 'fred',    'age': 40 },
+   *   { 'user': 'pebbles', 'age': 1 }
+   * ];
+   *
+   * var youngest = _
+   *   .chain(users)
+   *   .sortBy('age')
+   *   .map(function(o) {
+   *     return o.user + ' is ' + o.age;
+   *   })
+   *   .head()
+   *   .value();
+   * // => 'pebbles is 1'
+   */
+  function chain(value) {
+    var result = lodash(value);
+    result.__chain__ = true;
+    return result;
+  }
+
+  /**
+   * This method invokes `interceptor` and returns `value`. The interceptor
+   * is invoked with one argument; (value). The purpose of this method is to
+   * "tap into" a method chain sequence in order to modify intermediate results.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Seq
+   * @param {*} value The value to provide to `interceptor`.
+   * @param {Function} interceptor The function to invoke.
+   * @returns {*} Returns `value`.
+   * @example
+   *
+   * _([1, 2, 3])
+   *  .tap(function(array) {
+   *    // Mutate input array.
+   *    array.pop();
+   *  })
+   *  .reverse()
+   *  .value();
+   * // => [2, 1]
+   */
+  function tap(value, interceptor) {
+    interceptor(value);
+    return value;
+  }
+
+  /**
+   * This method is like `_.tap` except that it returns the result of `interceptor`.
+   * The purpose of this method is to "pass thru" values replacing intermediate
+   * results in a method chain sequence.
+   *
+   * @static
+   * @memberOf _
+   * @since 3.0.0
+   * @category Seq
+   * @param {*} value The value to provide to `interceptor`.
+   * @param {Function} interceptor The function to invoke.
+   * @returns {*} Returns the result of `interceptor`.
+   * @example
+   *
+   * _('  abc  ')
+   *  .chain()
+   *  .trim()
+   *  .thru(function(value) {
+   *    return [value];
+   *  })
+   *  .value();
+   * // => ['abc']
+   */
+  function thru(value, interceptor) {
+    return interceptor(value);
+  }
+
+  /**
+   * Creates a `lodash` wrapper instance with explicit method chain sequences enabled.
+   *
+   * @name chain
+   * @memberOf _
+   * @since 0.1.0
+   * @category Seq
+   * @returns {Object} Returns the new `lodash` wrapper instance.
+   * @example
+   *
+   * var users = [
+   *   { 'user': 'barney', 'age': 36 },
+   *   { 'user': 'fred',   'age': 40 }
+   * ];
+   *
+   * // A sequence without explicit chaining.
+   * _(users).head();
+   * // => { 'user': 'barney', 'age': 36 }
+   *
+   * // A sequence with explicit chaining.
+   * _(users)
+   *   .chain()
+   *   .head()
+   *   .pick('user')
+   *   .value();
+   * // => { 'user': 'barney' }
+   */
+  function wrapperChain() {
+    return chain(this);
+  }
+
+  /**
+   * Executes the chain sequence to resolve the unwrapped value.
+   *
+   * @name value
+   * @memberOf _
+   * @since 0.1.0
+   * @alias toJSON, valueOf
+   * @category Seq
+   * @returns {*} Returns the resolved unwrapped value.
+   * @example
+   *
+   * _([1, 2, 3]).value();
+   * // => [1, 2, 3]
+   */
+  function wrapperValue() {
+    return baseWrapperValue(this.__wrapped__, this.__actions__);
+  }
+
+  /*------------------------------------------------------------------------*/
+
+  /**
+   * Checks if `predicate` returns truthy for **all** elements of `collection`.
+   * Iteration is stopped once `predicate` returns falsey. The predicate is
+   * invoked with three arguments: (value, index|key, collection).
+   *
+   * **Note:** This method returns `true` for
+   * [empty collections](https://en.wikipedia.org/wiki/Empty_set) because
+   * [everything is true](https://en.wikipedia.org/wiki/Vacuous_truth) of
+   * elements of empty collections.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Collection
+   * @param {Array|Object} collection The collection to iterate over.
+   * @param {Function} [predicate=_.identity] The function invoked per iteration.
+   * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
+   * @returns {boolean} Returns `true` if all elements pass the predicate check,
+   *  else `false`.
+   * @example
+   *
+   * _.every([true, 1, null, 'yes'], Boolean);
+   * // => false
+   *
+   * var users = [
+   *   { 'user': 'barney', 'age': 36, 'active': false },
+   *   { 'user': 'fred',   'age': 40, 'active': false }
+   * ];
+   *
+   * // The `_.matches` iteratee shorthand.
+   * _.every(users, { 'user': 'barney', 'active': false });
+   * // => false
+   *
+   * // The `_.matchesProperty` iteratee shorthand.
+   * _.every(users, ['active', false]);
+   * // => true
+   *
+   * // The `_.property` iteratee shorthand.
+   * _.every(users, 'active');
+   * // => false
+   */
+  function every(collection, predicate, guard) {
+    predicate = guard ? undefined : predicate;
+    return baseEvery(collection, baseIteratee(predicate));
+  }
+
+  /**
+   * Iterates over elements of `collection`, returning an array of all elements
+   * `predicate` returns truthy for. The predicate is invoked with three
+   * arguments: (value, index|key, collection).
+   *
+   * **Note:** Unlike `_.remove`, this method returns a new array.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Collection
+   * @param {Array|Object} collection The collection to iterate over.
+   * @param {Function} [predicate=_.identity] The function invoked per iteration.
+   * @returns {Array} Returns the new filtered array.
+   * @see _.reject
+   * @example
+   *
+   * var users = [
+   *   { 'user': 'barney', 'age': 36, 'active': true },
+   *   { 'user': 'fred',   'age': 40, 'active': false }
+   * ];
+   *
+   * _.filter(users, function(o) { return !o.active; });
+   * // => objects for ['fred']
+   *
+   * // The `_.matches` iteratee shorthand.
+   * _.filter(users, { 'age': 36, 'active': true });
+   * // => objects for ['barney']
+   *
+   * // The `_.matchesProperty` iteratee shorthand.
+   * _.filter(users, ['active', false]);
+   * // => objects for ['fred']
+   *
+   * // The `_.property` iteratee shorthand.
+   * _.filter(users, 'active');
+   * // => objects for ['barney']
+   */
+  function filter(collection, predicate) {
+    return baseFilter(collection, baseIteratee(predicate));
+  }
+
+  /**
+   * Iterates over elements of `collection`, returning the first element
+   * `predicate` returns truthy for. The predicate is invoked with three
+   * arguments: (value, index|key, collection).
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Collection
+   * @param {Array|Object} collection The collection to inspect.
+   * @param {Function} [predicate=_.identity] The function invoked per iteration.
+   * @param {number} [fromIndex=0] The index to search from.
+   * @returns {*} Returns the matched element, else `undefined`.
+   * @example
+   *
+   * var users = [
+   *   { 'user': 'barney',  'age': 36, 'active': true },
+   *   { 'user': 'fred',    'age': 40, 'active': false },
+   *   { 'user': 'pebbles', 'age': 1,  'active': true }
+   * ];
+   *
+   * _.find(users, function(o) { return o.age < 40; });
+   * // => object for 'barney'
+   *
+   * // The `_.matches` iteratee shorthand.
+   * _.find(users, { 'age': 1, 'active': true });
+   * // => object for 'pebbles'
+   *
+   * // The `_.matchesProperty` iteratee shorthand.
+   * _.find(users, ['active', false]);
+   * // => object for 'fred'
+   *
+   * // The `_.property` iteratee shorthand.
+   * _.find(users, 'active');
+   * // => object for 'barney'
+   */
+  var find = createFind(findIndex);
+
+  /**
+   * Iterates over elements of `collection` and invokes `iteratee` for each element.
+   * The iteratee is invoked with three arguments: (value, index|key, collection).
+   * Iteratee functions may exit iteration early by explicitly returning `false`.
+   *
+   * **Note:** As with other "Collections" methods, objects with a "length"
+   * property are iterated like arrays. To avoid this behavior use `_.forIn`
+   * or `_.forOwn` for object iteration.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @alias each
+   * @category Collection
+   * @param {Array|Object} collection The collection to iterate over.
+   * @param {Function} [iteratee=_.identity] The function invoked per iteration.
+   * @returns {Array|Object} Returns `collection`.
+   * @see _.forEachRight
+   * @example
+   *
+   * _.forEach([1, 2], function(value) {
+   *   console.log(value);
+   * });
+   * // => Logs `1` then `2`.
+   *
+   * _.forEach({ 'a': 1, 'b': 2 }, function(value, key) {
+   *   console.log(key);
+   * });
+   * // => Logs 'a' then 'b' (iteration order is not guaranteed).
+   */
+  function forEach(collection, iteratee) {
+    return baseEach(collection, baseIteratee(iteratee));
+  }
+
+  /**
+   * Creates an array of values by running each element in `collection` thru
+   * `iteratee`. The iteratee is invoked with three arguments:
+   * (value, index|key, collection).
+   *
+   * Many lodash methods are guarded to work as iteratees for methods like
+   * `_.every`, `_.filter`, `_.map`, `_.mapValues`, `_.reject`, and `_.some`.
+   *
+   * The guarded methods are:
+   * `ary`, `chunk`, `curry`, `curryRight`, `drop`, `dropRight`, `every`,
+   * `fill`, `invert`, `parseInt`, `random`, `range`, `rangeRight`, `repeat`,
+   * `sampleSize`, `slice`, `some`, `sortBy`, `split`, `take`, `takeRight`,
+   * `template`, `trim`, `trimEnd`, `trimStart`, and `words`
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Collection
+   * @param {Array|Object} collection The collection to iterate over.
+   * @param {Function} [iteratee=_.identity] The function invoked per iteration.
+   * @returns {Array} Returns the new mapped array.
+   * @example
+   *
+   * function square(n) {
+   *   return n * n;
+   * }
+   *
+   * _.map([4, 8], square);
+   * // => [16, 64]
+   *
+   * _.map({ 'a': 4, 'b': 8 }, square);
+   * // => [16, 64] (iteration order is not guaranteed)
+   *
+   * var users = [
+   *   { 'user': 'barney' },
+   *   { 'user': 'fred' }
+   * ];
+   *
+   * // The `_.property` iteratee shorthand.
+   * _.map(users, 'user');
+   * // => ['barney', 'fred']
+   */
+  function map(collection, iteratee) {
+    return baseMap(collection, baseIteratee(iteratee));
+  }
+
+  /**
+   * Reduces `collection` to a value which is the accumulated result of running
+   * each element in `collection` thru `iteratee`, where each successive
+   * invocation is supplied the return value of the previous. If `accumulator`
+   * is not given, the first element of `collection` is used as the initial
+   * value. The iteratee is invoked with four arguments:
+   * (accumulator, value, index|key, collection).
+   *
+   * Many lodash methods are guarded to work as iteratees for methods like
+   * `_.reduce`, `_.reduceRight`, and `_.transform`.
+   *
+   * The guarded methods are:
+   * `assign`, `defaults`, `defaultsDeep`, `includes`, `merge`, `orderBy`,
+   * and `sortBy`
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Collection
+   * @param {Array|Object} collection The collection to iterate over.
+   * @param {Function} [iteratee=_.identity] The function invoked per iteration.
+   * @param {*} [accumulator] The initial value.
+   * @returns {*} Returns the accumulated value.
+   * @see _.reduceRight
+   * @example
+   *
+   * _.reduce([1, 2], function(sum, n) {
+   *   return sum + n;
+   * }, 0);
+   * // => 3
+   *
+   * _.reduce({ 'a': 1, 'b': 2, 'c': 1 }, function(result, value, key) {
+   *   (result[value] || (result[value] = [])).push(key);
+   *   return result;
+   * }, {});
+   * // => { '1': ['a', 'c'], '2': ['b'] } (iteration order is not guaranteed)
+   */
+  function reduce(collection, iteratee, accumulator) {
+    return baseReduce(collection, baseIteratee(iteratee), accumulator, arguments.length < 3, baseEach);
+  }
+
+  /**
+   * Gets the size of `collection` by returning its length for array-like
+   * values or the number of own enumerable string keyed properties for objects.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Collection
+   * @param {Array|Object|string} collection The collection to inspect.
+   * @returns {number} Returns the collection size.
+   * @example
+   *
+   * _.size([1, 2, 3]);
+   * // => 3
+   *
+   * _.size({ 'a': 1, 'b': 2 });
+   * // => 2
+   *
+   * _.size('pebbles');
+   * // => 7
+   */
+  function size(collection) {
+    if (collection == null) {
+      return 0;
+    }
+    collection = isArrayLike(collection) ? collection : nativeKeys(collection);
+    return collection.length;
+  }
+
+  /**
+   * Checks if `predicate` returns truthy for **any** element of `collection`.
+   * Iteration is stopped once `predicate` returns truthy. The predicate is
+   * invoked with three arguments: (value, index|key, collection).
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Collection
+   * @param {Array|Object} collection The collection to iterate over.
+   * @param {Function} [predicate=_.identity] The function invoked per iteration.
+   * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
+   * @returns {boolean} Returns `true` if any element passes the predicate check,
+   *  else `false`.
+   * @example
+   *
+   * _.some([null, 0, 'yes', false], Boolean);
+   * // => true
+   *
+   * var users = [
+   *   { 'user': 'barney', 'active': true },
+   *   { 'user': 'fred',   'active': false }
+   * ];
+   *
+   * // The `_.matches` iteratee shorthand.
+   * _.some(users, { 'user': 'barney', 'active': false });
+   * // => false
+   *
+   * // The `_.matchesProperty` iteratee shorthand.
+   * _.some(users, ['active', false]);
+   * // => true
+   *
+   * // The `_.property` iteratee shorthand.
+   * _.some(users, 'active');
+   * // => true
+   */
+  function some(collection, predicate, guard) {
+    predicate = guard ? undefined : predicate;
+    return baseSome(collection, baseIteratee(predicate));
+  }
+
+  /**
+   * Creates an array of elements, sorted in ascending order by the results of
+   * running each element in a collection thru each iteratee. This method
+   * performs a stable sort, that is, it preserves the original sort order of
+   * equal elements. The iteratees are invoked with one argument: (value).
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Collection
+   * @param {Array|Object} collection The collection to iterate over.
+   * @param {...(Function|Function[])} [iteratees=[_.identity]]
+   *  The iteratees to sort by.
+   * @returns {Array} Returns the new sorted array.
+   * @example
+   *
+   * var users = [
+   *   { 'user': 'fred',   'age': 48 },
+   *   { 'user': 'barney', 'age': 36 },
+   *   { 'user': 'fred',   'age': 40 },
+   *   { 'user': 'barney', 'age': 34 }
+   * ];
+   *
+   * _.sortBy(users, [function(o) { return o.user; }]);
+   * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
+   *
+   * _.sortBy(users, ['user', 'age']);
+   * // => objects for [['barney', 34], ['barney', 36], ['fred', 40], ['fred', 48]]
+   */
+  function sortBy(collection, iteratee) {
+    var index = 0;
+    iteratee = baseIteratee(iteratee);
+
+    return baseMap(baseMap(collection, function(value, key, collection) {
+      return { 'value': value, 'index': index++, 'criteria': iteratee(value, key, collection) };
+    }).sort(function(object, other) {
+      return compareAscending(object.criteria, other.criteria) || (object.index - other.index);
+    }), baseProperty('value'));
+  }
+
+  /*------------------------------------------------------------------------*/
+
+  /**
+   * Creates a function that invokes `func`, with the `this` binding and arguments
+   * of the created function, while it's called less than `n` times. Subsequent
+   * calls to the created function return the result of the last `func` invocation.
+   *
+   * @static
+   * @memberOf _
+   * @since 3.0.0
+   * @category Function
+   * @param {number} n The number of calls at which `func` is no longer invoked.
+   * @param {Function} func The function to restrict.
+   * @returns {Function} Returns the new restricted function.
+   * @example
+   *
+   * jQuery(element).on('click', _.before(5, addContactToList));
+   * // => Allows adding up to 4 contacts to the list.
+   */
+  function before(n, func) {
+    var result;
+    if (typeof func != 'function') {
+      throw new TypeError(FUNC_ERROR_TEXT);
+    }
+    n = toInteger(n);
+    return function() {
+      if (--n > 0) {
+        result = func.apply(this, arguments);
+      }
+      if (n <= 1) {
+        func = undefined;
+      }
+      return result;
+    };
+  }
+
+  /**
+   * Creates a function that invokes `func` with the `this` binding of `thisArg`
+   * and `partials` prepended to the arguments it receives.
+   *
+   * The `_.bind.placeholder` value, which defaults to `_` in monolithic builds,
+   * may be used as a placeholder for partially applied arguments.
+   *
+   * **Note:** Unlike native `Function#bind`, this method doesn't set the "length"
+   * property of bound functions.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Function
+   * @param {Function} func The function to bind.
+   * @param {*} thisArg The `this` binding of `func`.
+   * @param {...*} [partials] The arguments to be partially applied.
+   * @returns {Function} Returns the new bound function.
+   * @example
+   *
+   * function greet(greeting, punctuation) {
+   *   return greeting + ' ' + this.user + punctuation;
+   * }
+   *
+   * var object = { 'user': 'fred' };
+   *
+   * var bound = _.bind(greet, object, 'hi');
+   * bound('!');
+   * // => 'hi fred!'
+   *
+   * // Bound with placeholders.
+   * var bound = _.bind(greet, object, _, '!');
+   * bound('hi');
+   * // => 'hi fred!'
+   */
+  var bind = baseRest(function(func, thisArg, partials) {
+    return createPartial(func, WRAP_BIND_FLAG | WRAP_PARTIAL_FLAG, thisArg, partials);
+  });
+
+  /**
+   * Defers invoking the `func` until the current call stack has cleared. Any
+   * additional arguments are provided to `func` when it's invoked.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Function
+   * @param {Function} func The function to defer.
+   * @param {...*} [args] The arguments to invoke `func` with.
+   * @returns {number} Returns the timer id.
+   * @example
+   *
+   * _.defer(function(text) {
+   *   console.log(text);
+   * }, 'deferred');
+   * // => Logs 'deferred' after one millisecond.
+   */
+  var defer = baseRest(function(func, args) {
+    return baseDelay(func, 1, args);
+  });
+
+  /**
+   * Invokes `func` after `wait` milliseconds. Any additional arguments are
+   * provided to `func` when it's invoked.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Function
+   * @param {Function} func The function to delay.
+   * @param {number} wait The number of milliseconds to delay invocation.
+   * @param {...*} [args] The arguments to invoke `func` with.
+   * @returns {number} Returns the timer id.
+   * @example
+   *
+   * _.delay(function(text) {
+   *   console.log(text);
+   * }, 1000, 'later');
+   * // => Logs 'later' after one second.
+   */
+  var delay = baseRest(function(func, wait, args) {
+    return baseDelay(func, toNumber(wait) || 0, args);
+  });
+
+  /**
+   * Creates a function that negates the result of the predicate `func`. The
+   * `func` predicate is invoked with the `this` binding and arguments of the
+   * created function.
+   *
+   * @static
+   * @memberOf _
+   * @since 3.0.0
+   * @category Function
+   * @param {Function} predicate The predicate to negate.
+   * @returns {Function} Returns the new negated function.
+   * @example
+   *
+   * function isEven(n) {
+   *   return n % 2 == 0;
+   * }
+   *
+   * _.filter([1, 2, 3, 4, 5, 6], _.negate(isEven));
+   * // => [1, 3, 5]
+   */
+  function negate(predicate) {
+    if (typeof predicate != 'function') {
+      throw new TypeError(FUNC_ERROR_TEXT);
+    }
+    return function() {
+      var args = arguments;
+      return !predicate.apply(this, args);
+    };
+  }
+
+  /**
+   * Creates a function that is restricted to invoking `func` once. Repeat calls
+   * to the function return the value of the first invocation. The `func` is
+   * invoked with the `this` binding and arguments of the created function.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Function
+   * @param {Function} func The function to restrict.
+   * @returns {Function} Returns the new restricted function.
+   * @example
+   *
+   * var initialize = _.once(createApplication);
+   * initialize();
+   * initialize();
+   * // => `createApplication` is invoked once
+   */
+  function once(func) {
+    return before(2, func);
+  }
+
+  /*------------------------------------------------------------------------*/
+
+  /**
+   * Creates a shallow clone of `value`.
+   *
+   * **Note:** This method is loosely based on the
+   * [structured clone algorithm](https://mdn.io/Structured_clone_algorithm)
+   * and supports cloning arrays, array buffers, booleans, date objects, maps,
+   * numbers, `Object` objects, regexes, sets, strings, symbols, and typed
+   * arrays. The own enumerable properties of `arguments` objects are cloned
+   * as plain objects. An empty object is returned for uncloneable values such
+   * as error objects, functions, DOM nodes, and WeakMaps.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to clone.
+   * @returns {*} Returns the cloned value.
+   * @see _.cloneDeep
+   * @example
+   *
+   * var objects = [{ 'a': 1 }, { 'b': 2 }];
+   *
+   * var shallow = _.clone(objects);
+   * console.log(shallow[0] === objects[0]);
+   * // => true
+   */
+  function clone(value) {
+    if (!isObject(value)) {
+      return value;
+    }
+    return isArray(value) ? copyArray(value) : copyObject(value, nativeKeys(value));
+  }
+
+  /**
+   * Performs a
+   * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+   * comparison between two values to determine if they are equivalent.
+   *
+   * @static
+   * @memberOf _
+   * @since 4.0.0
+   * @category Lang
+   * @param {*} value The value to compare.
+   * @param {*} other The other value to compare.
+   * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+   * @example
+   *
+   * var object = { 'a': 1 };
+   * var other = { 'a': 1 };
+   *
+   * _.eq(object, object);
+   * // => true
+   *
+   * _.eq(object, other);
+   * // => false
+   *
+   * _.eq('a', 'a');
+   * // => true
+   *
+   * _.eq('a', Object('a'));
+   * // => false
+   *
+   * _.eq(NaN, NaN);
+   * // => true
+   */
+  function eq(value, other) {
+    return value === other || (value !== value && other !== other);
+  }
+
+  /**
+   * Checks if `value` is likely an `arguments` object.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+   *  else `false`.
+   * @example
+   *
+   * _.isArguments(function() { return arguments; }());
+   * // => true
+   *
+   * _.isArguments([1, 2, 3]);
+   * // => false
+   */
+  var isArguments = baseIsArguments(function() { return arguments; }()) ? baseIsArguments : function(value) {
+    return isObjectLike(value) && hasOwnProperty.call(value, 'callee') &&
+      !propertyIsEnumerable.call(value, 'callee');
+  };
+
+  /**
+   * Checks if `value` is classified as an `Array` object.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+   * @example
+   *
+   * _.isArray([1, 2, 3]);
+   * // => true
+   *
+   * _.isArray(document.body.children);
+   * // => false
+   *
+   * _.isArray('abc');
+   * // => false
+   *
+   * _.isArray(_.noop);
+   * // => false
+   */
+  var isArray = Array.isArray;
+
+  /**
+   * Checks if `value` is array-like. A value is considered array-like if it's
+   * not a function and has a `value.length` that's an integer greater than or
+   * equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
+   *
+   * @static
+   * @memberOf _
+   * @since 4.0.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
+   * @example
+   *
+   * _.isArrayLike([1, 2, 3]);
+   * // => true
+   *
+   * _.isArrayLike(document.body.children);
+   * // => true
+   *
+   * _.isArrayLike('abc');
+   * // => true
+   *
+   * _.isArrayLike(_.noop);
+   * // => false
+   */
+  function isArrayLike(value) {
+    return value != null && isLength(value.length) && !isFunction(value);
+  }
+
+  /**
+   * Checks if `value` is classified as a boolean primitive or object.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a boolean, else `false`.
+   * @example
+   *
+   * _.isBoolean(false);
+   * // => true
+   *
+   * _.isBoolean(null);
+   * // => false
+   */
+  function isBoolean(value) {
+    return value === true || value === false ||
+      (isObjectLike(value) && baseGetTag(value) == boolTag);
+  }
+
+  /**
+   * Checks if `value` is classified as a `Date` object.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a date object, else `false`.
+   * @example
+   *
+   * _.isDate(new Date);
+   * // => true
+   *
+   * _.isDate('Mon April 23 2012');
+   * // => false
+   */
+  var isDate = baseIsDate;
+
+  /**
+   * Checks if `value` is an empty object, collection, map, or set.
+   *
+   * Objects are considered empty if they have no own enumerable string keyed
+   * properties.
+   *
+   * Array-like values such as `arguments` objects, arrays, buffers, strings, or
+   * jQuery-like collections are considered empty if they have a `length` of `0`.
+   * Similarly, maps and sets are considered empty if they have a `size` of `0`.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is empty, else `false`.
+   * @example
+   *
+   * _.isEmpty(null);
+   * // => true
+   *
+   * _.isEmpty(true);
+   * // => true
+   *
+   * _.isEmpty(1);
+   * // => true
+   *
+   * _.isEmpty([1, 2, 3]);
+   * // => false
+   *
+   * _.isEmpty({ 'a': 1 });
+   * // => false
+   */
+  function isEmpty(value) {
+    if (isArrayLike(value) &&
+        (isArray(value) || isString(value) ||
+          isFunction(value.splice) || isArguments(value))) {
+      return !value.length;
+    }
+    return !nativeKeys(value).length;
+  }
+
+  /**
+   * Performs a deep comparison between two values to determine if they are
+   * equivalent.
+   *
+   * **Note:** This method supports comparing arrays, array buffers, booleans,
+   * date objects, error objects, maps, numbers, `Object` objects, regexes,
+   * sets, strings, symbols, and typed arrays. `Object` objects are compared
+   * by their own, not inherited, enumerable properties. Functions and DOM
+   * nodes are compared by strict equality, i.e. `===`.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to compare.
+   * @param {*} other The other value to compare.
+   * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+   * @example
+   *
+   * var object = { 'a': 1 };
+   * var other = { 'a': 1 };
+   *
+   * _.isEqual(object, other);
+   * // => true
+   *
+   * object === other;
+   * // => false
+   */
+  function isEqual(value, other) {
+    return baseIsEqual(value, other);
+  }
+
+  /**
+   * Checks if `value` is a finite primitive number.
+   *
+   * **Note:** This method is based on
+   * [`Number.isFinite`](https://mdn.io/Number/isFinite).
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a finite number, else `false`.
+   * @example
+   *
+   * _.isFinite(3);
+   * // => true
+   *
+   * _.isFinite(Number.MIN_VALUE);
+   * // => true
+   *
+   * _.isFinite(Infinity);
+   * // => false
+   *
+   * _.isFinite('3');
+   * // => false
+   */
+  function isFinite(value) {
+    return typeof value == 'number' && nativeIsFinite(value);
+  }
+
+  /**
+   * Checks if `value` is classified as a `Function` object.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+   * @example
+   *
+   * _.isFunction(_);
+   * // => true
+   *
+   * _.isFunction(/abc/);
+   * // => false
+   */
+  function isFunction(value) {
+    if (!isObject(value)) {
+      return false;
+    }
+    // The use of `Object#toString` avoids issues with the `typeof` operator
+    // in Safari 9 which returns 'object' for typed arrays and other constructors.
+    var tag = baseGetTag(value);
+    return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
+  }
+
+  /**
+   * Checks if `value` is a valid array-like length.
+   *
+   * **Note:** This method is loosely based on
+   * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
+   *
+   * @static
+   * @memberOf _
+   * @since 4.0.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+   * @example
+   *
+   * _.isLength(3);
+   * // => true
+   *
+   * _.isLength(Number.MIN_VALUE);
+   * // => false
+   *
+   * _.isLength(Infinity);
+   * // => false
+   *
+   * _.isLength('3');
+   * // => false
+   */
+  function isLength(value) {
+    return typeof value == 'number' &&
+      value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+  }
+
+  /**
+   * Checks if `value` is the
+   * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+   * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+   * @example
+   *
+   * _.isObject({});
+   * // => true
+   *
+   * _.isObject([1, 2, 3]);
+   * // => true
+   *
+   * _.isObject(_.noop);
+   * // => true
+   *
+   * _.isObject(null);
+   * // => false
+   */
+  function isObject(value) {
+    var type = typeof value;
+    return value != null && (type == 'object' || type == 'function');
+  }
+
+  /**
+   * Checks if `value` is object-like. A value is object-like if it's not `null`
+   * and has a `typeof` result of "object".
+   *
+   * @static
+   * @memberOf _
+   * @since 4.0.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+   * @example
+   *
+   * _.isObjectLike({});
+   * // => true
+   *
+   * _.isObjectLike([1, 2, 3]);
+   * // => true
+   *
+   * _.isObjectLike(_.noop);
+   * // => false
+   *
+   * _.isObjectLike(null);
+   * // => false
+   */
+  function isObjectLike(value) {
+    return value != null && typeof value == 'object';
+  }
+
+  /**
+   * Checks if `value` is `NaN`.
+   *
+   * **Note:** This method is based on
+   * [`Number.isNaN`](https://mdn.io/Number/isNaN) and is not the same as
+   * global [`isNaN`](https://mdn.io/isNaN) which returns `true` for
+   * `undefined` and other non-number values.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is `NaN`, else `false`.
+   * @example
+   *
+   * _.isNaN(NaN);
+   * // => true
+   *
+   * _.isNaN(new Number(NaN));
+   * // => true
+   *
+   * isNaN(undefined);
+   * // => true
+   *
+   * _.isNaN(undefined);
+   * // => false
+   */
+  function isNaN(value) {
+    // An `NaN` primitive is the only value that is not equal to itself.
+    // Perform the `toStringTag` check first to avoid errors with some
+    // ActiveX objects in IE.
+    return isNumber(value) && value != +value;
+  }
+
+  /**
+   * Checks if `value` is `null`.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is `null`, else `false`.
+   * @example
+   *
+   * _.isNull(null);
+   * // => true
+   *
+   * _.isNull(void 0);
+   * // => false
+   */
+  function isNull(value) {
+    return value === null;
+  }
+
+  /**
+   * Checks if `value` is classified as a `Number` primitive or object.
+   *
+   * **Note:** To exclude `Infinity`, `-Infinity`, and `NaN`, which are
+   * classified as numbers, use the `_.isFinite` method.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a number, else `false`.
+   * @example
+   *
+   * _.isNumber(3);
+   * // => true
+   *
+   * _.isNumber(Number.MIN_VALUE);
+   * // => true
+   *
+   * _.isNumber(Infinity);
+   * // => true
+   *
+   * _.isNumber('3');
+   * // => false
+   */
+  function isNumber(value) {
+    return typeof value == 'number' ||
+      (isObjectLike(value) && baseGetTag(value) == numberTag);
+  }
+
+  /**
+   * Checks if `value` is classified as a `RegExp` object.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a regexp, else `false`.
+   * @example
+   *
+   * _.isRegExp(/abc/);
+   * // => true
+   *
+   * _.isRegExp('/abc/');
+   * // => false
+   */
+  var isRegExp = baseIsRegExp;
+
+  /**
+   * Checks if `value` is classified as a `String` primitive or object.
+   *
+   * @static
+   * @since 0.1.0
+   * @memberOf _
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a string, else `false`.
+   * @example
+   *
+   * _.isString('abc');
+   * // => true
+   *
+   * _.isString(1);
+   * // => false
+   */
+  function isString(value) {
+    return typeof value == 'string' ||
+      (!isArray(value) && isObjectLike(value) && baseGetTag(value) == stringTag);
+  }
+
+  /**
+   * Checks if `value` is `undefined`.
+   *
+   * @static
+   * @since 0.1.0
+   * @memberOf _
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is `undefined`, else `false`.
+   * @example
+   *
+   * _.isUndefined(void 0);
+   * // => true
+   *
+   * _.isUndefined(null);
+   * // => false
+   */
+  function isUndefined(value) {
+    return value === undefined;
+  }
+
+  /**
+   * Converts `value` to an array.
+   *
+   * @static
+   * @since 0.1.0
+   * @memberOf _
+   * @category Lang
+   * @param {*} value The value to convert.
+   * @returns {Array} Returns the converted array.
+   * @example
+   *
+   * _.toArray({ 'a': 1, 'b': 2 });
+   * // => [1, 2]
+   *
+   * _.toArray('abc');
+   * // => ['a', 'b', 'c']
+   *
+   * _.toArray(1);
+   * // => []
+   *
+   * _.toArray(null);
+   * // => []
+   */
+  function toArray(value) {
+    if (!isArrayLike(value)) {
+      return values(value);
+    }
+    return value.length ? copyArray(value) : [];
+  }
+
+  /**
+   * Converts `value` to an integer.
+   *
+   * **Note:** This method is loosely based on
+   * [`ToInteger`](http://www.ecma-international.org/ecma-262/7.0/#sec-tointeger).
+   *
+   * @static
+   * @memberOf _
+   * @since 4.0.0
+   * @category Lang
+   * @param {*} value The value to convert.
+   * @returns {number} Returns the converted integer.
+   * @example
+   *
+   * _.toInteger(3.2);
+   * // => 3
+   *
+   * _.toInteger(Number.MIN_VALUE);
+   * // => 0
+   *
+   * _.toInteger(Infinity);
+   * // => 1.7976931348623157e+308
+   *
+   * _.toInteger('3.2');
+   * // => 3
+   */
+  var toInteger = Number;
+
+  /**
+   * Converts `value` to a number.
+   *
+   * @static
+   * @memberOf _
+   * @since 4.0.0
+   * @category Lang
+   * @param {*} value The value to process.
+   * @returns {number} Returns the number.
+   * @example
+   *
+   * _.toNumber(3.2);
+   * // => 3.2
+   *
+   * _.toNumber(Number.MIN_VALUE);
+   * // => 5e-324
+   *
+   * _.toNumber(Infinity);
+   * // => Infinity
+   *
+   * _.toNumber('3.2');
+   * // => 3.2
+   */
+  var toNumber = Number;
+
+  /**
+   * Converts `value` to a string. An empty string is returned for `null`
+   * and `undefined` values. The sign of `-0` is preserved.
+   *
+   * @static
+   * @memberOf _
+   * @since 4.0.0
+   * @category Lang
+   * @param {*} value The value to convert.
+   * @returns {string} Returns the converted string.
+   * @example
+   *
+   * _.toString(null);
+   * // => ''
+   *
+   * _.toString(-0);
+   * // => '-0'
+   *
+   * _.toString([1, 2, 3]);
+   * // => '1,2,3'
+   */
+  function toString(value) {
+    if (typeof value == 'string') {
+      return value;
+    }
+    return value == null ? '' : (value + '');
+  }
+
+  /*------------------------------------------------------------------------*/
+
+  /**
+   * Assigns own enumerable string keyed properties of source objects to the
+   * destination object. Source objects are applied from left to right.
+   * Subsequent sources overwrite property assignments of previous sources.
+   *
+   * **Note:** This method mutates `object` and is loosely based on
+   * [`Object.assign`](https://mdn.io/Object/assign).
+   *
+   * @static
+   * @memberOf _
+   * @since 0.10.0
+   * @category Object
+   * @param {Object} object The destination object.
+   * @param {...Object} [sources] The source objects.
+   * @returns {Object} Returns `object`.
+   * @see _.assignIn
+   * @example
+   *
+   * function Foo() {
+   *   this.a = 1;
+   * }
+   *
+   * function Bar() {
+   *   this.c = 3;
+   * }
+   *
+   * Foo.prototype.b = 2;
+   * Bar.prototype.d = 4;
+   *
+   * _.assign({ 'a': 0 }, new Foo, new Bar);
+   * // => { 'a': 1, 'c': 3 }
+   */
+  var assign = createAssigner(function(object, source) {
+    copyObject(source, nativeKeys(source), object);
+  });
+
+  /**
+   * This method is like `_.assign` except that it iterates over own and
+   * inherited source properties.
+   *
+   * **Note:** This method mutates `object`.
+   *
+   * @static
+   * @memberOf _
+   * @since 4.0.0
+   * @alias extend
+   * @category Object
+   * @param {Object} object The destination object.
+   * @param {...Object} [sources] The source objects.
+   * @returns {Object} Returns `object`.
+   * @see _.assign
+   * @example
+   *
+   * function Foo() {
+   *   this.a = 1;
+   * }
+   *
+   * function Bar() {
+   *   this.c = 3;
+   * }
+   *
+   * Foo.prototype.b = 2;
+   * Bar.prototype.d = 4;
+   *
+   * _.assignIn({ 'a': 0 }, new Foo, new Bar);
+   * // => { 'a': 1, 'b': 2, 'c': 3, 'd': 4 }
+   */
+  var assignIn = createAssigner(function(object, source) {
+    copyObject(source, nativeKeysIn(source), object);
+  });
+
+  /**
+   * This method is like `_.assignIn` except that it accepts `customizer`
+   * which is invoked to produce the assigned values. If `customizer` returns
+   * `undefined`, assignment is handled by the method instead. The `customizer`
+   * is invoked with five arguments: (objValue, srcValue, key, object, source).
+   *
+   * **Note:** This method mutates `object`.
+   *
+   * @static
+   * @memberOf _
+   * @since 4.0.0
+   * @alias extendWith
+   * @category Object
+   * @param {Object} object The destination object.
+   * @param {...Object} sources The source objects.
+   * @param {Function} [customizer] The function to customize assigned values.
+   * @returns {Object} Returns `object`.
+   * @see _.assignWith
+   * @example
+   *
+   * function customizer(objValue, srcValue) {
+   *   return _.isUndefined(objValue) ? srcValue : objValue;
+   * }
+   *
+   * var defaults = _.partialRight(_.assignInWith, customizer);
+   *
+   * defaults({ 'a': 1 }, { 'b': 2 }, { 'a': 3 });
+   * // => { 'a': 1, 'b': 2 }
+   */
+  var assignInWith = createAssigner(function(object, source, srcIndex, customizer) {
+    copyObject(source, keysIn(source), object, customizer);
+  });
+
+  /**
+   * Creates an object that inherits from the `prototype` object. If a
+   * `properties` object is given, its own enumerable string keyed properties
+   * are assigned to the created object.
+   *
+   * @static
+   * @memberOf _
+   * @since 2.3.0
+   * @category Object
+   * @param {Object} prototype The object to inherit from.
+   * @param {Object} [properties] The properties to assign to the object.
+   * @returns {Object} Returns the new object.
+   * @example
+   *
+   * function Shape() {
+   *   this.x = 0;
+   *   this.y = 0;
+   * }
+   *
+   * function Circle() {
+   *   Shape.call(this);
+   * }
+   *
+   * Circle.prototype = _.create(Shape.prototype, {
+   *   'constructor': Circle
+   * });
+   *
+   * var circle = new Circle;
+   * circle instanceof Circle;
+   * // => true
+   *
+   * circle instanceof Shape;
+   * // => true
+   */
+  function create(prototype, properties) {
+    var result = baseCreate(prototype);
+    return properties == null ? result : assign(result, properties);
+  }
+
+  /**
+   * Assigns own and inherited enumerable string keyed properties of source
+   * objects to the destination object for all destination properties that
+   * resolve to `undefined`. Source objects are applied from left to right.
+   * Once a property is set, additional values of the same property are ignored.
+   *
+   * **Note:** This method mutates `object`.
+   *
+   * @static
+   * @since 0.1.0
+   * @memberOf _
+   * @category Object
+   * @param {Object} object The destination object.
+   * @param {...Object} [sources] The source objects.
+   * @returns {Object} Returns `object`.
+   * @see _.defaultsDeep
+   * @example
+   *
+   * _.defaults({ 'a': 1 }, { 'b': 2 }, { 'a': 3 });
+   * // => { 'a': 1, 'b': 2 }
+   */
+  var defaults = baseRest(function(args) {
+    args.push(undefined, customDefaultsAssignIn);
+    return assignInWith.apply(undefined, args);
+  });
+
+  /**
+   * Checks if `path` is a direct property of `object`.
+   *
+   * @static
+   * @since 0.1.0
+   * @memberOf _
+   * @category Object
+   * @param {Object} object The object to query.
+   * @param {Array|string} path The path to check.
+   * @returns {boolean} Returns `true` if `path` exists, else `false`.
+   * @example
+   *
+   * var object = { 'a': { 'b': 2 } };
+   * var other = _.create({ 'a': _.create({ 'b': 2 }) });
+   *
+   * _.has(object, 'a');
+   * // => true
+   *
+   * _.has(object, 'a.b');
+   * // => true
+   *
+   * _.has(object, ['a', 'b']);
+   * // => true
+   *
+   * _.has(other, 'a');
+   * // => false
+   */
+  function has(object, path) {
+    return object != null && hasOwnProperty.call(object, path);
+  }
+
+  /**
+   * Creates an array of the own enumerable property names of `object`.
+   *
+   * **Note:** Non-object values are coerced to objects. See the
+   * [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+   * for more details.
+   *
+   * @static
+   * @since 0.1.0
+   * @memberOf _
+   * @category Object
+   * @param {Object} object The object to query.
+   * @returns {Array} Returns the array of property names.
+   * @example
+   *
+   * function Foo() {
+   *   this.a = 1;
+   *   this.b = 2;
+   * }
+   *
+   * Foo.prototype.c = 3;
+   *
+   * _.keys(new Foo);
+   * // => ['a', 'b'] (iteration order is not guaranteed)
+   *
+   * _.keys('hi');
+   * // => ['0', '1']
+   */
+  var keys = nativeKeys;
+
+  /**
+   * Creates an array of the own and inherited enumerable property names of `object`.
+   *
+   * **Note:** Non-object values are coerced to objects.
+   *
+   * @static
+   * @memberOf _
+   * @since 3.0.0
+   * @category Object
+   * @param {Object} object The object to query.
+   * @returns {Array} Returns the array of property names.
+   * @example
+   *
+   * function Foo() {
+   *   this.a = 1;
+   *   this.b = 2;
+   * }
+   *
+   * Foo.prototype.c = 3;
+   *
+   * _.keysIn(new Foo);
+   * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
+   */
+  var keysIn = nativeKeysIn;
+
+  /**
+   * Creates an object composed of the picked `object` properties.
+   *
+   * @static
+   * @since 0.1.0
+   * @memberOf _
+   * @category Object
+   * @param {Object} object The source object.
+   * @param {...(string|string[])} [paths] The property paths to pick.
+   * @returns {Object} Returns the new object.
+   * @example
+   *
+   * var object = { 'a': 1, 'b': '2', 'c': 3 };
+   *
+   * _.pick(object, ['a', 'c']);
+   * // => { 'a': 1, 'c': 3 }
+   */
+  var pick = flatRest(function(object, paths) {
+    return object == null ? {} : basePick(object, paths);
+  });
+
+  /**
+   * This method is like `_.get` except that if the resolved value is a
+   * function it's invoked with the `this` binding of its parent object and
+   * its result is returned.
+   *
+   * @static
+   * @since 0.1.0
+   * @memberOf _
+   * @category Object
+   * @param {Object} object The object to query.
+   * @param {Array|string} path The path of the property to resolve.
+   * @param {*} [defaultValue] The value returned for `undefined` resolved values.
+   * @returns {*} Returns the resolved value.
+   * @example
+   *
+   * var object = { 'a': [{ 'b': { 'c1': 3, 'c2': _.constant(4) } }] };
+   *
+   * _.result(object, 'a[0].b.c1');
+   * // => 3
+   *
+   * _.result(object, 'a[0].b.c2');
+   * // => 4
+   *
+   * _.result(object, 'a[0].b.c3', 'default');
+   * // => 'default'
+   *
+   * _.result(object, 'a[0].b.c3', _.constant('default'));
+   * // => 'default'
+   */
+  function result(object, path, defaultValue) {
+    var value = object == null ? undefined : object[path];
+    if (value === undefined) {
+      value = defaultValue;
+    }
+    return isFunction(value) ? value.call(object) : value;
+  }
+
+  /**
+   * Creates an array of the own enumerable string keyed property values of `object`.
+   *
+   * **Note:** Non-object values are coerced to objects.
+   *
+   * @static
+   * @since 0.1.0
+   * @memberOf _
+   * @category Object
+   * @param {Object} object The object to query.
+   * @returns {Array} Returns the array of property values.
+   * @example
+   *
+   * function Foo() {
+   *   this.a = 1;
+   *   this.b = 2;
+   * }
+   *
+   * Foo.prototype.c = 3;
+   *
+   * _.values(new Foo);
+   * // => [1, 2] (iteration order is not guaranteed)
+   *
+   * _.values('hi');
+   * // => ['h', 'i']
+   */
+  function values(object) {
+    return object == null ? [] : baseValues(object, keys(object));
+  }
+
+  /*------------------------------------------------------------------------*/
+
+  /**
+   * Converts the characters "&", "<", ">", '"', and "'" in `string` to their
+   * corresponding HTML entities.
+   *
+   * **Note:** No other characters are escaped. To escape additional
+   * characters use a third-party library like [_he_](https://mths.be/he).
+   *
+   * Though the ">" character is escaped for symmetry, characters like
+   * ">" and "/" don't need escaping in HTML and have no special meaning
+   * unless they're part of a tag or unquoted attribute value. See
+   * [Mathias Bynens's article](https://mathiasbynens.be/notes/ambiguous-ampersands)
+   * (under "semi-related fun fact") for more details.
+   *
+   * When working with HTML you should always
+   * [quote attribute values](http://wonko.com/post/html-escaping) to reduce
+   * XSS vectors.
+   *
+   * @static
+   * @since 0.1.0
+   * @memberOf _
+   * @category String
+   * @param {string} [string=''] The string to escape.
+   * @returns {string} Returns the escaped string.
+   * @example
+   *
+   * _.escape('fred, barney, & pebbles');
+   * // => 'fred, barney, &amp; pebbles'
+   */
+  function escape(string) {
+    string = toString(string);
+    return (string && reHasUnescapedHtml.test(string))
+      ? string.replace(reUnescapedHtml, escapeHtmlChar)
+      : string;
+  }
+
+  /*------------------------------------------------------------------------*/
+
+  /**
+   * This method returns the first argument it receives.
+   *
+   * @static
+   * @since 0.1.0
+   * @memberOf _
+   * @category Util
+   * @param {*} value Any value.
+   * @returns {*} Returns `value`.
+   * @example
+   *
+   * var object = { 'a': 1 };
+   *
+   * console.log(_.identity(object) === object);
+   * // => true
+   */
+  function identity(value) {
+    return value;
+  }
+
+  /**
+   * Creates a function that invokes `func` with the arguments of the created
+   * function. If `func` is a property name, the created function returns the
+   * property value for a given element. If `func` is an array or object, the
+   * created function returns `true` for elements that contain the equivalent
+   * source properties, otherwise it returns `false`.
+   *
+   * @static
+   * @since 4.0.0
+   * @memberOf _
+   * @category Util
+   * @param {*} [func=_.identity] The value to convert to a callback.
+   * @returns {Function} Returns the callback.
+   * @example
+   *
+   * var users = [
+   *   { 'user': 'barney', 'age': 36, 'active': true },
+   *   { 'user': 'fred',   'age': 40, 'active': false }
+   * ];
+   *
+   * // The `_.matches` iteratee shorthand.
+   * _.filter(users, _.iteratee({ 'user': 'barney', 'active': true }));
+   * // => [{ 'user': 'barney', 'age': 36, 'active': true }]
+   *
+   * // The `_.matchesProperty` iteratee shorthand.
+   * _.filter(users, _.iteratee(['user', 'fred']));
+   * // => [{ 'user': 'fred', 'age': 40 }]
+   *
+   * // The `_.property` iteratee shorthand.
+   * _.map(users, _.iteratee('user'));
+   * // => ['barney', 'fred']
+   *
+   * // Create custom iteratee shorthands.
+   * _.iteratee = _.wrap(_.iteratee, function(iteratee, func) {
+   *   return !_.isRegExp(func) ? iteratee(func) : function(string) {
+   *     return func.test(string);
+   *   };
+   * });
+   *
+   * _.filter(['abc', 'def'], /ef/);
+   * // => ['def']
+   */
+  var iteratee = baseIteratee;
+
+  /**
+   * Creates a function that performs a partial deep comparison between a given
+   * object and `source`, returning `true` if the given object has equivalent
+   * property values, else `false`.
+   *
+   * **Note:** The created function is equivalent to `_.isMatch` with `source`
+   * partially applied.
+   *
+   * Partial comparisons will match empty array and empty object `source`
+   * values against any array or object value, respectively. See `_.isEqual`
+   * for a list of supported value comparisons.
+   *
+   * @static
+   * @memberOf _
+   * @since 3.0.0
+   * @category Util
+   * @param {Object} source The object of property values to match.
+   * @returns {Function} Returns the new spec function.
+   * @example
+   *
+   * var objects = [
+   *   { 'a': 1, 'b': 2, 'c': 3 },
+   *   { 'a': 4, 'b': 5, 'c': 6 }
+   * ];
+   *
+   * _.filter(objects, _.matches({ 'a': 4, 'c': 6 }));
+   * // => [{ 'a': 4, 'b': 5, 'c': 6 }]
+   */
+  function matches(source) {
+    return baseMatches(assign({}, source));
+  }
+
+  /**
+   * Adds all own enumerable string keyed function properties of a source
+   * object to the destination object. If `object` is a function, then methods
+   * are added to its prototype as well.
+   *
+   * **Note:** Use `_.runInContext` to create a pristine `lodash` function to
+   * avoid conflicts caused by modifying the original.
+   *
+   * @static
+   * @since 0.1.0
+   * @memberOf _
+   * @category Util
+   * @param {Function|Object} [object=lodash] The destination object.
+   * @param {Object} source The object of functions to add.
+   * @param {Object} [options={}] The options object.
+   * @param {boolean} [options.chain=true] Specify whether mixins are chainable.
+   * @returns {Function|Object} Returns `object`.
+   * @example
+   *
+   * function vowels(string) {
+   *   return _.filter(string, function(v) {
+   *     return /[aeiou]/i.test(v);
+   *   });
+   * }
+   *
+   * _.mixin({ 'vowels': vowels });
+   * _.vowels('fred');
+   * // => ['e']
+   *
+   * _('fred').vowels().value();
+   * // => ['e']
+   *
+   * _.mixin({ 'vowels': vowels }, { 'chain': false });
+   * _('fred').vowels();
+   * // => ['e']
+   */
+  function mixin(object, source, options) {
+    var props = keys(source),
+        methodNames = baseFunctions(source, props);
+
+    if (options == null &&
+        !(isObject(source) && (methodNames.length || !props.length))) {
+      options = source;
+      source = object;
+      object = this;
+      methodNames = baseFunctions(source, keys(source));
+    }
+    var chain = !(isObject(options) && 'chain' in options) || !!options.chain,
+        isFunc = isFunction(object);
+
+    baseEach(methodNames, function(methodName) {
+      var func = source[methodName];
+      object[methodName] = func;
+      if (isFunc) {
+        object.prototype[methodName] = function() {
+          var chainAll = this.__chain__;
+          if (chain || chainAll) {
+            var result = object(this.__wrapped__),
+                actions = result.__actions__ = copyArray(this.__actions__);
+
+            actions.push({ 'func': func, 'args': arguments, 'thisArg': object });
+            result.__chain__ = chainAll;
+            return result;
+          }
+          return func.apply(object, arrayPush([this.value()], arguments));
+        };
+      }
+    });
+
+    return object;
+  }
+
+  /**
+   * Reverts the `_` variable to its previous value and returns a reference to
+   * the `lodash` function.
+   *
+   * @static
+   * @since 0.1.0
+   * @memberOf _
+   * @category Util
+   * @returns {Function} Returns the `lodash` function.
+   * @example
+   *
+   * var lodash = _.noConflict();
+   */
+  function noConflict() {
+    if (root._ === this) {
+      root._ = oldDash;
+    }
+    return this;
+  }
+
+  /**
+   * This method returns `undefined`.
+   *
+   * @static
+   * @memberOf _
+   * @since 2.3.0
+   * @category Util
+   * @example
+   *
+   * _.times(2, _.noop);
+   * // => [undefined, undefined]
+   */
+  function noop() {
+    // No operation performed.
+  }
+
+  /**
+   * Generates a unique ID. If `prefix` is given, the ID is appended to it.
+   *
+   * @static
+   * @since 0.1.0
+   * @memberOf _
+   * @category Util
+   * @param {string} [prefix=''] The value to prefix the ID with.
+   * @returns {string} Returns the unique ID.
+   * @example
+   *
+   * _.uniqueId('contact_');
+   * // => 'contact_104'
+   *
+   * _.uniqueId();
+   * // => '105'
+   */
+  function uniqueId(prefix) {
+    var id = ++idCounter;
+    return toString(prefix) + id;
+  }
+
+  /*------------------------------------------------------------------------*/
+
+  /**
+   * Computes the maximum value of `array`. If `array` is empty or falsey,
+   * `undefined` is returned.
+   *
+   * @static
+   * @since 0.1.0
+   * @memberOf _
+   * @category Math
+   * @param {Array} array The array to iterate over.
+   * @returns {*} Returns the maximum value.
+   * @example
+   *
+   * _.max([4, 2, 8, 6]);
+   * // => 8
+   *
+   * _.max([]);
+   * // => undefined
+   */
+  function max(array) {
+    return (array && array.length)
+      ? baseExtremum(array, identity, baseGt)
+      : undefined;
+  }
+
+  /**
+   * Computes the minimum value of `array`. If `array` is empty or falsey,
+   * `undefined` is returned.
+   *
+   * @static
+   * @since 0.1.0
+   * @memberOf _
+   * @category Math
+   * @param {Array} array The array to iterate over.
+   * @returns {*} Returns the minimum value.
+   * @example
+   *
+   * _.min([4, 2, 8, 6]);
+   * // => 2
+   *
+   * _.min([]);
+   * // => undefined
+   */
+  function min(array) {
+    return (array && array.length)
+      ? baseExtremum(array, identity, baseLt)
+      : undefined;
+  }
+
+  /*------------------------------------------------------------------------*/
+
+  // Add methods that return wrapped values in chain sequences.
+  lodash.assignIn = assignIn;
+  lodash.before = before;
+  lodash.bind = bind;
+  lodash.chain = chain;
+  lodash.compact = compact;
+  lodash.concat = concat;
+  lodash.create = create;
+  lodash.defaults = defaults;
+  lodash.defer = defer;
+  lodash.delay = delay;
+  lodash.filter = filter;
+  lodash.flatten = flatten;
+  lodash.flattenDeep = flattenDeep;
+  lodash.iteratee = iteratee;
+  lodash.keys = keys;
+  lodash.map = map;
+  lodash.matches = matches;
+  lodash.mixin = mixin;
+  lodash.negate = negate;
+  lodash.once = once;
+  lodash.pick = pick;
+  lodash.slice = slice;
+  lodash.sortBy = sortBy;
+  lodash.tap = tap;
+  lodash.thru = thru;
+  lodash.toArray = toArray;
+  lodash.values = values;
+
+  // Add aliases.
+  lodash.extend = assignIn;
+
+  // Add methods to `lodash.prototype`.
+  mixin(lodash, lodash);
+
+  /*------------------------------------------------------------------------*/
+
+  // Add methods that return unwrapped values in chain sequences.
+  lodash.clone = clone;
+  lodash.escape = escape;
+  lodash.every = every;
+  lodash.find = find;
+  lodash.forEach = forEach;
+  lodash.has = has;
+  lodash.head = head;
+  lodash.identity = identity;
+  lodash.indexOf = indexOf;
+  lodash.isArguments = isArguments;
+  lodash.isArray = isArray;
+  lodash.isBoolean = isBoolean;
+  lodash.isDate = isDate;
+  lodash.isEmpty = isEmpty;
+  lodash.isEqual = isEqual;
+  lodash.isFinite = isFinite;
+  lodash.isFunction = isFunction;
+  lodash.isNaN = isNaN;
+  lodash.isNull = isNull;
+  lodash.isNumber = isNumber;
+  lodash.isObject = isObject;
+  lodash.isRegExp = isRegExp;
+  lodash.isString = isString;
+  lodash.isUndefined = isUndefined;
+  lodash.last = last;
+  lodash.max = max;
+  lodash.min = min;
+  lodash.noConflict = noConflict;
+  lodash.noop = noop;
+  lodash.reduce = reduce;
+  lodash.result = result;
+  lodash.size = size;
+  lodash.some = some;
+  lodash.uniqueId = uniqueId;
+
+  // Add aliases.
+  lodash.each = forEach;
+  lodash.first = head;
+
+  mixin(lodash, (function() {
+    var source = {};
+    baseForOwn(lodash, function(func, methodName) {
+      if (!hasOwnProperty.call(lodash.prototype, methodName)) {
+        source[methodName] = func;
+      }
+    });
+    return source;
+  }()), { 'chain': false });
+
+  /*------------------------------------------------------------------------*/
+
+  /**
+   * The semantic version number.
+   *
+   * @static
+   * @memberOf _
+   * @type {string}
+   */
+  lodash.VERSION = VERSION;
+
+  // Add `Array` methods to `lodash.prototype`.
+  baseEach(['pop', 'join', 'replace', 'reverse', 'split', 'push', 'shift', 'sort', 'splice', 'unshift'], function(methodName) {
+    var func = (/^(?:replace|split)$/.test(methodName) ? String.prototype : arrayProto)[methodName],
+        chainName = /^(?:push|sort|unshift)$/.test(methodName) ? 'tap' : 'thru',
+        retUnwrapped = /^(?:pop|join|replace|shift)$/.test(methodName);
+
+    lodash.prototype[methodName] = function() {
+      var args = arguments;
+      if (retUnwrapped && !this.__chain__) {
+        var value = this.value();
+        return func.apply(isArray(value) ? value : [], args);
+      }
+      return this[chainName](function(value) {
+        return func.apply(isArray(value) ? value : [], args);
+      });
+    };
+  });
+
+  // Add chain sequence methods to the `lodash` wrapper.
+  lodash.prototype.toJSON = lodash.prototype.valueOf = lodash.prototype.value = wrapperValue;
+
+  /*--------------------------------------------------------------------------*/
+
+  // Some AMD build optimizers, like r.js, check for condition patterns like:
+  if (true) {
+    // Expose Lodash on the global object to prevent errors when Lodash is
+    // loaded by a script tag in the presence of an AMD loader.
+    // See http://requirejs.org/docs/errors.html#mismatch for more details.
+    // Use `_.noConflict` to remove Lodash from the global object.
+    root._ = lodash;
+
+    // Define as an anonymous module so, through path mapping, it can be
+    // referenced as the "underscore" module.
+    !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
+      return lodash;
+    }.call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  }
+  // Check for `exports` after `define` in case a build optimizer adds it.
+  else if (freeModule) {
+    // Export for Node.js.
+    (freeModule.exports = lodash)._ = lodash;
+    // Export for CommonJS support.
+    freeExports._ = lodash;
+  }
+  else {
+    // Export to the global object.
+    root._ = lodash;
+  }
+}.call(this));
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(51)(module)))
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -3419,7 +4557,107 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 2 */
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(0);
+var normalizeHeaderName = __webpack_require__(32);
+
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(9);
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(9);
+  }
+  return adapter;
+}
+
+var defaults = {
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports) {
 
 var g;
@@ -3446,9 +4684,6 @@ module.exports = g;
 
 
 /***/ }),
-/* 3 */,
-/* 4 */,
-/* 5 */,
 /* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5915,7 +7150,7 @@ if (inBrowser && window.Vue) {
 
 /* harmony default export */ __webpack_exports__["default"] = VueRouter;
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3)))
 
 /***/ }),
 /* 7 */
@@ -15242,20 +16477,11269 @@ Vue$3.compile = compileToFunctions;
 
 /* harmony default export */ __webpack_exports__["default"] = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1), __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3), __webpack_require__(5)))
 
 /***/ }),
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(18);
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(0);
+var settle = __webpack_require__(24);
+var buildURL = __webpack_require__(27);
+var parseHeaders = __webpack_require__(33);
+var isURLSameOrigin = __webpack_require__(31);
+var createError = __webpack_require__(12);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(26);
+
+module.exports = function xhrAdapter(config) {
+  return new Promise(function dispatchXhrRequest(resolve, reject) {
+    var requestData = config.data;
+    var requestHeaders = config.headers;
+
+    if (utils.isFormData(requestData)) {
+      delete requestHeaders['Content-Type']; // Let the browser set it
+    }
+
+    var request = new XMLHttpRequest();
+    var loadEvent = 'onreadystatechange';
+    var xDomain = false;
+
+    // For IE 8/9 CORS support
+    // Only supports POST and GET calls and doesn't returns the response headers.
+    // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
+    if (process.env.NODE_ENV !== 'test' &&
+        typeof window !== 'undefined' &&
+        window.XDomainRequest && !('withCredentials' in request) &&
+        !isURLSameOrigin(config.url)) {
+      request = new window.XDomainRequest();
+      loadEvent = 'onload';
+      xDomain = true;
+      request.onprogress = function handleProgress() {};
+      request.ontimeout = function handleTimeout() {};
+    }
+
+    // HTTP basic authentication
+    if (config.auth) {
+      var username = config.auth.username || '';
+      var password = config.auth.password || '';
+      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
+    }
+
+    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
+
+    // Set the request timeout in MS
+    request.timeout = config.timeout;
+
+    // Listen for ready state
+    request[loadEvent] = function handleLoad() {
+      if (!request || (request.readyState !== 4 && !xDomain)) {
+        return;
+      }
+
+      // The request errored out and we didn't get a response, this will be
+      // handled by onerror instead
+      // With one exception: request that using file: protocol, most browsers
+      // will return status as 0 even though it's a successful request
+      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
+        return;
+      }
+
+      // Prepare the response
+      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
+      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
+      var response = {
+        data: responseData,
+        // IE sends 1223 instead of 204 (https://github.com/mzabriskie/axios/issues/201)
+        status: request.status === 1223 ? 204 : request.status,
+        statusText: request.status === 1223 ? 'No Content' : request.statusText,
+        headers: responseHeaders,
+        config: config,
+        request: request
+      };
+
+      settle(resolve, reject, response);
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle low level network errors
+    request.onerror = function handleError() {
+      // Real errors are hidden from us by the browser
+      // onerror should only fire if it's a network error
+      reject(createError('Network Error', config));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle timeout
+    request.ontimeout = function handleTimeout() {
+      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED'));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Add xsrf header
+    // This is only done if running in a standard browser environment.
+    // Specifically not if we're in a web worker, or react-native.
+    if (utils.isStandardBrowserEnv()) {
+      var cookies = __webpack_require__(29);
+
+      // Add xsrf header
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
+          cookies.read(config.xsrfCookieName) :
+          undefined;
+
+      if (xsrfValue) {
+        requestHeaders[config.xsrfHeaderName] = xsrfValue;
+      }
+    }
+
+    // Add headers to the request
+    if ('setRequestHeader' in request) {
+      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
+        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
+          // Remove Content-Type if data is undefined
+          delete requestHeaders[key];
+        } else {
+          // Otherwise add header to the request
+          request.setRequestHeader(key, val);
+        }
+      });
+    }
+
+    // Add withCredentials to request if needed
+    if (config.withCredentials) {
+      request.withCredentials = true;
+    }
+
+    // Add responseType to request if needed
+    if (config.responseType) {
+      try {
+        request.responseType = config.responseType;
+      } catch (e) {
+        // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
+        // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
+        if (config.responseType !== 'json') {
+          throw e;
+        }
+      }
+    }
+
+    // Handle progress if needed
+    if (typeof config.onDownloadProgress === 'function') {
+      request.addEventListener('progress', config.onDownloadProgress);
+    }
+
+    // Not all browsers support upload events
+    if (typeof config.onUploadProgress === 'function' && request.upload) {
+      request.upload.addEventListener('progress', config.onUploadProgress);
+    }
+
+    if (config.cancelToken) {
+      // Handle cancellation
+      config.cancelToken.promise.then(function onCanceled(cancel) {
+        if (!request) {
+          return;
+        }
+
+        request.abort();
+        reject(cancel);
+        // Clean up request
+        request = null;
+      });
+    }
+
+    if (requestData === undefined) {
+      requestData = null;
+    }
+
+    // Send the request
+    request.send(requestData);
+  });
+};
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * A `Cancel` is an object that is thrown when an operation is canceled.
+ *
+ * @class
+ * @param {string=} message The message.
+ */
+function Cancel(message) {
+  this.message = message;
+}
+
+Cancel.prototype.toString = function toString() {
+  return 'Cancel' + (this.message ? ': ' + this.message : '');
+};
+
+Cancel.prototype.__CANCEL__ = true;
+
+module.exports = Cancel;
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function isCancel(value) {
+  return !!(value && value.__CANCEL__);
+};
+
+
+/***/ }),
 /* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var enhanceError = __webpack_require__(23);
+
+/**
+ * Create an Error with the specified message, config, error code, and response.
+ *
+ * @param {string} message The error message.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ @ @param {Object} [response] The response.
+ * @returns {Error} The created error.
+ */
+module.exports = function createError(message, config, code, response) {
+  var error = new Error(message);
+  return enhanceError(error, config, code, response);
+};
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function bind(fn, thisArg) {
+  return function wrap() {
+    var args = new Array(arguments.length);
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i];
+    }
+    return fn.apply(thisArg, args);
+  };
+};
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @license  MIT
+ */
+/* eslint-disable no-proto */
+
+
+
+var base64 = __webpack_require__(42)
+var ieee754 = __webpack_require__(44)
+var isArray = __webpack_require__(45)
+
+exports.Buffer = Buffer
+exports.SlowBuffer = SlowBuffer
+exports.INSPECT_MAX_BYTES = 50
+
+/**
+ * If `Buffer.TYPED_ARRAY_SUPPORT`:
+ *   === true    Use Uint8Array implementation (fastest)
+ *   === false   Use Object implementation (most compatible, even IE6)
+ *
+ * Browsers that support typed arrays are IE 10+, Firefox 4+, Chrome 7+, Safari 5.1+,
+ * Opera 11.6+, iOS 4.2+.
+ *
+ * Due to various browser bugs, sometimes the Object implementation will be used even
+ * when the browser supports typed arrays.
+ *
+ * Note:
+ *
+ *   - Firefox 4-29 lacks support for adding new properties to `Uint8Array` instances,
+ *     See: https://bugzilla.mozilla.org/show_bug.cgi?id=695438.
+ *
+ *   - Chrome 9-10 is missing the `TypedArray.prototype.subarray` function.
+ *
+ *   - IE10 has a broken `TypedArray.prototype.subarray` function which returns arrays of
+ *     incorrect length in some situations.
+
+ * We detect these buggy browsers and set `Buffer.TYPED_ARRAY_SUPPORT` to `false` so they
+ * get the Object implementation, which is slower but behaves correctly.
+ */
+Buffer.TYPED_ARRAY_SUPPORT = global.TYPED_ARRAY_SUPPORT !== undefined
+  ? global.TYPED_ARRAY_SUPPORT
+  : typedArraySupport()
+
+/*
+ * Export kMaxLength after typed array support is determined.
+ */
+exports.kMaxLength = kMaxLength()
+
+function typedArraySupport () {
+  try {
+    var arr = new Uint8Array(1)
+    arr.__proto__ = {__proto__: Uint8Array.prototype, foo: function () { return 42 }}
+    return arr.foo() === 42 && // typed array instances can be augmented
+        typeof arr.subarray === 'function' && // chrome 9-10 lack `subarray`
+        arr.subarray(1, 1).byteLength === 0 // ie10 has broken `subarray`
+  } catch (e) {
+    return false
+  }
+}
+
+function kMaxLength () {
+  return Buffer.TYPED_ARRAY_SUPPORT
+    ? 0x7fffffff
+    : 0x3fffffff
+}
+
+function createBuffer (that, length) {
+  if (kMaxLength() < length) {
+    throw new RangeError('Invalid typed array length')
+  }
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    // Return an augmented `Uint8Array` instance, for best performance
+    that = new Uint8Array(length)
+    that.__proto__ = Buffer.prototype
+  } else {
+    // Fallback: Return an object instance of the Buffer class
+    if (that === null) {
+      that = new Buffer(length)
+    }
+    that.length = length
+  }
+
+  return that
+}
+
+/**
+ * The Buffer constructor returns instances of `Uint8Array` that have their
+ * prototype changed to `Buffer.prototype`. Furthermore, `Buffer` is a subclass of
+ * `Uint8Array`, so the returned instances will have all the node `Buffer` methods
+ * and the `Uint8Array` methods. Square bracket notation works as expected -- it
+ * returns a single octet.
+ *
+ * The `Uint8Array` prototype remains unmodified.
+ */
+
+function Buffer (arg, encodingOrOffset, length) {
+  if (!Buffer.TYPED_ARRAY_SUPPORT && !(this instanceof Buffer)) {
+    return new Buffer(arg, encodingOrOffset, length)
+  }
+
+  // Common case.
+  if (typeof arg === 'number') {
+    if (typeof encodingOrOffset === 'string') {
+      throw new Error(
+        'If encoding is specified then the first argument must be a string'
+      )
+    }
+    return allocUnsafe(this, arg)
+  }
+  return from(this, arg, encodingOrOffset, length)
+}
+
+Buffer.poolSize = 8192 // not used by this implementation
+
+// TODO: Legacy, not needed anymore. Remove in next major version.
+Buffer._augment = function (arr) {
+  arr.__proto__ = Buffer.prototype
+  return arr
+}
+
+function from (that, value, encodingOrOffset, length) {
+  if (typeof value === 'number') {
+    throw new TypeError('"value" argument must not be a number')
+  }
+
+  if (typeof ArrayBuffer !== 'undefined' && value instanceof ArrayBuffer) {
+    return fromArrayBuffer(that, value, encodingOrOffset, length)
+  }
+
+  if (typeof value === 'string') {
+    return fromString(that, value, encodingOrOffset)
+  }
+
+  return fromObject(that, value)
+}
+
+/**
+ * Functionally equivalent to Buffer(arg, encoding) but throws a TypeError
+ * if value is a number.
+ * Buffer.from(str[, encoding])
+ * Buffer.from(array)
+ * Buffer.from(buffer)
+ * Buffer.from(arrayBuffer[, byteOffset[, length]])
+ **/
+Buffer.from = function (value, encodingOrOffset, length) {
+  return from(null, value, encodingOrOffset, length)
+}
+
+if (Buffer.TYPED_ARRAY_SUPPORT) {
+  Buffer.prototype.__proto__ = Uint8Array.prototype
+  Buffer.__proto__ = Uint8Array
+  if (typeof Symbol !== 'undefined' && Symbol.species &&
+      Buffer[Symbol.species] === Buffer) {
+    // Fix subarray() in ES2016. See: https://github.com/feross/buffer/pull/97
+    Object.defineProperty(Buffer, Symbol.species, {
+      value: null,
+      configurable: true
+    })
+  }
+}
+
+function assertSize (size) {
+  if (typeof size !== 'number') {
+    throw new TypeError('"size" argument must be a number')
+  } else if (size < 0) {
+    throw new RangeError('"size" argument must not be negative')
+  }
+}
+
+function alloc (that, size, fill, encoding) {
+  assertSize(size)
+  if (size <= 0) {
+    return createBuffer(that, size)
+  }
+  if (fill !== undefined) {
+    // Only pay attention to encoding if it's a string. This
+    // prevents accidentally sending in a number that would
+    // be interpretted as a start offset.
+    return typeof encoding === 'string'
+      ? createBuffer(that, size).fill(fill, encoding)
+      : createBuffer(that, size).fill(fill)
+  }
+  return createBuffer(that, size)
+}
+
+/**
+ * Creates a new filled Buffer instance.
+ * alloc(size[, fill[, encoding]])
+ **/
+Buffer.alloc = function (size, fill, encoding) {
+  return alloc(null, size, fill, encoding)
+}
+
+function allocUnsafe (that, size) {
+  assertSize(size)
+  that = createBuffer(that, size < 0 ? 0 : checked(size) | 0)
+  if (!Buffer.TYPED_ARRAY_SUPPORT) {
+    for (var i = 0; i < size; ++i) {
+      that[i] = 0
+    }
+  }
+  return that
+}
+
+/**
+ * Equivalent to Buffer(num), by default creates a non-zero-filled Buffer instance.
+ * */
+Buffer.allocUnsafe = function (size) {
+  return allocUnsafe(null, size)
+}
+/**
+ * Equivalent to SlowBuffer(num), by default creates a non-zero-filled Buffer instance.
+ */
+Buffer.allocUnsafeSlow = function (size) {
+  return allocUnsafe(null, size)
+}
+
+function fromString (that, string, encoding) {
+  if (typeof encoding !== 'string' || encoding === '') {
+    encoding = 'utf8'
+  }
+
+  if (!Buffer.isEncoding(encoding)) {
+    throw new TypeError('"encoding" must be a valid string encoding')
+  }
+
+  var length = byteLength(string, encoding) | 0
+  that = createBuffer(that, length)
+
+  var actual = that.write(string, encoding)
+
+  if (actual !== length) {
+    // Writing a hex string, for example, that contains invalid characters will
+    // cause everything after the first invalid character to be ignored. (e.g.
+    // 'abxxcd' will be treated as 'ab')
+    that = that.slice(0, actual)
+  }
+
+  return that
+}
+
+function fromArrayLike (that, array) {
+  var length = array.length < 0 ? 0 : checked(array.length) | 0
+  that = createBuffer(that, length)
+  for (var i = 0; i < length; i += 1) {
+    that[i] = array[i] & 255
+  }
+  return that
+}
+
+function fromArrayBuffer (that, array, byteOffset, length) {
+  array.byteLength // this throws if `array` is not a valid ArrayBuffer
+
+  if (byteOffset < 0 || array.byteLength < byteOffset) {
+    throw new RangeError('\'offset\' is out of bounds')
+  }
+
+  if (array.byteLength < byteOffset + (length || 0)) {
+    throw new RangeError('\'length\' is out of bounds')
+  }
+
+  if (byteOffset === undefined && length === undefined) {
+    array = new Uint8Array(array)
+  } else if (length === undefined) {
+    array = new Uint8Array(array, byteOffset)
+  } else {
+    array = new Uint8Array(array, byteOffset, length)
+  }
+
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    // Return an augmented `Uint8Array` instance, for best performance
+    that = array
+    that.__proto__ = Buffer.prototype
+  } else {
+    // Fallback: Return an object instance of the Buffer class
+    that = fromArrayLike(that, array)
+  }
+  return that
+}
+
+function fromObject (that, obj) {
+  if (Buffer.isBuffer(obj)) {
+    var len = checked(obj.length) | 0
+    that = createBuffer(that, len)
+
+    if (that.length === 0) {
+      return that
+    }
+
+    obj.copy(that, 0, 0, len)
+    return that
+  }
+
+  if (obj) {
+    if ((typeof ArrayBuffer !== 'undefined' &&
+        obj.buffer instanceof ArrayBuffer) || 'length' in obj) {
+      if (typeof obj.length !== 'number' || isnan(obj.length)) {
+        return createBuffer(that, 0)
+      }
+      return fromArrayLike(that, obj)
+    }
+
+    if (obj.type === 'Buffer' && isArray(obj.data)) {
+      return fromArrayLike(that, obj.data)
+    }
+  }
+
+  throw new TypeError('First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.')
+}
+
+function checked (length) {
+  // Note: cannot use `length < kMaxLength()` here because that fails when
+  // length is NaN (which is otherwise coerced to zero.)
+  if (length >= kMaxLength()) {
+    throw new RangeError('Attempt to allocate Buffer larger than maximum ' +
+                         'size: 0x' + kMaxLength().toString(16) + ' bytes')
+  }
+  return length | 0
+}
+
+function SlowBuffer (length) {
+  if (+length != length) { // eslint-disable-line eqeqeq
+    length = 0
+  }
+  return Buffer.alloc(+length)
+}
+
+Buffer.isBuffer = function isBuffer (b) {
+  return !!(b != null && b._isBuffer)
+}
+
+Buffer.compare = function compare (a, b) {
+  if (!Buffer.isBuffer(a) || !Buffer.isBuffer(b)) {
+    throw new TypeError('Arguments must be Buffers')
+  }
+
+  if (a === b) return 0
+
+  var x = a.length
+  var y = b.length
+
+  for (var i = 0, len = Math.min(x, y); i < len; ++i) {
+    if (a[i] !== b[i]) {
+      x = a[i]
+      y = b[i]
+      break
+    }
+  }
+
+  if (x < y) return -1
+  if (y < x) return 1
+  return 0
+}
+
+Buffer.isEncoding = function isEncoding (encoding) {
+  switch (String(encoding).toLowerCase()) {
+    case 'hex':
+    case 'utf8':
+    case 'utf-8':
+    case 'ascii':
+    case 'latin1':
+    case 'binary':
+    case 'base64':
+    case 'ucs2':
+    case 'ucs-2':
+    case 'utf16le':
+    case 'utf-16le':
+      return true
+    default:
+      return false
+  }
+}
+
+Buffer.concat = function concat (list, length) {
+  if (!isArray(list)) {
+    throw new TypeError('"list" argument must be an Array of Buffers')
+  }
+
+  if (list.length === 0) {
+    return Buffer.alloc(0)
+  }
+
+  var i
+  if (length === undefined) {
+    length = 0
+    for (i = 0; i < list.length; ++i) {
+      length += list[i].length
+    }
+  }
+
+  var buffer = Buffer.allocUnsafe(length)
+  var pos = 0
+  for (i = 0; i < list.length; ++i) {
+    var buf = list[i]
+    if (!Buffer.isBuffer(buf)) {
+      throw new TypeError('"list" argument must be an Array of Buffers')
+    }
+    buf.copy(buffer, pos)
+    pos += buf.length
+  }
+  return buffer
+}
+
+function byteLength (string, encoding) {
+  if (Buffer.isBuffer(string)) {
+    return string.length
+  }
+  if (typeof ArrayBuffer !== 'undefined' && typeof ArrayBuffer.isView === 'function' &&
+      (ArrayBuffer.isView(string) || string instanceof ArrayBuffer)) {
+    return string.byteLength
+  }
+  if (typeof string !== 'string') {
+    string = '' + string
+  }
+
+  var len = string.length
+  if (len === 0) return 0
+
+  // Use a for loop to avoid recursion
+  var loweredCase = false
+  for (;;) {
+    switch (encoding) {
+      case 'ascii':
+      case 'latin1':
+      case 'binary':
+        return len
+      case 'utf8':
+      case 'utf-8':
+      case undefined:
+        return utf8ToBytes(string).length
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return len * 2
+      case 'hex':
+        return len >>> 1
+      case 'base64':
+        return base64ToBytes(string).length
+      default:
+        if (loweredCase) return utf8ToBytes(string).length // assume utf8
+        encoding = ('' + encoding).toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+Buffer.byteLength = byteLength
+
+function slowToString (encoding, start, end) {
+  var loweredCase = false
+
+  // No need to verify that "this.length <= MAX_UINT32" since it's a read-only
+  // property of a typed array.
+
+  // This behaves neither like String nor Uint8Array in that we set start/end
+  // to their upper/lower bounds if the value passed is out of range.
+  // undefined is handled specially as per ECMA-262 6th Edition,
+  // Section 13.3.3.7 Runtime Semantics: KeyedBindingInitialization.
+  if (start === undefined || start < 0) {
+    start = 0
+  }
+  // Return early if start > this.length. Done here to prevent potential uint32
+  // coercion fail below.
+  if (start > this.length) {
+    return ''
+  }
+
+  if (end === undefined || end > this.length) {
+    end = this.length
+  }
+
+  if (end <= 0) {
+    return ''
+  }
+
+  // Force coersion to uint32. This will also coerce falsey/NaN values to 0.
+  end >>>= 0
+  start >>>= 0
+
+  if (end <= start) {
+    return ''
+  }
+
+  if (!encoding) encoding = 'utf8'
+
+  while (true) {
+    switch (encoding) {
+      case 'hex':
+        return hexSlice(this, start, end)
+
+      case 'utf8':
+      case 'utf-8':
+        return utf8Slice(this, start, end)
+
+      case 'ascii':
+        return asciiSlice(this, start, end)
+
+      case 'latin1':
+      case 'binary':
+        return latin1Slice(this, start, end)
+
+      case 'base64':
+        return base64Slice(this, start, end)
+
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return utf16leSlice(this, start, end)
+
+      default:
+        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
+        encoding = (encoding + '').toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+
+// The property is used by `Buffer.isBuffer` and `is-buffer` (in Safari 5-7) to detect
+// Buffer instances.
+Buffer.prototype._isBuffer = true
+
+function swap (b, n, m) {
+  var i = b[n]
+  b[n] = b[m]
+  b[m] = i
+}
+
+Buffer.prototype.swap16 = function swap16 () {
+  var len = this.length
+  if (len % 2 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 16-bits')
+  }
+  for (var i = 0; i < len; i += 2) {
+    swap(this, i, i + 1)
+  }
+  return this
+}
+
+Buffer.prototype.swap32 = function swap32 () {
+  var len = this.length
+  if (len % 4 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 32-bits')
+  }
+  for (var i = 0; i < len; i += 4) {
+    swap(this, i, i + 3)
+    swap(this, i + 1, i + 2)
+  }
+  return this
+}
+
+Buffer.prototype.swap64 = function swap64 () {
+  var len = this.length
+  if (len % 8 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 64-bits')
+  }
+  for (var i = 0; i < len; i += 8) {
+    swap(this, i, i + 7)
+    swap(this, i + 1, i + 6)
+    swap(this, i + 2, i + 5)
+    swap(this, i + 3, i + 4)
+  }
+  return this
+}
+
+Buffer.prototype.toString = function toString () {
+  var length = this.length | 0
+  if (length === 0) return ''
+  if (arguments.length === 0) return utf8Slice(this, 0, length)
+  return slowToString.apply(this, arguments)
+}
+
+Buffer.prototype.equals = function equals (b) {
+  if (!Buffer.isBuffer(b)) throw new TypeError('Argument must be a Buffer')
+  if (this === b) return true
+  return Buffer.compare(this, b) === 0
+}
+
+Buffer.prototype.inspect = function inspect () {
+  var str = ''
+  var max = exports.INSPECT_MAX_BYTES
+  if (this.length > 0) {
+    str = this.toString('hex', 0, max).match(/.{2}/g).join(' ')
+    if (this.length > max) str += ' ... '
+  }
+  return '<Buffer ' + str + '>'
+}
+
+Buffer.prototype.compare = function compare (target, start, end, thisStart, thisEnd) {
+  if (!Buffer.isBuffer(target)) {
+    throw new TypeError('Argument must be a Buffer')
+  }
+
+  if (start === undefined) {
+    start = 0
+  }
+  if (end === undefined) {
+    end = target ? target.length : 0
+  }
+  if (thisStart === undefined) {
+    thisStart = 0
+  }
+  if (thisEnd === undefined) {
+    thisEnd = this.length
+  }
+
+  if (start < 0 || end > target.length || thisStart < 0 || thisEnd > this.length) {
+    throw new RangeError('out of range index')
+  }
+
+  if (thisStart >= thisEnd && start >= end) {
+    return 0
+  }
+  if (thisStart >= thisEnd) {
+    return -1
+  }
+  if (start >= end) {
+    return 1
+  }
+
+  start >>>= 0
+  end >>>= 0
+  thisStart >>>= 0
+  thisEnd >>>= 0
+
+  if (this === target) return 0
+
+  var x = thisEnd - thisStart
+  var y = end - start
+  var len = Math.min(x, y)
+
+  var thisCopy = this.slice(thisStart, thisEnd)
+  var targetCopy = target.slice(start, end)
+
+  for (var i = 0; i < len; ++i) {
+    if (thisCopy[i] !== targetCopy[i]) {
+      x = thisCopy[i]
+      y = targetCopy[i]
+      break
+    }
+  }
+
+  if (x < y) return -1
+  if (y < x) return 1
+  return 0
+}
+
+// Finds either the first index of `val` in `buffer` at offset >= `byteOffset`,
+// OR the last index of `val` in `buffer` at offset <= `byteOffset`.
+//
+// Arguments:
+// - buffer - a Buffer to search
+// - val - a string, Buffer, or number
+// - byteOffset - an index into `buffer`; will be clamped to an int32
+// - encoding - an optional encoding, relevant is val is a string
+// - dir - true for indexOf, false for lastIndexOf
+function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
+  // Empty buffer means no match
+  if (buffer.length === 0) return -1
+
+  // Normalize byteOffset
+  if (typeof byteOffset === 'string') {
+    encoding = byteOffset
+    byteOffset = 0
+  } else if (byteOffset > 0x7fffffff) {
+    byteOffset = 0x7fffffff
+  } else if (byteOffset < -0x80000000) {
+    byteOffset = -0x80000000
+  }
+  byteOffset = +byteOffset  // Coerce to Number.
+  if (isNaN(byteOffset)) {
+    // byteOffset: it it's undefined, null, NaN, "foo", etc, search whole buffer
+    byteOffset = dir ? 0 : (buffer.length - 1)
+  }
+
+  // Normalize byteOffset: negative offsets start from the end of the buffer
+  if (byteOffset < 0) byteOffset = buffer.length + byteOffset
+  if (byteOffset >= buffer.length) {
+    if (dir) return -1
+    else byteOffset = buffer.length - 1
+  } else if (byteOffset < 0) {
+    if (dir) byteOffset = 0
+    else return -1
+  }
+
+  // Normalize val
+  if (typeof val === 'string') {
+    val = Buffer.from(val, encoding)
+  }
+
+  // Finally, search either indexOf (if dir is true) or lastIndexOf
+  if (Buffer.isBuffer(val)) {
+    // Special case: looking for empty string/buffer always fails
+    if (val.length === 0) {
+      return -1
+    }
+    return arrayIndexOf(buffer, val, byteOffset, encoding, dir)
+  } else if (typeof val === 'number') {
+    val = val & 0xFF // Search for a byte value [0-255]
+    if (Buffer.TYPED_ARRAY_SUPPORT &&
+        typeof Uint8Array.prototype.indexOf === 'function') {
+      if (dir) {
+        return Uint8Array.prototype.indexOf.call(buffer, val, byteOffset)
+      } else {
+        return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset)
+      }
+    }
+    return arrayIndexOf(buffer, [ val ], byteOffset, encoding, dir)
+  }
+
+  throw new TypeError('val must be string, number or Buffer')
+}
+
+function arrayIndexOf (arr, val, byteOffset, encoding, dir) {
+  var indexSize = 1
+  var arrLength = arr.length
+  var valLength = val.length
+
+  if (encoding !== undefined) {
+    encoding = String(encoding).toLowerCase()
+    if (encoding === 'ucs2' || encoding === 'ucs-2' ||
+        encoding === 'utf16le' || encoding === 'utf-16le') {
+      if (arr.length < 2 || val.length < 2) {
+        return -1
+      }
+      indexSize = 2
+      arrLength /= 2
+      valLength /= 2
+      byteOffset /= 2
+    }
+  }
+
+  function read (buf, i) {
+    if (indexSize === 1) {
+      return buf[i]
+    } else {
+      return buf.readUInt16BE(i * indexSize)
+    }
+  }
+
+  var i
+  if (dir) {
+    var foundIndex = -1
+    for (i = byteOffset; i < arrLength; i++) {
+      if (read(arr, i) === read(val, foundIndex === -1 ? 0 : i - foundIndex)) {
+        if (foundIndex === -1) foundIndex = i
+        if (i - foundIndex + 1 === valLength) return foundIndex * indexSize
+      } else {
+        if (foundIndex !== -1) i -= i - foundIndex
+        foundIndex = -1
+      }
+    }
+  } else {
+    if (byteOffset + valLength > arrLength) byteOffset = arrLength - valLength
+    for (i = byteOffset; i >= 0; i--) {
+      var found = true
+      for (var j = 0; j < valLength; j++) {
+        if (read(arr, i + j) !== read(val, j)) {
+          found = false
+          break
+        }
+      }
+      if (found) return i
+    }
+  }
+
+  return -1
+}
+
+Buffer.prototype.includes = function includes (val, byteOffset, encoding) {
+  return this.indexOf(val, byteOffset, encoding) !== -1
+}
+
+Buffer.prototype.indexOf = function indexOf (val, byteOffset, encoding) {
+  return bidirectionalIndexOf(this, val, byteOffset, encoding, true)
+}
+
+Buffer.prototype.lastIndexOf = function lastIndexOf (val, byteOffset, encoding) {
+  return bidirectionalIndexOf(this, val, byteOffset, encoding, false)
+}
+
+function hexWrite (buf, string, offset, length) {
+  offset = Number(offset) || 0
+  var remaining = buf.length - offset
+  if (!length) {
+    length = remaining
+  } else {
+    length = Number(length)
+    if (length > remaining) {
+      length = remaining
+    }
+  }
+
+  // must be an even number of digits
+  var strLen = string.length
+  if (strLen % 2 !== 0) throw new TypeError('Invalid hex string')
+
+  if (length > strLen / 2) {
+    length = strLen / 2
+  }
+  for (var i = 0; i < length; ++i) {
+    var parsed = parseInt(string.substr(i * 2, 2), 16)
+    if (isNaN(parsed)) return i
+    buf[offset + i] = parsed
+  }
+  return i
+}
+
+function utf8Write (buf, string, offset, length) {
+  return blitBuffer(utf8ToBytes(string, buf.length - offset), buf, offset, length)
+}
+
+function asciiWrite (buf, string, offset, length) {
+  return blitBuffer(asciiToBytes(string), buf, offset, length)
+}
+
+function latin1Write (buf, string, offset, length) {
+  return asciiWrite(buf, string, offset, length)
+}
+
+function base64Write (buf, string, offset, length) {
+  return blitBuffer(base64ToBytes(string), buf, offset, length)
+}
+
+function ucs2Write (buf, string, offset, length) {
+  return blitBuffer(utf16leToBytes(string, buf.length - offset), buf, offset, length)
+}
+
+Buffer.prototype.write = function write (string, offset, length, encoding) {
+  // Buffer#write(string)
+  if (offset === undefined) {
+    encoding = 'utf8'
+    length = this.length
+    offset = 0
+  // Buffer#write(string, encoding)
+  } else if (length === undefined && typeof offset === 'string') {
+    encoding = offset
+    length = this.length
+    offset = 0
+  // Buffer#write(string, offset[, length][, encoding])
+  } else if (isFinite(offset)) {
+    offset = offset | 0
+    if (isFinite(length)) {
+      length = length | 0
+      if (encoding === undefined) encoding = 'utf8'
+    } else {
+      encoding = length
+      length = undefined
+    }
+  // legacy write(string, encoding, offset, length) - remove in v0.13
+  } else {
+    throw new Error(
+      'Buffer.write(string, encoding, offset[, length]) is no longer supported'
+    )
+  }
+
+  var remaining = this.length - offset
+  if (length === undefined || length > remaining) length = remaining
+
+  if ((string.length > 0 && (length < 0 || offset < 0)) || offset > this.length) {
+    throw new RangeError('Attempt to write outside buffer bounds')
+  }
+
+  if (!encoding) encoding = 'utf8'
+
+  var loweredCase = false
+  for (;;) {
+    switch (encoding) {
+      case 'hex':
+        return hexWrite(this, string, offset, length)
+
+      case 'utf8':
+      case 'utf-8':
+        return utf8Write(this, string, offset, length)
+
+      case 'ascii':
+        return asciiWrite(this, string, offset, length)
+
+      case 'latin1':
+      case 'binary':
+        return latin1Write(this, string, offset, length)
+
+      case 'base64':
+        // Warning: maxLength not taken into account in base64Write
+        return base64Write(this, string, offset, length)
+
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return ucs2Write(this, string, offset, length)
+
+      default:
+        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
+        encoding = ('' + encoding).toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+
+Buffer.prototype.toJSON = function toJSON () {
+  return {
+    type: 'Buffer',
+    data: Array.prototype.slice.call(this._arr || this, 0)
+  }
+}
+
+function base64Slice (buf, start, end) {
+  if (start === 0 && end === buf.length) {
+    return base64.fromByteArray(buf)
+  } else {
+    return base64.fromByteArray(buf.slice(start, end))
+  }
+}
+
+function utf8Slice (buf, start, end) {
+  end = Math.min(buf.length, end)
+  var res = []
+
+  var i = start
+  while (i < end) {
+    var firstByte = buf[i]
+    var codePoint = null
+    var bytesPerSequence = (firstByte > 0xEF) ? 4
+      : (firstByte > 0xDF) ? 3
+      : (firstByte > 0xBF) ? 2
+      : 1
+
+    if (i + bytesPerSequence <= end) {
+      var secondByte, thirdByte, fourthByte, tempCodePoint
+
+      switch (bytesPerSequence) {
+        case 1:
+          if (firstByte < 0x80) {
+            codePoint = firstByte
+          }
+          break
+        case 2:
+          secondByte = buf[i + 1]
+          if ((secondByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0x1F) << 0x6 | (secondByte & 0x3F)
+            if (tempCodePoint > 0x7F) {
+              codePoint = tempCodePoint
+            }
+          }
+          break
+        case 3:
+          secondByte = buf[i + 1]
+          thirdByte = buf[i + 2]
+          if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0xF) << 0xC | (secondByte & 0x3F) << 0x6 | (thirdByte & 0x3F)
+            if (tempCodePoint > 0x7FF && (tempCodePoint < 0xD800 || tempCodePoint > 0xDFFF)) {
+              codePoint = tempCodePoint
+            }
+          }
+          break
+        case 4:
+          secondByte = buf[i + 1]
+          thirdByte = buf[i + 2]
+          fourthByte = buf[i + 3]
+          if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80 && (fourthByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0xF) << 0x12 | (secondByte & 0x3F) << 0xC | (thirdByte & 0x3F) << 0x6 | (fourthByte & 0x3F)
+            if (tempCodePoint > 0xFFFF && tempCodePoint < 0x110000) {
+              codePoint = tempCodePoint
+            }
+          }
+      }
+    }
+
+    if (codePoint === null) {
+      // we did not generate a valid codePoint so insert a
+      // replacement char (U+FFFD) and advance only 1 byte
+      codePoint = 0xFFFD
+      bytesPerSequence = 1
+    } else if (codePoint > 0xFFFF) {
+      // encode to utf16 (surrogate pair dance)
+      codePoint -= 0x10000
+      res.push(codePoint >>> 10 & 0x3FF | 0xD800)
+      codePoint = 0xDC00 | codePoint & 0x3FF
+    }
+
+    res.push(codePoint)
+    i += bytesPerSequence
+  }
+
+  return decodeCodePointsArray(res)
+}
+
+// Based on http://stackoverflow.com/a/22747272/680742, the browser with
+// the lowest limit is Chrome, with 0x10000 args.
+// We go 1 magnitude less, for safety
+var MAX_ARGUMENTS_LENGTH = 0x1000
+
+function decodeCodePointsArray (codePoints) {
+  var len = codePoints.length
+  if (len <= MAX_ARGUMENTS_LENGTH) {
+    return String.fromCharCode.apply(String, codePoints) // avoid extra slice()
+  }
+
+  // Decode in chunks to avoid "call stack size exceeded".
+  var res = ''
+  var i = 0
+  while (i < len) {
+    res += String.fromCharCode.apply(
+      String,
+      codePoints.slice(i, i += MAX_ARGUMENTS_LENGTH)
+    )
+  }
+  return res
+}
+
+function asciiSlice (buf, start, end) {
+  var ret = ''
+  end = Math.min(buf.length, end)
+
+  for (var i = start; i < end; ++i) {
+    ret += String.fromCharCode(buf[i] & 0x7F)
+  }
+  return ret
+}
+
+function latin1Slice (buf, start, end) {
+  var ret = ''
+  end = Math.min(buf.length, end)
+
+  for (var i = start; i < end; ++i) {
+    ret += String.fromCharCode(buf[i])
+  }
+  return ret
+}
+
+function hexSlice (buf, start, end) {
+  var len = buf.length
+
+  if (!start || start < 0) start = 0
+  if (!end || end < 0 || end > len) end = len
+
+  var out = ''
+  for (var i = start; i < end; ++i) {
+    out += toHex(buf[i])
+  }
+  return out
+}
+
+function utf16leSlice (buf, start, end) {
+  var bytes = buf.slice(start, end)
+  var res = ''
+  for (var i = 0; i < bytes.length; i += 2) {
+    res += String.fromCharCode(bytes[i] + bytes[i + 1] * 256)
+  }
+  return res
+}
+
+Buffer.prototype.slice = function slice (start, end) {
+  var len = this.length
+  start = ~~start
+  end = end === undefined ? len : ~~end
+
+  if (start < 0) {
+    start += len
+    if (start < 0) start = 0
+  } else if (start > len) {
+    start = len
+  }
+
+  if (end < 0) {
+    end += len
+    if (end < 0) end = 0
+  } else if (end > len) {
+    end = len
+  }
+
+  if (end < start) end = start
+
+  var newBuf
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    newBuf = this.subarray(start, end)
+    newBuf.__proto__ = Buffer.prototype
+  } else {
+    var sliceLen = end - start
+    newBuf = new Buffer(sliceLen, undefined)
+    for (var i = 0; i < sliceLen; ++i) {
+      newBuf[i] = this[i + start]
+    }
+  }
+
+  return newBuf
+}
+
+/*
+ * Need to make sure that buffer isn't trying to write out of bounds.
+ */
+function checkOffset (offset, ext, length) {
+  if ((offset % 1) !== 0 || offset < 0) throw new RangeError('offset is not uint')
+  if (offset + ext > length) throw new RangeError('Trying to access beyond buffer length')
+}
+
+Buffer.prototype.readUIntLE = function readUIntLE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var val = this[offset]
+  var mul = 1
+  var i = 0
+  while (++i < byteLength && (mul *= 0x100)) {
+    val += this[offset + i] * mul
+  }
+
+  return val
+}
+
+Buffer.prototype.readUIntBE = function readUIntBE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) {
+    checkOffset(offset, byteLength, this.length)
+  }
+
+  var val = this[offset + --byteLength]
+  var mul = 1
+  while (byteLength > 0 && (mul *= 0x100)) {
+    val += this[offset + --byteLength] * mul
+  }
+
+  return val
+}
+
+Buffer.prototype.readUInt8 = function readUInt8 (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 1, this.length)
+  return this[offset]
+}
+
+Buffer.prototype.readUInt16LE = function readUInt16LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  return this[offset] | (this[offset + 1] << 8)
+}
+
+Buffer.prototype.readUInt16BE = function readUInt16BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  return (this[offset] << 8) | this[offset + 1]
+}
+
+Buffer.prototype.readUInt32LE = function readUInt32LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return ((this[offset]) |
+      (this[offset + 1] << 8) |
+      (this[offset + 2] << 16)) +
+      (this[offset + 3] * 0x1000000)
+}
+
+Buffer.prototype.readUInt32BE = function readUInt32BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset] * 0x1000000) +
+    ((this[offset + 1] << 16) |
+    (this[offset + 2] << 8) |
+    this[offset + 3])
+}
+
+Buffer.prototype.readIntLE = function readIntLE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var val = this[offset]
+  var mul = 1
+  var i = 0
+  while (++i < byteLength && (mul *= 0x100)) {
+    val += this[offset + i] * mul
+  }
+  mul *= 0x80
+
+  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+
+  return val
+}
+
+Buffer.prototype.readIntBE = function readIntBE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var i = byteLength
+  var mul = 1
+  var val = this[offset + --i]
+  while (i > 0 && (mul *= 0x100)) {
+    val += this[offset + --i] * mul
+  }
+  mul *= 0x80
+
+  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+
+  return val
+}
+
+Buffer.prototype.readInt8 = function readInt8 (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 1, this.length)
+  if (!(this[offset] & 0x80)) return (this[offset])
+  return ((0xff - this[offset] + 1) * -1)
+}
+
+Buffer.prototype.readInt16LE = function readInt16LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  var val = this[offset] | (this[offset + 1] << 8)
+  return (val & 0x8000) ? val | 0xFFFF0000 : val
+}
+
+Buffer.prototype.readInt16BE = function readInt16BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  var val = this[offset + 1] | (this[offset] << 8)
+  return (val & 0x8000) ? val | 0xFFFF0000 : val
+}
+
+Buffer.prototype.readInt32LE = function readInt32LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset]) |
+    (this[offset + 1] << 8) |
+    (this[offset + 2] << 16) |
+    (this[offset + 3] << 24)
+}
+
+Buffer.prototype.readInt32BE = function readInt32BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset] << 24) |
+    (this[offset + 1] << 16) |
+    (this[offset + 2] << 8) |
+    (this[offset + 3])
+}
+
+Buffer.prototype.readFloatLE = function readFloatLE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+  return ieee754.read(this, offset, true, 23, 4)
+}
+
+Buffer.prototype.readFloatBE = function readFloatBE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+  return ieee754.read(this, offset, false, 23, 4)
+}
+
+Buffer.prototype.readDoubleLE = function readDoubleLE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 8, this.length)
+  return ieee754.read(this, offset, true, 52, 8)
+}
+
+Buffer.prototype.readDoubleBE = function readDoubleBE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 8, this.length)
+  return ieee754.read(this, offset, false, 52, 8)
+}
+
+function checkInt (buf, value, offset, ext, max, min) {
+  if (!Buffer.isBuffer(buf)) throw new TypeError('"buffer" argument must be a Buffer instance')
+  if (value > max || value < min) throw new RangeError('"value" argument is out of bounds')
+  if (offset + ext > buf.length) throw new RangeError('Index out of range')
+}
+
+Buffer.prototype.writeUIntLE = function writeUIntLE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) {
+    var maxBytes = Math.pow(2, 8 * byteLength) - 1
+    checkInt(this, value, offset, byteLength, maxBytes, 0)
+  }
+
+  var mul = 1
+  var i = 0
+  this[offset] = value & 0xFF
+  while (++i < byteLength && (mul *= 0x100)) {
+    this[offset + i] = (value / mul) & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeUIntBE = function writeUIntBE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) {
+    var maxBytes = Math.pow(2, 8 * byteLength) - 1
+    checkInt(this, value, offset, byteLength, maxBytes, 0)
+  }
+
+  var i = byteLength - 1
+  var mul = 1
+  this[offset + i] = value & 0xFF
+  while (--i >= 0 && (mul *= 0x100)) {
+    this[offset + i] = (value / mul) & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeUInt8 = function writeUInt8 (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 1, 0xff, 0)
+  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
+  this[offset] = (value & 0xff)
+  return offset + 1
+}
+
+function objectWriteUInt16 (buf, value, offset, littleEndian) {
+  if (value < 0) value = 0xffff + value + 1
+  for (var i = 0, j = Math.min(buf.length - offset, 2); i < j; ++i) {
+    buf[offset + i] = (value & (0xff << (8 * (littleEndian ? i : 1 - i)))) >>>
+      (littleEndian ? i : 1 - i) * 8
+  }
+}
+
+Buffer.prototype.writeUInt16LE = function writeUInt16LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value & 0xff)
+    this[offset + 1] = (value >>> 8)
+  } else {
+    objectWriteUInt16(this, value, offset, true)
+  }
+  return offset + 2
+}
+
+Buffer.prototype.writeUInt16BE = function writeUInt16BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 8)
+    this[offset + 1] = (value & 0xff)
+  } else {
+    objectWriteUInt16(this, value, offset, false)
+  }
+  return offset + 2
+}
+
+function objectWriteUInt32 (buf, value, offset, littleEndian) {
+  if (value < 0) value = 0xffffffff + value + 1
+  for (var i = 0, j = Math.min(buf.length - offset, 4); i < j; ++i) {
+    buf[offset + i] = (value >>> (littleEndian ? i : 3 - i) * 8) & 0xff
+  }
+}
+
+Buffer.prototype.writeUInt32LE = function writeUInt32LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset + 3] = (value >>> 24)
+    this[offset + 2] = (value >>> 16)
+    this[offset + 1] = (value >>> 8)
+    this[offset] = (value & 0xff)
+  } else {
+    objectWriteUInt32(this, value, offset, true)
+  }
+  return offset + 4
+}
+
+Buffer.prototype.writeUInt32BE = function writeUInt32BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 24)
+    this[offset + 1] = (value >>> 16)
+    this[offset + 2] = (value >>> 8)
+    this[offset + 3] = (value & 0xff)
+  } else {
+    objectWriteUInt32(this, value, offset, false)
+  }
+  return offset + 4
+}
+
+Buffer.prototype.writeIntLE = function writeIntLE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) {
+    var limit = Math.pow(2, 8 * byteLength - 1)
+
+    checkInt(this, value, offset, byteLength, limit - 1, -limit)
+  }
+
+  var i = 0
+  var mul = 1
+  var sub = 0
+  this[offset] = value & 0xFF
+  while (++i < byteLength && (mul *= 0x100)) {
+    if (value < 0 && sub === 0 && this[offset + i - 1] !== 0) {
+      sub = 1
+    }
+    this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeIntBE = function writeIntBE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) {
+    var limit = Math.pow(2, 8 * byteLength - 1)
+
+    checkInt(this, value, offset, byteLength, limit - 1, -limit)
+  }
+
+  var i = byteLength - 1
+  var mul = 1
+  var sub = 0
+  this[offset + i] = value & 0xFF
+  while (--i >= 0 && (mul *= 0x100)) {
+    if (value < 0 && sub === 0 && this[offset + i + 1] !== 0) {
+      sub = 1
+    }
+    this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeInt8 = function writeInt8 (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 1, 0x7f, -0x80)
+  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
+  if (value < 0) value = 0xff + value + 1
+  this[offset] = (value & 0xff)
+  return offset + 1
+}
+
+Buffer.prototype.writeInt16LE = function writeInt16LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value & 0xff)
+    this[offset + 1] = (value >>> 8)
+  } else {
+    objectWriteUInt16(this, value, offset, true)
+  }
+  return offset + 2
+}
+
+Buffer.prototype.writeInt16BE = function writeInt16BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 8)
+    this[offset + 1] = (value & 0xff)
+  } else {
+    objectWriteUInt16(this, value, offset, false)
+  }
+  return offset + 2
+}
+
+Buffer.prototype.writeInt32LE = function writeInt32LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value & 0xff)
+    this[offset + 1] = (value >>> 8)
+    this[offset + 2] = (value >>> 16)
+    this[offset + 3] = (value >>> 24)
+  } else {
+    objectWriteUInt32(this, value, offset, true)
+  }
+  return offset + 4
+}
+
+Buffer.prototype.writeInt32BE = function writeInt32BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+  if (value < 0) value = 0xffffffff + value + 1
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 24)
+    this[offset + 1] = (value >>> 16)
+    this[offset + 2] = (value >>> 8)
+    this[offset + 3] = (value & 0xff)
+  } else {
+    objectWriteUInt32(this, value, offset, false)
+  }
+  return offset + 4
+}
+
+function checkIEEE754 (buf, value, offset, ext, max, min) {
+  if (offset + ext > buf.length) throw new RangeError('Index out of range')
+  if (offset < 0) throw new RangeError('Index out of range')
+}
+
+function writeFloat (buf, value, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    checkIEEE754(buf, value, offset, 4, 3.4028234663852886e+38, -3.4028234663852886e+38)
+  }
+  ieee754.write(buf, value, offset, littleEndian, 23, 4)
+  return offset + 4
+}
+
+Buffer.prototype.writeFloatLE = function writeFloatLE (value, offset, noAssert) {
+  return writeFloat(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeFloatBE = function writeFloatBE (value, offset, noAssert) {
+  return writeFloat(this, value, offset, false, noAssert)
+}
+
+function writeDouble (buf, value, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    checkIEEE754(buf, value, offset, 8, 1.7976931348623157E+308, -1.7976931348623157E+308)
+  }
+  ieee754.write(buf, value, offset, littleEndian, 52, 8)
+  return offset + 8
+}
+
+Buffer.prototype.writeDoubleLE = function writeDoubleLE (value, offset, noAssert) {
+  return writeDouble(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeDoubleBE = function writeDoubleBE (value, offset, noAssert) {
+  return writeDouble(this, value, offset, false, noAssert)
+}
+
+// copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)
+Buffer.prototype.copy = function copy (target, targetStart, start, end) {
+  if (!start) start = 0
+  if (!end && end !== 0) end = this.length
+  if (targetStart >= target.length) targetStart = target.length
+  if (!targetStart) targetStart = 0
+  if (end > 0 && end < start) end = start
+
+  // Copy 0 bytes; we're done
+  if (end === start) return 0
+  if (target.length === 0 || this.length === 0) return 0
+
+  // Fatal error conditions
+  if (targetStart < 0) {
+    throw new RangeError('targetStart out of bounds')
+  }
+  if (start < 0 || start >= this.length) throw new RangeError('sourceStart out of bounds')
+  if (end < 0) throw new RangeError('sourceEnd out of bounds')
+
+  // Are we oob?
+  if (end > this.length) end = this.length
+  if (target.length - targetStart < end - start) {
+    end = target.length - targetStart + start
+  }
+
+  var len = end - start
+  var i
+
+  if (this === target && start < targetStart && targetStart < end) {
+    // descending copy from end
+    for (i = len - 1; i >= 0; --i) {
+      target[i + targetStart] = this[i + start]
+    }
+  } else if (len < 1000 || !Buffer.TYPED_ARRAY_SUPPORT) {
+    // ascending copy from start
+    for (i = 0; i < len; ++i) {
+      target[i + targetStart] = this[i + start]
+    }
+  } else {
+    Uint8Array.prototype.set.call(
+      target,
+      this.subarray(start, start + len),
+      targetStart
+    )
+  }
+
+  return len
+}
+
+// Usage:
+//    buffer.fill(number[, offset[, end]])
+//    buffer.fill(buffer[, offset[, end]])
+//    buffer.fill(string[, offset[, end]][, encoding])
+Buffer.prototype.fill = function fill (val, start, end, encoding) {
+  // Handle string cases:
+  if (typeof val === 'string') {
+    if (typeof start === 'string') {
+      encoding = start
+      start = 0
+      end = this.length
+    } else if (typeof end === 'string') {
+      encoding = end
+      end = this.length
+    }
+    if (val.length === 1) {
+      var code = val.charCodeAt(0)
+      if (code < 256) {
+        val = code
+      }
+    }
+    if (encoding !== undefined && typeof encoding !== 'string') {
+      throw new TypeError('encoding must be a string')
+    }
+    if (typeof encoding === 'string' && !Buffer.isEncoding(encoding)) {
+      throw new TypeError('Unknown encoding: ' + encoding)
+    }
+  } else if (typeof val === 'number') {
+    val = val & 255
+  }
+
+  // Invalid ranges are not set to a default, so can range check early.
+  if (start < 0 || this.length < start || this.length < end) {
+    throw new RangeError('Out of range index')
+  }
+
+  if (end <= start) {
+    return this
+  }
+
+  start = start >>> 0
+  end = end === undefined ? this.length : end >>> 0
+
+  if (!val) val = 0
+
+  var i
+  if (typeof val === 'number') {
+    for (i = start; i < end; ++i) {
+      this[i] = val
+    }
+  } else {
+    var bytes = Buffer.isBuffer(val)
+      ? val
+      : utf8ToBytes(new Buffer(val, encoding).toString())
+    var len = bytes.length
+    for (i = 0; i < end - start; ++i) {
+      this[i + start] = bytes[i % len]
+    }
+  }
+
+  return this
+}
+
+// HELPER FUNCTIONS
+// ================
+
+var INVALID_BASE64_RE = /[^+\/0-9A-Za-z-_]/g
+
+function base64clean (str) {
+  // Node strips out invalid characters like \n and \t from the string, base64-js does not
+  str = stringtrim(str).replace(INVALID_BASE64_RE, '')
+  // Node converts strings with length < 2 to ''
+  if (str.length < 2) return ''
+  // Node allows for non-padded base64 strings (missing trailing ===), base64-js does not
+  while (str.length % 4 !== 0) {
+    str = str + '='
+  }
+  return str
+}
+
+function stringtrim (str) {
+  if (str.trim) return str.trim()
+  return str.replace(/^\s+|\s+$/g, '')
+}
+
+function toHex (n) {
+  if (n < 16) return '0' + n.toString(16)
+  return n.toString(16)
+}
+
+function utf8ToBytes (string, units) {
+  units = units || Infinity
+  var codePoint
+  var length = string.length
+  var leadSurrogate = null
+  var bytes = []
+
+  for (var i = 0; i < length; ++i) {
+    codePoint = string.charCodeAt(i)
+
+    // is surrogate component
+    if (codePoint > 0xD7FF && codePoint < 0xE000) {
+      // last char was a lead
+      if (!leadSurrogate) {
+        // no lead yet
+        if (codePoint > 0xDBFF) {
+          // unexpected trail
+          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+          continue
+        } else if (i + 1 === length) {
+          // unpaired lead
+          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+          continue
+        }
+
+        // valid lead
+        leadSurrogate = codePoint
+
+        continue
+      }
+
+      // 2 leads in a row
+      if (codePoint < 0xDC00) {
+        if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+        leadSurrogate = codePoint
+        continue
+      }
+
+      // valid surrogate pair
+      codePoint = (leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00) + 0x10000
+    } else if (leadSurrogate) {
+      // valid bmp char, but last char was a lead
+      if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+    }
+
+    leadSurrogate = null
+
+    // encode utf8
+    if (codePoint < 0x80) {
+      if ((units -= 1) < 0) break
+      bytes.push(codePoint)
+    } else if (codePoint < 0x800) {
+      if ((units -= 2) < 0) break
+      bytes.push(
+        codePoint >> 0x6 | 0xC0,
+        codePoint & 0x3F | 0x80
+      )
+    } else if (codePoint < 0x10000) {
+      if ((units -= 3) < 0) break
+      bytes.push(
+        codePoint >> 0xC | 0xE0,
+        codePoint >> 0x6 & 0x3F | 0x80,
+        codePoint & 0x3F | 0x80
+      )
+    } else if (codePoint < 0x110000) {
+      if ((units -= 4) < 0) break
+      bytes.push(
+        codePoint >> 0x12 | 0xF0,
+        codePoint >> 0xC & 0x3F | 0x80,
+        codePoint >> 0x6 & 0x3F | 0x80,
+        codePoint & 0x3F | 0x80
+      )
+    } else {
+      throw new Error('Invalid code point')
+    }
+  }
+
+  return bytes
+}
+
+function asciiToBytes (str) {
+  var byteArray = []
+  for (var i = 0; i < str.length; ++i) {
+    // Node's code seems to be doing this and not & 0x7F..
+    byteArray.push(str.charCodeAt(i) & 0xFF)
+  }
+  return byteArray
+}
+
+function utf16leToBytes (str, units) {
+  var c, hi, lo
+  var byteArray = []
+  for (var i = 0; i < str.length; ++i) {
+    if ((units -= 2) < 0) break
+
+    c = str.charCodeAt(i)
+    hi = c >> 8
+    lo = c % 256
+    byteArray.push(lo)
+    byteArray.push(hi)
+  }
+
+  return byteArray
+}
+
+function base64ToBytes (str) {
+  return base64.toByteArray(base64clean(str))
+}
+
+function blitBuffer (src, dst, offset, length) {
+  for (var i = 0; i < length; ++i) {
+    if ((i + offset >= dst.length) || (i >= src.length)) break
+    dst[i + offset] = src[i]
+  }
+  return i
+}
+
+function isnan (val) {
+  return val !== val // eslint-disable-line no-self-compare
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+
+/***/ }),
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+var bind = __webpack_require__(13);
+var Axios = __webpack_require__(20);
+var defaults = __webpack_require__(4);
+
+/**
+ * Create an instance of Axios
+ *
+ * @param {Object} defaultConfig The default config for the instance
+ * @return {Axios} A new instance of Axios
+ */
+function createInstance(defaultConfig) {
+  var context = new Axios(defaultConfig);
+  var instance = bind(Axios.prototype.request, context);
+
+  // Copy axios.prototype to instance
+  utils.extend(instance, Axios.prototype, context);
+
+  // Copy context to instance
+  utils.extend(instance, context);
+
+  return instance;
+}
+
+// Create the default instance to be exported
+var axios = createInstance(defaults);
+
+// Expose Axios class to allow class inheritance
+axios.Axios = Axios;
+
+// Factory for creating new instances
+axios.create = function create(instanceConfig) {
+  return createInstance(utils.merge(defaults, instanceConfig));
+};
+
+// Expose Cancel & CancelToken
+axios.Cancel = __webpack_require__(10);
+axios.CancelToken = __webpack_require__(19);
+axios.isCancel = __webpack_require__(11);
+
+// Expose all/spread
+axios.all = function all(promises) {
+  return Promise.all(promises);
+};
+axios.spread = __webpack_require__(34);
+
+module.exports = axios;
+
+// Allow use of default import syntax in TypeScript
+module.exports.default = axios;
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Cancel = __webpack_require__(10);
+
+/**
+ * A `CancelToken` is an object that can be used to request cancellation of an operation.
+ *
+ * @class
+ * @param {Function} executor The executor function.
+ */
+function CancelToken(executor) {
+  if (typeof executor !== 'function') {
+    throw new TypeError('executor must be a function.');
+  }
+
+  var resolvePromise;
+  this.promise = new Promise(function promiseExecutor(resolve) {
+    resolvePromise = resolve;
+  });
+
+  var token = this;
+  executor(function cancel(message) {
+    if (token.reason) {
+      // Cancellation has already been requested
+      return;
+    }
+
+    token.reason = new Cancel(message);
+    resolvePromise(token.reason);
+  });
+}
+
+/**
+ * Throws a `Cancel` if cancellation has been requested.
+ */
+CancelToken.prototype.throwIfRequested = function throwIfRequested() {
+  if (this.reason) {
+    throw this.reason;
+  }
+};
+
+/**
+ * Returns an object that contains a new `CancelToken` and a function that, when called,
+ * cancels the `CancelToken`.
+ */
+CancelToken.source = function source() {
+  var cancel;
+  var token = new CancelToken(function executor(c) {
+    cancel = c;
+  });
+  return {
+    token: token,
+    cancel: cancel
+  };
+};
+
+module.exports = CancelToken;
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var defaults = __webpack_require__(4);
+var utils = __webpack_require__(0);
+var InterceptorManager = __webpack_require__(21);
+var dispatchRequest = __webpack_require__(22);
+var isAbsoluteURL = __webpack_require__(30);
+var combineURLs = __webpack_require__(28);
+
+/**
+ * Create a new instance of Axios
+ *
+ * @param {Object} instanceConfig The default config for the instance
+ */
+function Axios(instanceConfig) {
+  this.defaults = instanceConfig;
+  this.interceptors = {
+    request: new InterceptorManager(),
+    response: new InterceptorManager()
+  };
+}
+
+/**
+ * Dispatch a request
+ *
+ * @param {Object} config The config specific for this request (merged with this.defaults)
+ */
+Axios.prototype.request = function request(config) {
+  /*eslint no-param-reassign:0*/
+  // Allow for axios('example/url'[, config]) a la fetch API
+  if (typeof config === 'string') {
+    config = utils.merge({
+      url: arguments[0]
+    }, arguments[1]);
+  }
+
+  config = utils.merge(defaults, this.defaults, { method: 'get' }, config);
+
+  // Support baseURL config
+  if (config.baseURL && !isAbsoluteURL(config.url)) {
+    config.url = combineURLs(config.baseURL, config.url);
+  }
+
+  // Hook up interceptors middleware
+  var chain = [dispatchRequest, undefined];
+  var promise = Promise.resolve(config);
+
+  this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
+    chain.unshift(interceptor.fulfilled, interceptor.rejected);
+  });
+
+  this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
+    chain.push(interceptor.fulfilled, interceptor.rejected);
+  });
+
+  while (chain.length) {
+    promise = promise.then(chain.shift(), chain.shift());
+  }
+
+  return promise;
+};
+
+// Provide aliases for supported request methods
+utils.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData(method) {
+  /*eslint func-names:0*/
+  Axios.prototype[method] = function(url, config) {
+    return this.request(utils.merge(config || {}, {
+      method: method,
+      url: url
+    }));
+  };
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  /*eslint func-names:0*/
+  Axios.prototype[method] = function(url, data, config) {
+    return this.request(utils.merge(config || {}, {
+      method: method,
+      url: url,
+      data: data
+    }));
+  };
+});
+
+module.exports = Axios;
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+
+function InterceptorManager() {
+  this.handlers = [];
+}
+
+/**
+ * Add a new interceptor to the stack
+ *
+ * @param {Function} fulfilled The function to handle `then` for a `Promise`
+ * @param {Function} rejected The function to handle `reject` for a `Promise`
+ *
+ * @return {Number} An ID used to remove interceptor later
+ */
+InterceptorManager.prototype.use = function use(fulfilled, rejected) {
+  this.handlers.push({
+    fulfilled: fulfilled,
+    rejected: rejected
+  });
+  return this.handlers.length - 1;
+};
+
+/**
+ * Remove an interceptor from the stack
+ *
+ * @param {Number} id The ID that was returned by `use`
+ */
+InterceptorManager.prototype.eject = function eject(id) {
+  if (this.handlers[id]) {
+    this.handlers[id] = null;
+  }
+};
+
+/**
+ * Iterate over all the registered interceptors
+ *
+ * This method is particularly useful for skipping over any
+ * interceptors that may have become `null` calling `eject`.
+ *
+ * @param {Function} fn The function to call for each interceptor
+ */
+InterceptorManager.prototype.forEach = function forEach(fn) {
+  utils.forEach(this.handlers, function forEachHandler(h) {
+    if (h !== null) {
+      fn(h);
+    }
+  });
+};
+
+module.exports = InterceptorManager;
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+var transformData = __webpack_require__(25);
+var isCancel = __webpack_require__(11);
+var defaults = __webpack_require__(4);
+
+/**
+ * Throws a `Cancel` if cancellation has been requested.
+ */
+function throwIfCancellationRequested(config) {
+  if (config.cancelToken) {
+    config.cancelToken.throwIfRequested();
+  }
+}
+
+/**
+ * Dispatch a request to the server using the configured adapter.
+ *
+ * @param {object} config The config that is to be used for the request
+ * @returns {Promise} The Promise to be fulfilled
+ */
+module.exports = function dispatchRequest(config) {
+  throwIfCancellationRequested(config);
+
+  // Ensure headers exist
+  config.headers = config.headers || {};
+
+  // Transform request data
+  config.data = transformData(
+    config.data,
+    config.headers,
+    config.transformRequest
+  );
+
+  // Flatten headers
+  config.headers = utils.merge(
+    config.headers.common || {},
+    config.headers[config.method] || {},
+    config.headers || {}
+  );
+
+  utils.forEach(
+    ['delete', 'get', 'head', 'post', 'put', 'patch', 'common'],
+    function cleanHeaderConfig(method) {
+      delete config.headers[method];
+    }
+  );
+
+  var adapter = config.adapter || defaults.adapter;
+
+  return adapter(config).then(function onAdapterResolution(response) {
+    throwIfCancellationRequested(config);
+
+    // Transform response data
+    response.data = transformData(
+      response.data,
+      response.headers,
+      config.transformResponse
+    );
+
+    return response;
+  }, function onAdapterRejection(reason) {
+    if (!isCancel(reason)) {
+      throwIfCancellationRequested(config);
+
+      // Transform response data
+      if (reason && reason.response) {
+        reason.response.data = transformData(
+          reason.response.data,
+          reason.response.headers,
+          config.transformResponse
+        );
+      }
+    }
+
+    return Promise.reject(reason);
+  });
+};
+
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Update an Error with the specified config, error code, and response.
+ *
+ * @param {Error} error The error to update.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ @ @param {Object} [response] The response.
+ * @returns {Error} The error.
+ */
+module.exports = function enhanceError(error, config, code, response) {
+  error.config = config;
+  if (code) {
+    error.code = code;
+  }
+  error.response = response;
+  return error;
+};
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var createError = __webpack_require__(12);
+
+/**
+ * Resolve or reject a Promise based on response status.
+ *
+ * @param {Function} resolve A function that resolves the promise.
+ * @param {Function} reject A function that rejects the promise.
+ * @param {object} response The response.
+ */
+module.exports = function settle(resolve, reject, response) {
+  var validateStatus = response.config.validateStatus;
+  // Note: status is not exposed by XDomainRequest
+  if (!response.status || !validateStatus || validateStatus(response.status)) {
+    resolve(response);
+  } else {
+    reject(createError(
+      'Request failed with status code ' + response.status,
+      response.config,
+      null,
+      response
+    ));
+  }
+};
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+
+/**
+ * Transform the data for a request or a response
+ *
+ * @param {Object|String} data The data to be transformed
+ * @param {Array} headers The headers for the request or response
+ * @param {Array|Function} fns A single function or Array of functions
+ * @returns {*} The resulting transformed data
+ */
+module.exports = function transformData(data, headers, fns) {
+  /*eslint no-param-reassign:0*/
+  utils.forEach(fns, function transform(fn) {
+    data = fn(data, headers);
+  });
+
+  return data;
+};
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// btoa polyfill for IE<10 courtesy https://github.com/davidchambers/Base64.js
+
+var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+
+function E() {
+  this.message = 'String contains an invalid character';
+}
+E.prototype = new Error;
+E.prototype.code = 5;
+E.prototype.name = 'InvalidCharacterError';
+
+function btoa(input) {
+  var str = String(input);
+  var output = '';
+  for (
+    // initialize result and counter
+    var block, charCode, idx = 0, map = chars;
+    // if the next str index does not exist:
+    //   change the mapping table to "="
+    //   check if d has no fractional digits
+    str.charAt(idx | 0) || (map = '=', idx % 1);
+    // "8 - idx % 1 * 8" generates the sequence 2, 4, 6, 8
+    output += map.charAt(63 & block >> 8 - idx % 1 * 8)
+  ) {
+    charCode = str.charCodeAt(idx += 3 / 4);
+    if (charCode > 0xFF) {
+      throw new E();
+    }
+    block = block << 8 | charCode;
+  }
+  return output;
+}
+
+module.exports = btoa;
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+
+function encode(val) {
+  return encodeURIComponent(val).
+    replace(/%40/gi, '@').
+    replace(/%3A/gi, ':').
+    replace(/%24/g, '$').
+    replace(/%2C/gi, ',').
+    replace(/%20/g, '+').
+    replace(/%5B/gi, '[').
+    replace(/%5D/gi, ']');
+}
+
+/**
+ * Build a URL by appending params to the end
+ *
+ * @param {string} url The base of the url (e.g., http://www.google.com)
+ * @param {object} [params] The params to be appended
+ * @returns {string} The formatted url
+ */
+module.exports = function buildURL(url, params, paramsSerializer) {
+  /*eslint no-param-reassign:0*/
+  if (!params) {
+    return url;
+  }
+
+  var serializedParams;
+  if (paramsSerializer) {
+    serializedParams = paramsSerializer(params);
+  } else if (utils.isURLSearchParams(params)) {
+    serializedParams = params.toString();
+  } else {
+    var parts = [];
+
+    utils.forEach(params, function serialize(val, key) {
+      if (val === null || typeof val === 'undefined') {
+        return;
+      }
+
+      if (utils.isArray(val)) {
+        key = key + '[]';
+      }
+
+      if (!utils.isArray(val)) {
+        val = [val];
+      }
+
+      utils.forEach(val, function parseValue(v) {
+        if (utils.isDate(v)) {
+          v = v.toISOString();
+        } else if (utils.isObject(v)) {
+          v = JSON.stringify(v);
+        }
+        parts.push(encode(key) + '=' + encode(v));
+      });
+    });
+
+    serializedParams = parts.join('&');
+  }
+
+  if (serializedParams) {
+    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
+  }
+
+  return url;
+};
+
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Creates a new URL by combining the specified URLs
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} relativeURL The relative URL
+ * @returns {string} The combined URL
+ */
+module.exports = function combineURLs(baseURL, relativeURL) {
+  return relativeURL
+    ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
+    : baseURL;
+};
+
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+
+module.exports = (
+  utils.isStandardBrowserEnv() ?
+
+  // Standard browser envs support document.cookie
+  (function standardBrowserEnv() {
+    return {
+      write: function write(name, value, expires, path, domain, secure) {
+        var cookie = [];
+        cookie.push(name + '=' + encodeURIComponent(value));
+
+        if (utils.isNumber(expires)) {
+          cookie.push('expires=' + new Date(expires).toGMTString());
+        }
+
+        if (utils.isString(path)) {
+          cookie.push('path=' + path);
+        }
+
+        if (utils.isString(domain)) {
+          cookie.push('domain=' + domain);
+        }
+
+        if (secure === true) {
+          cookie.push('secure');
+        }
+
+        document.cookie = cookie.join('; ');
+      },
+
+      read: function read(name) {
+        var match = document.cookie.match(new RegExp('(^|;\\s*)(' + name + ')=([^;]*)'));
+        return (match ? decodeURIComponent(match[3]) : null);
+      },
+
+      remove: function remove(name) {
+        this.write(name, '', Date.now() - 86400000);
+      }
+    };
+  })() :
+
+  // Non standard browser env (web workers, react-native) lack needed support.
+  (function nonStandardBrowserEnv() {
+    return {
+      write: function write() {},
+      read: function read() { return null; },
+      remove: function remove() {}
+    };
+  })()
+);
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Determines whether the specified URL is absolute
+ *
+ * @param {string} url The URL to test
+ * @returns {boolean} True if the specified URL is absolute, otherwise false
+ */
+module.exports = function isAbsoluteURL(url) {
+  // A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
+  // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
+  // by any combination of letters, digits, plus, period, or hyphen.
+  return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
+};
+
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+
+module.exports = (
+  utils.isStandardBrowserEnv() ?
+
+  // Standard browser envs have full support of the APIs needed to test
+  // whether the request URL is of the same origin as current location.
+  (function standardBrowserEnv() {
+    var msie = /(msie|trident)/i.test(navigator.userAgent);
+    var urlParsingNode = document.createElement('a');
+    var originURL;
+
+    /**
+    * Parse a URL to discover it's components
+    *
+    * @param {String} url The URL to be parsed
+    * @returns {Object}
+    */
+    function resolveURL(url) {
+      var href = url;
+
+      if (msie) {
+        // IE needs attribute set twice to normalize properties
+        urlParsingNode.setAttribute('href', href);
+        href = urlParsingNode.href;
+      }
+
+      urlParsingNode.setAttribute('href', href);
+
+      // urlParsingNode provides the UrlUtils interface - http://url.spec.whatwg.org/#urlutils
+      return {
+        href: urlParsingNode.href,
+        protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, '') : '',
+        host: urlParsingNode.host,
+        search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, '') : '',
+        hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, '') : '',
+        hostname: urlParsingNode.hostname,
+        port: urlParsingNode.port,
+        pathname: (urlParsingNode.pathname.charAt(0) === '/') ?
+                  urlParsingNode.pathname :
+                  '/' + urlParsingNode.pathname
+      };
+    }
+
+    originURL = resolveURL(window.location.href);
+
+    /**
+    * Determine if a URL shares the same origin as the current location
+    *
+    * @param {String} requestURL The URL to test
+    * @returns {boolean} True if URL shares the same origin, otherwise false
+    */
+    return function isURLSameOrigin(requestURL) {
+      var parsed = (utils.isString(requestURL)) ? resolveURL(requestURL) : requestURL;
+      return (parsed.protocol === originURL.protocol &&
+            parsed.host === originURL.host);
+    };
+  })() :
+
+  // Non standard browser envs (web workers, react-native) lack needed support.
+  (function nonStandardBrowserEnv() {
+    return function isURLSameOrigin() {
+      return true;
+    };
+  })()
+);
+
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+
+module.exports = function normalizeHeaderName(headers, normalizedName) {
+  utils.forEach(headers, function processHeader(value, name) {
+    if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
+      headers[normalizedName] = value;
+      delete headers[name];
+    }
+  });
+};
+
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+
+/**
+ * Parse headers into an object
+ *
+ * ```
+ * Date: Wed, 27 Aug 2014 08:58:49 GMT
+ * Content-Type: application/json
+ * Connection: keep-alive
+ * Transfer-Encoding: chunked
+ * ```
+ *
+ * @param {String} headers Headers needing to be parsed
+ * @returns {Object} Headers parsed into an object
+ */
+module.exports = function parseHeaders(headers) {
+  var parsed = {};
+  var key;
+  var val;
+  var i;
+
+  if (!headers) { return parsed; }
+
+  utils.forEach(headers.split('\n'), function parser(line) {
+    i = line.indexOf(':');
+    key = utils.trim(line.substr(0, i)).toLowerCase();
+    val = utils.trim(line.substr(i + 1));
+
+    if (key) {
+      parsed[key] = parsed[key] ? parsed[key] + ', ' + val : val;
+    }
+  });
+
+  return parsed;
+};
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Syntactic sugar for invoking a function and expanding an array for arguments.
+ *
+ * Common use case would be to use `Function.prototype.apply`.
+ *
+ *  ```js
+ *  function f(x, y, z) {}
+ *  var args = [1, 2, 3];
+ *  f.apply(null, args);
+ *  ```
+ *
+ * With `spread` this example can be re-written.
+ *
+ *  ```js
+ *  spread(function(x, y, z) {})([1, 2, 3]);
+ *  ```
+ *
+ * @param {Function} callback
+ * @returns {Function}
+ */
+module.exports = function spread(callback) {
+  return function wrap(arr) {
+    return callback.apply(null, arr);
+  };
+};
+
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*
+ * app.js v0.1.1
+ * (c) 2017 wangli
+ * Released under the MIT License.
+ */
+/*创建APP根页面*/
+var _app;
+
+var App = function App(Vue, router) {
+    if (typeof _app == "undefined") {
+        var _app = new Vue({
+            el: '#app',
+            router: router,
+            template: '<router-view></router-view>'
+        });
+    }
+};
+
+if (typeof window !== 'undefined' && window.getApp) {
+    window.getApp = function () {
+        return _app;
+    };
+}
+
+module.exports = App;
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _page = __webpack_require__(37);
+
+var _page2 = _interopRequireDefault(_page);
+
+var _app = __webpack_require__(35);
+
+var _app2 = _interopRequireDefault(_app);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = {
+    v: 'P 0.1',
+    Page: _page2.default,
+    App: _app2.default
+};
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (_option) {
+    if (typeof _option != "undefined") {
+        //默认计算属性data扩展
+        if (_core2.default.has(_option, "data")) _core2.default.extend(_option.data, _weixConfig.data);
+        _core2.default.extend(_weixConfig, _option);
+    }
+    //提取所有非微信方法到methods对象
+    var unMethodArr = ["onLoad", "onReady", "onUnload", "onPullDownRefresh", "onReachBottom", "onShareAppMessage", "data", "watch"];
+    var methods = {};
+    for (var k in _weixConfig) {
+        if (_core2.default.indexOf(unMethodArr, k) == -1) {
+            methods[k] = _weixConfig[k];
+        }
+    }
+    //处理计算数据data对象
+    _vueConfig.data = function () {
+        var _weixConfig$data;
+
+        return _weixConfig$data = _weixConfig.data, _objectDestructuringEmpty(_weixConfig$data), _weixConfig$data;
+    };
+    //模板处理
+    var _template = "<transition name='animRight' v-on:enter-cancelled='onShow' v-on:leave-cancelled='onHide'>";
+    _template += "<div class='cxPage animated' v-if='show'><slot>";
+    _template += _weixConfig.template;
+    _template += "</slot></div>";
+    _template += "</transition>";
+    _vueConfig.template = _template;
+
+    _vueConfig.created = _weixConfig.onLoad;
+    _vueConfig.mounted = _weixConfig.onReady;
+    _vueConfig.destroyed = _weixConfig.onUnload;
+    _vueConfig.watch = _weixConfig.watch;
+    _vueConfig.methods = methods;
+    return _vueConfig;
+};
+
+var _axios = __webpack_require__(8);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _core = __webpack_require__(2);
+
+var _core2 = _interopRequireDefault(_core);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
+var _vueConfig = {
+    name: "namevvs",
+    /*在实例初始化之后，数据观测(data observer) 和 event/watcher 事件配置之前被调用。*/
+    beforeCreate: function beforeCreate() {},
+    /*实例已经创建完成之后被调用。在这一步，实例已完成以下的配置：数据观测(data observer)，属性和方法的运算， watch/event 事件回调。然而，挂载阶段还没开始，$el 属性目前不可见。*/
+    created: function created() {},
+    /*在挂载开始之前被调用：相关的 render 函数首次被调用。*/
+    beforeMount: function beforeMount() {},
+    /*el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用该钩子。如果 root 实例挂载了一个文档内元素，当 mounted 被调用时 vm.$el 也在文档内。*/
+    mounted: function mounted() {},
+    /*过渡动画页面进入后*/
+    enterCancelled: function enterCancelled() {},
+    /*数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前。你可以在这个钩子中进一步地更改状态，这不会触发附加的重渲染过程。*/
+    beforeUpdate: function beforeUpdate() {},
+    /*由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。当这个钩子被调用时，组件 DOM 已经更新*/
+    updated: function updated() {},
+    /*keep-alive 组件激活时调用*/
+    activated: function activated() {},
+    /*keep-alive 组件停用时调用*/
+    deactivated: function deactivated() {},
+    /*过渡动画页面离开后*/
+    leaveCancelled: function leaveCancelled() {},
+    /*实例销毁之前调用。在这一步，实例仍然完全可用。*/
+    beforeDestroy: function beforeDestroy() {},
+    /*Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。*/
+    destroyed: function destroyed() {}
+};
+
+var _weixConfig = {
+    template: "<div><slot></slot></div>",
+    data: {
+        show: true,
+        pv: 1
+    },
+    watch: {},
+    onLoad: function onLoad(options) {
+        // 生命周期函数--监听页面加载
+    },
+    onReady: function onReady() {
+        // 生命周期函数--监听页面初次渲染完成
+    },
+    onShow: function onShow() {
+        // 生命周期函数--监听页面显示
+    },
+    onHide: function onHide() {
+        // 生命周期函数--监听页面隐藏
+    },
+    onUnload: function onUnload() {
+        // 生命周期函数--监听页面卸载
+    },
+    onPullDownRefresh: function onPullDownRefresh() {
+        // 页面相关事件处理函数--监听用户下拉动作
+    },
+    onReachBottom: function onReachBottom() {
+        // 页面上拉触底事件的处理函数
+    },
+    onShareAppMessage: function onShareAppMessage() {
+        //用户点击右上角分享
+    },
+    setData: function setData(_obj) {
+        var _this = this;
+
+        _core2.default.forEach(data, function (val, key) {
+            _this[key] = val;
+        });
+    }
+};
+
+;
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _iscroll = __webpack_require__(46);
+
+var _iscroll2 = _interopRequireDefault(_iscroll);
+
+var _scroll_view = __webpack_require__(49);
+
+var _scroll_view2 = _interopRequireDefault(_scroll_view);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var vScroll = null;
+exports.default = {
+    name: "scroll-view",
+    template: _scroll_view2.default,
+    data: function data() {
+        return {
+            lowerY: 1,
+            readyRen: false
+        };
+    },
+    props: {
+        scrollX: {
+            default: false
+        },
+        scrollY: {
+            default: true
+        },
+        scrollId: {
+            default: ".scrollView"
+        }
+    },
+    mounted: function mounted() {
+        var that = this;
+        //创建滚动
+        vScroll = new _iscroll2.default(this.scrollId, {
+            scrollX: that.scrollX,
+            scrollY: that.scrollY,
+            probeType: 3,
+            mouseWheel: true,
+            disableTouch: false,
+            disableMouse: true,
+            eventPassthrough: "horizontal"
+        });
+        //滚动监听
+        vScroll.on('scrollStart', function () {
+            that.bindscrollstart(this);
+        });
+        //滚动监听
+        vScroll.on('scrollEnd', function () {
+            that.bindscrollend(this);
+            if (this.y == this.maxScrollY) {
+                that.bindscrolltolower(this);
+            } else if (this.y == 0) {
+                that.bindscrolltoupper(this);
+            }
+        });
+        //滚动监听
+        vScroll.on('scroll', function () {
+            that.bindscroll(this);
+        });
+    },
+    methods: {
+        bindscrollstart: function bindscrollstart(evt) {
+            if (this.lowerY <= 0) {
+                this.readyRen = true;
+            } else {
+                this.readyRen = false;
+            }
+            this.$emit('bindscrollstart', evt);
+        },
+        bindscrollend: function bindscrollend(evt) {
+            this.$emit('bindscrollend', evt);
+        },
+        bindscrolltoupper: function bindscrolltoupper(evt) {
+            this.$emit('bindscrolltoupper', evt);
+        },
+        bindscrolltolower: function bindscrolltolower(evt) {
+            this.$emit('bindscrolltolower', evt);
+        },
+        bindscroll: function bindscroll(evt) {
+            this.lowerY = parseInt(evt.y - evt.maxScrollY);
+            this.$emit('bindscroll', evt);
+        },
+        refresh: function refresh() {
+            vScroll.refresh();
+        }
+    }
+};
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _swiper = __webpack_require__(47);
+
+var _swiper2 = _interopRequireDefault(_swiper);
+
+var _swiper3 = __webpack_require__(50);
+
+var _swiper4 = _interopRequireDefault(_swiper3);
+
+__webpack_require__(43);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var vSwiper = null;
+exports.default = {
+	name: 'swiper',
+	template: _swiper4.default,
+	props: {
+		indicatorDots: {
+			default: false
+		},
+		autoplay: {
+			default: false
+		},
+		current: {
+			default: 0
+		},
+		interval: {
+			default: 300
+		},
+		duration: {
+			default: 500
+		},
+		circular: {
+			default: false
+		},
+		swiperId: {
+			default: ".swiper"
+		}
+	},
+	computed: {
+		pagination: function pagination() {
+			return this.indicatorDots ? ".swiper-pagination" : "";
+		},
+		intval: function intval() {
+			return this.autoplay ? this.interval : 0;
+		}
+	},
+	mounted: function mounted() {
+		//创建滚动
+		vSwiper = new _swiper2.default(this.swiperId, {
+			autoplay: this.intval,
+			pagination: this.pagination,
+			speed: this.duration,
+			initialSlide: this.current,
+			loop: this.circular
+		});
+	},
+	methods: {
+		refresh: function refresh() {
+			mySwiper.update();
+		}
+	}
+};
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _request = __webpack_require__(41);
+
+var _request2 = _interopRequireDefault(_request);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = {
+    v: 0.1,
+    request: _request2.default
+};
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (_obj) {
+    /*默认参数配置*/
+    var _defObj = {};
+    _defObj.url = '';
+    _defObj.method = 'get';
+    _defObj.dataType = 'json';
+    _defObj.headers = { 'Content-Type': 'application/json;charset=utf-8' };
+    _defObj.success = function (data) {};
+    _defObj.fail = function (err) {};
+    _defObj.complete = function (a) {};
+    /*发送参数处理*/
+    var _reqObj = _core2.default.clone(_defObj);
+    if (_core2.default.has(_obj, 'dataType')) {
+        _obj.responseType = _obj.dataType;
+    }
+    _core2.default.extend(_reqObj, _obj);
+    /*发送数据*/
+    (0, _axios2.default)(_reqObj).then(function (res) {
+        _reqObj.success(res.data);
+        _reqObj.complete(res.data);
+    }).catch(function (err) {
+        _reqObj.fail(err);
+        _reqObj.complete(err);
+    });
+};
+
+var _axios = __webpack_require__(8);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _core = __webpack_require__(2);
+
+var _core2 = _interopRequireDefault(_core);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+;
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.byteLength = byteLength
+exports.toByteArray = toByteArray
+exports.fromByteArray = fromByteArray
+
+var lookup = []
+var revLookup = []
+var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
+
+var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+for (var i = 0, len = code.length; i < len; ++i) {
+  lookup[i] = code[i]
+  revLookup[code.charCodeAt(i)] = i
+}
+
+revLookup['-'.charCodeAt(0)] = 62
+revLookup['_'.charCodeAt(0)] = 63
+
+function placeHoldersCount (b64) {
+  var len = b64.length
+  if (len % 4 > 0) {
+    throw new Error('Invalid string. Length must be a multiple of 4')
+  }
+
+  // the number of equal signs (place holders)
+  // if there are two placeholders, than the two characters before it
+  // represent one byte
+  // if there is only one, then the three characters before it represent 2 bytes
+  // this is just a cheap hack to not do indexOf twice
+  return b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
+}
+
+function byteLength (b64) {
+  // base64 is 4/3 + up to two characters of the original data
+  return b64.length * 3 / 4 - placeHoldersCount(b64)
+}
+
+function toByteArray (b64) {
+  var i, j, l, tmp, placeHolders, arr
+  var len = b64.length
+  placeHolders = placeHoldersCount(b64)
+
+  arr = new Arr(len * 3 / 4 - placeHolders)
+
+  // if there are placeholders, only get up to the last complete 4 chars
+  l = placeHolders > 0 ? len - 4 : len
+
+  var L = 0
+
+  for (i = 0, j = 0; i < l; i += 4, j += 3) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 18) | (revLookup[b64.charCodeAt(i + 1)] << 12) | (revLookup[b64.charCodeAt(i + 2)] << 6) | revLookup[b64.charCodeAt(i + 3)]
+    arr[L++] = (tmp >> 16) & 0xFF
+    arr[L++] = (tmp >> 8) & 0xFF
+    arr[L++] = tmp & 0xFF
+  }
+
+  if (placeHolders === 2) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 2) | (revLookup[b64.charCodeAt(i + 1)] >> 4)
+    arr[L++] = tmp & 0xFF
+  } else if (placeHolders === 1) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 10) | (revLookup[b64.charCodeAt(i + 1)] << 4) | (revLookup[b64.charCodeAt(i + 2)] >> 2)
+    arr[L++] = (tmp >> 8) & 0xFF
+    arr[L++] = tmp & 0xFF
+  }
+
+  return arr
+}
+
+function tripletToBase64 (num) {
+  return lookup[num >> 18 & 0x3F] + lookup[num >> 12 & 0x3F] + lookup[num >> 6 & 0x3F] + lookup[num & 0x3F]
+}
+
+function encodeChunk (uint8, start, end) {
+  var tmp
+  var output = []
+  for (var i = start; i < end; i += 3) {
+    tmp = (uint8[i] << 16) + (uint8[i + 1] << 8) + (uint8[i + 2])
+    output.push(tripletToBase64(tmp))
+  }
+  return output.join('')
+}
+
+function fromByteArray (uint8) {
+  var tmp
+  var len = uint8.length
+  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
+  var output = ''
+  var parts = []
+  var maxChunkLength = 16383 // must be multiple of 3
+
+  // go through the array every three bytes, we'll deal with trailing stuff later
+  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
+    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
+  }
+
+  // pad the end with zeros, but make sure to not forget the extra bytes
+  if (extraBytes === 1) {
+    tmp = uint8[len - 1]
+    output += lookup[tmp >> 2]
+    output += lookup[(tmp << 4) & 0x3F]
+    output += '=='
+  } else if (extraBytes === 2) {
+    tmp = (uint8[len - 2] << 8) + (uint8[len - 1])
+    output += lookup[tmp >> 10]
+    output += lookup[(tmp >> 4) & 0x3F]
+    output += lookup[(tmp << 2) & 0x3F]
+    output += '='
+  }
+
+  parts.push(output)
+
+  return parts.join('')
+}
+
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports) {
+
+exports.read = function (buffer, offset, isLE, mLen, nBytes) {
+  var e, m
+  var eLen = nBytes * 8 - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var nBits = -7
+  var i = isLE ? (nBytes - 1) : 0
+  var d = isLE ? -1 : 1
+  var s = buffer[offset + i]
+
+  i += d
+
+  e = s & ((1 << (-nBits)) - 1)
+  s >>= (-nBits)
+  nBits += eLen
+  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+
+  m = e & ((1 << (-nBits)) - 1)
+  e >>= (-nBits)
+  nBits += mLen
+  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+
+  if (e === 0) {
+    e = 1 - eBias
+  } else if (e === eMax) {
+    return m ? NaN : ((s ? -1 : 1) * Infinity)
+  } else {
+    m = m + Math.pow(2, mLen)
+    e = e - eBias
+  }
+  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
+}
+
+exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
+  var e, m, c
+  var eLen = nBytes * 8 - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
+  var i = isLE ? 0 : (nBytes - 1)
+  var d = isLE ? 1 : -1
+  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
+
+  value = Math.abs(value)
+
+  if (isNaN(value) || value === Infinity) {
+    m = isNaN(value) ? 1 : 0
+    e = eMax
+  } else {
+    e = Math.floor(Math.log(value) / Math.LN2)
+    if (value * (c = Math.pow(2, -e)) < 1) {
+      e--
+      c *= 2
+    }
+    if (e + eBias >= 1) {
+      value += rt / c
+    } else {
+      value += rt * Math.pow(2, 1 - eBias)
+    }
+    if (value * c >= 2) {
+      e++
+      c /= 2
+    }
+
+    if (e + eBias >= eMax) {
+      m = 0
+      e = eMax
+    } else if (e + eBias >= 1) {
+      m = (value * c - 1) * Math.pow(2, mLen)
+      e = e + eBias
+    } else {
+      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
+      e = 0
+    }
+  }
+
+  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
+
+  e = (e << mLen) | m
+  eLen += mLen
+  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
+
+  buffer[offset + i - d] |= s * 128
+}
+
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports) {
+
+var toString = {}.toString;
+
+module.exports = Array.isArray || function (arr) {
+  return toString.call(arr) == '[object Array]';
+};
+
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_RESULT__;/*! iScroll v5.2.0-snapshot ~ (c) 2008-2017 Matteo Spinelli ~ http://cubiq.org/license */
+(function (window, document, Math) {
+var rAF = window.requestAnimationFrame	||
+	window.webkitRequestAnimationFrame	||
+	window.mozRequestAnimationFrame		||
+	window.oRequestAnimationFrame		||
+	window.msRequestAnimationFrame		||
+	function (callback) { window.setTimeout(callback, 1000 / 60); };
+
+var utils = (function () {
+	var me = {};
+
+	var _elementStyle = document.createElement('div').style;
+	var _vendor = (function () {
+		var vendors = ['t', 'webkitT', 'MozT', 'msT', 'OT'],
+			transform,
+			i = 0,
+			l = vendors.length;
+
+		for ( ; i < l; i++ ) {
+			transform = vendors[i] + 'ransform';
+			if ( transform in _elementStyle ) return vendors[i].substr(0, vendors[i].length-1);
+		}
+
+		return false;
+	})();
+
+	function _prefixStyle (style) {
+		if ( _vendor === false ) return false;
+		if ( _vendor === '' ) return style;
+		return _vendor + style.charAt(0).toUpperCase() + style.substr(1);
+	}
+
+	me.getTime = Date.now || function getTime () { return new Date().getTime(); };
+
+	me.extend = function (target, obj) {
+		for ( var i in obj ) {
+			target[i] = obj[i];
+		}
+	};
+
+	me.addEvent = function (el, type, fn, capture) {
+		el.addEventListener(type, fn, !!capture);
+	};
+
+	me.removeEvent = function (el, type, fn, capture) {
+		el.removeEventListener(type, fn, !!capture);
+	};
+
+	me.prefixPointerEvent = function (pointerEvent) {
+		return window.MSPointerEvent ?
+			'MSPointer' + pointerEvent.charAt(7).toUpperCase() + pointerEvent.substr(8):
+			pointerEvent;
+	};
+
+	me.momentum = function (current, start, time, lowerMargin, wrapperSize, deceleration) {
+		var distance = current - start,
+			speed = Math.abs(distance) / time,
+			destination,
+			duration;
+
+		deceleration = deceleration === undefined ? 0.0006 : deceleration;
+
+		destination = current + ( speed * speed ) / ( 2 * deceleration ) * ( distance < 0 ? -1 : 1 );
+		duration = speed / deceleration;
+
+		if ( destination < lowerMargin ) {
+			destination = wrapperSize ? lowerMargin - ( wrapperSize / 2.5 * ( speed / 8 ) ) : lowerMargin;
+			distance = Math.abs(destination - current);
+			duration = distance / speed;
+		} else if ( destination > 0 ) {
+			destination = wrapperSize ? wrapperSize / 2.5 * ( speed / 8 ) : 0;
+			distance = Math.abs(current) + destination;
+			duration = distance / speed;
+		}
+
+		return {
+			destination: Math.round(destination),
+			duration: duration
+		};
+	};
+
+	var _transform = _prefixStyle('transform');
+
+	me.extend(me, {
+		hasTransform: _transform !== false,
+		hasPerspective: _prefixStyle('perspective') in _elementStyle,
+		hasTouch: 'ontouchstart' in window,
+		hasPointer: !!(window.PointerEvent || window.MSPointerEvent), // IE10 is prefixed
+		hasTransition: _prefixStyle('transition') in _elementStyle
+	});
+
+	/*
+	This should find all Android browsers lower than build 535.19 (both stock browser and webview)
+	- galaxy S2 is ok
+    - 2.3.6 : `AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1`
+    - 4.0.4 : `AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30`
+   - galaxy S3 is badAndroid (stock brower, webview)
+     `AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30`
+   - galaxy S4 is badAndroid (stock brower, webview)
+     `AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30`
+   - galaxy S5 is OK
+     `AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36 (Chrome/)`
+   - galaxy S6 is OK
+     `AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36 (Chrome/)`
+  */
+	me.isBadAndroid = (function() {
+		var appVersion = window.navigator.appVersion;
+		// Android browser is not a chrome browser.
+		if (/Android/.test(appVersion) && !(/Chrome\/\d/.test(appVersion))) {
+			var safariVersion = appVersion.match(/Safari\/(\d+.\d)/);
+			if(safariVersion && typeof safariVersion === "object" && safariVersion.length >= 2) {
+				return parseFloat(safariVersion[1]) < 535.19;
+			} else {
+				return true;
+			}
+		} else {
+			return false;
+		}
+	})();
+
+	me.extend(me.style = {}, {
+		transform: _transform,
+		transitionTimingFunction: _prefixStyle('transitionTimingFunction'),
+		transitionDuration: _prefixStyle('transitionDuration'),
+		transitionDelay: _prefixStyle('transitionDelay'),
+		transformOrigin: _prefixStyle('transformOrigin'),
+		touchAction: _prefixStyle('touchAction')
+	});
+
+	me.hasClass = function (e, c) {
+		var re = new RegExp("(^|\\s)" + c + "(\\s|$)");
+		return re.test(e.className);
+	};
+
+	me.addClass = function (e, c) {
+		if ( me.hasClass(e, c) ) {
+			return;
+		}
+
+		var newclass = e.className.split(' ');
+		newclass.push(c);
+		e.className = newclass.join(' ');
+	};
+
+	me.removeClass = function (e, c) {
+		if ( !me.hasClass(e, c) ) {
+			return;
+		}
+
+		var re = new RegExp("(^|\\s)" + c + "(\\s|$)", 'g');
+		e.className = e.className.replace(re, ' ');
+	};
+
+	me.offset = function (el) {
+		var left = -el.offsetLeft,
+			top = -el.offsetTop;
+
+		// jshint -W084
+		while (el = el.offsetParent) {
+			left -= el.offsetLeft;
+			top -= el.offsetTop;
+		}
+		// jshint +W084
+
+		return {
+			left: left,
+			top: top
+		};
+	};
+
+	me.preventDefaultException = function (el, exceptions) {
+		for ( var i in exceptions ) {
+			if ( exceptions[i].test(el[i]) ) {
+				return true;
+			}
+		}
+
+		return false;
+	};
+
+	me.extend(me.eventType = {}, {
+		touchstart: 1,
+		touchmove: 1,
+		touchend: 1,
+
+		mousedown: 2,
+		mousemove: 2,
+		mouseup: 2,
+
+		pointerdown: 3,
+		pointermove: 3,
+		pointerup: 3,
+
+		MSPointerDown: 3,
+		MSPointerMove: 3,
+		MSPointerUp: 3
+	});
+
+	me.extend(me.ease = {}, {
+		quadratic: {
+			style: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+			fn: function (k) {
+				return k * ( 2 - k );
+			}
+		},
+		circular: {
+			style: 'cubic-bezier(0.1, 0.57, 0.1, 1)',	// Not properly "circular" but this looks better, it should be (0.075, 0.82, 0.165, 1)
+			fn: function (k) {
+				return Math.sqrt( 1 - ( --k * k ) );
+			}
+		},
+		back: {
+			style: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+			fn: function (k) {
+				var b = 4;
+				return ( k = k - 1 ) * k * ( ( b + 1 ) * k + b ) + 1;
+			}
+		},
+		bounce: {
+			style: '',
+			fn: function (k) {
+				if ( ( k /= 1 ) < ( 1 / 2.75 ) ) {
+					return 7.5625 * k * k;
+				} else if ( k < ( 2 / 2.75 ) ) {
+					return 7.5625 * ( k -= ( 1.5 / 2.75 ) ) * k + 0.75;
+				} else if ( k < ( 2.5 / 2.75 ) ) {
+					return 7.5625 * ( k -= ( 2.25 / 2.75 ) ) * k + 0.9375;
+				} else {
+					return 7.5625 * ( k -= ( 2.625 / 2.75 ) ) * k + 0.984375;
+				}
+			}
+		},
+		elastic: {
+			style: '',
+			fn: function (k) {
+				var f = 0.22,
+					e = 0.4;
+
+				if ( k === 0 ) { return 0; }
+				if ( k == 1 ) { return 1; }
+
+				return ( e * Math.pow( 2, - 10 * k ) * Math.sin( ( k - f / 4 ) * ( 2 * Math.PI ) / f ) + 1 );
+			}
+		}
+	});
+
+	me.tap = function (e, eventName) {
+		var ev = document.createEvent('Event');
+		ev.initEvent(eventName, true, true);
+		ev.pageX = e.pageX;
+		ev.pageY = e.pageY;
+		e.target.dispatchEvent(ev);
+	};
+
+	me.click = function (e) {
+		var target = e.target,
+			ev;
+
+		if ( !(/(SELECT|INPUT|TEXTAREA)/i).test(target.tagName) ) {
+			// https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent
+			// initMouseEvent is deprecated.
+			ev = document.createEvent(window.MouseEvent ? 'MouseEvents' : 'Event');
+			ev.initEvent('click', true, true);
+			ev.view = e.view || window;
+			ev.detail = 1;
+			ev.screenX = target.screenX || 0;
+			ev.screenY = target.screenY || 0;
+			ev.clientX = target.clientX || 0;
+			ev.clientY = target.clientY || 0;
+			ev.ctrlKey = !!e.ctrlKey;
+			ev.altKey = !!e.altKey;
+			ev.shiftKey = !!e.shiftKey;
+			ev.metaKey = !!e.metaKey;
+			ev.button = 0;
+			ev.relatedTarget = null;
+			ev._constructed = true;
+			target.dispatchEvent(ev);
+		}
+	};
+
+	me.getTouchAction = function(eventPassthrough, addPinch) {
+		var touchAction = 'none';
+		if ( eventPassthrough === 'vertical' ) {
+			touchAction = 'pan-y';
+		} else if (eventPassthrough === 'horizontal' ) {
+			touchAction = 'pan-x';
+		}
+		if (addPinch && touchAction != 'none') {
+			// add pinch-zoom support if the browser supports it, but if not (eg. Chrome <55) do nothing
+			touchAction += ' pinch-zoom';
+		}
+		return touchAction;
+	};
+
+	me.getRect = function(el) {
+		if (el instanceof SVGElement) {
+			var rect = el.getBoundingClientRect();
+			return {
+				top : rect.top,
+				left : rect.left,
+				width : rect.width,
+				height : rect.height
+			};
+		} else {
+			return {
+				top : el.offsetTop,
+				left : el.offsetLeft,
+				width : el.offsetWidth,
+				height : el.offsetHeight
+			};
+		}
+	};
+
+	return me;
+})();
+function IScroll (el, options) {
+	this.wrapper = typeof el == 'string' ? document.querySelector(el) : el;
+	this.scroller = this.wrapper.children[0];
+	this.scrollerStyle = this.scroller.style;		// cache style for better performance
+
+	this.options = {
+
+		resizeScrollbars: true,
+
+		mouseWheelSpeed: 20,
+
+		snapThreshold: 0.334,
+
+// INSERT POINT: OPTIONS
+		disablePointer : !utils.hasPointer,
+		disableTouch : utils.hasPointer || !utils.hasTouch,
+		disableMouse : utils.hasPointer || utils.hasTouch,
+		startX: 0,
+		startY: 0,
+		scrollY: true,
+		directionLockThreshold: 5,
+		momentum: true,
+
+		bounce: true,
+		bounceTime: 600,
+		bounceEasing: '',
+
+		preventDefault: true,
+		preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT)$/ },
+
+		HWCompositing: true,
+		useTransition: true,
+		useTransform: true,
+		bindToWrapper: typeof window.onmousedown === "undefined"
+	};
+
+	for ( var i in options ) {
+		this.options[i] = options[i];
+	}
+
+	// Normalize options
+	this.translateZ = this.options.HWCompositing && utils.hasPerspective ? ' translateZ(0)' : '';
+
+	this.options.useTransition = utils.hasTransition && this.options.useTransition;
+	this.options.useTransform = utils.hasTransform && this.options.useTransform;
+
+	this.options.eventPassthrough = this.options.eventPassthrough === true ? 'vertical' : this.options.eventPassthrough;
+	this.options.preventDefault = !this.options.eventPassthrough && this.options.preventDefault;
+
+	// If you want eventPassthrough I have to lock one of the axes
+	this.options.scrollY = this.options.eventPassthrough == 'vertical' ? false : this.options.scrollY;
+	this.options.scrollX = this.options.eventPassthrough == 'horizontal' ? false : this.options.scrollX;
+
+	// With eventPassthrough we also need lockDirection mechanism
+	this.options.freeScroll = this.options.freeScroll && !this.options.eventPassthrough;
+	this.options.directionLockThreshold = this.options.eventPassthrough ? 0 : this.options.directionLockThreshold;
+
+	this.options.bounceEasing = typeof this.options.bounceEasing == 'string' ? utils.ease[this.options.bounceEasing] || utils.ease.circular : this.options.bounceEasing;
+
+	this.options.resizePolling = this.options.resizePolling === undefined ? 60 : this.options.resizePolling;
+
+	if ( this.options.tap === true ) {
+		this.options.tap = 'tap';
+	}
+
+	// https://github.com/cubiq/iscroll/issues/1029
+	if (!this.options.useTransition && !this.options.useTransform) {
+		if(!(/relative|absolute/i).test(this.scrollerStyle.position)) {
+			this.scrollerStyle.position = "relative";
+		}
+	}
+
+	if ( this.options.shrinkScrollbars == 'scale' ) {
+		this.options.useTransition = false;
+	}
+
+	this.options.invertWheelDirection = this.options.invertWheelDirection ? -1 : 1;
+
+	if ( this.options.probeType == 3 ) {
+		this.options.useTransition = false;	}
+
+// INSERT POINT: NORMALIZATION
+
+	// Some defaults
+	this.x = 0;
+	this.y = 0;
+	this.directionX = 0;
+	this.directionY = 0;
+	this._events = {};
+
+// INSERT POINT: DEFAULTS
+
+	this._init();
+	this.refresh();
+
+	this.scrollTo(this.options.startX, this.options.startY);
+	this.enable();
+}
+
+IScroll.prototype = {
+	version: '5.2.0-snapshot',
+
+	_init: function () {
+		this._initEvents();
+
+		if ( this.options.scrollbars || this.options.indicators ) {
+			this._initIndicators();
+		}
+
+		if ( this.options.mouseWheel ) {
+			this._initWheel();
+		}
+
+		if ( this.options.snap ) {
+			this._initSnap();
+		}
+
+		if ( this.options.keyBindings ) {
+			this._initKeys();
+		}
+
+// INSERT POINT: _init
+
+	},
+
+	destroy: function () {
+		this._initEvents(true);
+		clearTimeout(this.resizeTimeout);
+ 		this.resizeTimeout = null;
+		this._execEvent('destroy');
+	},
+
+	_transitionEnd: function (e) {
+		if ( e.target != this.scroller || !this.isInTransition ) {
+			return;
+		}
+
+		this._transitionTime();
+		if ( !this.resetPosition(this.options.bounceTime) ) {
+			this.isInTransition = false;
+			this._execEvent('scrollEnd');
+		}
+	},
+
+	_start: function (e) {
+		// React to left mouse button only
+		if ( utils.eventType[e.type] != 1 ) {
+		  // for button property
+		  // http://unixpapa.com/js/mouse.html
+		  var button;
+	    if (!e.which) {
+	      /* IE case */
+	      button = (e.button < 2) ? 0 :
+	               ((e.button == 4) ? 1 : 2);
+	    } else {
+	      /* All others */
+	      button = e.button;
+	    }
+			if ( button !== 0 ) {
+				return;
+			}
+		}
+
+		if ( !this.enabled || (this.initiated && utils.eventType[e.type] !== this.initiated) ) {
+			return;
+		}
+
+		if ( this.options.preventDefault && !utils.isBadAndroid && !utils.preventDefaultException(e.target, this.options.preventDefaultException) ) {
+			e.preventDefault();
+		}
+
+		var point = e.touches ? e.touches[0] : e,
+			pos;
+
+		this.initiated	= utils.eventType[e.type];
+		this.moved		= false;
+		this.distX		= 0;
+		this.distY		= 0;
+		this.directionX = 0;
+		this.directionY = 0;
+		this.directionLocked = 0;
+
+		this.startTime = utils.getTime();
+
+		if ( this.options.useTransition && this.isInTransition ) {
+			this._transitionTime();
+			this.isInTransition = false;
+			pos = this.getComputedPosition();
+			this._translate(Math.round(pos.x), Math.round(pos.y));
+			this._execEvent('scrollEnd');
+		} else if ( !this.options.useTransition && this.isAnimating ) {
+			this.isAnimating = false;
+			this._execEvent('scrollEnd');
+		}
+
+		this.startX    = this.x;
+		this.startY    = this.y;
+		this.absStartX = this.x;
+		this.absStartY = this.y;
+		this.pointX    = point.pageX;
+		this.pointY    = point.pageY;
+
+		this._execEvent('beforeScrollStart');
+	},
+
+	_move: function (e) {
+		if ( !this.enabled || utils.eventType[e.type] !== this.initiated ) {
+			return;
+		}
+
+		if ( this.options.preventDefault ) {	// increases performance on Android? TODO: check!
+			e.preventDefault();
+		}
+
+		var point		= e.touches ? e.touches[0] : e,
+			deltaX		= point.pageX - this.pointX,
+			deltaY		= point.pageY - this.pointY,
+			timestamp	= utils.getTime(),
+			newX, newY,
+			absDistX, absDistY;
+
+		this.pointX		= point.pageX;
+		this.pointY		= point.pageY;
+
+		this.distX		+= deltaX;
+		this.distY		+= deltaY;
+		absDistX		= Math.abs(this.distX);
+		absDistY		= Math.abs(this.distY);
+
+		// We need to move at least 10 pixels for the scrolling to initiate
+		if ( timestamp - this.endTime > 300 && (absDistX < 10 && absDistY < 10) ) {
+			return;
+		}
+
+		// If you are scrolling in one direction lock the other
+		if ( !this.directionLocked && !this.options.freeScroll ) {
+			if ( absDistX > absDistY + this.options.directionLockThreshold ) {
+				this.directionLocked = 'h';		// lock horizontally
+			} else if ( absDistY >= absDistX + this.options.directionLockThreshold ) {
+				this.directionLocked = 'v';		// lock vertically
+			} else {
+				this.directionLocked = 'n';		// no lock
+			}
+		}
+
+		if ( this.directionLocked == 'h' ) {
+			if ( this.options.eventPassthrough == 'vertical' ) {
+				e.preventDefault();
+			} else if ( this.options.eventPassthrough == 'horizontal' ) {
+				this.initiated = false;
+				return;
+			}
+
+			deltaY = 0;
+		} else if ( this.directionLocked == 'v' ) {
+			if ( this.options.eventPassthrough == 'horizontal' ) {
+				e.preventDefault();
+			} else if ( this.options.eventPassthrough == 'vertical' ) {
+				this.initiated = false;
+				return;
+			}
+
+			deltaX = 0;
+		}
+
+		deltaX = this.hasHorizontalScroll ? deltaX : 0;
+		deltaY = this.hasVerticalScroll ? deltaY : 0;
+
+		newX = this.x + deltaX;
+		newY = this.y + deltaY;
+
+		// Slow down if outside of the boundaries
+		if ( newX > 0 || newX < this.maxScrollX ) {
+			newX = this.options.bounce ? this.x + deltaX / 3 : newX > 0 ? 0 : this.maxScrollX;
+		}
+		if ( newY > 0 || newY < this.maxScrollY ) {
+			newY = this.options.bounce ? this.y + deltaY / 3 : newY > 0 ? 0 : this.maxScrollY;
+		}
+
+		this.directionX = deltaX > 0 ? -1 : deltaX < 0 ? 1 : 0;
+		this.directionY = deltaY > 0 ? -1 : deltaY < 0 ? 1 : 0;
+
+		if ( !this.moved ) {
+			this._execEvent('scrollStart');
+		}
+
+		this.moved = true;
+
+		this._translate(newX, newY);
+
+/* REPLACE START: _move */
+		if ( timestamp - this.startTime > 300 ) {
+			this.startTime = timestamp;
+			this.startX = this.x;
+			this.startY = this.y;
+
+			if ( this.options.probeType == 1 ) {
+				this._execEvent('scroll');
+			}
+		}
+
+		if ( this.options.probeType > 1 ) {
+			this._execEvent('scroll');
+		}
+/* REPLACE END: _move */
+
+	},
+
+	_end: function (e) {
+		if ( !this.enabled || utils.eventType[e.type] !== this.initiated ) {
+			return;
+		}
+
+		if ( this.options.preventDefault && !utils.preventDefaultException(e.target, this.options.preventDefaultException) ) {
+			e.preventDefault();
+		}
+
+		var point = e.changedTouches ? e.changedTouches[0] : e,
+			momentumX,
+			momentumY,
+			duration = utils.getTime() - this.startTime,
+			newX = Math.round(this.x),
+			newY = Math.round(this.y),
+			distanceX = Math.abs(newX - this.startX),
+			distanceY = Math.abs(newY - this.startY),
+			time = 0,
+			easing = '';
+
+		this.isInTransition = 0;
+		this.initiated = 0;
+		this.endTime = utils.getTime();
+
+		// reset if we are outside of the boundaries
+		if ( this.resetPosition(this.options.bounceTime) ) {
+			return;
+		}
+
+		this.scrollTo(newX, newY);	// ensures that the last position is rounded
+
+		// we scrolled less than 10 pixels
+		if ( !this.moved ) {
+			if ( this.options.tap ) {
+				utils.tap(e, this.options.tap);
+			}
+
+			if ( this.options.click ) {
+				utils.click(e);
+			}
+
+			this._execEvent('scrollCancel');
+			return;
+		}
+
+		if ( this._events.flick && duration < 200 && distanceX < 100 && distanceY < 100 ) {
+			this._execEvent('flick');
+			return;
+		}
+
+		// start momentum animation if needed
+		if ( this.options.momentum && duration < 300 ) {
+			momentumX = this.hasHorizontalScroll ? utils.momentum(this.x, this.startX, duration, this.maxScrollX, this.options.bounce ? this.wrapperWidth : 0, this.options.deceleration) : { destination: newX, duration: 0 };
+			momentumY = this.hasVerticalScroll ? utils.momentum(this.y, this.startY, duration, this.maxScrollY, this.options.bounce ? this.wrapperHeight : 0, this.options.deceleration) : { destination: newY, duration: 0 };
+			newX = momentumX.destination;
+			newY = momentumY.destination;
+			time = Math.max(momentumX.duration, momentumY.duration);
+			this.isInTransition = 1;
+		}
+
+
+		if ( this.options.snap ) {
+			var snap = this._nearestSnap(newX, newY);
+			this.currentPage = snap;
+			time = this.options.snapSpeed || Math.max(
+					Math.max(
+						Math.min(Math.abs(newX - snap.x), 1000),
+						Math.min(Math.abs(newY - snap.y), 1000)
+					), 300);
+			newX = snap.x;
+			newY = snap.y;
+
+			this.directionX = 0;
+			this.directionY = 0;
+			easing = this.options.bounceEasing;
+		}
+
+// INSERT POINT: _end
+
+		if ( newX != this.x || newY != this.y ) {
+			// change easing function when scroller goes out of the boundaries
+			if ( newX > 0 || newX < this.maxScrollX || newY > 0 || newY < this.maxScrollY ) {
+				easing = utils.ease.quadratic;
+			}
+
+			this.scrollTo(newX, newY, time, easing);
+			return;
+		}
+
+		this._execEvent('scrollEnd');
+	},
+
+	_resize: function () {
+		var that = this;
+
+		clearTimeout(this.resizeTimeout);
+
+		this.resizeTimeout = setTimeout(function () {
+			that.refresh();
+		}, this.options.resizePolling);
+	},
+
+	resetPosition: function (time) {
+		var x = this.x,
+			y = this.y;
+
+		time = time || 0;
+
+		if ( !this.hasHorizontalScroll || this.x > 0 ) {
+			x = 0;
+		} else if ( this.x < this.maxScrollX ) {
+			x = this.maxScrollX;
+		}
+
+		if ( !this.hasVerticalScroll || this.y > 0 ) {
+			y = 0;
+		} else if ( this.y < this.maxScrollY ) {
+			y = this.maxScrollY;
+		}
+
+		if ( x == this.x && y == this.y ) {
+			return false;
+		}
+
+		this.scrollTo(x, y, time, this.options.bounceEasing);
+
+		return true;
+	},
+
+	disable: function () {
+		this.enabled = false;
+	},
+
+	enable: function () {
+		this.enabled = true;
+	},
+
+	refresh: function () {
+		utils.getRect(this.wrapper);		// Force reflow
+
+		this.wrapperWidth	= this.wrapper.clientWidth;
+		this.wrapperHeight	= this.wrapper.clientHeight;
+
+		var rect = utils.getRect(this.scroller);
+/* REPLACE START: refresh */
+
+		this.scrollerWidth	= rect.width;
+		this.scrollerHeight	= rect.height;
+
+		this.maxScrollX		= this.wrapperWidth - this.scrollerWidth;
+		this.maxScrollY		= this.wrapperHeight - this.scrollerHeight;
+
+/* REPLACE END: refresh */
+
+		this.hasHorizontalScroll	= this.options.scrollX && this.maxScrollX < 0;
+		this.hasVerticalScroll		= this.options.scrollY && this.maxScrollY < 0;
+		
+		if ( !this.hasHorizontalScroll ) {
+			this.maxScrollX = 0;
+			this.scrollerWidth = this.wrapperWidth;
+		}
+
+		if ( !this.hasVerticalScroll ) {
+			this.maxScrollY = 0;
+			this.scrollerHeight = this.wrapperHeight;
+		}
+
+		this.endTime = 0;
+		this.directionX = 0;
+		this.directionY = 0;
+		
+		if(utils.hasPointer && !this.options.disablePointer) {
+			// The wrapper should have `touchAction` property for using pointerEvent.
+			this.wrapper.style[utils.style.touchAction] = utils.getTouchAction(this.options.eventPassthrough, true);
+
+			// case. not support 'pinch-zoom'
+			// https://github.com/cubiq/iscroll/issues/1118#issuecomment-270057583
+			if (!this.wrapper.style[utils.style.touchAction]) {
+				this.wrapper.style[utils.style.touchAction] = utils.getTouchAction(this.options.eventPassthrough, false);
+			}
+		}
+		this.wrapperOffset = utils.offset(this.wrapper);
+
+		this._execEvent('refresh');
+
+		this.resetPosition();
+
+// INSERT POINT: _refresh
+
+	},	
+
+	on: function (type, fn) {
+		if ( !this._events[type] ) {
+			this._events[type] = [];
+		}
+
+		this._events[type].push(fn);
+	},
+
+	off: function (type, fn) {
+		if ( !this._events[type] ) {
+			return;
+		}
+
+		var index = this._events[type].indexOf(fn);
+
+		if ( index > -1 ) {
+			this._events[type].splice(index, 1);
+		}
+	},
+
+	_execEvent: function (type) {
+		if ( !this._events[type] ) {
+			return;
+		}
+
+		var i = 0,
+			l = this._events[type].length;
+
+		if ( !l ) {
+			return;
+		}
+
+		for ( ; i < l; i++ ) {
+			this._events[type][i].apply(this, [].slice.call(arguments, 1));
+		}
+	},
+
+	scrollBy: function (x, y, time, easing) {
+		x = this.x + x;
+		y = this.y + y;
+		time = time || 0;
+
+		this.scrollTo(x, y, time, easing);
+	},
+
+	scrollTo: function (x, y, time, easing) {
+		easing = easing || utils.ease.circular;
+
+		this.isInTransition = this.options.useTransition && time > 0;
+		var transitionType = this.options.useTransition && easing.style;
+		if ( !time || transitionType ) {
+				if(transitionType) {
+					this._transitionTimingFunction(easing.style);
+					this._transitionTime(time);
+				}
+			this._translate(x, y);
+		} else {
+			this._animate(x, y, time, easing.fn);
+		}
+	},
+
+	scrollToElement: function (el, time, offsetX, offsetY, easing) {
+		el = el.nodeType ? el : this.scroller.querySelector(el);
+
+		if ( !el ) {
+			return;
+		}
+
+		var pos = utils.offset(el);
+
+		pos.left -= this.wrapperOffset.left;
+		pos.top  -= this.wrapperOffset.top;
+
+		// if offsetX/Y are true we center the element to the screen
+		var elRect = utils.getRect(el);
+		var wrapperRect = utils.getRect(this.wrapper);
+		if ( offsetX === true ) {
+			offsetX = Math.round(elRect.width / 2 - wrapperRect.width / 2);
+		}
+		if ( offsetY === true ) {
+			offsetY = Math.round(elRect.height / 2 - wrapperRect.height / 2);
+		}
+
+		pos.left -= offsetX || 0;
+		pos.top  -= offsetY || 0;
+
+		pos.left = pos.left > 0 ? 0 : pos.left < this.maxScrollX ? this.maxScrollX : pos.left;
+		pos.top  = pos.top  > 0 ? 0 : pos.top  < this.maxScrollY ? this.maxScrollY : pos.top;
+
+		time = time === undefined || time === null || time === 'auto' ? Math.max(Math.abs(this.x-pos.left), Math.abs(this.y-pos.top)) : time;
+
+		this.scrollTo(pos.left, pos.top, time, easing);
+	},
+
+	_transitionTime: function (time) {
+		if (!this.options.useTransition) {
+			return;
+		}
+		time = time || 0;
+		var durationProp = utils.style.transitionDuration;
+		if(!durationProp) {
+			return;
+		}
+
+		this.scrollerStyle[durationProp] = time + 'ms';
+
+		if ( !time && utils.isBadAndroid ) {
+			this.scrollerStyle[durationProp] = '0.0001ms';
+			// remove 0.0001ms
+			var self = this;
+			rAF(function() {
+				if(self.scrollerStyle[durationProp] === '0.0001ms') {
+					self.scrollerStyle[durationProp] = '0s';
+				}
+			});
+		}
+
+
+		if ( this.indicators ) {
+			for ( var i = this.indicators.length; i--; ) {
+				this.indicators[i].transitionTime(time);
+			}
+		}
+
+
+// INSERT POINT: _transitionTime
+
+	},
+
+	_transitionTimingFunction: function (easing) {
+		this.scrollerStyle[utils.style.transitionTimingFunction] = easing;
+
+
+		if ( this.indicators ) {
+			for ( var i = this.indicators.length; i--; ) {
+				this.indicators[i].transitionTimingFunction(easing);
+			}
+		}
+
+
+// INSERT POINT: _transitionTimingFunction
+
+	},
+
+	_translate: function (x, y) {
+		if ( this.options.useTransform ) {
+
+/* REPLACE START: _translate */
+
+			this.scrollerStyle[utils.style.transform] = 'translate(' + x + 'px,' + y + 'px)' + this.translateZ;
+
+/* REPLACE END: _translate */
+
+		} else {
+			x = Math.round(x);
+			y = Math.round(y);
+			this.scrollerStyle.left = x + 'px';
+			this.scrollerStyle.top = y + 'px';
+		}
+
+		this.x = x;
+		this.y = y;
+
+
+	if ( this.indicators ) {
+		for ( var i = this.indicators.length; i--; ) {
+			this.indicators[i].updatePosition();
+		}
+	}
+
+
+// INSERT POINT: _translate
+
+	},
+
+	_initEvents: function (remove) {
+		var eventType = remove ? utils.removeEvent : utils.addEvent,
+			target = this.options.bindToWrapper ? this.wrapper : window;
+
+		eventType(window, 'orientationchange', this);
+		eventType(window, 'resize', this);
+
+		if ( this.options.click ) {
+			eventType(this.wrapper, 'click', this, true);
+		}
+
+		if ( !this.options.disableMouse ) {
+			eventType(this.wrapper, 'mousedown', this);
+			eventType(target, 'mousemove', this);
+			eventType(target, 'mousecancel', this);
+			eventType(target, 'mouseup', this);
+		}
+
+		if ( utils.hasPointer && !this.options.disablePointer ) {
+			eventType(this.wrapper, utils.prefixPointerEvent('pointerdown'), this);
+			eventType(target, utils.prefixPointerEvent('pointermove'), this);
+			eventType(target, utils.prefixPointerEvent('pointercancel'), this);
+			eventType(target, utils.prefixPointerEvent('pointerup'), this);
+		}
+
+		if ( utils.hasTouch && !this.options.disableTouch ) {
+			eventType(this.wrapper, 'touchstart', this);
+			eventType(target, 'touchmove', this);
+			eventType(target, 'touchcancel', this);
+			eventType(target, 'touchend', this);
+		}
+
+		eventType(this.scroller, 'transitionend', this);
+		eventType(this.scroller, 'webkitTransitionEnd', this);
+		eventType(this.scroller, 'oTransitionEnd', this);
+		eventType(this.scroller, 'MSTransitionEnd', this);
+	},
+
+	getComputedPosition: function () {
+		var matrix = window.getComputedStyle(this.scroller, null),
+			x, y;
+
+		if ( this.options.useTransform ) {
+			matrix = matrix[utils.style.transform].split(')')[0].split(', ');
+			x = +(matrix[12] || matrix[4]);
+			y = +(matrix[13] || matrix[5]);
+		} else {
+			x = +matrix.left.replace(/[^-\d.]/g, '');
+			y = +matrix.top.replace(/[^-\d.]/g, '');
+		}
+
+		return { x: x, y: y };
+	},
+	_initIndicators: function () {
+		var interactive = this.options.interactiveScrollbars,
+			customStyle = typeof this.options.scrollbars != 'string',
+			indicators = [],
+			indicator;
+
+		var that = this;
+
+		this.indicators = [];
+
+		if ( this.options.scrollbars ) {
+			// Vertical scrollbar
+			if ( this.options.scrollY ) {
+				indicator = {
+					el: createDefaultScrollbar('v', interactive, this.options.scrollbars),
+					interactive: interactive,
+					defaultScrollbars: true,
+					customStyle: customStyle,
+					resize: this.options.resizeScrollbars,
+					shrink: this.options.shrinkScrollbars,
+					fade: this.options.fadeScrollbars,
+					listenX: false
+				};
+
+				this.wrapper.appendChild(indicator.el);
+				indicators.push(indicator);
+			}
+
+			// Horizontal scrollbar
+			if ( this.options.scrollX ) {
+				indicator = {
+					el: createDefaultScrollbar('h', interactive, this.options.scrollbars),
+					interactive: interactive,
+					defaultScrollbars: true,
+					customStyle: customStyle,
+					resize: this.options.resizeScrollbars,
+					shrink: this.options.shrinkScrollbars,
+					fade: this.options.fadeScrollbars,
+					listenY: false
+				};
+
+				this.wrapper.appendChild(indicator.el);
+				indicators.push(indicator);
+			}
+		}
+
+		if ( this.options.indicators ) {
+			// TODO: check concat compatibility
+			indicators = indicators.concat(this.options.indicators);
+		}
+
+		for ( var i = indicators.length; i--; ) {
+			this.indicators.push( new Indicator(this, indicators[i]) );
+		}
+
+		// TODO: check if we can use array.map (wide compatibility and performance issues)
+		function _indicatorsMap (fn) {
+			if (that.indicators) {
+				for ( var i = that.indicators.length; i--; ) {
+					fn.call(that.indicators[i]);
+				}
+			}
+		}
+
+		if ( this.options.fadeScrollbars ) {
+			this.on('scrollEnd', function () {
+				_indicatorsMap(function () {
+					this.fade();
+				});
+			});
+
+			this.on('scrollCancel', function () {
+				_indicatorsMap(function () {
+					this.fade();
+				});
+			});
+
+			this.on('scrollStart', function () {
+				_indicatorsMap(function () {
+					this.fade(1);
+				});
+			});
+
+			this.on('beforeScrollStart', function () {
+				_indicatorsMap(function () {
+					this.fade(1, true);
+				});
+			});
+		}
+
+
+		this.on('refresh', function () {
+			_indicatorsMap(function () {
+				this.refresh();
+			});
+		});
+
+		this.on('destroy', function () {
+			_indicatorsMap(function () {
+				this.destroy();
+			});
+
+			delete this.indicators;
+		});
+	},
+
+	_initWheel: function () {
+		utils.addEvent(this.wrapper, 'wheel', this);
+		utils.addEvent(this.wrapper, 'mousewheel', this);
+		utils.addEvent(this.wrapper, 'DOMMouseScroll', this);
+
+		this.on('destroy', function () {
+			clearTimeout(this.wheelTimeout);
+			this.wheelTimeout = null;
+			utils.removeEvent(this.wrapper, 'wheel', this);
+			utils.removeEvent(this.wrapper, 'mousewheel', this);
+			utils.removeEvent(this.wrapper, 'DOMMouseScroll', this);
+		});
+	},
+
+	_wheel: function (e) {
+		if ( !this.enabled ) {
+			return;
+		}
+
+		e.preventDefault();
+
+		var wheelDeltaX, wheelDeltaY,
+			newX, newY,
+			that = this;
+
+		if ( this.wheelTimeout === undefined ) {
+			that._execEvent('scrollStart');
+		}
+
+		// Execute the scrollEnd event after 400ms the wheel stopped scrolling
+		clearTimeout(this.wheelTimeout);
+		this.wheelTimeout = setTimeout(function () {
+			if(!that.options.snap) {
+				that._execEvent('scrollEnd');
+			}
+			that.wheelTimeout = undefined;
+		}, 400);
+
+		if ( 'deltaX' in e ) {
+			if (e.deltaMode === 1) {
+				wheelDeltaX = -e.deltaX * this.options.mouseWheelSpeed;
+				wheelDeltaY = -e.deltaY * this.options.mouseWheelSpeed;
+			} else {
+				wheelDeltaX = -e.deltaX;
+				wheelDeltaY = -e.deltaY;
+			}
+		} else if ( 'wheelDeltaX' in e ) {
+			wheelDeltaX = e.wheelDeltaX / 120 * this.options.mouseWheelSpeed;
+			wheelDeltaY = e.wheelDeltaY / 120 * this.options.mouseWheelSpeed;
+		} else if ( 'wheelDelta' in e ) {
+			wheelDeltaX = wheelDeltaY = e.wheelDelta / 120 * this.options.mouseWheelSpeed;
+		} else if ( 'detail' in e ) {
+			wheelDeltaX = wheelDeltaY = -e.detail / 3 * this.options.mouseWheelSpeed;
+		} else {
+			return;
+		}
+
+		wheelDeltaX *= this.options.invertWheelDirection;
+		wheelDeltaY *= this.options.invertWheelDirection;
+
+		if ( !this.hasVerticalScroll ) {
+			wheelDeltaX = wheelDeltaY;
+			wheelDeltaY = 0;
+		}
+
+		if ( this.options.snap ) {
+			newX = this.currentPage.pageX;
+			newY = this.currentPage.pageY;
+
+			if ( wheelDeltaX > 0 ) {
+				newX--;
+			} else if ( wheelDeltaX < 0 ) {
+				newX++;
+			}
+
+			if ( wheelDeltaY > 0 ) {
+				newY--;
+			} else if ( wheelDeltaY < 0 ) {
+				newY++;
+			}
+
+			this.goToPage(newX, newY);
+
+			return;
+		}
+
+		newX = this.x + Math.round(this.hasHorizontalScroll ? wheelDeltaX : 0);
+		newY = this.y + Math.round(this.hasVerticalScroll ? wheelDeltaY : 0);
+
+		this.directionX = wheelDeltaX > 0 ? -1 : wheelDeltaX < 0 ? 1 : 0;
+		this.directionY = wheelDeltaY > 0 ? -1 : wheelDeltaY < 0 ? 1 : 0;
+
+		if ( newX > 0 ) {
+			newX = 0;
+		} else if ( newX < this.maxScrollX ) {
+			newX = this.maxScrollX;
+		}
+
+		if ( newY > 0 ) {
+			newY = 0;
+		} else if ( newY < this.maxScrollY ) {
+			newY = this.maxScrollY;
+		}
+
+		this.scrollTo(newX, newY, 0);
+
+		if ( this.options.probeType > 1 ) {
+			this._execEvent('scroll');
+		}
+
+// INSERT POINT: _wheel
+	},
+
+	_initSnap: function () {
+		this.currentPage = {};
+
+		if ( typeof this.options.snap == 'string' ) {
+			this.options.snap = this.scroller.querySelectorAll(this.options.snap);
+		}
+
+		this.on('refresh', function () {
+			var i = 0, l,
+				m = 0, n,
+				cx, cy,
+				x = 0, y,
+				stepX = this.options.snapStepX || this.wrapperWidth,
+				stepY = this.options.snapStepY || this.wrapperHeight,
+				el,
+				rect;
+
+			this.pages = [];
+
+			if ( !this.wrapperWidth || !this.wrapperHeight || !this.scrollerWidth || !this.scrollerHeight ) {
+				return;
+			}
+
+			if ( this.options.snap === true ) {
+				cx = Math.round( stepX / 2 );
+				cy = Math.round( stepY / 2 );
+
+				while ( x > -this.scrollerWidth ) {
+					this.pages[i] = [];
+					l = 0;
+					y = 0;
+
+					while ( y > -this.scrollerHeight ) {
+						this.pages[i][l] = {
+							x: Math.max(x, this.maxScrollX),
+							y: Math.max(y, this.maxScrollY),
+							width: stepX,
+							height: stepY,
+							cx: x - cx,
+							cy: y - cy
+						};
+
+						y -= stepY;
+						l++;
+					}
+
+					x -= stepX;
+					i++;
+				}
+			} else {
+				el = this.options.snap;
+				l = el.length;
+				n = -1;
+
+				for ( ; i < l; i++ ) {
+					rect = utils.getRect(el[i]);
+					if ( i === 0 || rect.left <= utils.getRect(el[i-1]).left ) {
+						m = 0;
+						n++;
+					}
+
+					if ( !this.pages[m] ) {
+						this.pages[m] = [];
+					}
+
+					x = Math.max(-rect.left, this.maxScrollX);
+					y = Math.max(-rect.top, this.maxScrollY);
+					cx = x - Math.round(rect.width / 2);
+					cy = y - Math.round(rect.height / 2);
+
+					this.pages[m][n] = {
+						x: x,
+						y: y,
+						width: rect.width,
+						height: rect.height,
+						cx: cx,
+						cy: cy
+					};
+
+					if ( x > this.maxScrollX ) {
+						m++;
+					}
+				}
+			}
+
+			this.goToPage(this.currentPage.pageX || 0, this.currentPage.pageY || 0, 0);
+
+			// Update snap threshold if needed
+			if ( this.options.snapThreshold % 1 === 0 ) {
+				this.snapThresholdX = this.options.snapThreshold;
+				this.snapThresholdY = this.options.snapThreshold;
+			} else {
+				this.snapThresholdX = Math.round(this.pages[this.currentPage.pageX][this.currentPage.pageY].width * this.options.snapThreshold);
+				this.snapThresholdY = Math.round(this.pages[this.currentPage.pageX][this.currentPage.pageY].height * this.options.snapThreshold);
+			}
+		});
+
+		this.on('flick', function () {
+			var time = this.options.snapSpeed || Math.max(
+					Math.max(
+						Math.min(Math.abs(this.x - this.startX), 1000),
+						Math.min(Math.abs(this.y - this.startY), 1000)
+					), 300);
+
+			this.goToPage(
+				this.currentPage.pageX + this.directionX,
+				this.currentPage.pageY + this.directionY,
+				time
+			);
+		});
+	},
+
+	_nearestSnap: function (x, y) {
+		if ( !this.pages.length ) {
+			return { x: 0, y: 0, pageX: 0, pageY: 0 };
+		}
+
+		var i = 0,
+			l = this.pages.length,
+			m = 0;
+
+		// Check if we exceeded the snap threshold
+		if ( Math.abs(x - this.absStartX) < this.snapThresholdX &&
+			Math.abs(y - this.absStartY) < this.snapThresholdY ) {
+			return this.currentPage;
+		}
+
+		if ( x > 0 ) {
+			x = 0;
+		} else if ( x < this.maxScrollX ) {
+			x = this.maxScrollX;
+		}
+
+		if ( y > 0 ) {
+			y = 0;
+		} else if ( y < this.maxScrollY ) {
+			y = this.maxScrollY;
+		}
+
+		for ( ; i < l; i++ ) {
+			if ( x >= this.pages[i][0].cx ) {
+				x = this.pages[i][0].x;
+				break;
+			}
+		}
+
+		l = this.pages[i].length;
+
+		for ( ; m < l; m++ ) {
+			if ( y >= this.pages[0][m].cy ) {
+				y = this.pages[0][m].y;
+				break;
+			}
+		}
+
+		if ( i == this.currentPage.pageX ) {
+			i += this.directionX;
+
+			if ( i < 0 ) {
+				i = 0;
+			} else if ( i >= this.pages.length ) {
+				i = this.pages.length - 1;
+			}
+
+			x = this.pages[i][0].x;
+		}
+
+		if ( m == this.currentPage.pageY ) {
+			m += this.directionY;
+
+			if ( m < 0 ) {
+				m = 0;
+			} else if ( m >= this.pages[0].length ) {
+				m = this.pages[0].length - 1;
+			}
+
+			y = this.pages[0][m].y;
+		}
+
+		return {
+			x: x,
+			y: y,
+			pageX: i,
+			pageY: m
+		};
+	},
+
+	goToPage: function (x, y, time, easing) {
+		easing = easing || this.options.bounceEasing;
+
+		if ( x >= this.pages.length ) {
+			x = this.pages.length - 1;
+		} else if ( x < 0 ) {
+			x = 0;
+		}
+
+		if ( y >= this.pages[x].length ) {
+			y = this.pages[x].length - 1;
+		} else if ( y < 0 ) {
+			y = 0;
+		}
+
+		var posX = this.pages[x][y].x,
+			posY = this.pages[x][y].y;
+
+		time = time === undefined ? this.options.snapSpeed || Math.max(
+			Math.max(
+				Math.min(Math.abs(posX - this.x), 1000),
+				Math.min(Math.abs(posY - this.y), 1000)
+			), 300) : time;
+
+		this.currentPage = {
+			x: posX,
+			y: posY,
+			pageX: x,
+			pageY: y
+		};
+
+		this.scrollTo(posX, posY, time, easing);
+	},
+
+	next: function (time, easing) {
+		var x = this.currentPage.pageX,
+			y = this.currentPage.pageY;
+
+		x++;
+
+		if ( x >= this.pages.length && this.hasVerticalScroll ) {
+			x = 0;
+			y++;
+		}
+
+		this.goToPage(x, y, time, easing);
+	},
+
+	prev: function (time, easing) {
+		var x = this.currentPage.pageX,
+			y = this.currentPage.pageY;
+
+		x--;
+
+		if ( x < 0 && this.hasVerticalScroll ) {
+			x = 0;
+			y--;
+		}
+
+		this.goToPage(x, y, time, easing);
+	},
+
+	_initKeys: function (e) {
+		// default key bindings
+		var keys = {
+			pageUp: 33,
+			pageDown: 34,
+			end: 35,
+			home: 36,
+			left: 37,
+			up: 38,
+			right: 39,
+			down: 40
+		};
+		var i;
+
+		// if you give me characters I give you keycode
+		if ( typeof this.options.keyBindings == 'object' ) {
+			for ( i in this.options.keyBindings ) {
+				if ( typeof this.options.keyBindings[i] == 'string' ) {
+					this.options.keyBindings[i] = this.options.keyBindings[i].toUpperCase().charCodeAt(0);
+				}
+			}
+		} else {
+			this.options.keyBindings = {};
+		}
+
+		for ( i in keys ) {
+			this.options.keyBindings[i] = this.options.keyBindings[i] || keys[i];
+		}
+
+		utils.addEvent(window, 'keydown', this);
+
+		this.on('destroy', function () {
+			utils.removeEvent(window, 'keydown', this);
+		});
+	},
+
+	_key: function (e) {
+		if ( !this.enabled ) {
+			return;
+		}
+
+		var snap = this.options.snap,	// we are using this alot, better to cache it
+			newX = snap ? this.currentPage.pageX : this.x,
+			newY = snap ? this.currentPage.pageY : this.y,
+			now = utils.getTime(),
+			prevTime = this.keyTime || 0,
+			acceleration = 0.250,
+			pos;
+
+		if ( this.options.useTransition && this.isInTransition ) {
+			pos = this.getComputedPosition();
+
+			this._translate(Math.round(pos.x), Math.round(pos.y));
+			this.isInTransition = false;
+		}
+
+		this.keyAcceleration = now - prevTime < 200 ? Math.min(this.keyAcceleration + acceleration, 50) : 0;
+
+		switch ( e.keyCode ) {
+			case this.options.keyBindings.pageUp:
+				if ( this.hasHorizontalScroll && !this.hasVerticalScroll ) {
+					newX += snap ? 1 : this.wrapperWidth;
+				} else {
+					newY += snap ? 1 : this.wrapperHeight;
+				}
+				break;
+			case this.options.keyBindings.pageDown:
+				if ( this.hasHorizontalScroll && !this.hasVerticalScroll ) {
+					newX -= snap ? 1 : this.wrapperWidth;
+				} else {
+					newY -= snap ? 1 : this.wrapperHeight;
+				}
+				break;
+			case this.options.keyBindings.end:
+				newX = snap ? this.pages.length-1 : this.maxScrollX;
+				newY = snap ? this.pages[0].length-1 : this.maxScrollY;
+				break;
+			case this.options.keyBindings.home:
+				newX = 0;
+				newY = 0;
+				break;
+			case this.options.keyBindings.left:
+				newX += snap ? -1 : 5 + this.keyAcceleration>>0;
+				break;
+			case this.options.keyBindings.up:
+				newY += snap ? 1 : 5 + this.keyAcceleration>>0;
+				break;
+			case this.options.keyBindings.right:
+				newX -= snap ? -1 : 5 + this.keyAcceleration>>0;
+				break;
+			case this.options.keyBindings.down:
+				newY -= snap ? 1 : 5 + this.keyAcceleration>>0;
+				break;
+			default:
+				return;
+		}
+
+		if ( snap ) {
+			this.goToPage(newX, newY);
+			return;
+		}
+
+		if ( newX > 0 ) {
+			newX = 0;
+			this.keyAcceleration = 0;
+		} else if ( newX < this.maxScrollX ) {
+			newX = this.maxScrollX;
+			this.keyAcceleration = 0;
+		}
+
+		if ( newY > 0 ) {
+			newY = 0;
+			this.keyAcceleration = 0;
+		} else if ( newY < this.maxScrollY ) {
+			newY = this.maxScrollY;
+			this.keyAcceleration = 0;
+		}
+
+		this.scrollTo(newX, newY, 0);
+
+		this.keyTime = now;
+	},
+
+	_animate: function (destX, destY, duration, easingFn) {
+		var that = this,
+			startX = this.x,
+			startY = this.y,
+			startTime = utils.getTime(),
+			destTime = startTime + duration;
+
+		function step () {
+			var now = utils.getTime(),
+				newX, newY,
+				easing;
+
+			if ( now >= destTime ) {
+				that.isAnimating = false;
+				that._translate(destX, destY);
+				
+				if ( !that.resetPosition(that.options.bounceTime) ) {
+					that._execEvent('scrollEnd');
+				}
+
+				return;
+			}
+
+			now = ( now - startTime ) / duration;
+			easing = easingFn(now);
+			newX = ( destX - startX ) * easing + startX;
+			newY = ( destY - startY ) * easing + startY;
+			that._translate(newX, newY);
+
+			if ( that.isAnimating ) {
+				rAF(step);
+			}
+
+			if ( that.options.probeType == 3 ) {
+				that._execEvent('scroll');
+			}
+		}
+
+		this.isAnimating = true;
+		step();
+	},
+
+	handleEvent: function (e) {
+		switch ( e.type ) {
+			case 'touchstart':
+			case 'pointerdown':
+			case 'MSPointerDown':
+			case 'mousedown':
+				this._start(e);
+				break;
+			case 'touchmove':
+			case 'pointermove':
+			case 'MSPointerMove':
+			case 'mousemove':
+				this._move(e);
+				break;
+			case 'touchend':
+			case 'pointerup':
+			case 'MSPointerUp':
+			case 'mouseup':
+			case 'touchcancel':
+			case 'pointercancel':
+			case 'MSPointerCancel':
+			case 'mousecancel':
+				this._end(e);
+				break;
+			case 'orientationchange':
+			case 'resize':
+				this._resize();
+				break;
+			case 'transitionend':
+			case 'webkitTransitionEnd':
+			case 'oTransitionEnd':
+			case 'MSTransitionEnd':
+				this._transitionEnd(e);
+				break;
+			case 'wheel':
+			case 'DOMMouseScroll':
+			case 'mousewheel':
+				this._wheel(e);
+				break;
+			case 'keydown':
+				this._key(e);
+				break;
+			case 'click':
+				if ( this.enabled && !e._constructed ) {
+					e.preventDefault();
+					e.stopPropagation();
+				}
+				break;
+		}
+	}
+};
+function createDefaultScrollbar (direction, interactive, type) {
+	var scrollbar = document.createElement('div'),
+		indicator = document.createElement('div');
+
+	if ( type === true ) {
+		scrollbar.style.cssText = 'position:absolute;z-index:9999';
+		indicator.style.cssText = '-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:absolute;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.9);border-radius:3px';
+	}
+
+	indicator.className = 'iScrollIndicator';
+
+	if ( direction == 'h' ) {
+		if ( type === true ) {
+			scrollbar.style.cssText += ';height:7px;left:2px;right:2px;bottom:0';
+			indicator.style.height = '100%';
+		}
+		scrollbar.className = 'iScrollHorizontalScrollbar';
+	} else {
+		if ( type === true ) {
+			scrollbar.style.cssText += ';width:7px;bottom:2px;top:2px;right:1px';
+			indicator.style.width = '100%';
+		}
+		scrollbar.className = 'iScrollVerticalScrollbar';
+	}
+
+	scrollbar.style.cssText += ';overflow:hidden';
+
+	if ( !interactive ) {
+		scrollbar.style.pointerEvents = 'none';
+	}
+
+	scrollbar.appendChild(indicator);
+
+	return scrollbar;
+}
+
+function Indicator (scroller, options) {
+	this.wrapper = typeof options.el == 'string' ? document.querySelector(options.el) : options.el;
+	this.wrapperStyle = this.wrapper.style;
+	this.indicator = this.wrapper.children[0];
+	this.indicatorStyle = this.indicator.style;
+	this.scroller = scroller;
+
+	this.options = {
+		listenX: true,
+		listenY: true,
+		interactive: false,
+		resize: true,
+		defaultScrollbars: false,
+		shrink: false,
+		fade: false,
+		speedRatioX: 0,
+		speedRatioY: 0
+	};
+
+	for ( var i in options ) {
+		this.options[i] = options[i];
+	}
+
+	this.sizeRatioX = 1;
+	this.sizeRatioY = 1;
+	this.maxPosX = 0;
+	this.maxPosY = 0;
+
+	if ( this.options.interactive ) {
+		if ( !this.options.disableTouch ) {
+			utils.addEvent(this.indicator, 'touchstart', this);
+			utils.addEvent(window, 'touchend', this);
+		}
+		if ( !this.options.disablePointer ) {
+			utils.addEvent(this.indicator, utils.prefixPointerEvent('pointerdown'), this);
+			utils.addEvent(window, utils.prefixPointerEvent('pointerup'), this);
+		}
+		if ( !this.options.disableMouse ) {
+			utils.addEvent(this.indicator, 'mousedown', this);
+			utils.addEvent(window, 'mouseup', this);
+		}
+	}
+
+	if ( this.options.fade ) {
+		this.wrapperStyle[utils.style.transform] = this.scroller.translateZ;
+		var durationProp = utils.style.transitionDuration;
+		if(!durationProp) {
+			return;
+		}
+		this.wrapperStyle[durationProp] = utils.isBadAndroid ? '0.0001ms' : '0ms';
+		// remove 0.0001ms
+		var self = this;
+		if(utils.isBadAndroid) {
+			rAF(function() {
+				if(self.wrapperStyle[durationProp] === '0.0001ms') {
+					self.wrapperStyle[durationProp] = '0s';
+				}
+			});
+		}
+		this.wrapperStyle.opacity = '0';
+	}
+}
+
+Indicator.prototype = {
+	handleEvent: function (e) {
+		switch ( e.type ) {
+			case 'touchstart':
+			case 'pointerdown':
+			case 'MSPointerDown':
+			case 'mousedown':
+				this._start(e);
+				break;
+			case 'touchmove':
+			case 'pointermove':
+			case 'MSPointerMove':
+			case 'mousemove':
+				this._move(e);
+				break;
+			case 'touchend':
+			case 'pointerup':
+			case 'MSPointerUp':
+			case 'mouseup':
+			case 'touchcancel':
+			case 'pointercancel':
+			case 'MSPointerCancel':
+			case 'mousecancel':
+				this._end(e);
+				break;
+		}
+	},
+
+	destroy: function () {
+		if ( this.options.fadeScrollbars ) {
+			clearTimeout(this.fadeTimeout);
+			this.fadeTimeout = null;
+		}
+		if ( this.options.interactive ) {
+			utils.removeEvent(this.indicator, 'touchstart', this);
+			utils.removeEvent(this.indicator, utils.prefixPointerEvent('pointerdown'), this);
+			utils.removeEvent(this.indicator, 'mousedown', this);
+
+			utils.removeEvent(window, 'touchmove', this);
+			utils.removeEvent(window, utils.prefixPointerEvent('pointermove'), this);
+			utils.removeEvent(window, 'mousemove', this);
+
+			utils.removeEvent(window, 'touchend', this);
+			utils.removeEvent(window, utils.prefixPointerEvent('pointerup'), this);
+			utils.removeEvent(window, 'mouseup', this);
+		}
+
+		if ( this.options.defaultScrollbars && this.wrapper.parentNode ) {
+			this.wrapper.parentNode.removeChild(this.wrapper);
+		}
+	},
+
+	_start: function (e) {
+		var point = e.touches ? e.touches[0] : e;
+
+		e.preventDefault();
+		e.stopPropagation();
+
+		this.transitionTime();
+
+		this.initiated = true;
+		this.moved = false;
+		this.lastPointX	= point.pageX;
+		this.lastPointY	= point.pageY;
+
+		this.startTime	= utils.getTime();
+
+		if ( !this.options.disableTouch ) {
+			utils.addEvent(window, 'touchmove', this);
+		}
+		if ( !this.options.disablePointer ) {
+			utils.addEvent(window, utils.prefixPointerEvent('pointermove'), this);
+		}
+		if ( !this.options.disableMouse ) {
+			utils.addEvent(window, 'mousemove', this);
+		}
+
+		this.scroller._execEvent('beforeScrollStart');
+	},
+
+	_move: function (e) {
+		var point = e.touches ? e.touches[0] : e,
+			deltaX, deltaY,
+			newX, newY,
+			timestamp = utils.getTime();
+
+		if ( !this.moved ) {
+			this.scroller._execEvent('scrollStart');
+		}
+
+		this.moved = true;
+
+		deltaX = point.pageX - this.lastPointX;
+		this.lastPointX = point.pageX;
+
+		deltaY = point.pageY - this.lastPointY;
+		this.lastPointY = point.pageY;
+
+		newX = this.x + deltaX;
+		newY = this.y + deltaY;
+
+		this._pos(newX, newY);
+
+
+		if ( this.scroller.options.probeType == 1 && timestamp - this.startTime > 300 ) {
+			this.startTime = timestamp;
+			this.scroller._execEvent('scroll');
+		} else if ( this.scroller.options.probeType > 1 ) {
+			this.scroller._execEvent('scroll');
+		}
+
+
+// INSERT POINT: indicator._move
+
+		e.preventDefault();
+		e.stopPropagation();
+	},
+
+	_end: function (e) {
+		if ( !this.initiated ) {
+			return;
+		}
+
+		this.initiated = false;
+
+		e.preventDefault();
+		e.stopPropagation();
+
+		utils.removeEvent(window, 'touchmove', this);
+		utils.removeEvent(window, utils.prefixPointerEvent('pointermove'), this);
+		utils.removeEvent(window, 'mousemove', this);
+
+		if ( this.scroller.options.snap ) {
+			var snap = this.scroller._nearestSnap(this.scroller.x, this.scroller.y);
+
+			var time = this.options.snapSpeed || Math.max(
+					Math.max(
+						Math.min(Math.abs(this.scroller.x - snap.x), 1000),
+						Math.min(Math.abs(this.scroller.y - snap.y), 1000)
+					), 300);
+
+			if ( this.scroller.x != snap.x || this.scroller.y != snap.y ) {
+				this.scroller.directionX = 0;
+				this.scroller.directionY = 0;
+				this.scroller.currentPage = snap;
+				this.scroller.scrollTo(snap.x, snap.y, time, this.scroller.options.bounceEasing);
+			}
+		}
+
+		if ( this.moved ) {
+			this.scroller._execEvent('scrollEnd');
+		}
+	},
+
+	transitionTime: function (time) {
+		time = time || 0;
+		var durationProp = utils.style.transitionDuration;
+		if(!durationProp) {
+			return;
+		}
+
+		this.indicatorStyle[durationProp] = time + 'ms';
+
+		if ( !time && utils.isBadAndroid ) {
+			this.indicatorStyle[durationProp] = '0.0001ms';
+			// remove 0.0001ms
+			var self = this;
+			rAF(function() {
+				if(self.indicatorStyle[durationProp] === '0.0001ms') {
+					self.indicatorStyle[durationProp] = '0s';
+				}
+			});
+		}
+	},
+
+	transitionTimingFunction: function (easing) {
+		this.indicatorStyle[utils.style.transitionTimingFunction] = easing;
+	},
+
+	refresh: function () {
+		this.transitionTime();
+
+		if ( this.options.listenX && !this.options.listenY ) {
+			this.indicatorStyle.display = this.scroller.hasHorizontalScroll ? 'block' : 'none';
+		} else if ( this.options.listenY && !this.options.listenX ) {
+			this.indicatorStyle.display = this.scroller.hasVerticalScroll ? 'block' : 'none';
+		} else {
+			this.indicatorStyle.display = this.scroller.hasHorizontalScroll || this.scroller.hasVerticalScroll ? 'block' : 'none';
+		}
+
+		if ( this.scroller.hasHorizontalScroll && this.scroller.hasVerticalScroll ) {
+			utils.addClass(this.wrapper, 'iScrollBothScrollbars');
+			utils.removeClass(this.wrapper, 'iScrollLoneScrollbar');
+
+			if ( this.options.defaultScrollbars && this.options.customStyle ) {
+				if ( this.options.listenX ) {
+					this.wrapper.style.right = '8px';
+				} else {
+					this.wrapper.style.bottom = '8px';
+				}
+			}
+		} else {
+			utils.removeClass(this.wrapper, 'iScrollBothScrollbars');
+			utils.addClass(this.wrapper, 'iScrollLoneScrollbar');
+
+			if ( this.options.defaultScrollbars && this.options.customStyle ) {
+				if ( this.options.listenX ) {
+					this.wrapper.style.right = '2px';
+				} else {
+					this.wrapper.style.bottom = '2px';
+				}
+			}
+		}
+
+		utils.getRect(this.wrapper);	// force refresh
+
+		if ( this.options.listenX ) {
+			this.wrapperWidth = this.wrapper.clientWidth;
+			if ( this.options.resize ) {
+				this.indicatorWidth = Math.max(Math.round(this.wrapperWidth * this.wrapperWidth / (this.scroller.scrollerWidth || this.wrapperWidth || 1)), 8);
+				this.indicatorStyle.width = this.indicatorWidth + 'px';
+			} else {
+				this.indicatorWidth = this.indicator.clientWidth;
+			}
+
+			this.maxPosX = this.wrapperWidth - this.indicatorWidth;
+
+			if ( this.options.shrink == 'clip' ) {
+				this.minBoundaryX = -this.indicatorWidth + 8;
+				this.maxBoundaryX = this.wrapperWidth - 8;
+			} else {
+				this.minBoundaryX = 0;
+				this.maxBoundaryX = this.maxPosX;
+			}
+
+			this.sizeRatioX = this.options.speedRatioX || (this.scroller.maxScrollX && (this.maxPosX / this.scroller.maxScrollX));
+		}
+
+		if ( this.options.listenY ) {
+			this.wrapperHeight = this.wrapper.clientHeight;
+			if ( this.options.resize ) {
+				this.indicatorHeight = Math.max(Math.round(this.wrapperHeight * this.wrapperHeight / (this.scroller.scrollerHeight || this.wrapperHeight || 1)), 8);
+				this.indicatorStyle.height = this.indicatorHeight + 'px';
+			} else {
+				this.indicatorHeight = this.indicator.clientHeight;
+			}
+
+			this.maxPosY = this.wrapperHeight - this.indicatorHeight;
+
+			if ( this.options.shrink == 'clip' ) {
+				this.minBoundaryY = -this.indicatorHeight + 8;
+				this.maxBoundaryY = this.wrapperHeight - 8;
+			} else {
+				this.minBoundaryY = 0;
+				this.maxBoundaryY = this.maxPosY;
+			}
+
+			this.maxPosY = this.wrapperHeight - this.indicatorHeight;
+			this.sizeRatioY = this.options.speedRatioY || (this.scroller.maxScrollY && (this.maxPosY / this.scroller.maxScrollY));
+		}
+
+		this.updatePosition();
+	},
+
+	updatePosition: function () {
+		var x = this.options.listenX && Math.round(this.sizeRatioX * this.scroller.x) || 0,
+			y = this.options.listenY && Math.round(this.sizeRatioY * this.scroller.y) || 0;
+
+		if ( !this.options.ignoreBoundaries ) {
+			if ( x < this.minBoundaryX ) {
+				if ( this.options.shrink == 'scale' ) {
+					this.width = Math.max(this.indicatorWidth + x, 8);
+					this.indicatorStyle.width = this.width + 'px';
+				}
+				x = this.minBoundaryX;
+			} else if ( x > this.maxBoundaryX ) {
+				if ( this.options.shrink == 'scale' ) {
+					this.width = Math.max(this.indicatorWidth - (x - this.maxPosX), 8);
+					this.indicatorStyle.width = this.width + 'px';
+					x = this.maxPosX + this.indicatorWidth - this.width;
+				} else {
+					x = this.maxBoundaryX;
+				}
+			} else if ( this.options.shrink == 'scale' && this.width != this.indicatorWidth ) {
+				this.width = this.indicatorWidth;
+				this.indicatorStyle.width = this.width + 'px';
+			}
+
+			if ( y < this.minBoundaryY ) {
+				if ( this.options.shrink == 'scale' ) {
+					this.height = Math.max(this.indicatorHeight + y * 3, 8);
+					this.indicatorStyle.height = this.height + 'px';
+				}
+				y = this.minBoundaryY;
+			} else if ( y > this.maxBoundaryY ) {
+				if ( this.options.shrink == 'scale' ) {
+					this.height = Math.max(this.indicatorHeight - (y - this.maxPosY) * 3, 8);
+					this.indicatorStyle.height = this.height + 'px';
+					y = this.maxPosY + this.indicatorHeight - this.height;
+				} else {
+					y = this.maxBoundaryY;
+				}
+			} else if ( this.options.shrink == 'scale' && this.height != this.indicatorHeight ) {
+				this.height = this.indicatorHeight;
+				this.indicatorStyle.height = this.height + 'px';
+			}
+		}
+
+		this.x = x;
+		this.y = y;
+
+		if ( this.scroller.options.useTransform ) {
+			this.indicatorStyle[utils.style.transform] = 'translate(' + x + 'px,' + y + 'px)' + this.scroller.translateZ;
+		} else {
+			this.indicatorStyle.left = x + 'px';
+			this.indicatorStyle.top = y + 'px';
+		}
+	},
+
+	_pos: function (x, y) {
+		if ( x < 0 ) {
+			x = 0;
+		} else if ( x > this.maxPosX ) {
+			x = this.maxPosX;
+		}
+
+		if ( y < 0 ) {
+			y = 0;
+		} else if ( y > this.maxPosY ) {
+			y = this.maxPosY;
+		}
+
+		x = this.options.listenX ? Math.round(x / this.sizeRatioX) : this.scroller.x;
+		y = this.options.listenY ? Math.round(y / this.sizeRatioY) : this.scroller.y;
+
+		this.scroller.scrollTo(x, y);
+	},
+
+	fade: function (val, hold) {
+		if ( hold && !this.visible ) {
+			return;
+		}
+
+		clearTimeout(this.fadeTimeout);
+		this.fadeTimeout = null;
+
+		var time = val ? 250 : 500,
+			delay = val ? 0 : 300;
+
+		val = val ? '1' : '0';
+
+		this.wrapperStyle[utils.style.transitionDuration] = time + 'ms';
+
+		this.fadeTimeout = setTimeout((function (val) {
+			this.wrapperStyle.opacity = val;
+			this.visible = +val;
+		}).bind(this, val), delay);
+	}
+};
+
+IScroll.utils = utils;
+
+if ( typeof module != 'undefined' && module.exports ) {
+	module.exports = IScroll;
+} else if ( true ) {
+        !(__WEBPACK_AMD_DEFINE_RESULT__ = function () { return IScroll; }.call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+} else {
+	window.IScroll = IScroll;
+}
+
+})(window, document, Math);
+
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Swiper 3.4.2
+ * Most modern mobile touch slider and framework with hardware accelerated transitions
+ * 
+ * http://www.idangero.us/swiper/
+ * 
+ * Copyright 2017, Vladimir Kharlampidi
+ * The iDangero.us
+ * http://www.idangero.us/
+ * 
+ * Licensed under MIT
+ * 
+ * Released on: March 10, 2017
+ */
+(function () {
+    'use strict';
+    var $;
+
+    /*===========================
+    Swiper
+    ===========================*/
+    var Swiper = function (container, params) {
+        if (!(this instanceof Swiper)) return new Swiper(container, params);
+    
+
+        var defaults = {
+            direction: 'horizontal',
+            touchEventsTarget: 'container',
+            initialSlide: 0,
+            speed: 300,
+            // autoplay
+            autoplay: false,
+            autoplayDisableOnInteraction: true,
+            autoplayStopOnLast: false,
+            // To support iOS's swipe-to-go-back gesture (when being used in-app, with UIWebView).
+            iOSEdgeSwipeDetection: false,
+            iOSEdgeSwipeThreshold: 20,
+            // Free mode
+            freeMode: false,
+            freeModeMomentum: true,
+            freeModeMomentumRatio: 1,
+            freeModeMomentumBounce: true,
+            freeModeMomentumBounceRatio: 1,
+            freeModeMomentumVelocityRatio: 1,
+            freeModeSticky: false,
+            freeModeMinimumVelocity: 0.02,
+            // Autoheight
+            autoHeight: false,
+            // Set wrapper width
+            setWrapperSize: false,
+            // Virtual Translate
+            virtualTranslate: false,
+            // Effects
+            effect: 'slide', // 'slide' or 'fade' or 'cube' or 'coverflow' or 'flip'
+            coverflow: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows : true
+            },
+            flip: {
+                slideShadows : true,
+                limitRotation: true
+            },
+            cube: {
+                slideShadows: true,
+                shadow: true,
+                shadowOffset: 20,
+                shadowScale: 0.94
+            },
+            fade: {
+                crossFade: false
+            },
+            // Parallax
+            parallax: false,
+            // Zoom
+            zoom: false,
+            zoomMax: 3,
+            zoomMin: 1,
+            zoomToggle: true,
+            // Scrollbar
+            scrollbar: null,
+            scrollbarHide: true,
+            scrollbarDraggable: false,
+            scrollbarSnapOnRelease: false,
+            // Keyboard Mousewheel
+            keyboardControl: false,
+            mousewheelControl: false,
+            mousewheelReleaseOnEdges: false,
+            mousewheelInvert: false,
+            mousewheelForceToAxis: false,
+            mousewheelSensitivity: 1,
+            mousewheelEventsTarged: 'container',
+            // Hash Navigation
+            hashnav: false,
+            hashnavWatchState: false,
+            // History
+            history: false,
+            // Commong Nav State
+            replaceState: false,
+            // Breakpoints
+            breakpoints: undefined,
+            // Slides grid
+            spaceBetween: 0,
+            slidesPerView: 1,
+            slidesPerColumn: 1,
+            slidesPerColumnFill: 'column',
+            slidesPerGroup: 1,
+            centeredSlides: false,
+            slidesOffsetBefore: 0, // in px
+            slidesOffsetAfter: 0, // in px
+            // Round length
+            roundLengths: false,
+            // Touches
+            touchRatio: 1,
+            touchAngle: 45,
+            simulateTouch: true,
+            shortSwipes: true,
+            longSwipes: true,
+            longSwipesRatio: 0.5,
+            longSwipesMs: 300,
+            followFinger: true,
+            onlyExternal: false,
+            threshold: 0,
+            touchMoveStopPropagation: true,
+            touchReleaseOnEdges: false,
+            // Unique Navigation Elements
+            uniqueNavElements: true,
+            // Pagination
+            pagination: null,
+            paginationElement: 'span',
+            paginationClickable: false,
+            paginationHide: false,
+            paginationBulletRender: null,
+            paginationProgressRender: null,
+            paginationFractionRender: null,
+            paginationCustomRender: null,
+            paginationType: 'bullets', // 'bullets' or 'progress' or 'fraction' or 'custom'
+            // Resistance
+            resistance: true,
+            resistanceRatio: 0.85,
+            // Next/prev buttons
+            nextButton: null,
+            prevButton: null,
+            // Progress
+            watchSlidesProgress: false,
+            watchSlidesVisibility: false,
+            // Cursor
+            grabCursor: false,
+            // Clicks
+            preventClicks: true,
+            preventClicksPropagation: true,
+            slideToClickedSlide: false,
+            // Lazy Loading
+            lazyLoading: false,
+            lazyLoadingInPrevNext: false,
+            lazyLoadingInPrevNextAmount: 1,
+            lazyLoadingOnTransitionStart: false,
+            // Images
+            preloadImages: true,
+            updateOnImagesReady: true,
+            // loop
+            loop: false,
+            loopAdditionalSlides: 0,
+            loopedSlides: null,
+            // Control
+            control: undefined,
+            controlInverse: false,
+            controlBy: 'slide', //or 'container'
+            normalizeSlideIndex: true,
+            // Swiping/no swiping
+            allowSwipeToPrev: true,
+            allowSwipeToNext: true,
+            swipeHandler: null, //'.swipe-handler',
+            noSwiping: true,
+            noSwipingClass: 'swiper-no-swiping',
+            // Passive Listeners
+            passiveListeners: true,
+            // NS
+            containerModifierClass: 'swiper-container-', // NEW
+            slideClass: 'swiper-slide',
+            slideActiveClass: 'swiper-slide-active',
+            slideDuplicateActiveClass: 'swiper-slide-duplicate-active',
+            slideVisibleClass: 'swiper-slide-visible',
+            slideDuplicateClass: 'swiper-slide-duplicate',
+            slideNextClass: 'swiper-slide-next',
+            slideDuplicateNextClass: 'swiper-slide-duplicate-next',
+            slidePrevClass: 'swiper-slide-prev',
+            slideDuplicatePrevClass: 'swiper-slide-duplicate-prev',
+            wrapperClass: 'swiper-wrapper',
+            bulletClass: 'swiper-pagination-bullet',
+            bulletActiveClass: 'swiper-pagination-bullet-active',
+            buttonDisabledClass: 'swiper-button-disabled',
+            paginationCurrentClass: 'swiper-pagination-current',
+            paginationTotalClass: 'swiper-pagination-total',
+            paginationHiddenClass: 'swiper-pagination-hidden',
+            paginationProgressbarClass: 'swiper-pagination-progressbar',
+            paginationClickableClass: 'swiper-pagination-clickable', // NEW
+            paginationModifierClass: 'swiper-pagination-', // NEW
+            lazyLoadingClass: 'swiper-lazy',
+            lazyStatusLoadingClass: 'swiper-lazy-loading',
+            lazyStatusLoadedClass: 'swiper-lazy-loaded',
+            lazyPreloaderClass: 'swiper-lazy-preloader',
+            notificationClass: 'swiper-notification',
+            preloaderClass: 'preloader',
+            zoomContainerClass: 'swiper-zoom-container',
+        
+            // Observer
+            observer: false,
+            observeParents: false,
+            // Accessibility
+            a11y: false,
+            prevSlideMessage: 'Previous slide',
+            nextSlideMessage: 'Next slide',
+            firstSlideMessage: 'This is the first slide',
+            lastSlideMessage: 'This is the last slide',
+            paginationBulletMessage: 'Go to slide {{index}}',
+            // Callbacks
+            runCallbacksOnInit: true
+            /*
+            Callbacks:
+            onInit: function (swiper)
+            onDestroy: function (swiper)
+            onBeforeResize: function (swiper)
+            onAfterResize: function (swiper)
+            onClick: function (swiper, e)
+            onTap: function (swiper, e)
+            onDoubleTap: function (swiper, e)
+            onSliderMove: function (swiper, e)
+            onSlideChangeStart: function (swiper)
+            onSlideChangeEnd: function (swiper)
+            onTransitionStart: function (swiper)
+            onTransitionEnd: function (swiper)
+            onImagesReady: function (swiper)
+            onProgress: function (swiper, progress)
+            onTouchStart: function (swiper, e)
+            onTouchMove: function (swiper, e)
+            onTouchMoveOpposite: function (swiper, e)
+            onTouchEnd: function (swiper, e)
+            onReachBeginning: function (swiper)
+            onReachEnd: function (swiper)
+            onSetTransition: function (swiper, duration)
+            onSetTranslate: function (swiper, translate)
+            onAutoplayStart: function (swiper)
+            onAutoplayStop: function (swiper),
+            onLazyImageLoad: function (swiper, slide, image)
+            onLazyImageReady: function (swiper, slide, image)
+            onKeyPress: function (swiper, keyCode)
+            */
+        
+        };
+        var initialVirtualTranslate = params && params.virtualTranslate;
+        
+        params = params || {};
+        var originalParams = {};
+        for (var param in params) {
+            if (typeof params[param] === 'object' && params[param] !== null && !(params[param].nodeType || params[param] === window || params[param] === document || (typeof Dom7 !== 'undefined' && params[param] instanceof Dom7) || (typeof jQuery !== 'undefined' && params[param] instanceof jQuery))) {
+                originalParams[param] = {};
+                for (var deepParam in params[param]) {
+                    originalParams[param][deepParam] = params[param][deepParam];
+                }
+            }
+            else {
+                originalParams[param] = params[param];
+            }
+        }
+        for (var def in defaults) {
+            if (typeof params[def] === 'undefined') {
+                params[def] = defaults[def];
+            }
+            else if (typeof params[def] === 'object') {
+                for (var deepDef in defaults[def]) {
+                    if (typeof params[def][deepDef] === 'undefined') {
+                        params[def][deepDef] = defaults[def][deepDef];
+                    }
+                }
+            }
+        }
+        
+        // Swiper
+        var s = this;
+        
+        // Params
+        s.params = params;
+        s.originalParams = originalParams;
+        
+        // Classname
+        s.classNames = [];
+        /*=========================
+          Dom Library and plugins
+          ===========================*/
+        if (typeof $ !== 'undefined' && typeof Dom7 !== 'undefined'){
+            $ = Dom7;
+        }
+        if (typeof $ === 'undefined') {
+            if (typeof Dom7 === 'undefined') {
+                $ = window.Dom7 || window.Zepto || window.jQuery;
+            }
+            else {
+                $ = Dom7;
+            }
+            if (!$) return;
+        }
+        // Export it to Swiper instance
+        s.$ = $;
+        
+        /*=========================
+          Breakpoints
+          ===========================*/
+        s.currentBreakpoint = undefined;
+        s.getActiveBreakpoint = function () {
+            //Get breakpoint for window width
+            if (!s.params.breakpoints) return false;
+            var breakpoint = false;
+            var points = [], point;
+            for ( point in s.params.breakpoints ) {
+                if (s.params.breakpoints.hasOwnProperty(point)) {
+                    points.push(point);
+                }
+            }
+            points.sort(function (a, b) {
+                return parseInt(a, 10) > parseInt(b, 10);
+            });
+            for (var i = 0; i < points.length; i++) {
+                point = points[i];
+                if (point >= window.innerWidth && !breakpoint) {
+                    breakpoint = point;
+                }
+            }
+            return breakpoint || 'max';
+        };
+        s.setBreakpoint = function () {
+            //Set breakpoint for window width and update parameters
+            var breakpoint = s.getActiveBreakpoint();
+            if (breakpoint && s.currentBreakpoint !== breakpoint) {
+                var breakPointsParams = breakpoint in s.params.breakpoints ? s.params.breakpoints[breakpoint] : s.originalParams;
+                var needsReLoop = s.params.loop && (breakPointsParams.slidesPerView !== s.params.slidesPerView);
+                for ( var param in breakPointsParams ) {
+                    s.params[param] = breakPointsParams[param];
+                }
+                s.currentBreakpoint = breakpoint;
+                if(needsReLoop && s.destroyLoop) {
+                    s.reLoop(true);
+                }
+            }
+        };
+        // Set breakpoint on load
+        if (s.params.breakpoints) {
+            s.setBreakpoint();
+        }
+        
+        /*=========================
+          Preparation - Define Container, Wrapper and Pagination
+          ===========================*/
+        s.container = $(container);
+        if (s.container.length === 0) return;
+        if (s.container.length > 1) {
+            var swipers = [];
+            s.container.each(function () {
+                var container = this;
+                swipers.push(new Swiper(this, params));
+            });
+            return swipers;
+        }
+        
+        // Save instance in container HTML Element and in data
+        s.container[0].swiper = s;
+        s.container.data('swiper', s);
+        
+        s.classNames.push(s.params.containerModifierClass + s.params.direction);
+        
+        if (s.params.freeMode) {
+            s.classNames.push(s.params.containerModifierClass + 'free-mode');
+        }
+        if (!s.support.flexbox) {
+            s.classNames.push(s.params.containerModifierClass + 'no-flexbox');
+            s.params.slidesPerColumn = 1;
+        }
+        if (s.params.autoHeight) {
+            s.classNames.push(s.params.containerModifierClass + 'autoheight');
+        }
+        // Enable slides progress when required
+        if (s.params.parallax || s.params.watchSlidesVisibility) {
+            s.params.watchSlidesProgress = true;
+        }
+        // Max resistance when touchReleaseOnEdges
+        if (s.params.touchReleaseOnEdges) {
+            s.params.resistanceRatio = 0;
+        }
+        // Coverflow / 3D
+        if (['cube', 'coverflow', 'flip'].indexOf(s.params.effect) >= 0) {
+            if (s.support.transforms3d) {
+                s.params.watchSlidesProgress = true;
+                s.classNames.push(s.params.containerModifierClass + '3d');
+            }
+            else {
+                s.params.effect = 'slide';
+            }
+        }
+        if (s.params.effect !== 'slide') {
+            s.classNames.push(s.params.containerModifierClass + s.params.effect);
+        }
+        if (s.params.effect === 'cube') {
+            s.params.resistanceRatio = 0;
+            s.params.slidesPerView = 1;
+            s.params.slidesPerColumn = 1;
+            s.params.slidesPerGroup = 1;
+            s.params.centeredSlides = false;
+            s.params.spaceBetween = 0;
+            s.params.virtualTranslate = true;
+        }
+        if (s.params.effect === 'fade' || s.params.effect === 'flip') {
+            s.params.slidesPerView = 1;
+            s.params.slidesPerColumn = 1;
+            s.params.slidesPerGroup = 1;
+            s.params.watchSlidesProgress = true;
+            s.params.spaceBetween = 0;
+            if (typeof initialVirtualTranslate === 'undefined') {
+                s.params.virtualTranslate = true;
+            }
+        }
+        
+        // Grab Cursor
+        if (s.params.grabCursor && s.support.touch) {
+            s.params.grabCursor = false;
+        }
+        
+        // Wrapper
+        s.wrapper = s.container.children('.' + s.params.wrapperClass);
+        
+        // Pagination
+        if (s.params.pagination) {
+            s.paginationContainer = $(s.params.pagination);
+            if (s.params.uniqueNavElements && typeof s.params.pagination === 'string' && s.paginationContainer.length > 1 && s.container.find(s.params.pagination).length === 1) {
+                s.paginationContainer = s.container.find(s.params.pagination);
+            }
+        
+            if (s.params.paginationType === 'bullets' && s.params.paginationClickable) {
+                s.paginationContainer.addClass(s.params.paginationModifierClass + 'clickable');
+            }
+            else {
+                s.params.paginationClickable = false;
+            }
+            s.paginationContainer.addClass(s.params.paginationModifierClass + s.params.paginationType);
+        }
+        // Next/Prev Buttons
+        if (s.params.nextButton || s.params.prevButton) {
+            if (s.params.nextButton) {
+                s.nextButton = $(s.params.nextButton);
+                if (s.params.uniqueNavElements && typeof s.params.nextButton === 'string' && s.nextButton.length > 1 && s.container.find(s.params.nextButton).length === 1) {
+                    s.nextButton = s.container.find(s.params.nextButton);
+                }
+            }
+            if (s.params.prevButton) {
+                s.prevButton = $(s.params.prevButton);
+                if (s.params.uniqueNavElements && typeof s.params.prevButton === 'string' && s.prevButton.length > 1 && s.container.find(s.params.prevButton).length === 1) {
+                    s.prevButton = s.container.find(s.params.prevButton);
+                }
+            }
+        }
+        
+        // Is Horizontal
+        s.isHorizontal = function () {
+            return s.params.direction === 'horizontal';
+        };
+        // s.isH = isH;
+        
+        // RTL
+        s.rtl = s.isHorizontal() && (s.container[0].dir.toLowerCase() === 'rtl' || s.container.css('direction') === 'rtl');
+        if (s.rtl) {
+            s.classNames.push(s.params.containerModifierClass + 'rtl');
+        }
+        
+        // Wrong RTL support
+        if (s.rtl) {
+            s.wrongRTL = s.wrapper.css('display') === '-webkit-box';
+        }
+        
+        // Columns
+        if (s.params.slidesPerColumn > 1) {
+            s.classNames.push(s.params.containerModifierClass + 'multirow');
+        }
+        
+        // Check for Android
+        if (s.device.android) {
+            s.classNames.push(s.params.containerModifierClass + 'android');
+        }
+        
+        // Add classes
+        s.container.addClass(s.classNames.join(' '));
+        
+        // Translate
+        s.translate = 0;
+        
+        // Progress
+        s.progress = 0;
+        
+        // Velocity
+        s.velocity = 0;
+        
+        /*=========================
+          Locks, unlocks
+          ===========================*/
+        s.lockSwipeToNext = function () {
+            s.params.allowSwipeToNext = false;
+            if (s.params.allowSwipeToPrev === false && s.params.grabCursor) {
+                s.unsetGrabCursor();
+            }
+        };
+        s.lockSwipeToPrev = function () {
+            s.params.allowSwipeToPrev = false;
+            if (s.params.allowSwipeToNext === false && s.params.grabCursor) {
+                s.unsetGrabCursor();
+            }
+        };
+        s.lockSwipes = function () {
+            s.params.allowSwipeToNext = s.params.allowSwipeToPrev = false;
+            if (s.params.grabCursor) s.unsetGrabCursor();
+        };
+        s.unlockSwipeToNext = function () {
+            s.params.allowSwipeToNext = true;
+            if (s.params.allowSwipeToPrev === true && s.params.grabCursor) {
+                s.setGrabCursor();
+            }
+        };
+        s.unlockSwipeToPrev = function () {
+            s.params.allowSwipeToPrev = true;
+            if (s.params.allowSwipeToNext === true && s.params.grabCursor) {
+                s.setGrabCursor();
+            }
+        };
+        s.unlockSwipes = function () {
+            s.params.allowSwipeToNext = s.params.allowSwipeToPrev = true;
+            if (s.params.grabCursor) s.setGrabCursor();
+        };
+        
+        /*=========================
+          Round helper
+          ===========================*/
+        function round(a) {
+            return Math.floor(a);
+        }
+        /*=========================
+          Set grab cursor
+          ===========================*/
+        s.setGrabCursor = function(moving) {
+            s.container[0].style.cursor = 'move';
+            s.container[0].style.cursor = moving ? '-webkit-grabbing' : '-webkit-grab';
+            s.container[0].style.cursor = moving ? '-moz-grabbin' : '-moz-grab';
+            s.container[0].style.cursor = moving ? 'grabbing': 'grab';
+        };
+        s.unsetGrabCursor = function () {
+            s.container[0].style.cursor = '';
+        };
+        if (s.params.grabCursor) {
+            s.setGrabCursor();
+        }
+        /*=========================
+          Update on Images Ready
+          ===========================*/
+        s.imagesToLoad = [];
+        s.imagesLoaded = 0;
+        
+        s.loadImage = function (imgElement, src, srcset, sizes, checkForComplete, callback) {
+            var image;
+            function onReady () {
+                if (callback) callback();
+            }
+            if (!imgElement.complete || !checkForComplete) {
+                if (src) {
+                    image = new window.Image();
+                    image.onload = onReady;
+                    image.onerror = onReady;
+                    if (sizes) {
+                        image.sizes = sizes;
+                    }
+                    if (srcset) {
+                        image.srcset = srcset;
+                    }
+                    if (src) {
+                        image.src = src;
+                    }
+                } else {
+                    onReady();
+                }
+        
+            } else {//image already loaded...
+                onReady();
+            }
+        };
+        s.preloadImages = function () {
+            s.imagesToLoad = s.container.find('img');
+            function _onReady() {
+                if (typeof s === 'undefined' || s === null || !s) return;
+                if (s.imagesLoaded !== undefined) s.imagesLoaded++;
+                if (s.imagesLoaded === s.imagesToLoad.length) {
+                    if (s.params.updateOnImagesReady) s.update();
+                    s.emit('onImagesReady', s);
+                }
+            }
+            for (var i = 0; i < s.imagesToLoad.length; i++) {
+                s.loadImage(s.imagesToLoad[i], (s.imagesToLoad[i].currentSrc || s.imagesToLoad[i].getAttribute('src')), (s.imagesToLoad[i].srcset || s.imagesToLoad[i].getAttribute('srcset')), s.imagesToLoad[i].sizes || s.imagesToLoad[i].getAttribute('sizes'), true, _onReady);
+            }
+        };
+        
+        /*=========================
+          Autoplay
+          ===========================*/
+        s.autoplayTimeoutId = undefined;
+        s.autoplaying = false;
+        s.autoplayPaused = false;
+        function autoplay() {
+            var autoplayDelay = s.params.autoplay;
+            var activeSlide = s.slides.eq(s.activeIndex);
+            if (activeSlide.attr('data-swiper-autoplay')) {
+                autoplayDelay = activeSlide.attr('data-swiper-autoplay') || s.params.autoplay;
+            }
+            s.autoplayTimeoutId = setTimeout(function () {
+                if (s.params.loop) {
+                    s.fixLoop();
+                    s._slideNext();
+                    s.emit('onAutoplay', s);
+                }
+                else {
+                    if (!s.isEnd) {
+                        s._slideNext();
+                        s.emit('onAutoplay', s);
+                    }
+                    else {
+                        if (!params.autoplayStopOnLast) {
+                            s._slideTo(0);
+                            s.emit('onAutoplay', s);
+                        }
+                        else {
+                            s.stopAutoplay();
+                        }
+                    }
+                }
+            }, autoplayDelay);
+        }
+        s.startAutoplay = function () {
+            if (typeof s.autoplayTimeoutId !== 'undefined') return false;
+            if (!s.params.autoplay) return false;
+            if (s.autoplaying) return false;
+            s.autoplaying = true;
+            s.emit('onAutoplayStart', s);
+            autoplay();
+        };
+        s.stopAutoplay = function (internal) {
+            if (!s.autoplayTimeoutId) return;
+            if (s.autoplayTimeoutId) clearTimeout(s.autoplayTimeoutId);
+            s.autoplaying = false;
+            s.autoplayTimeoutId = undefined;
+            s.emit('onAutoplayStop', s);
+        };
+        s.pauseAutoplay = function (speed) {
+            if (s.autoplayPaused) return;
+            if (s.autoplayTimeoutId) clearTimeout(s.autoplayTimeoutId);
+            s.autoplayPaused = true;
+            if (speed === 0) {
+                s.autoplayPaused = false;
+                autoplay();
+            }
+            else {
+                s.wrapper.transitionEnd(function () {
+                    if (!s) return;
+                    s.autoplayPaused = false;
+                    if (!s.autoplaying) {
+                        s.stopAutoplay();
+                    }
+                    else {
+                        autoplay();
+                    }
+                });
+            }
+        };
+        /*=========================
+          Min/Max Translate
+          ===========================*/
+        s.minTranslate = function () {
+            return (-s.snapGrid[0]);
+        };
+        s.maxTranslate = function () {
+            return (-s.snapGrid[s.snapGrid.length - 1]);
+        };
+        /*=========================
+          Slider/slides sizes
+          ===========================*/
+        s.updateAutoHeight = function () {
+            var activeSlides = [];
+            var newHeight = 0;
+            var i;
+        
+            // Find slides currently in view
+            if(s.params.slidesPerView !== 'auto' && s.params.slidesPerView > 1) {
+                for (i = 0; i < Math.ceil(s.params.slidesPerView); i++) {
+                    var index = s.activeIndex + i;
+                    if(index > s.slides.length) break;
+                    activeSlides.push(s.slides.eq(index)[0]);
+                }
+            } else {
+                activeSlides.push(s.slides.eq(s.activeIndex)[0]);
+            }
+        
+            // Find new height from heighest slide in view
+            for (i = 0; i < activeSlides.length; i++) {
+                if (typeof activeSlides[i] !== 'undefined') {
+                    var height = activeSlides[i].offsetHeight;
+                    newHeight = height > newHeight ? height : newHeight;
+                }
+            }
+        
+            // Update Height
+            if (newHeight) s.wrapper.css('height', newHeight + 'px');
+        };
+        s.updateContainerSize = function () {
+            var width, height;
+            if (typeof s.params.width !== 'undefined') {
+                width = s.params.width;
+            }
+            else {
+                width = s.container[0].clientWidth;
+            }
+            if (typeof s.params.height !== 'undefined') {
+                height = s.params.height;
+            }
+            else {
+                height = s.container[0].clientHeight;
+            }
+            if (width === 0 && s.isHorizontal() || height === 0 && !s.isHorizontal()) {
+                return;
+            }
+        
+            //Subtract paddings
+            width = width - parseInt(s.container.css('padding-left'), 10) - parseInt(s.container.css('padding-right'), 10);
+            height = height - parseInt(s.container.css('padding-top'), 10) - parseInt(s.container.css('padding-bottom'), 10);
+        
+            // Store values
+            s.width = width;
+            s.height = height;
+            s.size = s.isHorizontal() ? s.width : s.height;
+        };
+        
+        s.updateSlidesSize = function () {
+            s.slides = s.wrapper.children('.' + s.params.slideClass);
+            s.snapGrid = [];
+            s.slidesGrid = [];
+            s.slidesSizesGrid = [];
+        
+            var spaceBetween = s.params.spaceBetween,
+                slidePosition = -s.params.slidesOffsetBefore,
+                i,
+                prevSlideSize = 0,
+                index = 0;
+            if (typeof s.size === 'undefined') return;
+            if (typeof spaceBetween === 'string' && spaceBetween.indexOf('%') >= 0) {
+                spaceBetween = parseFloat(spaceBetween.replace('%', '')) / 100 * s.size;
+            }
+        
+            s.virtualSize = -spaceBetween;
+            // reset margins
+            if (s.rtl) s.slides.css({marginLeft: '', marginTop: ''});
+            else s.slides.css({marginRight: '', marginBottom: ''});
+        
+            var slidesNumberEvenToRows;
+            if (s.params.slidesPerColumn > 1) {
+                if (Math.floor(s.slides.length / s.params.slidesPerColumn) === s.slides.length / s.params.slidesPerColumn) {
+                    slidesNumberEvenToRows = s.slides.length;
+                }
+                else {
+                    slidesNumberEvenToRows = Math.ceil(s.slides.length / s.params.slidesPerColumn) * s.params.slidesPerColumn;
+                }
+                if (s.params.slidesPerView !== 'auto' && s.params.slidesPerColumnFill === 'row') {
+                    slidesNumberEvenToRows = Math.max(slidesNumberEvenToRows, s.params.slidesPerView * s.params.slidesPerColumn);
+                }
+            }
+        
+            // Calc slides
+            var slideSize;
+            var slidesPerColumn = s.params.slidesPerColumn;
+            var slidesPerRow = slidesNumberEvenToRows / slidesPerColumn;
+            var numFullColumns = slidesPerRow - (s.params.slidesPerColumn * slidesPerRow - s.slides.length);
+            for (i = 0; i < s.slides.length; i++) {
+                slideSize = 0;
+                var slide = s.slides.eq(i);
+                if (s.params.slidesPerColumn > 1) {
+                    // Set slides order
+                    var newSlideOrderIndex;
+                    var column, row;
+                    if (s.params.slidesPerColumnFill === 'column') {
+                        column = Math.floor(i / slidesPerColumn);
+                        row = i - column * slidesPerColumn;
+                        if (column > numFullColumns || (column === numFullColumns && row === slidesPerColumn-1)) {
+                            if (++row >= slidesPerColumn) {
+                                row = 0;
+                                column++;
+                            }
+                        }
+                        newSlideOrderIndex = column + row * slidesNumberEvenToRows / slidesPerColumn;
+                        slide
+                            .css({
+                                '-webkit-box-ordinal-group': newSlideOrderIndex,
+                                '-moz-box-ordinal-group': newSlideOrderIndex,
+                                '-ms-flex-order': newSlideOrderIndex,
+                                '-webkit-order': newSlideOrderIndex,
+                                'order': newSlideOrderIndex
+                            });
+                    }
+                    else {
+                        row = Math.floor(i / slidesPerRow);
+                        column = i - row * slidesPerRow;
+                    }
+                    slide
+                        .css(
+                            'margin-' + (s.isHorizontal() ? 'top' : 'left'),
+                            (row !== 0 && s.params.spaceBetween) && (s.params.spaceBetween + 'px')
+                        )
+                        .attr('data-swiper-column', column)
+                        .attr('data-swiper-row', row);
+        
+                }
+                if (slide.css('display') === 'none') continue;
+                if (s.params.slidesPerView === 'auto') {
+                    slideSize = s.isHorizontal() ? slide.outerWidth(true) : slide.outerHeight(true);
+                    if (s.params.roundLengths) slideSize = round(slideSize);
+                }
+                else {
+                    slideSize = (s.size - (s.params.slidesPerView - 1) * spaceBetween) / s.params.slidesPerView;
+                    if (s.params.roundLengths) slideSize = round(slideSize);
+        
+                    if (s.isHorizontal()) {
+                        s.slides[i].style.width = slideSize + 'px';
+                    }
+                    else {
+                        s.slides[i].style.height = slideSize + 'px';
+                    }
+                }
+                s.slides[i].swiperSlideSize = slideSize;
+                s.slidesSizesGrid.push(slideSize);
+        
+        
+                if (s.params.centeredSlides) {
+                    slidePosition = slidePosition + slideSize / 2 + prevSlideSize / 2 + spaceBetween;
+                    if(prevSlideSize === 0 && i !== 0) slidePosition = slidePosition - s.size / 2 - spaceBetween;
+                    if (i === 0) slidePosition = slidePosition - s.size / 2 - spaceBetween;
+                    if (Math.abs(slidePosition) < 1 / 1000) slidePosition = 0;
+                    if ((index) % s.params.slidesPerGroup === 0) s.snapGrid.push(slidePosition);
+                    s.slidesGrid.push(slidePosition);
+                }
+                else {
+                    if ((index) % s.params.slidesPerGroup === 0) s.snapGrid.push(slidePosition);
+                    s.slidesGrid.push(slidePosition);
+                    slidePosition = slidePosition + slideSize + spaceBetween;
+                }
+        
+                s.virtualSize += slideSize + spaceBetween;
+        
+                prevSlideSize = slideSize;
+        
+                index ++;
+            }
+            s.virtualSize = Math.max(s.virtualSize, s.size) + s.params.slidesOffsetAfter;
+            var newSlidesGrid;
+        
+            if (
+                s.rtl && s.wrongRTL && (s.params.effect === 'slide' || s.params.effect === 'coverflow')) {
+                s.wrapper.css({width: s.virtualSize + s.params.spaceBetween + 'px'});
+            }
+            if (!s.support.flexbox || s.params.setWrapperSize) {
+                if (s.isHorizontal()) s.wrapper.css({width: s.virtualSize + s.params.spaceBetween + 'px'});
+                else s.wrapper.css({height: s.virtualSize + s.params.spaceBetween + 'px'});
+            }
+        
+            if (s.params.slidesPerColumn > 1) {
+                s.virtualSize = (slideSize + s.params.spaceBetween) * slidesNumberEvenToRows;
+                s.virtualSize = Math.ceil(s.virtualSize / s.params.slidesPerColumn) - s.params.spaceBetween;
+                if (s.isHorizontal()) s.wrapper.css({width: s.virtualSize + s.params.spaceBetween + 'px'});
+                else s.wrapper.css({height: s.virtualSize + s.params.spaceBetween + 'px'});
+                if (s.params.centeredSlides) {
+                    newSlidesGrid = [];
+                    for (i = 0; i < s.snapGrid.length; i++) {
+                        if (s.snapGrid[i] < s.virtualSize + s.snapGrid[0]) newSlidesGrid.push(s.snapGrid[i]);
+                    }
+                    s.snapGrid = newSlidesGrid;
+                }
+            }
+        
+            // Remove last grid elements depending on width
+            if (!s.params.centeredSlides) {
+                newSlidesGrid = [];
+                for (i = 0; i < s.snapGrid.length; i++) {
+                    if (s.snapGrid[i] <= s.virtualSize - s.size) {
+                        newSlidesGrid.push(s.snapGrid[i]);
+                    }
+                }
+                s.snapGrid = newSlidesGrid;
+                if (Math.floor(s.virtualSize - s.size) - Math.floor(s.snapGrid[s.snapGrid.length - 1]) > 1) {
+                    s.snapGrid.push(s.virtualSize - s.size);
+                }
+            }
+            if (s.snapGrid.length === 0) s.snapGrid = [0];
+        
+            if (s.params.spaceBetween !== 0) {
+                if (s.isHorizontal()) {
+                    if (s.rtl) s.slides.css({marginLeft: spaceBetween + 'px'});
+                    else s.slides.css({marginRight: spaceBetween + 'px'});
+                }
+                else s.slides.css({marginBottom: spaceBetween + 'px'});
+            }
+            if (s.params.watchSlidesProgress) {
+                s.updateSlidesOffset();
+            }
+        };
+        s.updateSlidesOffset = function () {
+            for (var i = 0; i < s.slides.length; i++) {
+                s.slides[i].swiperSlideOffset = s.isHorizontal() ? s.slides[i].offsetLeft : s.slides[i].offsetTop;
+            }
+        };
+        
+        /*=========================
+          Dynamic Slides Per View
+          ===========================*/
+        s.currentSlidesPerView = function () {
+            var spv = 1, i, j;
+            if (s.params.centeredSlides) {
+                var size = s.slides[s.activeIndex].swiperSlideSize;
+                var breakLoop;
+                for (i = s.activeIndex + 1; i < s.slides.length; i++) {
+                    if (s.slides[i] && !breakLoop) {
+                        size += s.slides[i].swiperSlideSize;
+                        spv ++;
+                        if (size > s.size) breakLoop = true;
+                    }
+                }
+                for (j = s.activeIndex - 1; j >= 0; j--) {
+                    if (s.slides[j] && !breakLoop) {
+                        size += s.slides[j].swiperSlideSize;
+                        spv ++;
+                        if (size > s.size) breakLoop = true;
+                    }
+                }
+            }
+            else {
+                for (i = s.activeIndex + 1; i < s.slides.length; i++) {
+                    if (s.slidesGrid[i] - s.slidesGrid[s.activeIndex] < s.size) {
+                        spv++;
+                    }
+                }
+            }
+            return spv;
+        };
+        /*=========================
+          Slider/slides progress
+          ===========================*/
+        s.updateSlidesProgress = function (translate) {
+            if (typeof translate === 'undefined') {
+                translate = s.translate || 0;
+            }
+            if (s.slides.length === 0) return;
+            if (typeof s.slides[0].swiperSlideOffset === 'undefined') s.updateSlidesOffset();
+        
+            var offsetCenter = -translate;
+            if (s.rtl) offsetCenter = translate;
+        
+            // Visible Slides
+            s.slides.removeClass(s.params.slideVisibleClass);
+            for (var i = 0; i < s.slides.length; i++) {
+                var slide = s.slides[i];
+                var slideProgress = (offsetCenter + (s.params.centeredSlides ? s.minTranslate() : 0) - slide.swiperSlideOffset) / (slide.swiperSlideSize + s.params.spaceBetween);
+                if (s.params.watchSlidesVisibility) {
+                    var slideBefore = -(offsetCenter - slide.swiperSlideOffset);
+                    var slideAfter = slideBefore + s.slidesSizesGrid[i];
+                    var isVisible =
+                        (slideBefore >= 0 && slideBefore < s.size) ||
+                        (slideAfter > 0 && slideAfter <= s.size) ||
+                        (slideBefore <= 0 && slideAfter >= s.size);
+                    if (isVisible) {
+                        s.slides.eq(i).addClass(s.params.slideVisibleClass);
+                    }
+                }
+                slide.progress = s.rtl ? -slideProgress : slideProgress;
+            }
+        };
+        s.updateProgress = function (translate) {
+            if (typeof translate === 'undefined') {
+                translate = s.translate || 0;
+            }
+            var translatesDiff = s.maxTranslate() - s.minTranslate();
+            var wasBeginning = s.isBeginning;
+            var wasEnd = s.isEnd;
+            if (translatesDiff === 0) {
+                s.progress = 0;
+                s.isBeginning = s.isEnd = true;
+            }
+            else {
+                s.progress = (translate - s.minTranslate()) / (translatesDiff);
+                s.isBeginning = s.progress <= 0;
+                s.isEnd = s.progress >= 1;
+            }
+            if (s.isBeginning && !wasBeginning) s.emit('onReachBeginning', s);
+            if (s.isEnd && !wasEnd) s.emit('onReachEnd', s);
+        
+            if (s.params.watchSlidesProgress) s.updateSlidesProgress(translate);
+            s.emit('onProgress', s, s.progress);
+        };
+        s.updateActiveIndex = function () {
+            var translate = s.rtl ? s.translate : -s.translate;
+            var newActiveIndex, i, snapIndex;
+            for (i = 0; i < s.slidesGrid.length; i ++) {
+                if (typeof s.slidesGrid[i + 1] !== 'undefined') {
+                    if (translate >= s.slidesGrid[i] && translate < s.slidesGrid[i + 1] - (s.slidesGrid[i + 1] - s.slidesGrid[i]) / 2) {
+                        newActiveIndex = i;
+                    }
+                    else if (translate >= s.slidesGrid[i] && translate < s.slidesGrid[i + 1]) {
+                        newActiveIndex = i + 1;
+                    }
+                }
+                else {
+                    if (translate >= s.slidesGrid[i]) {
+                        newActiveIndex = i;
+                    }
+                }
+            }
+            // Normalize slideIndex
+            if(s.params.normalizeSlideIndex){
+                if (newActiveIndex < 0 || typeof newActiveIndex === 'undefined') newActiveIndex = 0;
+            }
+            // for (i = 0; i < s.slidesGrid.length; i++) {
+                // if (- translate >= s.slidesGrid[i]) {
+                    // newActiveIndex = i;
+                // }
+            // }
+            snapIndex = Math.floor(newActiveIndex / s.params.slidesPerGroup);
+            if (snapIndex >= s.snapGrid.length) snapIndex = s.snapGrid.length - 1;
+        
+            if (newActiveIndex === s.activeIndex) {
+                return;
+            }
+            s.snapIndex = snapIndex;
+            s.previousIndex = s.activeIndex;
+            s.activeIndex = newActiveIndex;
+            s.updateClasses();
+            s.updateRealIndex();
+        };
+        s.updateRealIndex = function(){
+            s.realIndex = parseInt(s.slides.eq(s.activeIndex).attr('data-swiper-slide-index') || s.activeIndex, 10);
+        };
+        
+        /*=========================
+          Classes
+          ===========================*/
+        s.updateClasses = function () {
+            s.slides.removeClass(s.params.slideActiveClass + ' ' + s.params.slideNextClass + ' ' + s.params.slidePrevClass + ' ' + s.params.slideDuplicateActiveClass + ' ' + s.params.slideDuplicateNextClass + ' ' + s.params.slideDuplicatePrevClass);
+            var activeSlide = s.slides.eq(s.activeIndex);
+            // Active classes
+            activeSlide.addClass(s.params.slideActiveClass);
+            if (params.loop) {
+                // Duplicate to all looped slides
+                if (activeSlide.hasClass(s.params.slideDuplicateClass)) {
+                    s.wrapper.children('.' + s.params.slideClass + ':not(.' + s.params.slideDuplicateClass + ')[data-swiper-slide-index="' + s.realIndex + '"]').addClass(s.params.slideDuplicateActiveClass);
+                }
+                else {
+                    s.wrapper.children('.' + s.params.slideClass + '.' + s.params.slideDuplicateClass + '[data-swiper-slide-index="' + s.realIndex + '"]').addClass(s.params.slideDuplicateActiveClass);
+                }
+            }
+            // Next Slide
+            var nextSlide = activeSlide.next('.' + s.params.slideClass).addClass(s.params.slideNextClass);
+            if (s.params.loop && nextSlide.length === 0) {
+                nextSlide = s.slides.eq(0);
+                nextSlide.addClass(s.params.slideNextClass);
+            }
+            // Prev Slide
+            var prevSlide = activeSlide.prev('.' + s.params.slideClass).addClass(s.params.slidePrevClass);
+            if (s.params.loop && prevSlide.length === 0) {
+                prevSlide = s.slides.eq(-1);
+                prevSlide.addClass(s.params.slidePrevClass);
+            }
+            if (params.loop) {
+                // Duplicate to all looped slides
+                if (nextSlide.hasClass(s.params.slideDuplicateClass)) {
+                    s.wrapper.children('.' + s.params.slideClass + ':not(.' + s.params.slideDuplicateClass + ')[data-swiper-slide-index="' + nextSlide.attr('data-swiper-slide-index') + '"]').addClass(s.params.slideDuplicateNextClass);
+                }
+                else {
+                    s.wrapper.children('.' + s.params.slideClass + '.' + s.params.slideDuplicateClass + '[data-swiper-slide-index="' + nextSlide.attr('data-swiper-slide-index') + '"]').addClass(s.params.slideDuplicateNextClass);
+                }
+                if (prevSlide.hasClass(s.params.slideDuplicateClass)) {
+                    s.wrapper.children('.' + s.params.slideClass + ':not(.' + s.params.slideDuplicateClass + ')[data-swiper-slide-index="' + prevSlide.attr('data-swiper-slide-index') + '"]').addClass(s.params.slideDuplicatePrevClass);
+                }
+                else {
+                    s.wrapper.children('.' + s.params.slideClass + '.' + s.params.slideDuplicateClass + '[data-swiper-slide-index="' + prevSlide.attr('data-swiper-slide-index') + '"]').addClass(s.params.slideDuplicatePrevClass);
+                }
+            }
+        
+            // Pagination
+            if (s.paginationContainer && s.paginationContainer.length > 0) {
+                // Current/Total
+                var current,
+                    total = s.params.loop ? Math.ceil((s.slides.length - s.loopedSlides * 2) / s.params.slidesPerGroup) : s.snapGrid.length;
+                if (s.params.loop) {
+                    current = Math.ceil((s.activeIndex - s.loopedSlides)/s.params.slidesPerGroup);
+                    if (current > s.slides.length - 1 - s.loopedSlides * 2) {
+                        current = current - (s.slides.length - s.loopedSlides * 2);
+                    }
+                    if (current > total - 1) current = current - total;
+                    if (current < 0 && s.params.paginationType !== 'bullets') current = total + current;
+                }
+                else {
+                    if (typeof s.snapIndex !== 'undefined') {
+                        current = s.snapIndex;
+                    }
+                    else {
+                        current = s.activeIndex || 0;
+                    }
+                }
+                // Types
+                if (s.params.paginationType === 'bullets' && s.bullets && s.bullets.length > 0) {
+                    s.bullets.removeClass(s.params.bulletActiveClass);
+                    if (s.paginationContainer.length > 1) {
+                        s.bullets.each(function () {
+                            if ($(this).index() === current) $(this).addClass(s.params.bulletActiveClass);
+                        });
+                    }
+                    else {
+                        s.bullets.eq(current).addClass(s.params.bulletActiveClass);
+                    }
+                }
+                if (s.params.paginationType === 'fraction') {
+                    s.paginationContainer.find('.' + s.params.paginationCurrentClass).text(current + 1);
+                    s.paginationContainer.find('.' + s.params.paginationTotalClass).text(total);
+                }
+                if (s.params.paginationType === 'progress') {
+                    var scale = (current + 1) / total,
+                        scaleX = scale,
+                        scaleY = 1;
+                    if (!s.isHorizontal()) {
+                        scaleY = scale;
+                        scaleX = 1;
+                    }
+                    s.paginationContainer.find('.' + s.params.paginationProgressbarClass).transform('translate3d(0,0,0) scaleX(' + scaleX + ') scaleY(' + scaleY + ')').transition(s.params.speed);
+                }
+                if (s.params.paginationType === 'custom' && s.params.paginationCustomRender) {
+                    s.paginationContainer.html(s.params.paginationCustomRender(s, current + 1, total));
+                    s.emit('onPaginationRendered', s, s.paginationContainer[0]);
+                }
+            }
+        
+            // Next/active buttons
+            if (!s.params.loop) {
+                if (s.params.prevButton && s.prevButton && s.prevButton.length > 0) {
+                    if (s.isBeginning) {
+                        s.prevButton.addClass(s.params.buttonDisabledClass);
+                        if (s.params.a11y && s.a11y) s.a11y.disable(s.prevButton);
+                    }
+                    else {
+                        s.prevButton.removeClass(s.params.buttonDisabledClass);
+                        if (s.params.a11y && s.a11y) s.a11y.enable(s.prevButton);
+                    }
+                }
+                if (s.params.nextButton && s.nextButton && s.nextButton.length > 0) {
+                    if (s.isEnd) {
+                        s.nextButton.addClass(s.params.buttonDisabledClass);
+                        if (s.params.a11y && s.a11y) s.a11y.disable(s.nextButton);
+                    }
+                    else {
+                        s.nextButton.removeClass(s.params.buttonDisabledClass);
+                        if (s.params.a11y && s.a11y) s.a11y.enable(s.nextButton);
+                    }
+                }
+            }
+        };
+        
+        /*=========================
+          Pagination
+          ===========================*/
+        s.updatePagination = function () {
+            if (!s.params.pagination) return;
+            if (s.paginationContainer && s.paginationContainer.length > 0) {
+                var paginationHTML = '';
+                if (s.params.paginationType === 'bullets') {
+                    var numberOfBullets = s.params.loop ? Math.ceil((s.slides.length - s.loopedSlides * 2) / s.params.slidesPerGroup) : s.snapGrid.length;
+                    for (var i = 0; i < numberOfBullets; i++) {
+                        if (s.params.paginationBulletRender) {
+                            paginationHTML += s.params.paginationBulletRender(s, i, s.params.bulletClass);
+                        }
+                        else {
+                            paginationHTML += '<' + s.params.paginationElement+' class="' + s.params.bulletClass + '"></' + s.params.paginationElement + '>';
+                        }
+                    }
+                    s.paginationContainer.html(paginationHTML);
+                    s.bullets = s.paginationContainer.find('.' + s.params.bulletClass);
+                    if (s.params.paginationClickable && s.params.a11y && s.a11y) {
+                        s.a11y.initPagination();
+                    }
+                }
+                if (s.params.paginationType === 'fraction') {
+                    if (s.params.paginationFractionRender) {
+                        paginationHTML = s.params.paginationFractionRender(s, s.params.paginationCurrentClass, s.params.paginationTotalClass);
+                    }
+                    else {
+                        paginationHTML =
+                            '<span class="' + s.params.paginationCurrentClass + '"></span>' +
+                            ' / ' +
+                            '<span class="' + s.params.paginationTotalClass+'"></span>';
+                    }
+                    s.paginationContainer.html(paginationHTML);
+                }
+                if (s.params.paginationType === 'progress') {
+                    if (s.params.paginationProgressRender) {
+                        paginationHTML = s.params.paginationProgressRender(s, s.params.paginationProgressbarClass);
+                    }
+                    else {
+                        paginationHTML = '<span class="' + s.params.paginationProgressbarClass + '"></span>';
+                    }
+                    s.paginationContainer.html(paginationHTML);
+                }
+                if (s.params.paginationType !== 'custom') {
+                    s.emit('onPaginationRendered', s, s.paginationContainer[0]);
+                }
+            }
+        };
+        /*=========================
+          Common update method
+          ===========================*/
+        s.update = function (updateTranslate) {
+            if (!s) return;
+            s.updateContainerSize();
+            s.updateSlidesSize();
+            s.updateProgress();
+            s.updatePagination();
+            s.updateClasses();
+            if (s.params.scrollbar && s.scrollbar) {
+                s.scrollbar.set();
+            }
+            var newTranslate;
+            function forceSetTranslate() {
+                var translate = s.rtl ? -s.translate : s.translate;
+                newTranslate = Math.min(Math.max(s.translate, s.maxTranslate()), s.minTranslate());
+                s.setWrapperTranslate(newTranslate);
+                s.updateActiveIndex();
+                s.updateClasses();
+            }
+            if (updateTranslate) {
+                var translated;
+                if (s.controller && s.controller.spline) {
+                    s.controller.spline = undefined;
+                }
+                if (s.params.freeMode) {
+                    forceSetTranslate();
+                    if (s.params.autoHeight) {
+                        s.updateAutoHeight();
+                    }
+                }
+                else {
+                    if ((s.params.slidesPerView === 'auto' || s.params.slidesPerView > 1) && s.isEnd && !s.params.centeredSlides) {
+                        translated = s.slideTo(s.slides.length - 1, 0, false, true);
+                    }
+                    else {
+                        translated = s.slideTo(s.activeIndex, 0, false, true);
+                    }
+                    if (!translated) {
+                        forceSetTranslate();
+                    }
+                }
+            }
+            else if (s.params.autoHeight) {
+                s.updateAutoHeight();
+            }
+        };
+        
+        /*=========================
+          Resize Handler
+          ===========================*/
+        s.onResize = function (forceUpdatePagination) {
+            if (s.params.onBeforeResize) s.params.onBeforeResize(s);
+            //Breakpoints
+            if (s.params.breakpoints) {
+                s.setBreakpoint();
+            }
+        
+            // Disable locks on resize
+            var allowSwipeToPrev = s.params.allowSwipeToPrev;
+            var allowSwipeToNext = s.params.allowSwipeToNext;
+            s.params.allowSwipeToPrev = s.params.allowSwipeToNext = true;
+        
+            s.updateContainerSize();
+            s.updateSlidesSize();
+            if (s.params.slidesPerView === 'auto' || s.params.freeMode || forceUpdatePagination) s.updatePagination();
+            if (s.params.scrollbar && s.scrollbar) {
+                s.scrollbar.set();
+            }
+            if (s.controller && s.controller.spline) {
+                s.controller.spline = undefined;
+            }
+            var slideChangedBySlideTo = false;
+            if (s.params.freeMode) {
+                var newTranslate = Math.min(Math.max(s.translate, s.maxTranslate()), s.minTranslate());
+                s.setWrapperTranslate(newTranslate);
+                s.updateActiveIndex();
+                s.updateClasses();
+        
+                if (s.params.autoHeight) {
+                    s.updateAutoHeight();
+                }
+            }
+            else {
+                s.updateClasses();
+                if ((s.params.slidesPerView === 'auto' || s.params.slidesPerView > 1) && s.isEnd && !s.params.centeredSlides) {
+                    slideChangedBySlideTo = s.slideTo(s.slides.length - 1, 0, false, true);
+                }
+                else {
+                    slideChangedBySlideTo = s.slideTo(s.activeIndex, 0, false, true);
+                }
+            }
+            if (s.params.lazyLoading && !slideChangedBySlideTo && s.lazy) {
+                s.lazy.load();
+            }
+            // Return locks after resize
+            s.params.allowSwipeToPrev = allowSwipeToPrev;
+            s.params.allowSwipeToNext = allowSwipeToNext;
+            if (s.params.onAfterResize) s.params.onAfterResize(s);
+        };
+        
+        /*=========================
+          Events
+          ===========================*/
+        
+        //Define Touch Events
+        s.touchEventsDesktop = {start: 'mousedown', move: 'mousemove', end: 'mouseup'};
+        if (window.navigator.pointerEnabled) s.touchEventsDesktop = {start: 'pointerdown', move: 'pointermove', end: 'pointerup'};
+        else if (window.navigator.msPointerEnabled) s.touchEventsDesktop = {start: 'MSPointerDown', move: 'MSPointerMove', end: 'MSPointerUp'};
+        s.touchEvents = {
+            start : s.support.touch || !s.params.simulateTouch  ? 'touchstart' : s.touchEventsDesktop.start,
+            move : s.support.touch || !s.params.simulateTouch ? 'touchmove' : s.touchEventsDesktop.move,
+            end : s.support.touch || !s.params.simulateTouch ? 'touchend' : s.touchEventsDesktop.end
+        };
+        
+        
+        // WP8 Touch Events Fix
+        if (window.navigator.pointerEnabled || window.navigator.msPointerEnabled) {
+            (s.params.touchEventsTarget === 'container' ? s.container : s.wrapper).addClass('swiper-wp8-' + s.params.direction);
+        }
+        
+        // Attach/detach events
+        s.initEvents = function (detach) {
+            var actionDom = detach ? 'off' : 'on';
+            var action = detach ? 'removeEventListener' : 'addEventListener';
+            var touchEventsTarget = s.params.touchEventsTarget === 'container' ? s.container[0] : s.wrapper[0];
+            var target = s.support.touch ? touchEventsTarget : document;
+        
+            var moveCapture = s.params.nested ? true : false;
+        
+            //Touch Events
+            if (s.browser.ie) {
+                touchEventsTarget[action](s.touchEvents.start, s.onTouchStart, false);
+                target[action](s.touchEvents.move, s.onTouchMove, moveCapture);
+                target[action](s.touchEvents.end, s.onTouchEnd, false);
+            }
+            else {
+                if (s.support.touch) {
+                    var passiveListener = s.touchEvents.start === 'touchstart' && s.support.passiveListener && s.params.passiveListeners ? {passive: true, capture: false} : false;
+                    touchEventsTarget[action](s.touchEvents.start, s.onTouchStart, passiveListener);
+                    touchEventsTarget[action](s.touchEvents.move, s.onTouchMove, moveCapture);
+                    touchEventsTarget[action](s.touchEvents.end, s.onTouchEnd, passiveListener);
+                }
+                if ((params.simulateTouch && !s.device.ios && !s.device.android) || (params.simulateTouch && !s.support.touch && s.device.ios)) {
+                    touchEventsTarget[action]('mousedown', s.onTouchStart, false);
+                    document[action]('mousemove', s.onTouchMove, moveCapture);
+                    document[action]('mouseup', s.onTouchEnd, false);
+                }
+            }
+            window[action]('resize', s.onResize);
+        
+            // Next, Prev, Index
+            if (s.params.nextButton && s.nextButton && s.nextButton.length > 0) {
+                s.nextButton[actionDom]('click', s.onClickNext);
+                if (s.params.a11y && s.a11y) s.nextButton[actionDom]('keydown', s.a11y.onEnterKey);
+            }
+            if (s.params.prevButton && s.prevButton && s.prevButton.length > 0) {
+                s.prevButton[actionDom]('click', s.onClickPrev);
+                if (s.params.a11y && s.a11y) s.prevButton[actionDom]('keydown', s.a11y.onEnterKey);
+            }
+            if (s.params.pagination && s.params.paginationClickable) {
+                s.paginationContainer[actionDom]('click', '.' + s.params.bulletClass, s.onClickIndex);
+                if (s.params.a11y && s.a11y) s.paginationContainer[actionDom]('keydown', '.' + s.params.bulletClass, s.a11y.onEnterKey);
+            }
+        
+            // Prevent Links Clicks
+            if (s.params.preventClicks || s.params.preventClicksPropagation) touchEventsTarget[action]('click', s.preventClicks, true);
+        };
+        s.attachEvents = function () {
+            s.initEvents();
+        };
+        s.detachEvents = function () {
+            s.initEvents(true);
+        };
+        
+        /*=========================
+          Handle Clicks
+          ===========================*/
+        // Prevent Clicks
+        s.allowClick = true;
+        s.preventClicks = function (e) {
+            if (!s.allowClick) {
+                if (s.params.preventClicks) e.preventDefault();
+                if (s.params.preventClicksPropagation && s.animating) {
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                }
+            }
+        };
+        // Clicks
+        s.onClickNext = function (e) {
+            e.preventDefault();
+            if (s.isEnd && !s.params.loop) return;
+            s.slideNext();
+        };
+        s.onClickPrev = function (e) {
+            e.preventDefault();
+            if (s.isBeginning && !s.params.loop) return;
+            s.slidePrev();
+        };
+        s.onClickIndex = function (e) {
+            e.preventDefault();
+            var index = $(this).index() * s.params.slidesPerGroup;
+            if (s.params.loop) index = index + s.loopedSlides;
+            s.slideTo(index);
+        };
+        
+        /*=========================
+          Handle Touches
+          ===========================*/
+        function findElementInEvent(e, selector) {
+            var el = $(e.target);
+            if (!el.is(selector)) {
+                if (typeof selector === 'string') {
+                    el = el.parents(selector);
+                }
+                else if (selector.nodeType) {
+                    var found;
+                    el.parents().each(function (index, _el) {
+                        if (_el === selector) found = selector;
+                    });
+                    if (!found) return undefined;
+                    else return selector;
+                }
+            }
+            if (el.length === 0) {
+                return undefined;
+            }
+            return el[0];
+        }
+        s.updateClickedSlide = function (e) {
+            var slide = findElementInEvent(e, '.' + s.params.slideClass);
+            var slideFound = false;
+            if (slide) {
+                for (var i = 0; i < s.slides.length; i++) {
+                    if (s.slides[i] === slide) slideFound = true;
+                }
+            }
+        
+            if (slide && slideFound) {
+                s.clickedSlide = slide;
+                s.clickedIndex = $(slide).index();
+            }
+            else {
+                s.clickedSlide = undefined;
+                s.clickedIndex = undefined;
+                return;
+            }
+            if (s.params.slideToClickedSlide && s.clickedIndex !== undefined && s.clickedIndex !== s.activeIndex) {
+                var slideToIndex = s.clickedIndex,
+                    realIndex,
+                    duplicatedSlides,
+                    slidesPerView = s.params.slidesPerView === 'auto' ? s.currentSlidesPerView() : s.params.slidesPerView;
+                if (s.params.loop) {
+                    if (s.animating) return;
+                    realIndex = parseInt($(s.clickedSlide).attr('data-swiper-slide-index'), 10);
+                    if (s.params.centeredSlides) {
+                        if ((slideToIndex < s.loopedSlides - slidesPerView/2) || (slideToIndex > s.slides.length - s.loopedSlides + slidesPerView/2)) {
+                            s.fixLoop();
+                            slideToIndex = s.wrapper.children('.' + s.params.slideClass + '[data-swiper-slide-index="' + realIndex + '"]:not(.' + s.params.slideDuplicateClass + ')').eq(0).index();
+                            setTimeout(function () {
+                                s.slideTo(slideToIndex);
+                            }, 0);
+                        }
+                        else {
+                            s.slideTo(slideToIndex);
+                        }
+                    }
+                    else {
+                        if (slideToIndex > s.slides.length - slidesPerView) {
+                            s.fixLoop();
+                            slideToIndex = s.wrapper.children('.' + s.params.slideClass + '[data-swiper-slide-index="' + realIndex + '"]:not(.' + s.params.slideDuplicateClass + ')').eq(0).index();
+                            setTimeout(function () {
+                                s.slideTo(slideToIndex);
+                            }, 0);
+                        }
+                        else {
+                            s.slideTo(slideToIndex);
+                        }
+                    }
+                }
+                else {
+                    s.slideTo(slideToIndex);
+                }
+            }
+        };
+        
+        var isTouched,
+            isMoved,
+            allowTouchCallbacks,
+            touchStartTime,
+            isScrolling,
+            currentTranslate,
+            startTranslate,
+            allowThresholdMove,
+            // Form elements to match
+            formElements = 'input, select, textarea, button, video',
+            // Last click time
+            lastClickTime = Date.now(), clickTimeout,
+            //Velocities
+            velocities = [],
+            allowMomentumBounce;
+        
+        // Animating Flag
+        s.animating = false;
+        
+        // Touches information
+        s.touches = {
+            startX: 0,
+            startY: 0,
+            currentX: 0,
+            currentY: 0,
+            diff: 0
+        };
+        
+        // Touch handlers
+        var isTouchEvent, startMoving;
+        s.onTouchStart = function (e) {
+            if (e.originalEvent) e = e.originalEvent;
+            isTouchEvent = e.type === 'touchstart';
+            if (!isTouchEvent && 'which' in e && e.which === 3) return;
+            if (s.params.noSwiping && findElementInEvent(e, '.' + s.params.noSwipingClass)) {
+                s.allowClick = true;
+                return;
+            }
+            if (s.params.swipeHandler) {
+                if (!findElementInEvent(e, s.params.swipeHandler)) return;
+            }
+        
+            var startX = s.touches.currentX = e.type === 'touchstart' ? e.targetTouches[0].pageX : e.pageX;
+            var startY = s.touches.currentY = e.type === 'touchstart' ? e.targetTouches[0].pageY : e.pageY;
+        
+            // Do NOT start if iOS edge swipe is detected. Otherwise iOS app (UIWebView) cannot swipe-to-go-back anymore
+            if(s.device.ios && s.params.iOSEdgeSwipeDetection && startX <= s.params.iOSEdgeSwipeThreshold) {
+                return;
+            }
+        
+            isTouched = true;
+            isMoved = false;
+            allowTouchCallbacks = true;
+            isScrolling = undefined;
+            startMoving = undefined;
+            s.touches.startX = startX;
+            s.touches.startY = startY;
+            touchStartTime = Date.now();
+            s.allowClick = true;
+            s.updateContainerSize();
+            s.swipeDirection = undefined;
+            if (s.params.threshold > 0) allowThresholdMove = false;
+            if (e.type !== 'touchstart') {
+                var preventDefault = true;
+                if ($(e.target).is(formElements)) preventDefault = false;
+                if (document.activeElement && $(document.activeElement).is(formElements)) {
+                    document.activeElement.blur();
+                }
+                if (preventDefault) {
+                    e.preventDefault();
+                }
+            }
+            s.emit('onTouchStart', s, e);
+        };
+        
+        s.onTouchMove = function (e) {
+            if (e.originalEvent) e = e.originalEvent;
+            if (isTouchEvent && e.type === 'mousemove') return;
+            if (e.preventedByNestedSwiper) {
+                s.touches.startX = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
+                s.touches.startY = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
+                return;
+            }
+            if (s.params.onlyExternal) {
+                // isMoved = true;
+                s.allowClick = false;
+                if (isTouched) {
+                    s.touches.startX = s.touches.currentX = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
+                    s.touches.startY = s.touches.currentY = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
+                    touchStartTime = Date.now();
+                }
+                return;
+            }
+            if (isTouchEvent && s.params.touchReleaseOnEdges && !s.params.loop) {
+                if (!s.isHorizontal()) {
+                    // Vertical
+                    if (
+                        (s.touches.currentY < s.touches.startY && s.translate <= s.maxTranslate()) ||
+                        (s.touches.currentY > s.touches.startY && s.translate >= s.minTranslate())
+                        ) {
+                        return;
+                    }
+                }
+                else {
+                    if (
+                        (s.touches.currentX < s.touches.startX && s.translate <= s.maxTranslate()) ||
+                        (s.touches.currentX > s.touches.startX && s.translate >= s.minTranslate())
+                        ) {
+                        return;
+                    }
+                }
+            }
+            if (isTouchEvent && document.activeElement) {
+                if (e.target === document.activeElement && $(e.target).is(formElements)) {
+                    isMoved = true;
+                    s.allowClick = false;
+                    return;
+                }
+            }
+            if (allowTouchCallbacks) {
+                s.emit('onTouchMove', s, e);
+            }
+            if (e.targetTouches && e.targetTouches.length > 1) return;
+        
+            s.touches.currentX = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
+            s.touches.currentY = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
+        
+            if (typeof isScrolling === 'undefined') {
+                var touchAngle;
+                if (s.isHorizontal() && s.touches.currentY === s.touches.startY || !s.isHorizontal() && s.touches.currentX === s.touches.startX) {
+                    isScrolling = false;
+                }
+                else {
+                    touchAngle = Math.atan2(Math.abs(s.touches.currentY - s.touches.startY), Math.abs(s.touches.currentX - s.touches.startX)) * 180 / Math.PI;
+                    isScrolling = s.isHorizontal() ? touchAngle > s.params.touchAngle : (90 - touchAngle > s.params.touchAngle);
+                }
+            }
+            if (isScrolling) {
+                s.emit('onTouchMoveOpposite', s, e);
+            }
+            if (typeof startMoving === 'undefined') {
+                if (s.touches.currentX !== s.touches.startX || s.touches.currentY !== s.touches.startY) {
+                    startMoving = true;
+                }
+            }
+            if (!isTouched) return;
+            if (isScrolling)  {
+                isTouched = false;
+                return;
+            }
+            if (!startMoving) {
+                return;
+            }
+            s.allowClick = false;
+            s.emit('onSliderMove', s, e);
+            e.preventDefault();
+            if (s.params.touchMoveStopPropagation && !s.params.nested) {
+                e.stopPropagation();
+            }
+        
+            if (!isMoved) {
+                if (params.loop) {
+                    s.fixLoop();
+                }
+                startTranslate = s.getWrapperTranslate();
+                s.setWrapperTransition(0);
+                if (s.animating) {
+                    s.wrapper.trigger('webkitTransitionEnd transitionend oTransitionEnd MSTransitionEnd msTransitionEnd');
+                }
+                if (s.params.autoplay && s.autoplaying) {
+                    if (s.params.autoplayDisableOnInteraction) {
+                        s.stopAutoplay();
+                    }
+                    else {
+                        s.pauseAutoplay();
+                    }
+                }
+                allowMomentumBounce = false;
+                //Grab Cursor
+                if (s.params.grabCursor && (s.params.allowSwipeToNext === true || s.params.allowSwipeToPrev === true)) {
+                    s.setGrabCursor(true);
+                }
+            }
+            isMoved = true;
+        
+            var diff = s.touches.diff = s.isHorizontal() ? s.touches.currentX - s.touches.startX : s.touches.currentY - s.touches.startY;
+        
+            diff = diff * s.params.touchRatio;
+            if (s.rtl) diff = -diff;
+        
+            s.swipeDirection = diff > 0 ? 'prev' : 'next';
+            currentTranslate = diff + startTranslate;
+        
+            var disableParentSwiper = true;
+            if ((diff > 0 && currentTranslate > s.minTranslate())) {
+                disableParentSwiper = false;
+                if (s.params.resistance) currentTranslate = s.minTranslate() - 1 + Math.pow(-s.minTranslate() + startTranslate + diff, s.params.resistanceRatio);
+            }
+            else if (diff < 0 && currentTranslate < s.maxTranslate()) {
+                disableParentSwiper = false;
+                if (s.params.resistance) currentTranslate = s.maxTranslate() + 1 - Math.pow(s.maxTranslate() - startTranslate - diff, s.params.resistanceRatio);
+            }
+        
+            if (disableParentSwiper) {
+                e.preventedByNestedSwiper = true;
+            }
+        
+            // Directions locks
+            if (!s.params.allowSwipeToNext && s.swipeDirection === 'next' && currentTranslate < startTranslate) {
+                currentTranslate = startTranslate;
+            }
+            if (!s.params.allowSwipeToPrev && s.swipeDirection === 'prev' && currentTranslate > startTranslate) {
+                currentTranslate = startTranslate;
+            }
+        
+        
+            // Threshold
+            if (s.params.threshold > 0) {
+                if (Math.abs(diff) > s.params.threshold || allowThresholdMove) {
+                    if (!allowThresholdMove) {
+                        allowThresholdMove = true;
+                        s.touches.startX = s.touches.currentX;
+                        s.touches.startY = s.touches.currentY;
+                        currentTranslate = startTranslate;
+                        s.touches.diff = s.isHorizontal() ? s.touches.currentX - s.touches.startX : s.touches.currentY - s.touches.startY;
+                        return;
+                    }
+                }
+                else {
+                    currentTranslate = startTranslate;
+                    return;
+                }
+            }
+        
+            if (!s.params.followFinger) return;
+        
+            // Update active index in free mode
+            if (s.params.freeMode || s.params.watchSlidesProgress) {
+                s.updateActiveIndex();
+            }
+            if (s.params.freeMode) {
+                //Velocity
+                if (velocities.length === 0) {
+                    velocities.push({
+                        position: s.touches[s.isHorizontal() ? 'startX' : 'startY'],
+                        time: touchStartTime
+                    });
+                }
+                velocities.push({
+                    position: s.touches[s.isHorizontal() ? 'currentX' : 'currentY'],
+                    time: (new window.Date()).getTime()
+                });
+            }
+            // Update progress
+            s.updateProgress(currentTranslate);
+            // Update translate
+            s.setWrapperTranslate(currentTranslate);
+        };
+        s.onTouchEnd = function (e) {
+            if (e.originalEvent) e = e.originalEvent;
+            if (allowTouchCallbacks) {
+                s.emit('onTouchEnd', s, e);
+            }
+            allowTouchCallbacks = false;
+            if (!isTouched) return;
+            //Return Grab Cursor
+            if (s.params.grabCursor && isMoved && isTouched  && (s.params.allowSwipeToNext === true || s.params.allowSwipeToPrev === true)) {
+                s.setGrabCursor(false);
+            }
+        
+            // Time diff
+            var touchEndTime = Date.now();
+            var timeDiff = touchEndTime - touchStartTime;
+        
+            // Tap, doubleTap, Click
+            if (s.allowClick) {
+                s.updateClickedSlide(e);
+                s.emit('onTap', s, e);
+                if (timeDiff < 300 && (touchEndTime - lastClickTime) > 300) {
+                    if (clickTimeout) clearTimeout(clickTimeout);
+                    clickTimeout = setTimeout(function () {
+                        if (!s) return;
+                        if (s.params.paginationHide && s.paginationContainer.length > 0 && !$(e.target).hasClass(s.params.bulletClass)) {
+                            s.paginationContainer.toggleClass(s.params.paginationHiddenClass);
+                        }
+                        s.emit('onClick', s, e);
+                    }, 300);
+        
+                }
+                if (timeDiff < 300 && (touchEndTime - lastClickTime) < 300) {
+                    if (clickTimeout) clearTimeout(clickTimeout);
+                    s.emit('onDoubleTap', s, e);
+                }
+            }
+        
+            lastClickTime = Date.now();
+            setTimeout(function () {
+                if (s) s.allowClick = true;
+            }, 0);
+        
+            if (!isTouched || !isMoved || !s.swipeDirection || s.touches.diff === 0 || currentTranslate === startTranslate) {
+                isTouched = isMoved = false;
+                return;
+            }
+            isTouched = isMoved = false;
+        
+            var currentPos;
+            if (s.params.followFinger) {
+                currentPos = s.rtl ? s.translate : -s.translate;
+            }
+            else {
+                currentPos = -currentTranslate;
+            }
+            if (s.params.freeMode) {
+                if (currentPos < -s.minTranslate()) {
+                    s.slideTo(s.activeIndex);
+                    return;
+                }
+                else if (currentPos > -s.maxTranslate()) {
+                    if (s.slides.length < s.snapGrid.length) {
+                        s.slideTo(s.snapGrid.length - 1);
+                    }
+                    else {
+                        s.slideTo(s.slides.length - 1);
+                    }
+                    return;
+                }
+        
+                if (s.params.freeModeMomentum) {
+                    if (velocities.length > 1) {
+                        var lastMoveEvent = velocities.pop(), velocityEvent = velocities.pop();
+        
+                        var distance = lastMoveEvent.position - velocityEvent.position;
+                        var time = lastMoveEvent.time - velocityEvent.time;
+                        s.velocity = distance / time;
+                        s.velocity = s.velocity / 2;
+                        if (Math.abs(s.velocity) < s.params.freeModeMinimumVelocity) {
+                            s.velocity = 0;
+                        }
+                        // this implies that the user stopped moving a finger then released.
+                        // There would be no events with distance zero, so the last event is stale.
+                        if (time > 150 || (new window.Date().getTime() - lastMoveEvent.time) > 300) {
+                            s.velocity = 0;
+                        }
+                    } else {
+                        s.velocity = 0;
+                    }
+                    s.velocity = s.velocity * s.params.freeModeMomentumVelocityRatio;
+        
+                    velocities.length = 0;
+                    var momentumDuration = 1000 * s.params.freeModeMomentumRatio;
+                    var momentumDistance = s.velocity * momentumDuration;
+        
+                    var newPosition = s.translate + momentumDistance;
+                    if (s.rtl) newPosition = - newPosition;
+                    var doBounce = false;
+                    var afterBouncePosition;
+                    var bounceAmount = Math.abs(s.velocity) * 20 * s.params.freeModeMomentumBounceRatio;
+                    if (newPosition < s.maxTranslate()) {
+                        if (s.params.freeModeMomentumBounce) {
+                            if (newPosition + s.maxTranslate() < -bounceAmount) {
+                                newPosition = s.maxTranslate() - bounceAmount;
+                            }
+                            afterBouncePosition = s.maxTranslate();
+                            doBounce = true;
+                            allowMomentumBounce = true;
+                        }
+                        else {
+                            newPosition = s.maxTranslate();
+                        }
+                    }
+                    else if (newPosition > s.minTranslate()) {
+                        if (s.params.freeModeMomentumBounce) {
+                            if (newPosition - s.minTranslate() > bounceAmount) {
+                                newPosition = s.minTranslate() + bounceAmount;
+                            }
+                            afterBouncePosition = s.minTranslate();
+                            doBounce = true;
+                            allowMomentumBounce = true;
+                        }
+                        else {
+                            newPosition = s.minTranslate();
+                        }
+                    }
+                    else if (s.params.freeModeSticky) {
+                        var j = 0,
+                            nextSlide;
+                        for (j = 0; j < s.snapGrid.length; j += 1) {
+                            if (s.snapGrid[j] > -newPosition) {
+                                nextSlide = j;
+                                break;
+                            }
+        
+                        }
+                        if (Math.abs(s.snapGrid[nextSlide] - newPosition) < Math.abs(s.snapGrid[nextSlide - 1] - newPosition) || s.swipeDirection === 'next') {
+                            newPosition = s.snapGrid[nextSlide];
+                        } else {
+                            newPosition = s.snapGrid[nextSlide - 1];
+                        }
+                        if (!s.rtl) newPosition = - newPosition;
+                    }
+                    //Fix duration
+                    if (s.velocity !== 0) {
+                        if (s.rtl) {
+                            momentumDuration = Math.abs((-newPosition - s.translate) / s.velocity);
+                        }
+                        else {
+                            momentumDuration = Math.abs((newPosition - s.translate) / s.velocity);
+                        }
+                    }
+                    else if (s.params.freeModeSticky) {
+                        s.slideReset();
+                        return;
+                    }
+        
+                    if (s.params.freeModeMomentumBounce && doBounce) {
+                        s.updateProgress(afterBouncePosition);
+                        s.setWrapperTransition(momentumDuration);
+                        s.setWrapperTranslate(newPosition);
+                        s.onTransitionStart();
+                        s.animating = true;
+                        s.wrapper.transitionEnd(function () {
+                            if (!s || !allowMomentumBounce) return;
+                            s.emit('onMomentumBounce', s);
+        
+                            s.setWrapperTransition(s.params.speed);
+                            s.setWrapperTranslate(afterBouncePosition);
+                            s.wrapper.transitionEnd(function () {
+                                if (!s) return;
+                                s.onTransitionEnd();
+                            });
+                        });
+                    } else if (s.velocity) {
+                        s.updateProgress(newPosition);
+                        s.setWrapperTransition(momentumDuration);
+                        s.setWrapperTranslate(newPosition);
+                        s.onTransitionStart();
+                        if (!s.animating) {
+                            s.animating = true;
+                            s.wrapper.transitionEnd(function () {
+                                if (!s) return;
+                                s.onTransitionEnd();
+                            });
+                        }
+        
+                    } else {
+                        s.updateProgress(newPosition);
+                    }
+        
+                    s.updateActiveIndex();
+                }
+                if (!s.params.freeModeMomentum || timeDiff >= s.params.longSwipesMs) {
+                    s.updateProgress();
+                    s.updateActiveIndex();
+                }
+                return;
+            }
+        
+            // Find current slide
+            var i, stopIndex = 0, groupSize = s.slidesSizesGrid[0];
+            for (i = 0; i < s.slidesGrid.length; i += s.params.slidesPerGroup) {
+                if (typeof s.slidesGrid[i + s.params.slidesPerGroup] !== 'undefined') {
+                    if (currentPos >= s.slidesGrid[i] && currentPos < s.slidesGrid[i + s.params.slidesPerGroup]) {
+                        stopIndex = i;
+                        groupSize = s.slidesGrid[i + s.params.slidesPerGroup] - s.slidesGrid[i];
+                    }
+                }
+                else {
+                    if (currentPos >= s.slidesGrid[i]) {
+                        stopIndex = i;
+                        groupSize = s.slidesGrid[s.slidesGrid.length - 1] - s.slidesGrid[s.slidesGrid.length - 2];
+                    }
+                }
+            }
+        
+            // Find current slide size
+            var ratio = (currentPos - s.slidesGrid[stopIndex]) / groupSize;
+        
+            if (timeDiff > s.params.longSwipesMs) {
+                // Long touches
+                if (!s.params.longSwipes) {
+                    s.slideTo(s.activeIndex);
+                    return;
+                }
+                if (s.swipeDirection === 'next') {
+                    if (ratio >= s.params.longSwipesRatio) s.slideTo(stopIndex + s.params.slidesPerGroup);
+                    else s.slideTo(stopIndex);
+        
+                }
+                if (s.swipeDirection === 'prev') {
+                    if (ratio > (1 - s.params.longSwipesRatio)) s.slideTo(stopIndex + s.params.slidesPerGroup);
+                    else s.slideTo(stopIndex);
+                }
+            }
+            else {
+                // Short swipes
+                if (!s.params.shortSwipes) {
+                    s.slideTo(s.activeIndex);
+                    return;
+                }
+                if (s.swipeDirection === 'next') {
+                    s.slideTo(stopIndex + s.params.slidesPerGroup);
+        
+                }
+                if (s.swipeDirection === 'prev') {
+                    s.slideTo(stopIndex);
+                }
+            }
+        };
+        /*=========================
+          Transitions
+          ===========================*/
+        s._slideTo = function (slideIndex, speed) {
+            return s.slideTo(slideIndex, speed, true, true);
+        };
+        s.slideTo = function (slideIndex, speed, runCallbacks, internal) {
+            if (typeof runCallbacks === 'undefined') runCallbacks = true;
+            if (typeof slideIndex === 'undefined') slideIndex = 0;
+            if (slideIndex < 0) slideIndex = 0;
+            s.snapIndex = Math.floor(slideIndex / s.params.slidesPerGroup);
+            if (s.snapIndex >= s.snapGrid.length) s.snapIndex = s.snapGrid.length - 1;
+        
+            var translate = - s.snapGrid[s.snapIndex];
+            // Stop autoplay
+            if (s.params.autoplay && s.autoplaying) {
+                if (internal || !s.params.autoplayDisableOnInteraction) {
+                    s.pauseAutoplay(speed);
+                }
+                else {
+                    s.stopAutoplay();
+                }
+            }
+            // Update progress
+            s.updateProgress(translate);
+        
+            // Normalize slideIndex
+            if(s.params.normalizeSlideIndex){
+                for (var i = 0; i < s.slidesGrid.length; i++) {
+                    if (- Math.floor(translate * 100) >= Math.floor(s.slidesGrid[i] * 100)) {
+                        slideIndex = i;
+                    }
+                }
+            }
+        
+            // Directions locks
+            if (!s.params.allowSwipeToNext && translate < s.translate && translate < s.minTranslate()) {
+                return false;
+            }
+            if (!s.params.allowSwipeToPrev && translate > s.translate && translate > s.maxTranslate()) {
+                if ((s.activeIndex || 0) !== slideIndex ) return false;
+            }
+        
+            // Update Index
+            if (typeof speed === 'undefined') speed = s.params.speed;
+            s.previousIndex = s.activeIndex || 0;
+            s.activeIndex = slideIndex;
+            s.updateRealIndex();
+            if ((s.rtl && -translate === s.translate) || (!s.rtl && translate === s.translate)) {
+                // Update Height
+                if (s.params.autoHeight) {
+                    s.updateAutoHeight();
+                }
+                s.updateClasses();
+                if (s.params.effect !== 'slide') {
+                    s.setWrapperTranslate(translate);
+                }
+                return false;
+            }
+            s.updateClasses();
+            s.onTransitionStart(runCallbacks);
+        
+            if (speed === 0 || s.browser.lteIE9) {
+                s.setWrapperTranslate(translate);
+                s.setWrapperTransition(0);
+                s.onTransitionEnd(runCallbacks);
+            }
+            else {
+                s.setWrapperTranslate(translate);
+                s.setWrapperTransition(speed);
+                if (!s.animating) {
+                    s.animating = true;
+                    s.wrapper.transitionEnd(function () {
+                        if (!s) return;
+                        s.onTransitionEnd(runCallbacks);
+                    });
+                }
+        
+            }
+        
+            return true;
+        };
+        
+        s.onTransitionStart = function (runCallbacks) {
+            if (typeof runCallbacks === 'undefined') runCallbacks = true;
+            if (s.params.autoHeight) {
+                s.updateAutoHeight();
+            }
+            if (s.lazy) s.lazy.onTransitionStart();
+            if (runCallbacks) {
+                s.emit('onTransitionStart', s);
+                if (s.activeIndex !== s.previousIndex) {
+                    s.emit('onSlideChangeStart', s);
+                    if (s.activeIndex > s.previousIndex) {
+                        s.emit('onSlideNextStart', s);
+                    }
+                    else {
+                        s.emit('onSlidePrevStart', s);
+                    }
+                }
+        
+            }
+        };
+        s.onTransitionEnd = function (runCallbacks) {
+            s.animating = false;
+            s.setWrapperTransition(0);
+            if (typeof runCallbacks === 'undefined') runCallbacks = true;
+            if (s.lazy) s.lazy.onTransitionEnd();
+            if (runCallbacks) {
+                s.emit('onTransitionEnd', s);
+                if (s.activeIndex !== s.previousIndex) {
+                    s.emit('onSlideChangeEnd', s);
+                    if (s.activeIndex > s.previousIndex) {
+                        s.emit('onSlideNextEnd', s);
+                    }
+                    else {
+                        s.emit('onSlidePrevEnd', s);
+                    }
+                }
+            }
+            if (s.params.history && s.history) {
+                s.history.setHistory(s.params.history, s.activeIndex);
+            }
+            if (s.params.hashnav && s.hashnav) {
+                s.hashnav.setHash();
+            }
+        
+        };
+        s.slideNext = function (runCallbacks, speed, internal) {
+            if (s.params.loop) {
+                if (s.animating) return false;
+                s.fixLoop();
+                var clientLeft = s.container[0].clientLeft;
+                return s.slideTo(s.activeIndex + s.params.slidesPerGroup, speed, runCallbacks, internal);
+            }
+            else return s.slideTo(s.activeIndex + s.params.slidesPerGroup, speed, runCallbacks, internal);
+        };
+        s._slideNext = function (speed) {
+            return s.slideNext(true, speed, true);
+        };
+        s.slidePrev = function (runCallbacks, speed, internal) {
+            if (s.params.loop) {
+                if (s.animating) return false;
+                s.fixLoop();
+                var clientLeft = s.container[0].clientLeft;
+                return s.slideTo(s.activeIndex - 1, speed, runCallbacks, internal);
+            }
+            else return s.slideTo(s.activeIndex - 1, speed, runCallbacks, internal);
+        };
+        s._slidePrev = function (speed) {
+            return s.slidePrev(true, speed, true);
+        };
+        s.slideReset = function (runCallbacks, speed, internal) {
+            return s.slideTo(s.activeIndex, speed, runCallbacks);
+        };
+        
+        s.disableTouchControl = function () {
+            s.params.onlyExternal = true;
+            return true;
+        };
+        s.enableTouchControl = function () {
+            s.params.onlyExternal = false;
+            return true;
+        };
+        
+        /*=========================
+          Translate/transition helpers
+          ===========================*/
+        s.setWrapperTransition = function (duration, byController) {
+            s.wrapper.transition(duration);
+            if (s.params.effect !== 'slide' && s.effects[s.params.effect]) {
+                s.effects[s.params.effect].setTransition(duration);
+            }
+            if (s.params.parallax && s.parallax) {
+                s.parallax.setTransition(duration);
+            }
+            if (s.params.scrollbar && s.scrollbar) {
+                s.scrollbar.setTransition(duration);
+            }
+            if (s.params.control && s.controller) {
+                s.controller.setTransition(duration, byController);
+            }
+            s.emit('onSetTransition', s, duration);
+        };
+        s.setWrapperTranslate = function (translate, updateActiveIndex, byController) {
+            var x = 0, y = 0, z = 0;
+            if (s.isHorizontal()) {
+                x = s.rtl ? -translate : translate;
+            }
+            else {
+                y = translate;
+            }
+        
+            if (s.params.roundLengths) {
+                x = round(x);
+                y = round(y);
+            }
+        
+            if (!s.params.virtualTranslate) {
+                if (s.support.transforms3d) s.wrapper.transform('translate3d(' + x + 'px, ' + y + 'px, ' + z + 'px)');
+                else s.wrapper.transform('translate(' + x + 'px, ' + y + 'px)');
+            }
+        
+            s.translate = s.isHorizontal() ? x : y;
+        
+            // Check if we need to update progress
+            var progress;
+            var translatesDiff = s.maxTranslate() - s.minTranslate();
+            if (translatesDiff === 0) {
+                progress = 0;
+            }
+            else {
+                progress = (translate - s.minTranslate()) / (translatesDiff);
+            }
+            if (progress !== s.progress) {
+                s.updateProgress(translate);
+            }
+        
+            if (updateActiveIndex) s.updateActiveIndex();
+            if (s.params.effect !== 'slide' && s.effects[s.params.effect]) {
+                s.effects[s.params.effect].setTranslate(s.translate);
+            }
+            if (s.params.parallax && s.parallax) {
+                s.parallax.setTranslate(s.translate);
+            }
+            if (s.params.scrollbar && s.scrollbar) {
+                s.scrollbar.setTranslate(s.translate);
+            }
+            if (s.params.control && s.controller) {
+                s.controller.setTranslate(s.translate, byController);
+            }
+            s.emit('onSetTranslate', s, s.translate);
+        };
+        
+        s.getTranslate = function (el, axis) {
+            var matrix, curTransform, curStyle, transformMatrix;
+        
+            // automatic axis detection
+            if (typeof axis === 'undefined') {
+                axis = 'x';
+            }
+        
+            if (s.params.virtualTranslate) {
+                return s.rtl ? -s.translate : s.translate;
+            }
+        
+            curStyle = window.getComputedStyle(el, null);
+            if (window.WebKitCSSMatrix) {
+                curTransform = curStyle.transform || curStyle.webkitTransform;
+                if (curTransform.split(',').length > 6) {
+                    curTransform = curTransform.split(', ').map(function(a){
+                        return a.replace(',','.');
+                    }).join(', ');
+                }
+                // Some old versions of Webkit choke when 'none' is passed; pass
+                // empty string instead in this case
+                transformMatrix = new window.WebKitCSSMatrix(curTransform === 'none' ? '' : curTransform);
+            }
+            else {
+                transformMatrix = curStyle.MozTransform || curStyle.OTransform || curStyle.MsTransform || curStyle.msTransform  || curStyle.transform || curStyle.getPropertyValue('transform').replace('translate(', 'matrix(1, 0, 0, 1,');
+                matrix = transformMatrix.toString().split(',');
+            }
+        
+            if (axis === 'x') {
+                //Latest Chrome and webkits Fix
+                if (window.WebKitCSSMatrix)
+                    curTransform = transformMatrix.m41;
+                //Crazy IE10 Matrix
+                else if (matrix.length === 16)
+                    curTransform = parseFloat(matrix[12]);
+                //Normal Browsers
+                else
+                    curTransform = parseFloat(matrix[4]);
+            }
+            if (axis === 'y') {
+                //Latest Chrome and webkits Fix
+                if (window.WebKitCSSMatrix)
+                    curTransform = transformMatrix.m42;
+                //Crazy IE10 Matrix
+                else if (matrix.length === 16)
+                    curTransform = parseFloat(matrix[13]);
+                //Normal Browsers
+                else
+                    curTransform = parseFloat(matrix[5]);
+            }
+            if (s.rtl && curTransform) curTransform = -curTransform;
+            return curTransform || 0;
+        };
+        s.getWrapperTranslate = function (axis) {
+            if (typeof axis === 'undefined') {
+                axis = s.isHorizontal() ? 'x' : 'y';
+            }
+            return s.getTranslate(s.wrapper[0], axis);
+        };
+        
+        /*=========================
+          Observer
+          ===========================*/
+        s.observers = [];
+        function initObserver(target, options) {
+            options = options || {};
+            // create an observer instance
+            var ObserverFunc = window.MutationObserver || window.WebkitMutationObserver;
+            var observer = new ObserverFunc(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    s.onResize(true);
+                    s.emit('onObserverUpdate', s, mutation);
+                });
+            });
+        
+            observer.observe(target, {
+                attributes: typeof options.attributes === 'undefined' ? true : options.attributes,
+                childList: typeof options.childList === 'undefined' ? true : options.childList,
+                characterData: typeof options.characterData === 'undefined' ? true : options.characterData
+            });
+        
+            s.observers.push(observer);
+        }
+        s.initObservers = function () {
+            if (s.params.observeParents) {
+                var containerParents = s.container.parents();
+                for (var i = 0; i < containerParents.length; i++) {
+                    initObserver(containerParents[i]);
+                }
+            }
+        
+            // Observe container
+            initObserver(s.container[0], {childList: false});
+        
+            // Observe wrapper
+            initObserver(s.wrapper[0], {attributes: false});
+        };
+        s.disconnectObservers = function () {
+            for (var i = 0; i < s.observers.length; i++) {
+                s.observers[i].disconnect();
+            }
+            s.observers = [];
+        };
+        /*=========================
+          Loop
+          ===========================*/
+        // Create looped slides
+        s.createLoop = function () {
+            // Remove duplicated slides
+            s.wrapper.children('.' + s.params.slideClass + '.' + s.params.slideDuplicateClass).remove();
+        
+            var slides = s.wrapper.children('.' + s.params.slideClass);
+        
+            if(s.params.slidesPerView === 'auto' && !s.params.loopedSlides) s.params.loopedSlides = slides.length;
+        
+            s.loopedSlides = parseInt(s.params.loopedSlides || s.params.slidesPerView, 10);
+            s.loopedSlides = s.loopedSlides + s.params.loopAdditionalSlides;
+            if (s.loopedSlides > slides.length) {
+                s.loopedSlides = slides.length;
+            }
+        
+            var prependSlides = [], appendSlides = [], i;
+            slides.each(function (index, el) {
+                var slide = $(this);
+                if (index < s.loopedSlides) appendSlides.push(el);
+                if (index < slides.length && index >= slides.length - s.loopedSlides) prependSlides.push(el);
+                slide.attr('data-swiper-slide-index', index);
+            });
+            for (i = 0; i < appendSlides.length; i++) {
+                s.wrapper.append($(appendSlides[i].cloneNode(true)).addClass(s.params.slideDuplicateClass));
+            }
+            for (i = prependSlides.length - 1; i >= 0; i--) {
+                s.wrapper.prepend($(prependSlides[i].cloneNode(true)).addClass(s.params.slideDuplicateClass));
+            }
+        };
+        s.destroyLoop = function () {
+            s.wrapper.children('.' + s.params.slideClass + '.' + s.params.slideDuplicateClass).remove();
+            s.slides.removeAttr('data-swiper-slide-index');
+        };
+        s.reLoop = function (updatePosition) {
+            var oldIndex = s.activeIndex - s.loopedSlides;
+            s.destroyLoop();
+            s.createLoop();
+            s.updateSlidesSize();
+            if (updatePosition) {
+                s.slideTo(oldIndex + s.loopedSlides, 0, false);
+            }
+        
+        };
+        s.fixLoop = function () {
+            var newIndex;
+            //Fix For Negative Oversliding
+            if (s.activeIndex < s.loopedSlides) {
+                newIndex = s.slides.length - s.loopedSlides * 3 + s.activeIndex;
+                newIndex = newIndex + s.loopedSlides;
+                s.slideTo(newIndex, 0, false, true);
+            }
+            //Fix For Positive Oversliding
+            else if ((s.params.slidesPerView === 'auto' && s.activeIndex >= s.loopedSlides * 2) || (s.activeIndex > s.slides.length - s.params.slidesPerView * 2)) {
+                newIndex = -s.slides.length + s.activeIndex + s.loopedSlides;
+                newIndex = newIndex + s.loopedSlides;
+                s.slideTo(newIndex, 0, false, true);
+            }
+        };
+        /*=========================
+          Append/Prepend/Remove Slides
+          ===========================*/
+        s.appendSlide = function (slides) {
+            if (s.params.loop) {
+                s.destroyLoop();
+            }
+            if (typeof slides === 'object' && slides.length) {
+                for (var i = 0; i < slides.length; i++) {
+                    if (slides[i]) s.wrapper.append(slides[i]);
+                }
+            }
+            else {
+                s.wrapper.append(slides);
+            }
+            if (s.params.loop) {
+                s.createLoop();
+            }
+            if (!(s.params.observer && s.support.observer)) {
+                s.update(true);
+            }
+        };
+        s.prependSlide = function (slides) {
+            if (s.params.loop) {
+                s.destroyLoop();
+            }
+            var newActiveIndex = s.activeIndex + 1;
+            if (typeof slides === 'object' && slides.length) {
+                for (var i = 0; i < slides.length; i++) {
+                    if (slides[i]) s.wrapper.prepend(slides[i]);
+                }
+                newActiveIndex = s.activeIndex + slides.length;
+            }
+            else {
+                s.wrapper.prepend(slides);
+            }
+            if (s.params.loop) {
+                s.createLoop();
+            }
+            if (!(s.params.observer && s.support.observer)) {
+                s.update(true);
+            }
+            s.slideTo(newActiveIndex, 0, false);
+        };
+        s.removeSlide = function (slidesIndexes) {
+            if (s.params.loop) {
+                s.destroyLoop();
+                s.slides = s.wrapper.children('.' + s.params.slideClass);
+            }
+            var newActiveIndex = s.activeIndex,
+                indexToRemove;
+            if (typeof slidesIndexes === 'object' && slidesIndexes.length) {
+                for (var i = 0; i < slidesIndexes.length; i++) {
+                    indexToRemove = slidesIndexes[i];
+                    if (s.slides[indexToRemove]) s.slides.eq(indexToRemove).remove();
+                    if (indexToRemove < newActiveIndex) newActiveIndex--;
+                }
+                newActiveIndex = Math.max(newActiveIndex, 0);
+            }
+            else {
+                indexToRemove = slidesIndexes;
+                if (s.slides[indexToRemove]) s.slides.eq(indexToRemove).remove();
+                if (indexToRemove < newActiveIndex) newActiveIndex--;
+                newActiveIndex = Math.max(newActiveIndex, 0);
+            }
+        
+            if (s.params.loop) {
+                s.createLoop();
+            }
+        
+            if (!(s.params.observer && s.support.observer)) {
+                s.update(true);
+            }
+            if (s.params.loop) {
+                s.slideTo(newActiveIndex + s.loopedSlides, 0, false);
+            }
+            else {
+                s.slideTo(newActiveIndex, 0, false);
+            }
+        
+        };
+        s.removeAllSlides = function () {
+            var slidesIndexes = [];
+            for (var i = 0; i < s.slides.length; i++) {
+                slidesIndexes.push(i);
+            }
+            s.removeSlide(slidesIndexes);
+        };
+        
+
+        /*=========================
+          Effects
+          ===========================*/
+        s.effects = {
+            fade: {
+                setTranslate: function () {
+                    for (var i = 0; i < s.slides.length; i++) {
+                        var slide = s.slides.eq(i);
+                        var offset = slide[0].swiperSlideOffset;
+                        var tx = -offset;
+                        if (!s.params.virtualTranslate) tx = tx - s.translate;
+                        var ty = 0;
+                        if (!s.isHorizontal()) {
+                            ty = tx;
+                            tx = 0;
+                        }
+                        var slideOpacity = s.params.fade.crossFade ?
+                                Math.max(1 - Math.abs(slide[0].progress), 0) :
+                                1 + Math.min(Math.max(slide[0].progress, -1), 0);
+                        slide
+                            .css({
+                                opacity: slideOpacity
+                            })
+                            .transform('translate3d(' + tx + 'px, ' + ty + 'px, 0px)');
+        
+                    }
+        
+                },
+                setTransition: function (duration) {
+                    s.slides.transition(duration);
+                    if (s.params.virtualTranslate && duration !== 0) {
+                        var eventTriggered = false;
+                        s.slides.transitionEnd(function () {
+                            if (eventTriggered) return;
+                            if (!s) return;
+                            eventTriggered = true;
+                            s.animating = false;
+                            var triggerEvents = ['webkitTransitionEnd', 'transitionend', 'oTransitionEnd', 'MSTransitionEnd', 'msTransitionEnd'];
+                            for (var i = 0; i < triggerEvents.length; i++) {
+                                s.wrapper.trigger(triggerEvents[i]);
+                            }
+                        });
+                    }
+                }
+            },
+            flip: {
+                setTranslate: function () {
+                    for (var i = 0; i < s.slides.length; i++) {
+                        var slide = s.slides.eq(i);
+                        var progress = slide[0].progress;
+                        if (s.params.flip.limitRotation) {
+                            progress = Math.max(Math.min(slide[0].progress, 1), -1);
+                        }
+                        var offset = slide[0].swiperSlideOffset;
+                        var rotate = -180 * progress,
+                            rotateY = rotate,
+                            rotateX = 0,
+                            tx = -offset,
+                            ty = 0;
+                        if (!s.isHorizontal()) {
+                            ty = tx;
+                            tx = 0;
+                            rotateX = -rotateY;
+                            rotateY = 0;
+                        }
+                        else if (s.rtl) {
+                            rotateY = -rotateY;
+                        }
+        
+                        slide[0].style.zIndex = -Math.abs(Math.round(progress)) + s.slides.length;
+        
+                        if (s.params.flip.slideShadows) {
+                            //Set shadows
+                            var shadowBefore = s.isHorizontal() ? slide.find('.swiper-slide-shadow-left') : slide.find('.swiper-slide-shadow-top');
+                            var shadowAfter = s.isHorizontal() ? slide.find('.swiper-slide-shadow-right') : slide.find('.swiper-slide-shadow-bottom');
+                            if (shadowBefore.length === 0) {
+                                shadowBefore = $('<div class="swiper-slide-shadow-' + (s.isHorizontal() ? 'left' : 'top') + '"></div>');
+                                slide.append(shadowBefore);
+                            }
+                            if (shadowAfter.length === 0) {
+                                shadowAfter = $('<div class="swiper-slide-shadow-' + (s.isHorizontal() ? 'right' : 'bottom') + '"></div>');
+                                slide.append(shadowAfter);
+                            }
+                            if (shadowBefore.length) shadowBefore[0].style.opacity = Math.max(-progress, 0);
+                            if (shadowAfter.length) shadowAfter[0].style.opacity = Math.max(progress, 0);
+                        }
+        
+                        slide
+                            .transform('translate3d(' + tx + 'px, ' + ty + 'px, 0px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)');
+                    }
+                },
+                setTransition: function (duration) {
+                    s.slides.transition(duration).find('.swiper-slide-shadow-top, .swiper-slide-shadow-right, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left').transition(duration);
+                    if (s.params.virtualTranslate && duration !== 0) {
+                        var eventTriggered = false;
+                        s.slides.eq(s.activeIndex).transitionEnd(function () {
+                            if (eventTriggered) return;
+                            if (!s) return;
+                            if (!$(this).hasClass(s.params.slideActiveClass)) return;
+                            eventTriggered = true;
+                            s.animating = false;
+                            var triggerEvents = ['webkitTransitionEnd', 'transitionend', 'oTransitionEnd', 'MSTransitionEnd', 'msTransitionEnd'];
+                            for (var i = 0; i < triggerEvents.length; i++) {
+                                s.wrapper.trigger(triggerEvents[i]);
+                            }
+                        });
+                    }
+                }
+            },
+            cube: {
+                setTranslate: function () {
+                    var wrapperRotate = 0, cubeShadow;
+                    if (s.params.cube.shadow) {
+                        if (s.isHorizontal()) {
+                            cubeShadow = s.wrapper.find('.swiper-cube-shadow');
+                            if (cubeShadow.length === 0) {
+                                cubeShadow = $('<div class="swiper-cube-shadow"></div>');
+                                s.wrapper.append(cubeShadow);
+                            }
+                            cubeShadow.css({height: s.width + 'px'});
+                        }
+                        else {
+                            cubeShadow = s.container.find('.swiper-cube-shadow');
+                            if (cubeShadow.length === 0) {
+                                cubeShadow = $('<div class="swiper-cube-shadow"></div>');
+                                s.container.append(cubeShadow);
+                            }
+                        }
+                    }
+                    for (var i = 0; i < s.slides.length; i++) {
+                        var slide = s.slides.eq(i);
+                        var slideAngle = i * 90;
+                        var round = Math.floor(slideAngle / 360);
+                        if (s.rtl) {
+                            slideAngle = -slideAngle;
+                            round = Math.floor(-slideAngle / 360);
+                        }
+                        var progress = Math.max(Math.min(slide[0].progress, 1), -1);
+                        var tx = 0, ty = 0, tz = 0;
+                        if (i % 4 === 0) {
+                            tx = - round * 4 * s.size;
+                            tz = 0;
+                        }
+                        else if ((i - 1) % 4 === 0) {
+                            tx = 0;
+                            tz = - round * 4 * s.size;
+                        }
+                        else if ((i - 2) % 4 === 0) {
+                            tx = s.size + round * 4 * s.size;
+                            tz = s.size;
+                        }
+                        else if ((i - 3) % 4 === 0) {
+                            tx = - s.size;
+                            tz = 3 * s.size + s.size * 4 * round;
+                        }
+                        if (s.rtl) {
+                            tx = -tx;
+                        }
+        
+                        if (!s.isHorizontal()) {
+                            ty = tx;
+                            tx = 0;
+                        }
+        
+                        var transform = 'rotateX(' + (s.isHorizontal() ? 0 : -slideAngle) + 'deg) rotateY(' + (s.isHorizontal() ? slideAngle : 0) + 'deg) translate3d(' + tx + 'px, ' + ty + 'px, ' + tz + 'px)';
+                        if (progress <= 1 && progress > -1) {
+                            wrapperRotate = i * 90 + progress * 90;
+                            if (s.rtl) wrapperRotate = -i * 90 - progress * 90;
+                        }
+                        slide.transform(transform);
+                        if (s.params.cube.slideShadows) {
+                            //Set shadows
+                            var shadowBefore = s.isHorizontal() ? slide.find('.swiper-slide-shadow-left') : slide.find('.swiper-slide-shadow-top');
+                            var shadowAfter = s.isHorizontal() ? slide.find('.swiper-slide-shadow-right') : slide.find('.swiper-slide-shadow-bottom');
+                            if (shadowBefore.length === 0) {
+                                shadowBefore = $('<div class="swiper-slide-shadow-' + (s.isHorizontal() ? 'left' : 'top') + '"></div>');
+                                slide.append(shadowBefore);
+                            }
+                            if (shadowAfter.length === 0) {
+                                shadowAfter = $('<div class="swiper-slide-shadow-' + (s.isHorizontal() ? 'right' : 'bottom') + '"></div>');
+                                slide.append(shadowAfter);
+                            }
+                            if (shadowBefore.length) shadowBefore[0].style.opacity = Math.max(-progress, 0);
+                            if (shadowAfter.length) shadowAfter[0].style.opacity = Math.max(progress, 0);
+                        }
+                    }
+                    s.wrapper.css({
+                        '-webkit-transform-origin': '50% 50% -' + (s.size / 2) + 'px',
+                        '-moz-transform-origin': '50% 50% -' + (s.size / 2) + 'px',
+                        '-ms-transform-origin': '50% 50% -' + (s.size / 2) + 'px',
+                        'transform-origin': '50% 50% -' + (s.size / 2) + 'px'
+                    });
+        
+                    if (s.params.cube.shadow) {
+                        if (s.isHorizontal()) {
+                            cubeShadow.transform('translate3d(0px, ' + (s.width / 2 + s.params.cube.shadowOffset) + 'px, ' + (-s.width / 2) + 'px) rotateX(90deg) rotateZ(0deg) scale(' + (s.params.cube.shadowScale) + ')');
+                        }
+                        else {
+                            var shadowAngle = Math.abs(wrapperRotate) - Math.floor(Math.abs(wrapperRotate) / 90) * 90;
+                            var multiplier = 1.5 - (Math.sin(shadowAngle * 2 * Math.PI / 360) / 2 + Math.cos(shadowAngle * 2 * Math.PI / 360) / 2);
+                            var scale1 = s.params.cube.shadowScale,
+                                scale2 = s.params.cube.shadowScale / multiplier,
+                                offset = s.params.cube.shadowOffset;
+                            cubeShadow.transform('scale3d(' + scale1 + ', 1, ' + scale2 + ') translate3d(0px, ' + (s.height / 2 + offset) + 'px, ' + (-s.height / 2 / scale2) + 'px) rotateX(-90deg)');
+                        }
+                    }
+                    var zFactor = (s.isSafari || s.isUiWebView) ? (-s.size / 2) : 0;
+                    s.wrapper.transform('translate3d(0px,0,' + zFactor + 'px) rotateX(' + (s.isHorizontal() ? 0 : wrapperRotate) + 'deg) rotateY(' + (s.isHorizontal() ? -wrapperRotate : 0) + 'deg)');
+                },
+                setTransition: function (duration) {
+                    s.slides.transition(duration).find('.swiper-slide-shadow-top, .swiper-slide-shadow-right, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left').transition(duration);
+                    if (s.params.cube.shadow && !s.isHorizontal()) {
+                        s.container.find('.swiper-cube-shadow').transition(duration);
+                    }
+                }
+            },
+            coverflow: {
+                setTranslate: function () {
+                    var transform = s.translate;
+                    var center = s.isHorizontal() ? -transform + s.width / 2 : -transform + s.height / 2;
+                    var rotate = s.isHorizontal() ? s.params.coverflow.rotate: -s.params.coverflow.rotate;
+                    var translate = s.params.coverflow.depth;
+                    //Each slide offset from center
+                    for (var i = 0, length = s.slides.length; i < length; i++) {
+                        var slide = s.slides.eq(i);
+                        var slideSize = s.slidesSizesGrid[i];
+                        var slideOffset = slide[0].swiperSlideOffset;
+                        var offsetMultiplier = (center - slideOffset - slideSize / 2) / slideSize * s.params.coverflow.modifier;
+        
+                        var rotateY = s.isHorizontal() ? rotate * offsetMultiplier : 0;
+                        var rotateX = s.isHorizontal() ? 0 : rotate * offsetMultiplier;
+                        // var rotateZ = 0
+                        var translateZ = -translate * Math.abs(offsetMultiplier);
+        
+                        var translateY = s.isHorizontal() ? 0 : s.params.coverflow.stretch * (offsetMultiplier);
+                        var translateX = s.isHorizontal() ? s.params.coverflow.stretch * (offsetMultiplier) : 0;
+        
+                        //Fix for ultra small values
+                        if (Math.abs(translateX) < 0.001) translateX = 0;
+                        if (Math.abs(translateY) < 0.001) translateY = 0;
+                        if (Math.abs(translateZ) < 0.001) translateZ = 0;
+                        if (Math.abs(rotateY) < 0.001) rotateY = 0;
+                        if (Math.abs(rotateX) < 0.001) rotateX = 0;
+        
+                        var slideTransform = 'translate3d(' + translateX + 'px,' + translateY + 'px,' + translateZ + 'px)  rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+        
+                        slide.transform(slideTransform);
+                        slide[0].style.zIndex = -Math.abs(Math.round(offsetMultiplier)) + 1;
+                        if (s.params.coverflow.slideShadows) {
+                            //Set shadows
+                            var shadowBefore = s.isHorizontal() ? slide.find('.swiper-slide-shadow-left') : slide.find('.swiper-slide-shadow-top');
+                            var shadowAfter = s.isHorizontal() ? slide.find('.swiper-slide-shadow-right') : slide.find('.swiper-slide-shadow-bottom');
+                            if (shadowBefore.length === 0) {
+                                shadowBefore = $('<div class="swiper-slide-shadow-' + (s.isHorizontal() ? 'left' : 'top') + '"></div>');
+                                slide.append(shadowBefore);
+                            }
+                            if (shadowAfter.length === 0) {
+                                shadowAfter = $('<div class="swiper-slide-shadow-' + (s.isHorizontal() ? 'right' : 'bottom') + '"></div>');
+                                slide.append(shadowAfter);
+                            }
+                            if (shadowBefore.length) shadowBefore[0].style.opacity = offsetMultiplier > 0 ? offsetMultiplier : 0;
+                            if (shadowAfter.length) shadowAfter[0].style.opacity = (-offsetMultiplier) > 0 ? -offsetMultiplier : 0;
+                        }
+                    }
+        
+                    //Set correct perspective for IE10
+                    if (s.browser.ie) {
+                        var ws = s.wrapper[0].style;
+                        ws.perspectiveOrigin = center + 'px 50%';
+                    }
+                },
+                setTransition: function (duration) {
+                    s.slides.transition(duration).find('.swiper-slide-shadow-top, .swiper-slide-shadow-right, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left').transition(duration);
+                }
+            }
+        };
+        
+
+        /*=========================
+          Images Lazy Loading
+          ===========================*/
+        s.lazy = {
+            initialImageLoaded: false,
+            loadImageInSlide: function (index, loadInDuplicate) {
+                if (typeof index === 'undefined') return;
+                if (typeof loadInDuplicate === 'undefined') loadInDuplicate = true;
+                if (s.slides.length === 0) return;
+        
+                var slide = s.slides.eq(index);
+                var img = slide.find('.' + s.params.lazyLoadingClass + ':not(.' + s.params.lazyStatusLoadedClass + '):not(.' + s.params.lazyStatusLoadingClass + ')');
+                if (slide.hasClass(s.params.lazyLoadingClass) && !slide.hasClass(s.params.lazyStatusLoadedClass) && !slide.hasClass(s.params.lazyStatusLoadingClass)) {
+                    img = img.add(slide[0]);
+                }
+                if (img.length === 0) return;
+        
+                img.each(function () {
+                    var _img = $(this);
+                    _img.addClass(s.params.lazyStatusLoadingClass);
+                    var background = _img.attr('data-background');
+                    var src = _img.attr('data-src'),
+                        srcset = _img.attr('data-srcset'),
+                        sizes = _img.attr('data-sizes');
+                    s.loadImage(_img[0], (src || background), srcset, sizes, false, function () {
+                        if (typeof s === 'undefined' || s === null || !s) return;
+                        if (background) {
+                            _img.css('background-image', 'url("' + background + '")');
+                            _img.removeAttr('data-background');
+                        }
+                        else {
+                            if (srcset) {
+                                _img.attr('srcset', srcset);
+                                _img.removeAttr('data-srcset');
+                            }
+                            if (sizes) {
+                                _img.attr('sizes', sizes);
+                                _img.removeAttr('data-sizes');
+                            }
+                            if (src) {
+                                _img.attr('src', src);
+                                _img.removeAttr('data-src');
+                            }
+        
+                        }
+        
+                        _img.addClass(s.params.lazyStatusLoadedClass).removeClass(s.params.lazyStatusLoadingClass);
+                        slide.find('.' + s.params.lazyPreloaderClass + ', .' + s.params.preloaderClass).remove();
+                        if (s.params.loop && loadInDuplicate) {
+                            var slideOriginalIndex = slide.attr('data-swiper-slide-index');
+                            if (slide.hasClass(s.params.slideDuplicateClass)) {
+                                var originalSlide = s.wrapper.children('[data-swiper-slide-index="' + slideOriginalIndex + '"]:not(.' + s.params.slideDuplicateClass + ')');
+                                s.lazy.loadImageInSlide(originalSlide.index(), false);
+                            }
+                            else {
+                                var duplicatedSlide = s.wrapper.children('.' + s.params.slideDuplicateClass + '[data-swiper-slide-index="' + slideOriginalIndex + '"]');
+                                s.lazy.loadImageInSlide(duplicatedSlide.index(), false);
+                            }
+                        }
+                        s.emit('onLazyImageReady', s, slide[0], _img[0]);
+                    });
+        
+                    s.emit('onLazyImageLoad', s, slide[0], _img[0]);
+                });
+        
+            },
+            load: function () {
+                var i;
+                var slidesPerView = s.params.slidesPerView;
+                if (slidesPerView === 'auto') {
+                    slidesPerView = 0;
+                }
+                if (!s.lazy.initialImageLoaded) s.lazy.initialImageLoaded = true;
+                if (s.params.watchSlidesVisibility) {
+                    s.wrapper.children('.' + s.params.slideVisibleClass).each(function () {
+                        s.lazy.loadImageInSlide($(this).index());
+                    });
+                }
+                else {
+                    if (slidesPerView > 1) {
+                        for (i = s.activeIndex; i < s.activeIndex + slidesPerView ; i++) {
+                            if (s.slides[i]) s.lazy.loadImageInSlide(i);
+                        }
+                    }
+                    else {
+                        s.lazy.loadImageInSlide(s.activeIndex);
+                    }
+                }
+                if (s.params.lazyLoadingInPrevNext) {
+                    if (slidesPerView > 1 || (s.params.lazyLoadingInPrevNextAmount && s.params.lazyLoadingInPrevNextAmount > 1)) {
+                        var amount = s.params.lazyLoadingInPrevNextAmount;
+                        var spv = slidesPerView;
+                        var maxIndex = Math.min(s.activeIndex + spv + Math.max(amount, spv), s.slides.length);
+                        var minIndex = Math.max(s.activeIndex - Math.max(spv, amount), 0);
+                        // Next Slides
+                        for (i = s.activeIndex + slidesPerView; i < maxIndex; i++) {
+                            if (s.slides[i]) s.lazy.loadImageInSlide(i);
+                        }
+                        // Prev Slides
+                        for (i = minIndex; i < s.activeIndex ; i++) {
+                            if (s.slides[i]) s.lazy.loadImageInSlide(i);
+                        }
+                    }
+                    else {
+                        var nextSlide = s.wrapper.children('.' + s.params.slideNextClass);
+                        if (nextSlide.length > 0) s.lazy.loadImageInSlide(nextSlide.index());
+        
+                        var prevSlide = s.wrapper.children('.' + s.params.slidePrevClass);
+                        if (prevSlide.length > 0) s.lazy.loadImageInSlide(prevSlide.index());
+                    }
+                }
+            },
+            onTransitionStart: function () {
+                if (s.params.lazyLoading) {
+                    if (s.params.lazyLoadingOnTransitionStart || (!s.params.lazyLoadingOnTransitionStart && !s.lazy.initialImageLoaded)) {
+                        s.lazy.load();
+                    }
+                }
+            },
+            onTransitionEnd: function () {
+                if (s.params.lazyLoading && !s.params.lazyLoadingOnTransitionStart) {
+                    s.lazy.load();
+                }
+            }
+        };
+        
+
+        /*=========================
+          Scrollbar
+          ===========================*/
+        s.scrollbar = {
+            isTouched: false,
+            setDragPosition: function (e) {
+                var sb = s.scrollbar;
+                var x = 0, y = 0;
+                var translate;
+                var pointerPosition = s.isHorizontal() ?
+                    ((e.type === 'touchstart' || e.type === 'touchmove') ? e.targetTouches[0].pageX : e.pageX || e.clientX) :
+                    ((e.type === 'touchstart' || e.type === 'touchmove') ? e.targetTouches[0].pageY : e.pageY || e.clientY) ;
+                var position = (pointerPosition) - sb.track.offset()[s.isHorizontal() ? 'left' : 'top'] - sb.dragSize / 2;
+                var positionMin = -s.minTranslate() * sb.moveDivider;
+                var positionMax = -s.maxTranslate() * sb.moveDivider;
+                if (position < positionMin) {
+                    position = positionMin;
+                }
+                else if (position > positionMax) {
+                    position = positionMax;
+                }
+                position = -position / sb.moveDivider;
+                s.updateProgress(position);
+                s.setWrapperTranslate(position, true);
+            },
+            dragStart: function (e) {
+                var sb = s.scrollbar;
+                sb.isTouched = true;
+                e.preventDefault();
+                e.stopPropagation();
+        
+                sb.setDragPosition(e);
+                clearTimeout(sb.dragTimeout);
+        
+                sb.track.transition(0);
+                if (s.params.scrollbarHide) {
+                    sb.track.css('opacity', 1);
+                }
+                s.wrapper.transition(100);
+                sb.drag.transition(100);
+                s.emit('onScrollbarDragStart', s);
+            },
+            dragMove: function (e) {
+                var sb = s.scrollbar;
+                if (!sb.isTouched) return;
+                if (e.preventDefault) e.preventDefault();
+                else e.returnValue = false;
+                sb.setDragPosition(e);
+                s.wrapper.transition(0);
+                sb.track.transition(0);
+                sb.drag.transition(0);
+                s.emit('onScrollbarDragMove', s);
+            },
+            dragEnd: function (e) {
+                var sb = s.scrollbar;
+                if (!sb.isTouched) return;
+                sb.isTouched = false;
+                if (s.params.scrollbarHide) {
+                    clearTimeout(sb.dragTimeout);
+                    sb.dragTimeout = setTimeout(function () {
+                        sb.track.css('opacity', 0);
+                        sb.track.transition(400);
+                    }, 1000);
+        
+                }
+                s.emit('onScrollbarDragEnd', s);
+                if (s.params.scrollbarSnapOnRelease) {
+                    s.slideReset();
+                }
+            },
+            draggableEvents: (function () {
+                if ((s.params.simulateTouch === false && !s.support.touch)) return s.touchEventsDesktop;
+                else return s.touchEvents;
+            })(),
+            enableDraggable: function () {
+                var sb = s.scrollbar;
+                var target = s.support.touch ? sb.track : document;
+                $(sb.track).on(sb.draggableEvents.start, sb.dragStart);
+                $(target).on(sb.draggableEvents.move, sb.dragMove);
+                $(target).on(sb.draggableEvents.end, sb.dragEnd);
+            },
+            disableDraggable: function () {
+                var sb = s.scrollbar;
+                var target = s.support.touch ? sb.track : document;
+                $(sb.track).off(sb.draggableEvents.start, sb.dragStart);
+                $(target).off(sb.draggableEvents.move, sb.dragMove);
+                $(target).off(sb.draggableEvents.end, sb.dragEnd);
+            },
+            set: function () {
+                if (!s.params.scrollbar) return;
+                var sb = s.scrollbar;
+                sb.track = $(s.params.scrollbar);
+                if (s.params.uniqueNavElements && typeof s.params.scrollbar === 'string' && sb.track.length > 1 && s.container.find(s.params.scrollbar).length === 1) {
+                    sb.track = s.container.find(s.params.scrollbar);
+                }
+                sb.drag = sb.track.find('.swiper-scrollbar-drag');
+                if (sb.drag.length === 0) {
+                    sb.drag = $('<div class="swiper-scrollbar-drag"></div>');
+                    sb.track.append(sb.drag);
+                }
+                sb.drag[0].style.width = '';
+                sb.drag[0].style.height = '';
+                sb.trackSize = s.isHorizontal() ? sb.track[0].offsetWidth : sb.track[0].offsetHeight;
+        
+                sb.divider = s.size / s.virtualSize;
+                sb.moveDivider = sb.divider * (sb.trackSize / s.size);
+                sb.dragSize = sb.trackSize * sb.divider;
+        
+                if (s.isHorizontal()) {
+                    sb.drag[0].style.width = sb.dragSize + 'px';
+                }
+                else {
+                    sb.drag[0].style.height = sb.dragSize + 'px';
+                }
+        
+                if (sb.divider >= 1) {
+                    sb.track[0].style.display = 'none';
+                }
+                else {
+                    sb.track[0].style.display = '';
+                }
+                if (s.params.scrollbarHide) {
+                    sb.track[0].style.opacity = 0;
+                }
+            },
+            setTranslate: function () {
+                if (!s.params.scrollbar) return;
+                var diff;
+                var sb = s.scrollbar;
+                var translate = s.translate || 0;
+                var newPos;
+        
+                var newSize = sb.dragSize;
+                newPos = (sb.trackSize - sb.dragSize) * s.progress;
+                if (s.rtl && s.isHorizontal()) {
+                    newPos = -newPos;
+                    if (newPos > 0) {
+                        newSize = sb.dragSize - newPos;
+                        newPos = 0;
+                    }
+                    else if (-newPos + sb.dragSize > sb.trackSize) {
+                        newSize = sb.trackSize + newPos;
+                    }
+                }
+                else {
+                    if (newPos < 0) {
+                        newSize = sb.dragSize + newPos;
+                        newPos = 0;
+                    }
+                    else if (newPos + sb.dragSize > sb.trackSize) {
+                        newSize = sb.trackSize - newPos;
+                    }
+                }
+                if (s.isHorizontal()) {
+                    if (s.support.transforms3d) {
+                        sb.drag.transform('translate3d(' + (newPos) + 'px, 0, 0)');
+                    }
+                    else {
+                        sb.drag.transform('translateX(' + (newPos) + 'px)');
+                    }
+                    sb.drag[0].style.width = newSize + 'px';
+                }
+                else {
+                    if (s.support.transforms3d) {
+                        sb.drag.transform('translate3d(0px, ' + (newPos) + 'px, 0)');
+                    }
+                    else {
+                        sb.drag.transform('translateY(' + (newPos) + 'px)');
+                    }
+                    sb.drag[0].style.height = newSize + 'px';
+                }
+                if (s.params.scrollbarHide) {
+                    clearTimeout(sb.timeout);
+                    sb.track[0].style.opacity = 1;
+                    sb.timeout = setTimeout(function () {
+                        sb.track[0].style.opacity = 0;
+                        sb.track.transition(400);
+                    }, 1000);
+                }
+            },
+            setTransition: function (duration) {
+                if (!s.params.scrollbar) return;
+                s.scrollbar.drag.transition(duration);
+            }
+        };
+        
+
+        /*=========================
+          Controller
+          ===========================*/
+        s.controller = {
+            LinearSpline: function (x, y) {
+                var binarySearch = (function() {
+                    var maxIndex, minIndex, guess;
+                    return function(array, val) {
+                        minIndex = -1;
+                        maxIndex = array.length;
+                        while (maxIndex - minIndex > 1)
+                            if (array[guess = maxIndex + minIndex >> 1] <= val) {
+                                minIndex = guess;
+                            } else {
+                                maxIndex = guess;
+                            }
+                        return maxIndex;
+                    };
+                })();
+                this.x = x;
+                this.y = y;
+                this.lastIndex = x.length - 1;
+                // Given an x value (x2), return the expected y2 value:
+                // (x1,y1) is the known point before given value,
+                // (x3,y3) is the known point after given value.
+                var i1, i3;
+                var l = this.x.length;
+        
+                this.interpolate = function (x2) {
+                    if (!x2) return 0;
+        
+                    // Get the indexes of x1 and x3 (the array indexes before and after given x2):
+                    i3 = binarySearch(this.x, x2);
+                    i1 = i3 - 1;
+        
+                    // We have our indexes i1 & i3, so we can calculate already:
+                    // y2 := ((x2−x1) × (y3−y1)) ÷ (x3−x1) + y1
+                    return ((x2 - this.x[i1]) * (this.y[i3] - this.y[i1])) / (this.x[i3] - this.x[i1]) + this.y[i1];
+                };
+            },
+            //xxx: for now i will just save one spline function to to
+            getInterpolateFunction: function(c){
+                if(!s.controller.spline) s.controller.spline = s.params.loop ?
+                    new s.controller.LinearSpline(s.slidesGrid, c.slidesGrid) :
+                    new s.controller.LinearSpline(s.snapGrid, c.snapGrid);
+            },
+            setTranslate: function (translate, byController) {
+               var controlled = s.params.control;
+               var multiplier, controlledTranslate;
+               function setControlledTranslate(c) {
+                    // this will create an Interpolate function based on the snapGrids
+                    // x is the Grid of the scrolled scroller and y will be the controlled scroller
+                    // it makes sense to create this only once and recall it for the interpolation
+                    // the function does a lot of value caching for performance
+                    translate = c.rtl && c.params.direction === 'horizontal' ? -s.translate : s.translate;
+                    if (s.params.controlBy === 'slide') {
+                        s.controller.getInterpolateFunction(c);
+                        // i am not sure why the values have to be multiplicated this way, tried to invert the snapGrid
+                        // but it did not work out
+                        controlledTranslate = -s.controller.spline.interpolate(-translate);
+                    }
+        
+                    if(!controlledTranslate || s.params.controlBy === 'container'){
+                        multiplier = (c.maxTranslate() - c.minTranslate()) / (s.maxTranslate() - s.minTranslate());
+                        controlledTranslate = (translate - s.minTranslate()) * multiplier + c.minTranslate();
+                    }
+        
+                    if (s.params.controlInverse) {
+                        controlledTranslate = c.maxTranslate() - controlledTranslate;
+                    }
+                    c.updateProgress(controlledTranslate);
+                    c.setWrapperTranslate(controlledTranslate, false, s);
+                    c.updateActiveIndex();
+               }
+               if (Array.isArray(controlled)) {
+                   for (var i = 0; i < controlled.length; i++) {
+                       if (controlled[i] !== byController && controlled[i] instanceof Swiper) {
+                           setControlledTranslate(controlled[i]);
+                       }
+                   }
+               }
+               else if (controlled instanceof Swiper && byController !== controlled) {
+        
+                   setControlledTranslate(controlled);
+               }
+            },
+            setTransition: function (duration, byController) {
+                var controlled = s.params.control;
+                var i;
+                function setControlledTransition(c) {
+                    c.setWrapperTransition(duration, s);
+                    if (duration !== 0) {
+                        c.onTransitionStart();
+                        c.wrapper.transitionEnd(function(){
+                            if (!controlled) return;
+                            if (c.params.loop && s.params.controlBy === 'slide') {
+                                c.fixLoop();
+                            }
+                            c.onTransitionEnd();
+        
+                        });
+                    }
+                }
+                if (Array.isArray(controlled)) {
+                    for (i = 0; i < controlled.length; i++) {
+                        if (controlled[i] !== byController && controlled[i] instanceof Swiper) {
+                            setControlledTransition(controlled[i]);
+                        }
+                    }
+                }
+                else if (controlled instanceof Swiper && byController !== controlled) {
+                    setControlledTransition(controlled);
+                }
+            }
+        };
+        
+
+        /*=========================
+          Hash Navigation
+          ===========================*/
+        s.hashnav = {
+            onHashCange: function (e, a) {
+                var newHash = document.location.hash.replace('#', '');
+                var activeSlideHash = s.slides.eq(s.activeIndex).attr('data-hash');
+                if (newHash !== activeSlideHash) {
+                    s.slideTo(s.wrapper.children('.' + s.params.slideClass + '[data-hash="' + (newHash) + '"]').index());
+                }
+            },
+            attachEvents: function (detach) {
+                var action = detach ? 'off' : 'on';
+                $(window)[action]('hashchange', s.hashnav.onHashCange);
+            },
+            setHash: function () {
+                if (!s.hashnav.initialized || !s.params.hashnav) return;
+                if (s.params.replaceState && window.history && window.history.replaceState) {
+                    window.history.replaceState(null, null, ('#' + s.slides.eq(s.activeIndex).attr('data-hash') || ''));
+                } else {
+                    var slide = s.slides.eq(s.activeIndex);
+                    var hash = slide.attr('data-hash') || slide.attr('data-history');
+                    document.location.hash = hash || '';
+                }
+            },
+            init: function () {
+                if (!s.params.hashnav || s.params.history) return;
+                s.hashnav.initialized = true;
+                var hash = document.location.hash.replace('#', '');
+                if (hash) {
+                    var speed = 0;
+                    for (var i = 0, length = s.slides.length; i < length; i++) {
+                        var slide = s.slides.eq(i);
+                        var slideHash = slide.attr('data-hash') || slide.attr('data-history');
+                        if (slideHash === hash && !slide.hasClass(s.params.slideDuplicateClass)) {
+                            var index = slide.index();
+                            s.slideTo(index, speed, s.params.runCallbacksOnInit, true);
+                        }
+                    }
+                }
+                if (s.params.hashnavWatchState) s.hashnav.attachEvents();
+            },
+            destroy: function () {
+                if (s.params.hashnavWatchState) s.hashnav.attachEvents(true);
+            }
+        };
+        
+
+        /*=========================
+          History Api with fallback to Hashnav
+          ===========================*/
+        s.history = {
+            init: function () {
+                if (!s.params.history) return;
+                if (!window.history || !window.history.pushState) {
+                    s.params.history = false;
+                    s.params.hashnav = true;
+                    return;
+                }
+                s.history.initialized = true;
+                this.paths = this.getPathValues();
+                if (!this.paths.key && !this.paths.value) return;
+                this.scrollToSlide(0, this.paths.value, s.params.runCallbacksOnInit);
+                if (!s.params.replaceState) {
+                    window.addEventListener('popstate', this.setHistoryPopState);
+                }
+            },
+            setHistoryPopState: function() {
+                s.history.paths = s.history.getPathValues();
+                s.history.scrollToSlide(s.params.speed, s.history.paths.value, false);
+            },
+            getPathValues: function() {
+                var pathArray = window.location.pathname.slice(1).split('/');
+                var total = pathArray.length;
+                var key = pathArray[total - 2];
+                var value = pathArray[total - 1];
+                return { key: key, value: value };
+            },
+            setHistory: function (key, index) {
+                if (!s.history.initialized || !s.params.history) return;
+                var slide = s.slides.eq(index);
+                var value = this.slugify(slide.attr('data-history'));
+                if (!window.location.pathname.includes(key)) {
+                    value = key + '/' + value;
+                }
+                if (s.params.replaceState) {
+                    window.history.replaceState(null, null, value);
+                } else {
+                    window.history.pushState(null, null, value);
+                }
+            },
+            slugify: function(text) {
+                return text.toString().toLowerCase()
+                    .replace(/\s+/g, '-')
+                    .replace(/[^\w\-]+/g, '')
+                    .replace(/\-\-+/g, '-')
+                    .replace(/^-+/, '')
+                    .replace(/-+$/, '');
+            },
+            scrollToSlide: function(speed, value, runCallbacks) {
+                if (value) {
+                    for (var i = 0, length = s.slides.length; i < length; i++) {
+                        var slide = s.slides.eq(i);
+                        var slideHistory = this.slugify(slide.attr('data-history'));
+                        if (slideHistory === value && !slide.hasClass(s.params.slideDuplicateClass)) {
+                            var index = slide.index();
+                            s.slideTo(index, speed, runCallbacks);
+                        }
+                    }
+                } else {
+                    s.slideTo(0, speed, runCallbacks);
+                }
+            }
+        };
+        
+
+        /*=========================
+          Keyboard Control
+          ===========================*/
+        function handleKeyboard(e) {
+            if (e.originalEvent) e = e.originalEvent; //jquery fix
+            var kc = e.keyCode || e.charCode;
+            // Directions locks
+            if (!s.params.allowSwipeToNext && (s.isHorizontal() && kc === 39 || !s.isHorizontal() && kc === 40)) {
+                return false;
+            }
+            if (!s.params.allowSwipeToPrev && (s.isHorizontal() && kc === 37 || !s.isHorizontal() && kc === 38)) {
+                return false;
+            }
+            if (e.shiftKey || e.altKey || e.ctrlKey || e.metaKey) {
+                return;
+            }
+            if (document.activeElement && document.activeElement.nodeName && (document.activeElement.nodeName.toLowerCase() === 'input' || document.activeElement.nodeName.toLowerCase() === 'textarea')) {
+                return;
+            }
+            if (kc === 37 || kc === 39 || kc === 38 || kc === 40) {
+                var inView = false;
+                //Check that swiper should be inside of visible area of window
+                if (s.container.parents('.' + s.params.slideClass).length > 0 && s.container.parents('.' + s.params.slideActiveClass).length === 0) {
+                    return;
+                }
+                var windowScroll = {
+                    left: window.pageXOffset,
+                    top: window.pageYOffset
+                };
+                var windowWidth = window.innerWidth;
+                var windowHeight = window.innerHeight;
+                var swiperOffset = s.container.offset();
+                if (s.rtl) swiperOffset.left = swiperOffset.left - s.container[0].scrollLeft;
+                var swiperCoord = [
+                    [swiperOffset.left, swiperOffset.top],
+                    [swiperOffset.left + s.width, swiperOffset.top],
+                    [swiperOffset.left, swiperOffset.top + s.height],
+                    [swiperOffset.left + s.width, swiperOffset.top + s.height]
+                ];
+                for (var i = 0; i < swiperCoord.length; i++) {
+                    var point = swiperCoord[i];
+                    if (
+                        point[0] >= windowScroll.left && point[0] <= windowScroll.left + windowWidth &&
+                        point[1] >= windowScroll.top && point[1] <= windowScroll.top + windowHeight
+                    ) {
+                        inView = true;
+                    }
+        
+                }
+                if (!inView) return;
+            }
+            if (s.isHorizontal()) {
+                if (kc === 37 || kc === 39) {
+                    if (e.preventDefault) e.preventDefault();
+                    else e.returnValue = false;
+                }
+                if ((kc === 39 && !s.rtl) || (kc === 37 && s.rtl)) s.slideNext();
+                if ((kc === 37 && !s.rtl) || (kc === 39 && s.rtl)) s.slidePrev();
+            }
+            else {
+                if (kc === 38 || kc === 40) {
+                    if (e.preventDefault) e.preventDefault();
+                    else e.returnValue = false;
+                }
+                if (kc === 40) s.slideNext();
+                if (kc === 38) s.slidePrev();
+            }
+            s.emit('onKeyPress', s, kc);
+        }
+        s.disableKeyboardControl = function () {
+            s.params.keyboardControl = false;
+            $(document).off('keydown', handleKeyboard);
+        };
+        s.enableKeyboardControl = function () {
+            s.params.keyboardControl = true;
+            $(document).on('keydown', handleKeyboard);
+        };
+        
+
+        /*=========================
+          Mousewheel Control
+          ===========================*/
+        s.mousewheel = {
+            event: false,
+            lastScrollTime: (new window.Date()).getTime()
+        };
+        function isEventSupported() {
+            var eventName = 'onwheel';
+            var isSupported = eventName in document;
+        
+            if (!isSupported) {
+                var element = document.createElement('div');
+                element.setAttribute(eventName, 'return;');
+                isSupported = typeof element[eventName] === 'function';
+            }
+        
+            if (!isSupported &&
+                document.implementation &&
+                document.implementation.hasFeature &&
+                    // always returns true in newer browsers as per the standard.
+                    // @see http://dom.spec.whatwg.org/#dom-domimplementation-hasfeature
+                document.implementation.hasFeature('', '') !== true ) {
+                // This is the only way to test support for the `wheel` event in IE9+.
+                isSupported = document.implementation.hasFeature('Events.wheel', '3.0');
+            }
+        
+            return isSupported;
+        }
+        /**
+         * Mouse wheel (and 2-finger trackpad) support on the web sucks.  It is
+         * complicated, thus this doc is long and (hopefully) detailed enough to answer
+         * your questions.
+         *
+         * If you need to react to the mouse wheel in a predictable way, this code is
+         * like your bestest friend. * hugs *
+         *
+         * As of today, there are 4 DOM event types you can listen to:
+         *
+         *   'wheel'                -- Chrome(31+), FF(17+), IE(9+)
+         *   'mousewheel'           -- Chrome, IE(6+), Opera, Safari
+         *   'MozMousePixelScroll'  -- FF(3.5 only!) (2010-2013) -- don't bother!
+         *   'DOMMouseScroll'       -- FF(0.9.7+) since 2003
+         *
+         * So what to do?  The is the best:
+         *
+         *   normalizeWheel.getEventType();
+         *
+         * In your event callback, use this code to get sane interpretation of the
+         * deltas.  This code will return an object with properties:
+         *
+         *   spinX   -- normalized spin speed (use for zoom) - x plane
+         *   spinY   -- " - y plane
+         *   pixelX  -- normalized distance (to pixels) - x plane
+         *   pixelY  -- " - y plane
+         *
+         * Wheel values are provided by the browser assuming you are using the wheel to
+         * scroll a web page by a number of lines or pixels (or pages).  Values can vary
+         * significantly on different platforms and browsers, forgetting that you can
+         * scroll at different speeds.  Some devices (like trackpads) emit more events
+         * at smaller increments with fine granularity, and some emit massive jumps with
+         * linear speed or acceleration.
+         *
+         * This code does its best to normalize the deltas for you:
+         *
+         *   - spin is trying to normalize how far the wheel was spun (or trackpad
+         *     dragged).  This is super useful for zoom support where you want to
+         *     throw away the chunky scroll steps on the PC and make those equal to
+         *     the slow and smooth tiny steps on the Mac. Key data: This code tries to
+         *     resolve a single slow step on a wheel to 1.
+         *
+         *   - pixel is normalizing the desired scroll delta in pixel units.  You'll
+         *     get the crazy differences between browsers, but at least it'll be in
+         *     pixels!
+         *
+         *   - positive value indicates scrolling DOWN/RIGHT, negative UP/LEFT.  This
+         *     should translate to positive value zooming IN, negative zooming OUT.
+         *     This matches the newer 'wheel' event.
+         *
+         * Why are there spinX, spinY (or pixels)?
+         *
+         *   - spinX is a 2-finger side drag on the trackpad, and a shift + wheel turn
+         *     with a mouse.  It results in side-scrolling in the browser by default.
+         *
+         *   - spinY is what you expect -- it's the classic axis of a mouse wheel.
+         *
+         *   - I dropped spinZ/pixelZ.  It is supported by the DOM 3 'wheel' event and
+         *     probably is by browsers in conjunction with fancy 3D controllers .. but
+         *     you know.
+         *
+         * Implementation info:
+         *
+         * Examples of 'wheel' event if you scroll slowly (down) by one step with an
+         * average mouse:
+         *
+         *   OS X + Chrome  (mouse)     -    4   pixel delta  (wheelDelta -120)
+         *   OS X + Safari  (mouse)     -  N/A   pixel delta  (wheelDelta  -12)
+         *   OS X + Firefox (mouse)     -    0.1 line  delta  (wheelDelta  N/A)
+         *   Win8 + Chrome  (mouse)     -  100   pixel delta  (wheelDelta -120)
+         *   Win8 + Firefox (mouse)     -    3   line  delta  (wheelDelta -120)
+         *
+         * On the trackpad:
+         *
+         *   OS X + Chrome  (trackpad)  -    2   pixel delta  (wheelDelta   -6)
+         *   OS X + Firefox (trackpad)  -    1   pixel delta  (wheelDelta  N/A)
+         *
+         * On other/older browsers.. it's more complicated as there can be multiple and
+         * also missing delta values.
+         *
+         * The 'wheel' event is more standard:
+         *
+         * http://www.w3.org/TR/DOM-Level-3-Events/#events-wheelevents
+         *
+         * The basics is that it includes a unit, deltaMode (pixels, lines, pages), and
+         * deltaX, deltaY and deltaZ.  Some browsers provide other values to maintain
+         * backward compatibility with older events.  Those other values help us
+         * better normalize spin speed.  Example of what the browsers provide:
+         *
+         *                          | event.wheelDelta | event.detail
+         *        ------------------+------------------+--------------
+         *          Safari v5/OS X  |       -120       |       0
+         *          Safari v5/Win7  |       -120       |       0
+         *         Chrome v17/OS X  |       -120       |       0
+         *         Chrome v17/Win7  |       -120       |       0
+         *                IE9/Win7  |       -120       |   undefined
+         *         Firefox v4/OS X  |     undefined    |       1
+         *         Firefox v4/Win7  |     undefined    |       3
+         *
+         */
+        function normalizeWheel( /*object*/ event ) /*object*/ {
+            // Reasonable defaults
+            var PIXEL_STEP = 10;
+            var LINE_HEIGHT = 40;
+            var PAGE_HEIGHT = 800;
+        
+            var sX = 0, sY = 0,       // spinX, spinY
+                pX = 0, pY = 0;       // pixelX, pixelY
+        
+            // Legacy
+            if( 'detail' in event ) {
+                sY = event.detail;
+            }
+            if( 'wheelDelta' in event ) {
+                sY = -event.wheelDelta / 120;
+            }
+            if( 'wheelDeltaY' in event ) {
+                sY = -event.wheelDeltaY / 120;
+            }
+            if( 'wheelDeltaX' in event ) {
+                sX = -event.wheelDeltaX / 120;
+            }
+        
+            // side scrolling on FF with DOMMouseScroll
+            if( 'axis' in event && event.axis === event.HORIZONTAL_AXIS ) {
+                sX = sY;
+                sY = 0;
+            }
+        
+            pX = sX * PIXEL_STEP;
+            pY = sY * PIXEL_STEP;
+        
+            if( 'deltaY' in event ) {
+                pY = event.deltaY;
+            }
+            if( 'deltaX' in event ) {
+                pX = event.deltaX;
+            }
+        
+            if( (pX || pY) && event.deltaMode ) {
+                if( event.deltaMode === 1 ) {          // delta in LINE units
+                    pX *= LINE_HEIGHT;
+                    pY *= LINE_HEIGHT;
+                } else {                             // delta in PAGE units
+                    pX *= PAGE_HEIGHT;
+                    pY *= PAGE_HEIGHT;
+                }
+            }
+        
+            // Fall-back if spin cannot be determined
+            if( pX && !sX ) {
+                sX = (pX < 1) ? -1 : 1;
+            }
+            if( pY && !sY ) {
+                sY = (pY < 1) ? -1 : 1;
+            }
+        
+            return {
+                spinX: sX,
+                spinY: sY,
+                pixelX: pX,
+                pixelY: pY
+            };
+        }
+        if (s.params.mousewheelControl) {
+            /**
+             * The best combination if you prefer spinX + spinY normalization.  It favors
+             * the older DOMMouseScroll for Firefox, as FF does not include wheelDelta with
+             * 'wheel' event, making spin speed determination impossible.
+             */
+            s.mousewheel.event = (navigator.userAgent.indexOf('firefox') > -1) ?
+                'DOMMouseScroll' :
+                isEventSupported() ?
+                    'wheel' : 'mousewheel';
+        }
+        function handleMousewheel(e) {
+            if (e.originalEvent) e = e.originalEvent; //jquery fix
+            var delta = 0;
+            var rtlFactor = s.rtl ? -1 : 1;
+        
+            var data = normalizeWheel( e );
+        
+            if (s.params.mousewheelForceToAxis) {
+                if (s.isHorizontal()) {
+                    if (Math.abs(data.pixelX) > Math.abs(data.pixelY)) delta = data.pixelX * rtlFactor;
+                    else return;
+                }
+                else {
+                    if (Math.abs(data.pixelY) > Math.abs(data.pixelX)) delta = data.pixelY;
+                    else return;
+                }
+            }
+            else {
+                delta = Math.abs(data.pixelX) > Math.abs(data.pixelY) ? - data.pixelX * rtlFactor : - data.pixelY;
+            }
+        
+            if (delta === 0) return;
+        
+            if (s.params.mousewheelInvert) delta = -delta;
+        
+            if (!s.params.freeMode) {
+                if ((new window.Date()).getTime() - s.mousewheel.lastScrollTime > 60) {
+                    if (delta < 0) {
+                        if ((!s.isEnd || s.params.loop) && !s.animating) {
+                            s.slideNext();
+                            s.emit('onScroll', s, e);
+                        }
+                        else if (s.params.mousewheelReleaseOnEdges) return true;
+                    }
+                    else {
+                        if ((!s.isBeginning || s.params.loop) && !s.animating) {
+                            s.slidePrev();
+                            s.emit('onScroll', s, e);
+                        }
+                        else if (s.params.mousewheelReleaseOnEdges) return true;
+                    }
+                }
+                s.mousewheel.lastScrollTime = (new window.Date()).getTime();
+        
+            }
+            else {
+                //Freemode or scrollContainer:
+                var position = s.getWrapperTranslate() + delta * s.params.mousewheelSensitivity;
+                var wasBeginning = s.isBeginning,
+                    wasEnd = s.isEnd;
+        
+                if (position >= s.minTranslate()) position = s.minTranslate();
+                if (position <= s.maxTranslate()) position = s.maxTranslate();
+        
+                s.setWrapperTransition(0);
+                s.setWrapperTranslate(position);
+                s.updateProgress();
+                s.updateActiveIndex();
+        
+                if (!wasBeginning && s.isBeginning || !wasEnd && s.isEnd) {
+                    s.updateClasses();
+                }
+        
+                if (s.params.freeModeSticky) {
+                    clearTimeout(s.mousewheel.timeout);
+                    s.mousewheel.timeout = setTimeout(function () {
+                        s.slideReset();
+                    }, 300);
+                }
+                else {
+                    if (s.params.lazyLoading && s.lazy) {
+                        s.lazy.load();
+                    }
+                }
+                // Emit event
+                s.emit('onScroll', s, e);
+        
+                // Stop autoplay
+                if (s.params.autoplay && s.params.autoplayDisableOnInteraction) s.stopAutoplay();
+        
+                // Return page scroll on edge positions
+                if (position === 0 || position === s.maxTranslate()) return;
+            }
+        
+            if (e.preventDefault) e.preventDefault();
+            else e.returnValue = false;
+            return false;
+        }
+        s.disableMousewheelControl = function () {
+            if (!s.mousewheel.event) return false;
+            var target = s.container;
+            if (s.params.mousewheelEventsTarged !== 'container') {
+                target = $(s.params.mousewheelEventsTarged);
+            }
+            target.off(s.mousewheel.event, handleMousewheel);
+            s.params.mousewheelControl = false;
+            return true;
+        };
+        
+        s.enableMousewheelControl = function () {
+            if (!s.mousewheel.event) return false;
+            var target = s.container;
+            if (s.params.mousewheelEventsTarged !== 'container') {
+                target = $(s.params.mousewheelEventsTarged);
+            }
+            target.on(s.mousewheel.event, handleMousewheel);
+            s.params.mousewheelControl = true;
+            return true;
+        };
+        
+
+        /*=========================
+          Parallax
+          ===========================*/
+        function setParallaxTransform(el, progress) {
+            el = $(el);
+            var p, pX, pY;
+            var rtlFactor = s.rtl ? -1 : 1;
+        
+            p = el.attr('data-swiper-parallax') || '0';
+            pX = el.attr('data-swiper-parallax-x');
+            pY = el.attr('data-swiper-parallax-y');
+            if (pX || pY) {
+                pX = pX || '0';
+                pY = pY || '0';
+            }
+            else {
+                if (s.isHorizontal()) {
+                    pX = p;
+                    pY = '0';
+                }
+                else {
+                    pY = p;
+                    pX = '0';
+                }
+            }
+        
+            if ((pX).indexOf('%') >= 0) {
+                pX = parseInt(pX, 10) * progress * rtlFactor + '%';
+            }
+            else {
+                pX = pX * progress * rtlFactor + 'px' ;
+            }
+            if ((pY).indexOf('%') >= 0) {
+                pY = parseInt(pY, 10) * progress + '%';
+            }
+            else {
+                pY = pY * progress + 'px' ;
+            }
+        
+            el.transform('translate3d(' + pX + ', ' + pY + ',0px)');
+        }
+        s.parallax = {
+            setTranslate: function () {
+                s.container.children('[data-swiper-parallax], [data-swiper-parallax-x], [data-swiper-parallax-y]').each(function(){
+                    setParallaxTransform(this, s.progress);
+        
+                });
+                s.slides.each(function () {
+                    var slide = $(this);
+                    slide.find('[data-swiper-parallax], [data-swiper-parallax-x], [data-swiper-parallax-y]').each(function () {
+                        var progress = Math.min(Math.max(slide[0].progress, -1), 1);
+                        setParallaxTransform(this, progress);
+                    });
+                });
+            },
+            setTransition: function (duration) {
+                if (typeof duration === 'undefined') duration = s.params.speed;
+                s.container.find('[data-swiper-parallax], [data-swiper-parallax-x], [data-swiper-parallax-y]').each(function(){
+                    var el = $(this);
+                    var parallaxDuration = parseInt(el.attr('data-swiper-parallax-duration'), 10) || duration;
+                    if (duration === 0) parallaxDuration = 0;
+                    el.transition(parallaxDuration);
+                });
+            }
+        };
+        
+
+        /*=========================
+          Zoom
+          ===========================*/
+        s.zoom = {
+            // "Global" Props
+            scale: 1,
+            currentScale: 1,
+            isScaling: false,
+            gesture: {
+                slide: undefined,
+                slideWidth: undefined,
+                slideHeight: undefined,
+                image: undefined,
+                imageWrap: undefined,
+                zoomMax: s.params.zoomMax
+            },
+            image: {
+                isTouched: undefined,
+                isMoved: undefined,
+                currentX: undefined,
+                currentY: undefined,
+                minX: undefined,
+                minY: undefined,
+                maxX: undefined,
+                maxY: undefined,
+                width: undefined,
+                height: undefined,
+                startX: undefined,
+                startY: undefined,
+                touchesStart: {},
+                touchesCurrent: {}
+            },
+            velocity: {
+                x: undefined,
+                y: undefined,
+                prevPositionX: undefined,
+                prevPositionY: undefined,
+                prevTime: undefined
+            },
+            // Calc Scale From Multi-touches
+            getDistanceBetweenTouches: function (e) {
+                if (e.targetTouches.length < 2) return 1;
+                var x1 = e.targetTouches[0].pageX,
+                    y1 = e.targetTouches[0].pageY,
+                    x2 = e.targetTouches[1].pageX,
+                    y2 = e.targetTouches[1].pageY;
+                var distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                return distance;
+            },
+            // Events
+            onGestureStart: function (e) {
+                var z = s.zoom;
+                if (!s.support.gestures) {
+                    if (e.type !== 'touchstart' || e.type === 'touchstart' && e.targetTouches.length < 2) {
+                        return;
+                    }
+                    z.gesture.scaleStart = z.getDistanceBetweenTouches(e);
+                }
+                if (!z.gesture.slide || !z.gesture.slide.length) {
+                    z.gesture.slide = $(this);
+                    if (z.gesture.slide.length === 0) z.gesture.slide = s.slides.eq(s.activeIndex);
+                    z.gesture.image = z.gesture.slide.find('img, svg, canvas');
+                    z.gesture.imageWrap = z.gesture.image.parent('.' + s.params.zoomContainerClass);
+                    z.gesture.zoomMax = z.gesture.imageWrap.attr('data-swiper-zoom') || s.params.zoomMax ;
+                    if (z.gesture.imageWrap.length === 0) {
+                        z.gesture.image = undefined;
+                        return;
+                    }
+                }
+                z.gesture.image.transition(0);
+                z.isScaling = true;
+            },
+            onGestureChange: function (e) {
+                var z = s.zoom;
+                if (!s.support.gestures) {
+                    if (e.type !== 'touchmove' || e.type === 'touchmove' && e.targetTouches.length < 2) {
+                        return;
+                    }
+                    z.gesture.scaleMove = z.getDistanceBetweenTouches(e);
+                }
+                if (!z.gesture.image || z.gesture.image.length === 0) return;
+                if (s.support.gestures) {
+                    z.scale = e.scale * z.currentScale;
+                }
+                else {
+                    z.scale = (z.gesture.scaleMove / z.gesture.scaleStart) * z.currentScale;
+                }
+                if (z.scale > z.gesture.zoomMax) {
+                    z.scale = z.gesture.zoomMax - 1 + Math.pow((z.scale - z.gesture.zoomMax + 1), 0.5);
+                }
+                if (z.scale < s.params.zoomMin) {
+                    z.scale =  s.params.zoomMin + 1 - Math.pow((s.params.zoomMin - z.scale + 1), 0.5);
+                }
+                z.gesture.image.transform('translate3d(0,0,0) scale(' + z.scale + ')');
+            },
+            onGestureEnd: function (e) {
+                var z = s.zoom;
+                if (!s.support.gestures) {
+                    if (e.type !== 'touchend' || e.type === 'touchend' && e.changedTouches.length < 2) {
+                        return;
+                    }
+                }
+                if (!z.gesture.image || z.gesture.image.length === 0) return;
+                z.scale = Math.max(Math.min(z.scale, z.gesture.zoomMax), s.params.zoomMin);
+                z.gesture.image.transition(s.params.speed).transform('translate3d(0,0,0) scale(' + z.scale + ')');
+                z.currentScale = z.scale;
+                z.isScaling = false;
+                if (z.scale === 1) z.gesture.slide = undefined;
+            },
+            onTouchStart: function (s, e) {
+                var z = s.zoom;
+                if (!z.gesture.image || z.gesture.image.length === 0) return;
+                if (z.image.isTouched) return;
+                if (s.device.os === 'android') e.preventDefault();
+                z.image.isTouched = true;
+                z.image.touchesStart.x = e.type === 'touchstart' ? e.targetTouches[0].pageX : e.pageX;
+                z.image.touchesStart.y = e.type === 'touchstart' ? e.targetTouches[0].pageY : e.pageY;
+            },
+            onTouchMove: function (e) {
+                var z = s.zoom;
+                if (!z.gesture.image || z.gesture.image.length === 0) return;
+                s.allowClick = false;
+                if (!z.image.isTouched || !z.gesture.slide) return;
+        
+                if (!z.image.isMoved) {
+                    z.image.width = z.gesture.image[0].offsetWidth;
+                    z.image.height = z.gesture.image[0].offsetHeight;
+                    z.image.startX = s.getTranslate(z.gesture.imageWrap[0], 'x') || 0;
+                    z.image.startY = s.getTranslate(z.gesture.imageWrap[0], 'y') || 0;
+                    z.gesture.slideWidth = z.gesture.slide[0].offsetWidth;
+                    z.gesture.slideHeight = z.gesture.slide[0].offsetHeight;
+                    z.gesture.imageWrap.transition(0);
+                    if (s.rtl) z.image.startX = -z.image.startX;
+                    if (s.rtl) z.image.startY = -z.image.startY;
+                }
+                // Define if we need image drag
+                var scaledWidth = z.image.width * z.scale;
+                var scaledHeight = z.image.height * z.scale;
+        
+                if (scaledWidth < z.gesture.slideWidth && scaledHeight < z.gesture.slideHeight) return;
+        
+                z.image.minX = Math.min((z.gesture.slideWidth / 2 - scaledWidth / 2), 0);
+                z.image.maxX = -z.image.minX;
+                z.image.minY = Math.min((z.gesture.slideHeight / 2 - scaledHeight / 2), 0);
+                z.image.maxY = -z.image.minY;
+        
+                z.image.touchesCurrent.x = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
+                z.image.touchesCurrent.y = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
+        
+                if (!z.image.isMoved && !z.isScaling) {
+                    if (s.isHorizontal() &&
+                        (Math.floor(z.image.minX) === Math.floor(z.image.startX) && z.image.touchesCurrent.x < z.image.touchesStart.x) ||
+                        (Math.floor(z.image.maxX) === Math.floor(z.image.startX) && z.image.touchesCurrent.x > z.image.touchesStart.x)
+                        ) {
+                        z.image.isTouched = false;
+                        return;
+                    }
+                    else if (!s.isHorizontal() &&
+                        (Math.floor(z.image.minY) === Math.floor(z.image.startY) && z.image.touchesCurrent.y < z.image.touchesStart.y) ||
+                        (Math.floor(z.image.maxY) === Math.floor(z.image.startY) && z.image.touchesCurrent.y > z.image.touchesStart.y)
+                        ) {
+                        z.image.isTouched = false;
+                        return;
+                    }
+                }
+                e.preventDefault();
+                e.stopPropagation();
+        
+                z.image.isMoved = true;
+                z.image.currentX = z.image.touchesCurrent.x - z.image.touchesStart.x + z.image.startX;
+                z.image.currentY = z.image.touchesCurrent.y - z.image.touchesStart.y + z.image.startY;
+        
+                if (z.image.currentX < z.image.minX) {
+                    z.image.currentX =  z.image.minX + 1 - Math.pow((z.image.minX - z.image.currentX + 1), 0.8);
+                }
+                if (z.image.currentX > z.image.maxX) {
+                    z.image.currentX = z.image.maxX - 1 + Math.pow((z.image.currentX - z.image.maxX + 1), 0.8);
+                }
+        
+                if (z.image.currentY < z.image.minY) {
+                    z.image.currentY =  z.image.minY + 1 - Math.pow((z.image.minY - z.image.currentY + 1), 0.8);
+                }
+                if (z.image.currentY > z.image.maxY) {
+                    z.image.currentY = z.image.maxY - 1 + Math.pow((z.image.currentY - z.image.maxY + 1), 0.8);
+                }
+        
+                //Velocity
+                if (!z.velocity.prevPositionX) z.velocity.prevPositionX = z.image.touchesCurrent.x;
+                if (!z.velocity.prevPositionY) z.velocity.prevPositionY = z.image.touchesCurrent.y;
+                if (!z.velocity.prevTime) z.velocity.prevTime = Date.now();
+                z.velocity.x = (z.image.touchesCurrent.x - z.velocity.prevPositionX) / (Date.now() - z.velocity.prevTime) / 2;
+                z.velocity.y = (z.image.touchesCurrent.y - z.velocity.prevPositionY) / (Date.now() - z.velocity.prevTime) / 2;
+                if (Math.abs(z.image.touchesCurrent.x - z.velocity.prevPositionX) < 2) z.velocity.x = 0;
+                if (Math.abs(z.image.touchesCurrent.y - z.velocity.prevPositionY) < 2) z.velocity.y = 0;
+                z.velocity.prevPositionX = z.image.touchesCurrent.x;
+                z.velocity.prevPositionY = z.image.touchesCurrent.y;
+                z.velocity.prevTime = Date.now();
+        
+                z.gesture.imageWrap.transform('translate3d(' + z.image.currentX + 'px, ' + z.image.currentY + 'px,0)');
+            },
+            onTouchEnd: function (s, e) {
+                var z = s.zoom;
+                if (!z.gesture.image || z.gesture.image.length === 0) return;
+                if (!z.image.isTouched || !z.image.isMoved) {
+                    z.image.isTouched = false;
+                    z.image.isMoved = false;
+                    return;
+                }
+                z.image.isTouched = false;
+                z.image.isMoved = false;
+                var momentumDurationX = 300;
+                var momentumDurationY = 300;
+                var momentumDistanceX = z.velocity.x * momentumDurationX;
+                var newPositionX = z.image.currentX + momentumDistanceX;
+                var momentumDistanceY = z.velocity.y * momentumDurationY;
+                var newPositionY = z.image.currentY + momentumDistanceY;
+        
+                //Fix duration
+                if (z.velocity.x !== 0) momentumDurationX = Math.abs((newPositionX - z.image.currentX) / z.velocity.x);
+                if (z.velocity.y !== 0) momentumDurationY = Math.abs((newPositionY - z.image.currentY) / z.velocity.y);
+                var momentumDuration = Math.max(momentumDurationX, momentumDurationY);
+        
+                z.image.currentX = newPositionX;
+                z.image.currentY = newPositionY;
+        
+                // Define if we need image drag
+                var scaledWidth = z.image.width * z.scale;
+                var scaledHeight = z.image.height * z.scale;
+                z.image.minX = Math.min((z.gesture.slideWidth / 2 - scaledWidth / 2), 0);
+                z.image.maxX = -z.image.minX;
+                z.image.minY = Math.min((z.gesture.slideHeight / 2 - scaledHeight / 2), 0);
+                z.image.maxY = -z.image.minY;
+                z.image.currentX = Math.max(Math.min(z.image.currentX, z.image.maxX), z.image.minX);
+                z.image.currentY = Math.max(Math.min(z.image.currentY, z.image.maxY), z.image.minY);
+        
+                z.gesture.imageWrap.transition(momentumDuration).transform('translate3d(' + z.image.currentX + 'px, ' + z.image.currentY + 'px,0)');
+            },
+            onTransitionEnd: function (s) {
+                var z = s.zoom;
+                if (z.gesture.slide && s.previousIndex !== s.activeIndex) {
+                    z.gesture.image.transform('translate3d(0,0,0) scale(1)');
+                    z.gesture.imageWrap.transform('translate3d(0,0,0)');
+                    z.gesture.slide = z.gesture.image = z.gesture.imageWrap = undefined;
+                    z.scale = z.currentScale = 1;
+                }
+            },
+            // Toggle Zoom
+            toggleZoom: function (s, e) {
+                var z = s.zoom;
+                if (!z.gesture.slide) {
+                    z.gesture.slide = s.clickedSlide ? $(s.clickedSlide) : s.slides.eq(s.activeIndex);
+                    z.gesture.image = z.gesture.slide.find('img, svg, canvas');
+                    z.gesture.imageWrap = z.gesture.image.parent('.' + s.params.zoomContainerClass);
+                }
+                if (!z.gesture.image || z.gesture.image.length === 0) return;
+        
+                var touchX, touchY, offsetX, offsetY, diffX, diffY, translateX, translateY, imageWidth, imageHeight, scaledWidth, scaledHeight, translateMinX, translateMinY, translateMaxX, translateMaxY, slideWidth, slideHeight;
+        
+                if (typeof z.image.touchesStart.x === 'undefined' && e) {
+                    touchX = e.type === 'touchend' ? e.changedTouches[0].pageX : e.pageX;
+                    touchY = e.type === 'touchend' ? e.changedTouches[0].pageY : e.pageY;
+                }
+                else {
+                    touchX = z.image.touchesStart.x;
+                    touchY = z.image.touchesStart.y;
+                }
+        
+                if (z.scale && z.scale !== 1) {
+                    // Zoom Out
+                    z.scale = z.currentScale = 1;
+                    z.gesture.imageWrap.transition(300).transform('translate3d(0,0,0)');
+                    z.gesture.image.transition(300).transform('translate3d(0,0,0) scale(1)');
+                    z.gesture.slide = undefined;
+                }
+                else {
+                    // Zoom In
+                    z.scale = z.currentScale = z.gesture.imageWrap.attr('data-swiper-zoom') || s.params.zoomMax;
+                    if (e) {
+                        slideWidth = z.gesture.slide[0].offsetWidth;
+                        slideHeight = z.gesture.slide[0].offsetHeight;
+                        offsetX = z.gesture.slide.offset().left;
+                        offsetY = z.gesture.slide.offset().top;
+                        diffX = offsetX + slideWidth/2 - touchX;
+                        diffY = offsetY + slideHeight/2 - touchY;
+        
+                        imageWidth = z.gesture.image[0].offsetWidth;
+                        imageHeight = z.gesture.image[0].offsetHeight;
+                        scaledWidth = imageWidth * z.scale;
+                        scaledHeight = imageHeight * z.scale;
+        
+                        translateMinX = Math.min((slideWidth / 2 - scaledWidth / 2), 0);
+                        translateMinY = Math.min((slideHeight / 2 - scaledHeight / 2), 0);
+                        translateMaxX = -translateMinX;
+                        translateMaxY = -translateMinY;
+        
+                        translateX = diffX * z.scale;
+                        translateY = diffY * z.scale;
+        
+                        if (translateX < translateMinX) {
+                            translateX =  translateMinX;
+                        }
+                        if (translateX > translateMaxX) {
+                            translateX = translateMaxX;
+                        }
+        
+                        if (translateY < translateMinY) {
+                            translateY =  translateMinY;
+                        }
+                        if (translateY > translateMaxY) {
+                            translateY = translateMaxY;
+                        }
+                    }
+                    else {
+                        translateX = 0;
+                        translateY = 0;
+                    }
+                    z.gesture.imageWrap.transition(300).transform('translate3d(' + translateX + 'px, ' + translateY + 'px,0)');
+                    z.gesture.image.transition(300).transform('translate3d(0,0,0) scale(' + z.scale + ')');
+                }
+            },
+            // Attach/Detach Events
+            attachEvents: function (detach) {
+                var action = detach ? 'off' : 'on';
+        
+                if (s.params.zoom) {
+                    var target = s.slides;
+                    var passiveListener = s.touchEvents.start === 'touchstart' && s.support.passiveListener && s.params.passiveListeners ? {passive: true, capture: false} : false;
+                    // Scale image
+                    if (s.support.gestures) {
+                        s.slides[action]('gesturestart', s.zoom.onGestureStart, passiveListener);
+                        s.slides[action]('gesturechange', s.zoom.onGestureChange, passiveListener);
+                        s.slides[action]('gestureend', s.zoom.onGestureEnd, passiveListener);
+                    }
+                    else if (s.touchEvents.start === 'touchstart') {
+                        s.slides[action](s.touchEvents.start, s.zoom.onGestureStart, passiveListener);
+                        s.slides[action](s.touchEvents.move, s.zoom.onGestureChange, passiveListener);
+                        s.slides[action](s.touchEvents.end, s.zoom.onGestureEnd, passiveListener);
+                    }
+        
+                    // Move image
+                    s[action]('touchStart', s.zoom.onTouchStart);
+                    s.slides.each(function (index, slide){
+                        if ($(slide).find('.' + s.params.zoomContainerClass).length > 0) {
+                            $(slide)[action](s.touchEvents.move, s.zoom.onTouchMove);
+                        }
+                    });
+                    s[action]('touchEnd', s.zoom.onTouchEnd);
+        
+                    // Scale Out
+                    s[action]('transitionEnd', s.zoom.onTransitionEnd);
+                    if (s.params.zoomToggle) {
+                        s.on('doubleTap', s.zoom.toggleZoom);
+                    }
+                }
+            },
+            init: function () {
+                s.zoom.attachEvents();
+            },
+            destroy: function () {
+                s.zoom.attachEvents(true);
+            }
+        };
+        
+
+        /*=========================
+          Plugins API. Collect all and init all plugins
+          ===========================*/
+        s._plugins = [];
+        for (var plugin in s.plugins) {
+            var p = s.plugins[plugin](s, s.params[plugin]);
+            if (p) s._plugins.push(p);
+        }
+        // Method to call all plugins event/method
+        s.callPlugins = function (eventName) {
+            for (var i = 0; i < s._plugins.length; i++) {
+                if (eventName in s._plugins[i]) {
+                    s._plugins[i][eventName](arguments[1], arguments[2], arguments[3], arguments[4], arguments[5]);
+                }
+            }
+        };
+        
+
+        /*=========================
+          Events/Callbacks/Plugins Emitter
+          ===========================*/
+        function normalizeEventName (eventName) {
+            if (eventName.indexOf('on') !== 0) {
+                if (eventName[0] !== eventName[0].toUpperCase()) {
+                    eventName = 'on' + eventName[0].toUpperCase() + eventName.substring(1);
+                }
+                else {
+                    eventName = 'on' + eventName;
+                }
+            }
+            return eventName;
+        }
+        s.emitterEventListeners = {
+        
+        };
+        s.emit = function (eventName) {
+            // Trigger callbacks
+            if (s.params[eventName]) {
+                s.params[eventName](arguments[1], arguments[2], arguments[3], arguments[4], arguments[5]);
+            }
+            var i;
+            // Trigger events
+            if (s.emitterEventListeners[eventName]) {
+                for (i = 0; i < s.emitterEventListeners[eventName].length; i++) {
+                    s.emitterEventListeners[eventName][i](arguments[1], arguments[2], arguments[3], arguments[4], arguments[5]);
+                }
+            }
+            // Trigger plugins
+            if (s.callPlugins) s.callPlugins(eventName, arguments[1], arguments[2], arguments[3], arguments[4], arguments[5]);
+        };
+        s.on = function (eventName, handler) {
+            eventName = normalizeEventName(eventName);
+            if (!s.emitterEventListeners[eventName]) s.emitterEventListeners[eventName] = [];
+            s.emitterEventListeners[eventName].push(handler);
+            return s;
+        };
+        s.off = function (eventName, handler) {
+            var i;
+            eventName = normalizeEventName(eventName);
+            if (typeof handler === 'undefined') {
+                // Remove all handlers for such event
+                s.emitterEventListeners[eventName] = [];
+                return s;
+            }
+            if (!s.emitterEventListeners[eventName] || s.emitterEventListeners[eventName].length === 0) return;
+            for (i = 0; i < s.emitterEventListeners[eventName].length; i++) {
+                if(s.emitterEventListeners[eventName][i] === handler) s.emitterEventListeners[eventName].splice(i, 1);
+            }
+            return s;
+        };
+        s.once = function (eventName, handler) {
+            eventName = normalizeEventName(eventName);
+            var _handler = function () {
+                handler(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4]);
+                s.off(eventName, _handler);
+            };
+            s.on(eventName, _handler);
+            return s;
+        };
+        
+
+        // Accessibility tools
+        s.a11y = {
+            makeFocusable: function ($el) {
+                $el.attr('tabIndex', '0');
+                return $el;
+            },
+            addRole: function ($el, role) {
+                $el.attr('role', role);
+                return $el;
+            },
+        
+            addLabel: function ($el, label) {
+                $el.attr('aria-label', label);
+                return $el;
+            },
+        
+            disable: function ($el) {
+                $el.attr('aria-disabled', true);
+                return $el;
+            },
+        
+            enable: function ($el) {
+                $el.attr('aria-disabled', false);
+                return $el;
+            },
+        
+            onEnterKey: function (event) {
+                if (event.keyCode !== 13) return;
+                if ($(event.target).is(s.params.nextButton)) {
+                    s.onClickNext(event);
+                    if (s.isEnd) {
+                        s.a11y.notify(s.params.lastSlideMessage);
+                    }
+                    else {
+                        s.a11y.notify(s.params.nextSlideMessage);
+                    }
+                }
+                else if ($(event.target).is(s.params.prevButton)) {
+                    s.onClickPrev(event);
+                    if (s.isBeginning) {
+                        s.a11y.notify(s.params.firstSlideMessage);
+                    }
+                    else {
+                        s.a11y.notify(s.params.prevSlideMessage);
+                    }
+                }
+                if ($(event.target).is('.' + s.params.bulletClass)) {
+                    $(event.target)[0].click();
+                }
+            },
+        
+            liveRegion: $('<span class="' + s.params.notificationClass + '" aria-live="assertive" aria-atomic="true"></span>'),
+        
+            notify: function (message) {
+                var notification = s.a11y.liveRegion;
+                if (notification.length === 0) return;
+                notification.html('');
+                notification.html(message);
+            },
+            init: function () {
+                // Setup accessibility
+                if (s.params.nextButton && s.nextButton && s.nextButton.length > 0) {
+                    s.a11y.makeFocusable(s.nextButton);
+                    s.a11y.addRole(s.nextButton, 'button');
+                    s.a11y.addLabel(s.nextButton, s.params.nextSlideMessage);
+                }
+                if (s.params.prevButton && s.prevButton && s.prevButton.length > 0) {
+                    s.a11y.makeFocusable(s.prevButton);
+                    s.a11y.addRole(s.prevButton, 'button');
+                    s.a11y.addLabel(s.prevButton, s.params.prevSlideMessage);
+                }
+        
+                $(s.container).append(s.a11y.liveRegion);
+            },
+            initPagination: function () {
+                if (s.params.pagination && s.params.paginationClickable && s.bullets && s.bullets.length) {
+                    s.bullets.each(function () {
+                        var bullet = $(this);
+                        s.a11y.makeFocusable(bullet);
+                        s.a11y.addRole(bullet, 'button');
+                        s.a11y.addLabel(bullet, s.params.paginationBulletMessage.replace(/{{index}}/, bullet.index() + 1));
+                    });
+                }
+            },
+            destroy: function () {
+                if (s.a11y.liveRegion && s.a11y.liveRegion.length > 0) s.a11y.liveRegion.remove();
+            }
+        };
+        
+
+        /*=========================
+          Init/Destroy
+          ===========================*/
+        s.init = function () {
+            if (s.params.loop) s.createLoop();
+            s.updateContainerSize();
+            s.updateSlidesSize();
+            s.updatePagination();
+            if (s.params.scrollbar && s.scrollbar) {
+                s.scrollbar.set();
+                if (s.params.scrollbarDraggable) {
+                    s.scrollbar.enableDraggable();
+                }
+            }
+            if (s.params.effect !== 'slide' && s.effects[s.params.effect]) {
+                if (!s.params.loop) s.updateProgress();
+                s.effects[s.params.effect].setTranslate();
+            }
+            if (s.params.loop) {
+                s.slideTo(s.params.initialSlide + s.loopedSlides, 0, s.params.runCallbacksOnInit);
+            }
+            else {
+                s.slideTo(s.params.initialSlide, 0, s.params.runCallbacksOnInit);
+                if (s.params.initialSlide === 0) {
+                    if (s.parallax && s.params.parallax) s.parallax.setTranslate();
+                    if (s.lazy && s.params.lazyLoading) {
+                        s.lazy.load();
+                        s.lazy.initialImageLoaded = true;
+                    }
+                }
+            }
+            s.attachEvents();
+            if (s.params.observer && s.support.observer) {
+                s.initObservers();
+            }
+            if (s.params.preloadImages && !s.params.lazyLoading) {
+                s.preloadImages();
+            }
+            if (s.params.zoom && s.zoom) {
+                s.zoom.init();
+            }
+            if (s.params.autoplay) {
+                s.startAutoplay();
+            }
+            if (s.params.keyboardControl) {
+                if (s.enableKeyboardControl) s.enableKeyboardControl();
+            }
+            if (s.params.mousewheelControl) {
+                if (s.enableMousewheelControl) s.enableMousewheelControl();
+            }
+            // Deprecated hashnavReplaceState changed to replaceState for use in hashnav and history
+            if (s.params.hashnavReplaceState) {
+                s.params.replaceState = s.params.hashnavReplaceState;
+            }
+            if (s.params.history) {
+                if (s.history) s.history.init();
+            }
+            if (s.params.hashnav) {
+                if (s.hashnav) s.hashnav.init();
+            }
+            if (s.params.a11y && s.a11y) s.a11y.init();
+            s.emit('onInit', s);
+        };
+        
+        // Cleanup dynamic styles
+        s.cleanupStyles = function () {
+            // Container
+            s.container.removeClass(s.classNames.join(' ')).removeAttr('style');
+        
+            // Wrapper
+            s.wrapper.removeAttr('style');
+        
+            // Slides
+            if (s.slides && s.slides.length) {
+                s.slides
+                    .removeClass([
+                      s.params.slideVisibleClass,
+                      s.params.slideActiveClass,
+                      s.params.slideNextClass,
+                      s.params.slidePrevClass
+                    ].join(' '))
+                    .removeAttr('style')
+                    .removeAttr('data-swiper-column')
+                    .removeAttr('data-swiper-row');
+            }
+        
+            // Pagination/Bullets
+            if (s.paginationContainer && s.paginationContainer.length) {
+                s.paginationContainer.removeClass(s.params.paginationHiddenClass);
+            }
+            if (s.bullets && s.bullets.length) {
+                s.bullets.removeClass(s.params.bulletActiveClass);
+            }
+        
+            // Buttons
+            if (s.params.prevButton) $(s.params.prevButton).removeClass(s.params.buttonDisabledClass);
+            if (s.params.nextButton) $(s.params.nextButton).removeClass(s.params.buttonDisabledClass);
+        
+            // Scrollbar
+            if (s.params.scrollbar && s.scrollbar) {
+                if (s.scrollbar.track && s.scrollbar.track.length) s.scrollbar.track.removeAttr('style');
+                if (s.scrollbar.drag && s.scrollbar.drag.length) s.scrollbar.drag.removeAttr('style');
+            }
+        };
+        
+        // Destroy
+        s.destroy = function (deleteInstance, cleanupStyles) {
+            // Detach evebts
+            s.detachEvents();
+            // Stop autoplay
+            s.stopAutoplay();
+            // Disable draggable
+            if (s.params.scrollbar && s.scrollbar) {
+                if (s.params.scrollbarDraggable) {
+                    s.scrollbar.disableDraggable();
+                }
+            }
+            // Destroy loop
+            if (s.params.loop) {
+                s.destroyLoop();
+            }
+            // Cleanup styles
+            if (cleanupStyles) {
+                s.cleanupStyles();
+            }
+            // Disconnect observer
+            s.disconnectObservers();
+        
+            // Destroy zoom
+            if (s.params.zoom && s.zoom) {
+                s.zoom.destroy();
+            }
+            // Disable keyboard/mousewheel
+            if (s.params.keyboardControl) {
+                if (s.disableKeyboardControl) s.disableKeyboardControl();
+            }
+            if (s.params.mousewheelControl) {
+                if (s.disableMousewheelControl) s.disableMousewheelControl();
+            }
+            // Disable a11y
+            if (s.params.a11y && s.a11y) s.a11y.destroy();
+            // Delete history popstate
+            if (s.params.history && !s.params.replaceState) {
+                window.removeEventListener('popstate', s.history.setHistoryPopState);
+            }
+            if (s.params.hashnav && s.hashnav)  {
+                s.hashnav.destroy();
+            }
+            // Destroy callback
+            s.emit('onDestroy');
+            // Delete instance
+            if (deleteInstance !== false) s = null;
+        };
+        
+        s.init();
+        
+
+    
+        // Return swiper instance
+        return s;
+    };
+    
+
+    /*==================================================
+        Prototype
+    ====================================================*/
+    Swiper.prototype = {
+        isSafari: (function () {
+            var ua = window.navigator.userAgent.toLowerCase();
+            return (ua.indexOf('safari') >= 0 && ua.indexOf('chrome') < 0 && ua.indexOf('android') < 0);
+        })(),
+        isUiWebView: /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(window.navigator.userAgent),
+        isArray: function (arr) {
+            return Object.prototype.toString.apply(arr) === '[object Array]';
+        },
+        /*==================================================
+        Browser
+        ====================================================*/
+        browser: {
+            ie: window.navigator.pointerEnabled || window.navigator.msPointerEnabled,
+            ieTouch: (window.navigator.msPointerEnabled && window.navigator.msMaxTouchPoints > 1) || (window.navigator.pointerEnabled && window.navigator.maxTouchPoints > 1),
+            lteIE9: (function() {
+                // create temporary DIV
+                var div = document.createElement('div');
+                // add content to tmp DIV which is wrapped into the IE HTML conditional statement
+                div.innerHTML = '<!--[if lte IE 9]><i></i><![endif]-->';
+                // return true / false value based on what will browser render
+                return div.getElementsByTagName('i').length === 1;
+            })()
+        },
+        /*==================================================
+        Devices
+        ====================================================*/
+        device: (function () {
+            var ua = window.navigator.userAgent;
+            var android = ua.match(/(Android);?[\s\/]+([\d.]+)?/);
+            var ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
+            var ipod = ua.match(/(iPod)(.*OS\s([\d_]+))?/);
+            var iphone = !ipad && ua.match(/(iPhone\sOS|iOS)\s([\d_]+)/);
+            return {
+                ios: ipad || iphone || ipod,
+                android: android
+            };
+        })(),
+        /*==================================================
+        Feature Detection
+        ====================================================*/
+        support: {
+            touch : (window.Modernizr && Modernizr.touch === true) || (function () {
+                return !!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch);
+            })(),
+    
+            transforms3d : (window.Modernizr && Modernizr.csstransforms3d === true) || (function () {
+                var div = document.createElement('div').style;
+                return ('webkitPerspective' in div || 'MozPerspective' in div || 'OPerspective' in div || 'MsPerspective' in div || 'perspective' in div);
+            })(),
+    
+            flexbox: (function () {
+                var div = document.createElement('div').style;
+                var styles = ('alignItems webkitAlignItems webkitBoxAlign msFlexAlign mozBoxAlign webkitFlexDirection msFlexDirection mozBoxDirection mozBoxOrient webkitBoxDirection webkitBoxOrient').split(' ');
+                for (var i = 0; i < styles.length; i++) {
+                    if (styles[i] in div) return true;
+                }
+            })(),
+    
+            observer: (function () {
+                return ('MutationObserver' in window || 'WebkitMutationObserver' in window);
+            })(),
+    
+            passiveListener: (function () {
+                var supportsPassive = false;
+                try {
+                    var opts = Object.defineProperty({}, 'passive', {
+                        get: function() {
+                            supportsPassive = true;
+                        }
+                    });
+                    window.addEventListener('testPassiveListener', null, opts);
+                } catch (e) {}
+                return supportsPassive;
+            })(),
+    
+            gestures: (function () {
+                return 'ongesturestart' in window;
+            })()
+        },
+        /*==================================================
+        Plugins
+        ====================================================*/
+        plugins: {}
+    };
+    
+
+    /*===========================
+    Dom7 Library
+    ===========================*/
+    var Dom7 = (function () {
+        var Dom7 = function (arr) {
+            var _this = this, i = 0;
+            // Create array-like object
+            for (i = 0; i < arr.length; i++) {
+                _this[i] = arr[i];
+            }
+            _this.length = arr.length;
+            // Return collection with methods
+            return this;
+        };
+        var $ = function (selector, context) {
+            var arr = [], i = 0;
+            if (selector && !context) {
+                if (selector instanceof Dom7) {
+                    return selector;
+                }
+            }
+            if (selector) {
+                // String
+                if (typeof selector === 'string') {
+                    var els, tempParent, html = selector.trim();
+                    if (html.indexOf('<') >= 0 && html.indexOf('>') >= 0) {
+                        var toCreate = 'div';
+                        if (html.indexOf('<li') === 0) toCreate = 'ul';
+                        if (html.indexOf('<tr') === 0) toCreate = 'tbody';
+                        if (html.indexOf('<td') === 0 || html.indexOf('<th') === 0) toCreate = 'tr';
+                        if (html.indexOf('<tbody') === 0) toCreate = 'table';
+                        if (html.indexOf('<option') === 0) toCreate = 'select';
+                        tempParent = document.createElement(toCreate);
+                        tempParent.innerHTML = selector;
+                        for (i = 0; i < tempParent.childNodes.length; i++) {
+                            arr.push(tempParent.childNodes[i]);
+                        }
+                    }
+                    else {
+                        if (!context && selector[0] === '#' && !selector.match(/[ .<>:~]/)) {
+                            // Pure ID selector
+                            els = [document.getElementById(selector.split('#')[1])];
+                        }
+                        else {
+                            // Other selectors
+                            els = (context || document).querySelectorAll(selector);
+                        }
+                        for (i = 0; i < els.length; i++) {
+                            if (els[i]) arr.push(els[i]);
+                        }
+                    }
+                }
+                // Node/element
+                else if (selector.nodeType || selector === window || selector === document) {
+                    arr.push(selector);
+                }
+                //Array of elements or instance of Dom
+                else if (selector.length > 0 && selector[0].nodeType) {
+                    for (i = 0; i < selector.length; i++) {
+                        arr.push(selector[i]);
+                    }
+                }
+            }
+            return new Dom7(arr);
+        };
+        Dom7.prototype = {
+            // Classes and attriutes
+            addClass: function (className) {
+                if (typeof className === 'undefined') {
+                    return this;
+                }
+                var classes = className.split(' ');
+                for (var i = 0; i < classes.length; i++) {
+                    for (var j = 0; j < this.length; j++) {
+                        this[j].classList.add(classes[i]);
+                    }
+                }
+                return this;
+            },
+            removeClass: function (className) {
+                var classes = className.split(' ');
+                for (var i = 0; i < classes.length; i++) {
+                    for (var j = 0; j < this.length; j++) {
+                        this[j].classList.remove(classes[i]);
+                    }
+                }
+                return this;
+            },
+            hasClass: function (className) {
+                if (!this[0]) return false;
+                else return this[0].classList.contains(className);
+            },
+            toggleClass: function (className) {
+                var classes = className.split(' ');
+                for (var i = 0; i < classes.length; i++) {
+                    for (var j = 0; j < this.length; j++) {
+                        this[j].classList.toggle(classes[i]);
+                    }
+                }
+                return this;
+            },
+            attr: function (attrs, value) {
+                if (arguments.length === 1 && typeof attrs === 'string') {
+                    // Get attr
+                    if (this[0]) return this[0].getAttribute(attrs);
+                    else return undefined;
+                }
+                else {
+                    // Set attrs
+                    for (var i = 0; i < this.length; i++) {
+                        if (arguments.length === 2) {
+                            // String
+                            this[i].setAttribute(attrs, value);
+                        }
+                        else {
+                            // Object
+                            for (var attrName in attrs) {
+                                this[i][attrName] = attrs[attrName];
+                                this[i].setAttribute(attrName, attrs[attrName]);
+                            }
+                        }
+                    }
+                    return this;
+                }
+            },
+            removeAttr: function (attr) {
+                for (var i = 0; i < this.length; i++) {
+                    this[i].removeAttribute(attr);
+                }
+                return this;
+            },
+            data: function (key, value) {
+                if (typeof value === 'undefined') {
+                    // Get value
+                    if (this[0]) {
+                        var dataKey = this[0].getAttribute('data-' + key);
+                        if (dataKey) return dataKey;
+                        else if (this[0].dom7ElementDataStorage && (key in this[0].dom7ElementDataStorage)) return this[0].dom7ElementDataStorage[key];
+                        else return undefined;
+                    }
+                    else return undefined;
+                }
+                else {
+                    // Set value
+                    for (var i = 0; i < this.length; i++) {
+                        var el = this[i];
+                        if (!el.dom7ElementDataStorage) el.dom7ElementDataStorage = {};
+                        el.dom7ElementDataStorage[key] = value;
+                    }
+                    return this;
+                }
+            },
+            // Transforms
+            transform : function (transform) {
+                for (var i = 0; i < this.length; i++) {
+                    var elStyle = this[i].style;
+                    elStyle.webkitTransform = elStyle.MsTransform = elStyle.msTransform = elStyle.MozTransform = elStyle.OTransform = elStyle.transform = transform;
+                }
+                return this;
+            },
+            transition: function (duration) {
+                if (typeof duration !== 'string') {
+                    duration = duration + 'ms';
+                }
+                for (var i = 0; i < this.length; i++) {
+                    var elStyle = this[i].style;
+                    elStyle.webkitTransitionDuration = elStyle.MsTransitionDuration = elStyle.msTransitionDuration = elStyle.MozTransitionDuration = elStyle.OTransitionDuration = elStyle.transitionDuration = duration;
+                }
+                return this;
+            },
+            //Events
+            on: function (eventName, targetSelector, listener, capture) {
+                function handleLiveEvent(e) {
+                    var target = e.target;
+                    if ($(target).is(targetSelector)) listener.call(target, e);
+                    else {
+                        var parents = $(target).parents();
+                        for (var k = 0; k < parents.length; k++) {
+                            if ($(parents[k]).is(targetSelector)) listener.call(parents[k], e);
+                        }
+                    }
+                }
+                var events = eventName.split(' ');
+                var i, j;
+                for (i = 0; i < this.length; i++) {
+                    if (typeof targetSelector === 'function' || targetSelector === false) {
+                        // Usual events
+                        if (typeof targetSelector === 'function') {
+                            listener = arguments[1];
+                            capture = arguments[2] || false;
+                        }
+                        for (j = 0; j < events.length; j++) {
+                            this[i].addEventListener(events[j], listener, capture);
+                        }
+                    }
+                    else {
+                        //Live events
+                        for (j = 0; j < events.length; j++) {
+                            if (!this[i].dom7LiveListeners) this[i].dom7LiveListeners = [];
+                            this[i].dom7LiveListeners.push({listener: listener, liveListener: handleLiveEvent});
+                            this[i].addEventListener(events[j], handleLiveEvent, capture);
+                        }
+                    }
+                }
+    
+                return this;
+            },
+            off: function (eventName, targetSelector, listener, capture) {
+                var events = eventName.split(' ');
+                for (var i = 0; i < events.length; i++) {
+                    for (var j = 0; j < this.length; j++) {
+                        if (typeof targetSelector === 'function' || targetSelector === false) {
+                            // Usual events
+                            if (typeof targetSelector === 'function') {
+                                listener = arguments[1];
+                                capture = arguments[2] || false;
+                            }
+                            this[j].removeEventListener(events[i], listener, capture);
+                        }
+                        else {
+                            // Live event
+                            if (this[j].dom7LiveListeners) {
+                                for (var k = 0; k < this[j].dom7LiveListeners.length; k++) {
+                                    if (this[j].dom7LiveListeners[k].listener === listener) {
+                                        this[j].removeEventListener(events[i], this[j].dom7LiveListeners[k].liveListener, capture);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                return this;
+            },
+            once: function (eventName, targetSelector, listener, capture) {
+                var dom = this;
+                if (typeof targetSelector === 'function') {
+                    targetSelector = false;
+                    listener = arguments[1];
+                    capture = arguments[2];
+                }
+                function proxy(e) {
+                    listener(e);
+                    dom.off(eventName, targetSelector, proxy, capture);
+                }
+                dom.on(eventName, targetSelector, proxy, capture);
+            },
+            trigger: function (eventName, eventData) {
+                for (var i = 0; i < this.length; i++) {
+                    var evt;
+                    try {
+                        evt = new window.CustomEvent(eventName, {detail: eventData, bubbles: true, cancelable: true});
+                    }
+                    catch (e) {
+                        evt = document.createEvent('Event');
+                        evt.initEvent(eventName, true, true);
+                        evt.detail = eventData;
+                    }
+                    this[i].dispatchEvent(evt);
+                }
+                return this;
+            },
+            transitionEnd: function (callback) {
+                var events = ['webkitTransitionEnd', 'transitionend', 'oTransitionEnd', 'MSTransitionEnd', 'msTransitionEnd'],
+                    i, j, dom = this;
+                function fireCallBack(e) {
+                    /*jshint validthis:true */
+                    if (e.target !== this) return;
+                    callback.call(this, e);
+                    for (i = 0; i < events.length; i++) {
+                        dom.off(events[i], fireCallBack);
+                    }
+                }
+                if (callback) {
+                    for (i = 0; i < events.length; i++) {
+                        dom.on(events[i], fireCallBack);
+                    }
+                }
+                return this;
+            },
+            // Sizing/Styles
+            width: function () {
+                if (this[0] === window) {
+                    return window.innerWidth;
+                }
+                else {
+                    if (this.length > 0) {
+                        return parseFloat(this.css('width'));
+                    }
+                    else {
+                        return null;
+                    }
+                }
+            },
+            outerWidth: function (includeMargins) {
+                if (this.length > 0) {
+                    if (includeMargins)
+                        return this[0].offsetWidth + parseFloat(this.css('margin-right')) + parseFloat(this.css('margin-left'));
+                    else
+                        return this[0].offsetWidth;
+                }
+                else return null;
+            },
+            height: function () {
+                if (this[0] === window) {
+                    return window.innerHeight;
+                }
+                else {
+                    if (this.length > 0) {
+                        return parseFloat(this.css('height'));
+                    }
+                    else {
+                        return null;
+                    }
+                }
+            },
+            outerHeight: function (includeMargins) {
+                if (this.length > 0) {
+                    if (includeMargins)
+                        return this[0].offsetHeight + parseFloat(this.css('margin-top')) + parseFloat(this.css('margin-bottom'));
+                    else
+                        return this[0].offsetHeight;
+                }
+                else return null;
+            },
+            offset: function () {
+                if (this.length > 0) {
+                    var el = this[0];
+                    var box = el.getBoundingClientRect();
+                    var body = document.body;
+                    var clientTop  = el.clientTop  || body.clientTop  || 0;
+                    var clientLeft = el.clientLeft || body.clientLeft || 0;
+                    var scrollTop  = window.pageYOffset || el.scrollTop;
+                    var scrollLeft = window.pageXOffset || el.scrollLeft;
+                    return {
+                        top: box.top  + scrollTop  - clientTop,
+                        left: box.left + scrollLeft - clientLeft
+                    };
+                }
+                else {
+                    return null;
+                }
+            },
+            css: function (props, value) {
+                var i;
+                if (arguments.length === 1) {
+                    if (typeof props === 'string') {
+                        if (this[0]) return window.getComputedStyle(this[0], null).getPropertyValue(props);
+                    }
+                    else {
+                        for (i = 0; i < this.length; i++) {
+                            for (var prop in props) {
+                                this[i].style[prop] = props[prop];
+                            }
+                        }
+                        return this;
+                    }
+                }
+                if (arguments.length === 2 && typeof props === 'string') {
+                    for (i = 0; i < this.length; i++) {
+                        this[i].style[props] = value;
+                    }
+                    return this;
+                }
+                return this;
+            },
+    
+            //Dom manipulation
+            each: function (callback) {
+                for (var i = 0; i < this.length; i++) {
+                    callback.call(this[i], i, this[i]);
+                }
+                return this;
+            },
+            html: function (html) {
+                if (typeof html === 'undefined') {
+                    return this[0] ? this[0].innerHTML : undefined;
+                }
+                else {
+                    for (var i = 0; i < this.length; i++) {
+                        this[i].innerHTML = html;
+                    }
+                    return this;
+                }
+            },
+            text: function (text) {
+                if (typeof text === 'undefined') {
+                    if (this[0]) {
+                        return this[0].textContent.trim();
+                    }
+                    else return null;
+                }
+                else {
+                    for (var i = 0; i < this.length; i++) {
+                        this[i].textContent = text;
+                    }
+                    return this;
+                }
+            },
+            is: function (selector) {
+                if (!this[0]) return false;
+                var compareWith, i;
+                if (typeof selector === 'string') {
+                    var el = this[0];
+                    if (el === document) return selector === document;
+                    if (el === window) return selector === window;
+    
+                    if (el.matches) return el.matches(selector);
+                    else if (el.webkitMatchesSelector) return el.webkitMatchesSelector(selector);
+                    else if (el.mozMatchesSelector) return el.mozMatchesSelector(selector);
+                    else if (el.msMatchesSelector) return el.msMatchesSelector(selector);
+                    else {
+                        compareWith = $(selector);
+                        for (i = 0; i < compareWith.length; i++) {
+                            if (compareWith[i] === this[0]) return true;
+                        }
+                        return false;
+                    }
+                }
+                else if (selector === document) return this[0] === document;
+                else if (selector === window) return this[0] === window;
+                else {
+                    if (selector.nodeType || selector instanceof Dom7) {
+                        compareWith = selector.nodeType ? [selector] : selector;
+                        for (i = 0; i < compareWith.length; i++) {
+                            if (compareWith[i] === this[0]) return true;
+                        }
+                        return false;
+                    }
+                    return false;
+                }
+    
+            },
+            index: function () {
+                if (this[0]) {
+                    var child = this[0];
+                    var i = 0;
+                    while ((child = child.previousSibling) !== null) {
+                        if (child.nodeType === 1) i++;
+                    }
+                    return i;
+                }
+                else return undefined;
+            },
+            eq: function (index) {
+                if (typeof index === 'undefined') return this;
+                var length = this.length;
+                var returnIndex;
+                if (index > length - 1) {
+                    return new Dom7([]);
+                }
+                if (index < 0) {
+                    returnIndex = length + index;
+                    if (returnIndex < 0) return new Dom7([]);
+                    else return new Dom7([this[returnIndex]]);
+                }
+                return new Dom7([this[index]]);
+            },
+            append: function (newChild) {
+                var i, j;
+                for (i = 0; i < this.length; i++) {
+                    if (typeof newChild === 'string') {
+                        var tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = newChild;
+                        while (tempDiv.firstChild) {
+                            this[i].appendChild(tempDiv.firstChild);
+                        }
+                    }
+                    else if (newChild instanceof Dom7) {
+                        for (j = 0; j < newChild.length; j++) {
+                            this[i].appendChild(newChild[j]);
+                        }
+                    }
+                    else {
+                        this[i].appendChild(newChild);
+                    }
+                }
+                return this;
+            },
+            prepend: function (newChild) {
+                var i, j;
+                for (i = 0; i < this.length; i++) {
+                    if (typeof newChild === 'string') {
+                        var tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = newChild;
+                        for (j = tempDiv.childNodes.length - 1; j >= 0; j--) {
+                            this[i].insertBefore(tempDiv.childNodes[j], this[i].childNodes[0]);
+                        }
+                        // this[i].insertAdjacentHTML('afterbegin', newChild);
+                    }
+                    else if (newChild instanceof Dom7) {
+                        for (j = 0; j < newChild.length; j++) {
+                            this[i].insertBefore(newChild[j], this[i].childNodes[0]);
+                        }
+                    }
+                    else {
+                        this[i].insertBefore(newChild, this[i].childNodes[0]);
+                    }
+                }
+                return this;
+            },
+            insertBefore: function (selector) {
+                var before = $(selector);
+                for (var i = 0; i < this.length; i++) {
+                    if (before.length === 1) {
+                        before[0].parentNode.insertBefore(this[i], before[0]);
+                    }
+                    else if (before.length > 1) {
+                        for (var j = 0; j < before.length; j++) {
+                            before[j].parentNode.insertBefore(this[i].cloneNode(true), before[j]);
+                        }
+                    }
+                }
+            },
+            insertAfter: function (selector) {
+                var after = $(selector);
+                for (var i = 0; i < this.length; i++) {
+                    if (after.length === 1) {
+                        after[0].parentNode.insertBefore(this[i], after[0].nextSibling);
+                    }
+                    else if (after.length > 1) {
+                        for (var j = 0; j < after.length; j++) {
+                            after[j].parentNode.insertBefore(this[i].cloneNode(true), after[j].nextSibling);
+                        }
+                    }
+                }
+            },
+            next: function (selector) {
+                if (this.length > 0) {
+                    if (selector) {
+                        if (this[0].nextElementSibling && $(this[0].nextElementSibling).is(selector)) return new Dom7([this[0].nextElementSibling]);
+                        else return new Dom7([]);
+                    }
+                    else {
+                        if (this[0].nextElementSibling) return new Dom7([this[0].nextElementSibling]);
+                        else return new Dom7([]);
+                    }
+                }
+                else return new Dom7([]);
+            },
+            nextAll: function (selector) {
+                var nextEls = [];
+                var el = this[0];
+                if (!el) return new Dom7([]);
+                while (el.nextElementSibling) {
+                    var next = el.nextElementSibling;
+                    if (selector) {
+                        if($(next).is(selector)) nextEls.push(next);
+                    }
+                    else nextEls.push(next);
+                    el = next;
+                }
+                return new Dom7(nextEls);
+            },
+            prev: function (selector) {
+                if (this.length > 0) {
+                    if (selector) {
+                        if (this[0].previousElementSibling && $(this[0].previousElementSibling).is(selector)) return new Dom7([this[0].previousElementSibling]);
+                        else return new Dom7([]);
+                    }
+                    else {
+                        if (this[0].previousElementSibling) return new Dom7([this[0].previousElementSibling]);
+                        else return new Dom7([]);
+                    }
+                }
+                else return new Dom7([]);
+            },
+            prevAll: function (selector) {
+                var prevEls = [];
+                var el = this[0];
+                if (!el) return new Dom7([]);
+                while (el.previousElementSibling) {
+                    var prev = el.previousElementSibling;
+                    if (selector) {
+                        if($(prev).is(selector)) prevEls.push(prev);
+                    }
+                    else prevEls.push(prev);
+                    el = prev;
+                }
+                return new Dom7(prevEls);
+            },
+            parent: function (selector) {
+                var parents = [];
+                for (var i = 0; i < this.length; i++) {
+                    if (selector) {
+                        if ($(this[i].parentNode).is(selector)) parents.push(this[i].parentNode);
+                    }
+                    else {
+                        parents.push(this[i].parentNode);
+                    }
+                }
+                return $($.unique(parents));
+            },
+            parents: function (selector) {
+                var parents = [];
+                for (var i = 0; i < this.length; i++) {
+                    var parent = this[i].parentNode;
+                    while (parent) {
+                        if (selector) {
+                            if ($(parent).is(selector)) parents.push(parent);
+                        }
+                        else {
+                            parents.push(parent);
+                        }
+                        parent = parent.parentNode;
+                    }
+                }
+                return $($.unique(parents));
+            },
+            find : function (selector) {
+                var foundElements = [];
+                for (var i = 0; i < this.length; i++) {
+                    var found = this[i].querySelectorAll(selector);
+                    for (var j = 0; j < found.length; j++) {
+                        foundElements.push(found[j]);
+                    }
+                }
+                return new Dom7(foundElements);
+            },
+            children: function (selector) {
+                var children = [];
+                for (var i = 0; i < this.length; i++) {
+                    var childNodes = this[i].childNodes;
+    
+                    for (var j = 0; j < childNodes.length; j++) {
+                        if (!selector) {
+                            if (childNodes[j].nodeType === 1) children.push(childNodes[j]);
+                        }
+                        else {
+                            if (childNodes[j].nodeType === 1 && $(childNodes[j]).is(selector)) children.push(childNodes[j]);
+                        }
+                    }
+                }
+                return new Dom7($.unique(children));
+            },
+            remove: function () {
+                for (var i = 0; i < this.length; i++) {
+                    if (this[i].parentNode) this[i].parentNode.removeChild(this[i]);
+                }
+                return this;
+            },
+            add: function () {
+                var dom = this;
+                var i, j;
+                for (i = 0; i < arguments.length; i++) {
+                    var toAdd = $(arguments[i]);
+                    for (j = 0; j < toAdd.length; j++) {
+                        dom[dom.length] = toAdd[j];
+                        dom.length++;
+                    }
+                }
+                return dom;
+            }
+        };
+        $.fn = Dom7.prototype;
+        $.unique = function (arr) {
+            var unique = [];
+            for (var i = 0; i < arr.length; i++) {
+                if (unique.indexOf(arr[i]) === -1) unique.push(arr[i]);
+            }
+            return unique;
+        };
+    
+        return $;
+    })();
+    
+
+    /*===========================
+     Get Dom libraries
+     ===========================*/
+    var swiperDomPlugins = ['jQuery', 'Zepto', 'Dom7'];
+    for (var i = 0; i < swiperDomPlugins.length; i++) {
+    	if (window[swiperDomPlugins[i]]) {
+    		addLibraryPlugin(window[swiperDomPlugins[i]]);
+    	}
+    }
+    // Required DOM Plugins
+    var domLib;
+    if (typeof Dom7 === 'undefined') {
+    	domLib = window.Dom7 || window.Zepto || window.jQuery;
+    }
+    else {
+    	domLib = Dom7;
+    }
+    
+
+    /*===========================
+    Add .swiper plugin from Dom libraries
+    ===========================*/
+    function addLibraryPlugin(lib) {
+        lib.fn.swiper = function (params) {
+            var firstInstance;
+            lib(this).each(function () {
+                var s = new Swiper(this, params);
+                if (!firstInstance) firstInstance = s;
+            });
+            return firstInstance;
+        };
+    }
+    
+    if (domLib) {
+        if (!('transitionEnd' in domLib.fn)) {
+            domLib.fn.transitionEnd = function (callback) {
+                var events = ['webkitTransitionEnd', 'transitionend', 'oTransitionEnd', 'MSTransitionEnd', 'msTransitionEnd'],
+                    i, j, dom = this;
+                function fireCallBack(e) {
+                    /*jshint validthis:true */
+                    if (e.target !== this) return;
+                    callback.call(this, e);
+                    for (i = 0; i < events.length; i++) {
+                        dom.off(events[i], fireCallBack);
+                    }
+                }
+                if (callback) {
+                    for (i = 0; i < events.length; i++) {
+                        dom.on(events[i], fireCallBack);
+                    }
+                }
+                return this;
+            };
+        }
+        if (!('transform' in domLib.fn)) {
+            domLib.fn.transform = function (transform) {
+                for (var i = 0; i < this.length; i++) {
+                    var elStyle = this[i].style;
+                    elStyle.webkitTransform = elStyle.MsTransform = elStyle.msTransform = elStyle.MozTransform = elStyle.OTransform = elStyle.transform = transform;
+                }
+                return this;
+            };
+        }
+        if (!('transition' in domLib.fn)) {
+            domLib.fn.transition = function (duration) {
+                if (typeof duration !== 'string') {
+                    duration = duration + 'ms';
+                }
+                for (var i = 0; i < this.length; i++) {
+                    var elStyle = this[i].style;
+                    elStyle.webkitTransitionDuration = elStyle.MsTransitionDuration = elStyle.msTransitionDuration = elStyle.MozTransitionDuration = elStyle.OTransitionDuration = elStyle.transitionDuration = duration;
+                }
+                return this;
+            };
+        }
+        if (!('outerWidth' in domLib.fn)) {
+            domLib.fn.outerWidth = function (includeMargins) {
+                if (this.length > 0) {
+                    if (includeMargins)
+                        return this[0].offsetWidth + parseFloat(this.css('margin-right')) + parseFloat(this.css('margin-left'));
+                    else
+                        return this[0].offsetWidth;
+                }
+                else return null;
+            };
+        }
+    }
+    
+
+    window.Swiper = Swiper;
+})();
+
+/*===========================
+Swiper AMD Export
+===========================*/
+if (true)
+{
+    module.exports = window.Swiper;
+}
+else if (typeof define === 'function' && define.amd) {
+    define([], function () {
+        'use strict';
+        return window.Swiper;
+    });
+}
+
+//# sourceMappingURL=maps/swiper.js.map
+
+
+/***/ }),
+/* 48 */,
+/* 49 */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"scrollView\" v-bind:class=\"{ scrollbottom: lowerY<0 }\">\r\n    <div v-bind:class=\"{ scroller_h: scrollX }\">\r\n        <slot></slot>\r\n    </div>\r\n</div>";
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"swiper\">\r\n    <div class=\"swiper-wrapper\">\r\n        <slot></slot>\r\n    </div>\r\n    <div class=\"swiper-pagination\"></div>\r\n</div>";
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+/* 52 */,
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(7);
 __webpack_require__(6);
-module.exports = __webpack_require__(0);
+module.exports = __webpack_require__(1);
 
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(Buffer) {/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap) {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+  var base64 = new Buffer(JSON.stringify(sourceMap)).toString('base64');
+  var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+  return '/*# ' + data + ' */';
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14).Buffer))
 
 /***/ })
 /******/ ]);
