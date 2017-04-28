@@ -12,7 +12,7 @@ module.exports = {
         path: path.join(__dirname, "dist/js"),
         filename: "[name].js"
     },
-    externals: ['vue'],
+    externals: ['vue', 'vue-router'],
     module: {
         rules: [
             {

@@ -1,20 +1,18 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import _ from 'lodash/core';
-
-var routes = [];
+/*
+ * app.js v0.1.1
+ * (c) 2017 wangli
+ * Released under the MIT License.
+ */
+/*创建APP根页面*/
 var _app;
 
-var App = function (_obj) {
+var App = function (Vue, router) {
     if (typeof _app == "undefined") {
-        console.log("initApp");
-        Vue.component(VueRouter);
-        _.extend(routes, _obj.pages);
-        var router = new VueRouter({ routes: routes });
-        console.log(routes);
         var _app = new Vue({
-            router
-        }).$mount('#app');
+            el: '#app',
+            router,
+            template: '<router-view></router-view>'
+        });
     }
 };
 

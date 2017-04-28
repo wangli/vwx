@@ -6,7 +6,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     entry: {
         example: "./examples/App.js",
-        vendor: ['vue', 'vwx']
+        vendor: ['vue', 'vue-router', 'vwx']
     },
     output: {
         path: path.join(__dirname, "dist/examples"),//输出路径
