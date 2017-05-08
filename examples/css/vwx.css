@@ -90,15 +90,16 @@ img {
     position: relative;
     overflow: hidden;
 }
-.wrapper {
-    display: block;
-    position: relative;
-    overflow: hidden;
-}
 #timelist {
     position: relative;
-    height: 300px;
+    height: 200px;
 }
-.hoverAct:active {
-    background-color: #ECECEC;
+#timelist2 {
+    position: relative;
+    height: 200px;
+}
+#scroll2 .weui-cell{
+  display: inline-block;
+  width: 100px;
+  height: 100px;
 }

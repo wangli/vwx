@@ -573,3 +573,19 @@ button.swiper-pagination-bullet {
     transform: rotate(360deg);
   }
 }
+.swipercon {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.wrapper {
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+.scroller_h{
+  display: inline-flex;
+}
+.hoverAct:active {
+    background-color: #ECECEC;
+}

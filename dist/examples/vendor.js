@@ -142,7 +142,7 @@
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 53);
+/******/ 	return __webpack_require__(__webpack_require__.s = 54);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -4368,7 +4368,7 @@ module.exports = {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(51)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(52)(module)))
 
 /***/ }),
 /* 3 */
@@ -16768,8 +16768,8 @@ module.exports = function bind(fn, thisArg) {
 
 
 var base64 = __webpack_require__(42)
-var ieee754 = __webpack_require__(44)
-var isArray = __webpack_require__(45)
+var ieee754 = __webpack_require__(45)
+var isArray = __webpack_require__(46)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -19437,6 +19437,8 @@ var _app = __webpack_require__(35);
 
 var _app2 = _interopRequireDefault(_app);
 
+__webpack_require__(44);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
@@ -19585,11 +19587,11 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _iscroll = __webpack_require__(46);
+var _iscroll = __webpack_require__(47);
 
 var _iscroll2 = _interopRequireDefault(_iscroll);
 
-var _scroll_view = __webpack_require__(49);
+var _scroll_view = __webpack_require__(50);
 
 var _scroll_view2 = _interopRequireDefault(_scroll_view);
 
@@ -19607,9 +19609,11 @@ exports.default = {
     },
     props: {
         scrollX: {
+            type: Boolean,
             default: false
         },
         scrollY: {
+            type: Boolean,
             default: true
         },
         scrollId: {
@@ -19619,6 +19623,7 @@ exports.default = {
     mounted: function mounted() {
         var that = this;
         //创建滚动
+        console.log(this.scrollId + ":" + that.scrollX);
         vScroll = new _iscroll2.default(this.scrollId, {
             scrollX: that.scrollX,
             scrollY: that.scrollY,
@@ -19626,7 +19631,10 @@ exports.default = {
             mouseWheel: true,
             disableTouch: false,
             disableMouse: true,
-            eventPassthrough: "horizontal"
+            disablePointer: true,
+            eventPassthrough: that.scrollX,
+            click: false,
+            tap: true
         });
         //滚动监听
         vScroll.on('scrollStart', function () {
@@ -19685,11 +19693,11 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _swiper = __webpack_require__(47);
+var _swiper = __webpack_require__(48);
 
 var _swiper2 = _interopRequireDefault(_swiper);
 
-var _swiper3 = __webpack_require__(50);
+var _swiper3 = __webpack_require__(51);
 
 var _swiper4 = _interopRequireDefault(_swiper3);
 
@@ -19947,6 +19955,12 @@ function fromByteArray (uint8) {
 /* 44 */
 /***/ (function(module, exports) {
 
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports) {
+
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -20034,7 +20048,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -20045,7 +20059,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*! iScroll v5.2.0-snapshot ~ (c) 2008-2017 Matteo Spinelli ~ http://cubiq.org/license */
@@ -22249,7 +22263,7 @@ if ( typeof module != 'undefined' && module.exports ) {
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -27609,20 +27623,20 @@ else if (typeof define === 'function' && define.amd) {
 
 
 /***/ }),
-/* 48 */,
-/* 49 */
+/* 49 */,
+/* 50 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"scrollView\" v-bind:class=\"{ scrollbottom: lowerY<0 }\">\r\n    <div v-bind:class=\"{ scroller_h: scrollX }\">\r\n        <slot></slot>\r\n    </div>\r\n</div>";
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"swiper\">\r\n    <div class=\"swiper-wrapper\">\r\n        <slot></slot>\r\n    </div>\r\n    <div class=\"swiper-pagination\"></div>\r\n</div>";
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -27650,8 +27664,8 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 52 */,
-/* 53 */
+/* 53 */,
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(7);
@@ -27660,7 +27674,7 @@ module.exports = __webpack_require__(1);
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {/*

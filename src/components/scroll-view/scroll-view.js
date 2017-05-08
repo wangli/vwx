@@ -13,9 +13,11 @@ export default {
     },
     props: {
         scrollX: {
+            type:Boolean,
             default: false
         },
         scrollY: {
+            type:Boolean,
             default: true
         },
         scrollId: {
@@ -25,6 +27,7 @@ export default {
     mounted: function () {
         let that = this;
         //创建滚动
+        console.log(this.scrollId+":"+that.scrollX);
         vScroll = new IScroll(this.scrollId, {
             scrollX: that.scrollX,
             scrollY: that.scrollY,
@@ -32,7 +35,10 @@ export default {
             mouseWheel: true,
             disableTouch: false,
             disableMouse: true,
-            eventPassthrough: "horizontal"
+            disablePointer: true,
+            eventPassthrough: that.scrollX,
+            click: false,
+            tap: true
         });
         //滚动监听
         vScroll.on('scrollStart', function () {

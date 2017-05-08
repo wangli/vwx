@@ -6,7 +6,7 @@
         </swiper>
     </div>
     <div id="scroll">
-        <scroll-view ref="childTime" id="timelist" scroll-x="true" scroll-y="false" class="wrapper">
+        <scroll-view ref="childTime" id="timelist" scroll-id="#timelist" class="wrapper">
             <div class="weui-cells">
                 <a class="weui-cell weui-cell_access" href="javascript:;" v-for="(val,i) in list" @click="closed">
                     <div class="weui-cell__bd">
@@ -18,4 +18,12 @@
             </div>
         </scroll-view>
     </div>
+    <div id="scroll2">
+        <scroll-view ref="child2" id="timelist2" scroll-id="#timelist2" :scroll-x="true" :scroll-y="false" class="wrapper">
+            <a class="weui-cell" v-for="(val,i) in list" @click="closed">
+                {{val}}{{pv}}
+            </a>
+        </scroll-view>
+    </div>
+    <div><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p></div>
 </div>
