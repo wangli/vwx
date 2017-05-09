@@ -1,0 +1,15 @@
+<div id="page">
+    <div id="scroll">
+        <scroll-view ref="childTime" id="timelist" scroll-id="#timelist" class="wrapper">
+            <div class="weui-cells">
+                <a class="weui-cell weui-cell_access" href="javascript:;" v-for="(val,i) in list" @click="closed">
+                    <div class="weui-cell__bd">
+                        <p>{{val}}</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                    </div>
+                </a>
+            </div>
+        </scroll-view>
+    </div>
+</div>

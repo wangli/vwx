@@ -1,5 +1,5 @@
 /*
- * index.js v0.1.5
+ * index.js v0.1.8
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -15,14 +15,16 @@ const components = [
     ScrollView
 ];
 const _app = function (_obj) {
+    console.log("_obj");
+    console.log(_obj);
     window.wx = wx;
     Vue.use(VueRouter);
     components.map(component => {
         Vue.component(component.name, component);
     });
-    var routes = [];
-    _.extend(routes, _obj.pages);
-    var router = new VueRouter({ routes: routes });
+    var routes = _obj.pages;
+    //_.extend(routes, _obj.pages);
+    var router = new VueRouter({ routes });
     App(Vue, router);
 };
 module.exports = {

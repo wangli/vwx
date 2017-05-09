@@ -9,6 +9,7 @@ var _app;
 var App = function (Vue, router) {
     if (typeof _app == "undefined") {
         var _app = new Vue({
+            name:"App",
             el: '#app',
             router,
             template: '<router-view></router-view>'
