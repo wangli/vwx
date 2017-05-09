@@ -19,7 +19,7 @@
         </scroll-view>
     </div>
     <div id="scroll2">
-        <scroll-view ref="child2" id="timelist2" scroll-id="#timelist2" :scroll-x="true" :scroll-y="false" class="wrapper">
+        <scroll-view ref="child2" id="timelist2" scroll-id="#timelist2"  :scroll-x="true" :scroll-y="false" class="wrapper">
             <a class="weui-cell" v-for="(val,i) in list" @click="closed">
                 {{val}}{{pv}}
             </a>

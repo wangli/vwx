@@ -13,11 +13,11 @@ export default {
     },
     props: {
         scrollX: {
-            type:Boolean,
+            type: Boolean,
             default: false
         },
         scrollY: {
-            type:Boolean,
+            type: Boolean,
             default: true
         },
         scrollId: {
@@ -27,7 +27,6 @@ export default {
     mounted: function () {
         let that = this;
         //创建滚动
-        console.log(this.scrollId+":"+that.scrollX);
         vScroll = new IScroll(this.scrollId, {
             scrollX: that.scrollX,
             scrollY: that.scrollY,

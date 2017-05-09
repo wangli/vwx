@@ -19623,7 +19623,6 @@ exports.default = {
     mounted: function mounted() {
         var that = this;
         //创建滚动
-        console.log(this.scrollId + ":" + that.scrollX);
         vScroll = new _iscroll2.default(this.scrollId, {
             scrollX: that.scrollX,
             scrollY: that.scrollY,
@@ -19650,9 +19649,13 @@ exports.default = {
             }
         });
         //滚动监听
-        vScroll.on('scroll', function () {
-            that.bindscroll(this);
-        });
+        console.log("this._events");
+        if (this._events.bindscroll) {
+            console.log(this._events);
+            vScroll.on('scroll', function () {
+                that.bindscroll(this);
+            });
+        }
     },
     methods: {
         bindscrollstart: function bindscrollstart(evt) {

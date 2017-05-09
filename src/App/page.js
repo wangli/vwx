@@ -1,3 +1,9 @@
+/*
+ * app.js v0.1.2
+ * (c) 2017 wangli
+ * Released under the MIT License.
+ */
+/*创建APP页面*/
 import Axios from 'axios';
 import _ from 'lodash/core';
 
@@ -61,7 +67,7 @@ var _weixConfig = {
         //用户点击右上角分享
     },
     setData: function (_obj) {
-        _.forEach(data, (val, key) => {
+        _.forEach(_obj, (val, key) => {
             this[key] = val;
         });
     }

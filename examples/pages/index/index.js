@@ -19,5 +19,8 @@ module.exports = Page({
     },
     closed: function () {
         this.show = false;
+    },
+    onscroll: function () {
+        console.log("ttttttttttt");
     }
 });
