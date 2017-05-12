@@ -54,12 +54,12 @@ module.exports = {
             }
         }),
         new ExtractTextPlugin("[name].css"),
-        new webpack.optimize.UglifyJsPlugin({
+/*        new webpack.optimize.UglifyJsPlugin({
             sourceMap: true,
             compress: {
                 warnings: false
             }
-        }),
+        }),*/
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             filename: '[name].js',

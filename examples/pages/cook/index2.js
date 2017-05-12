@@ -1,8 +1,8 @@
 import { Page, App } from "vwx";
 import _ from 'lodash/core';
-import tpl from "./index.html";
+import tpl from "./index2.html";
 module.exports = Page({
-    name:"cook",
+    name:"cook2",
     template: tpl,
     data: {
         list: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20]

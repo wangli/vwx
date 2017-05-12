@@ -1,5 +1,16 @@
+/*
+ * v0.2.0
+ * (c) 2017 wangli
+ * Released under the MIT License.
+ */
+/*wx接口*/
 import request from "./request";
+import { setStorage, setStorageSync, getStorage, getStorageSync } from "./storage";
 module.exports = {
     v: 0.1,
-    request
+    request,
+    setStorage,
+    setStorageSync,
+    getStorage,
+    getStorageSync
 };

@@ -15,8 +15,6 @@ const components = [
     ScrollView
 ];
 const _app = function (_obj) {
-    console.log("_obj");
-    console.log(_obj);
     window.wx = wx;
     Vue.use(VueRouter);
     components.map(component => {
