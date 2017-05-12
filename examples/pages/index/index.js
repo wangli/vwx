@@ -1,5 +1,4 @@
 import { Page, App } from "vwx";
-import _ from 'lodash';
 import tpl from "./index.html";
 module.exports = Page({
     name: "index",
@@ -11,21 +10,9 @@ module.exports = Page({
     },
     onReady: function () {
         wx.request({
-            url: 'http://apiqa.ukitchenplus.com/v3/gclass/packagelist?page=1&pagesize=30',
-            complete: function (data) {
-                _.forEach(data, (val, key) => {
-
-                    //this[key] = val;
-                });
-            }
-        });
-        wx.setStorage({
-            key: "user", data: "good job", success: function (_key, _data) {
-                console.log(_key);
-                console.log(_data);
-            },
-            fail: function (err) {
-                console.log(err);
+            url: 'http://apiqa.ukitchenplus.com/v3/gclass/classlist?page=1&pagesize=30',
+            success: function (data) {
+                console.log(data);
             }
         });
     },

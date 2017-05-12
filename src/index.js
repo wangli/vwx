@@ -26,7 +26,7 @@ const _app = function (_obj) {
     App(Vue, router);
 };
 module.exports = {
-    v: '0.1',
+    v: '0.2',
     App: _app,
     Page,
     wx,

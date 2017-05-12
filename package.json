@@ -1,6 +1,6 @@
 {
   "name": "vwx",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "vwx",
   "main": "src/index.js",
   "dependencies": {
@@ -19,9 +19,11 @@
     "clean-webpack-plugin": "^0.1.16",
     "css-loader": "^0.28.0",
     "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
     "html-webpack-plugin": "^2.28.0",
     "less-loader": "^4.0.3",
     "style-loader": "^0.16.1",
+    "url-loader": "^0.5.8",
     "vue-html-loader": "^1.2.4",
     "webpack": "^2.2.1"
   },
@@ -35,7 +37,9 @@
     "url": "https://github.com/wangli/vwx.git"
   },
   "keywords": [
-    "vwx.js"
+    "vwx.js",
+    "vue.js",
+    "weixin"
   ],
   "author": "wangli",
   "license": "MIT"

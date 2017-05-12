@@ -1,9 +1,12 @@
 import Axios from 'axios';
-import _ from 'lodash/core';
+import _ from 'lodash';
+var count = 0;
 export default function (_obj) {
+
     /*默认参数配置*/
     var _defObj = {};
     _defObj.url = '';
+    _defObj.wait = true;
     _defObj.method = 'get';
     _defObj.dataType = 'json';
     _defObj.headers = { 'Content-Type': 'application/json;charset=utf-8' };
@@ -21,7 +24,9 @@ export default function (_obj) {
         _reqObj.success(res.data);
         _reqObj.complete(res.data);
     }).catch(function (err) {
-        _reqObj.fail(err);
-        _reqObj.complete(err);
+        if (err.response) {
+            _reqObj.fail(err);
+            _reqObj.complete(err);
+        }
     });
 };
