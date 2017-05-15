@@ -1,21 +1,19 @@
 /*
- * app.js v0.1.3
+ * app.js v0.1.4
  * (c) 2017 wangli
  * Released under the MIT License.
  */
 /*创建APP根页面*/
 var _app;
 
-var App = function (Vue, router) {
+var App = function (Vue, router, _data, _methods) {
     if (typeof _app == "undefined") {
         var _app = new Vue({
             name: "App",
             el: '#app',
             router,
             template: '<router-view></router-view>',
-            data: {
-                history: []
-            },
+            data: _data,
             watch: {
                 $route(to, from) {
                     var nChildren = this.$children[0];
@@ -29,7 +27,8 @@ var App = function (Vue, router) {
             },
             created: function () {
                 this.history.push(this.$route.path);
-            }
+            },
+            methods: _methods
         });
     }
 };
