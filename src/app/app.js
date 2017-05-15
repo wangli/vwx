@@ -1,5 +1,5 @@
 /*
- * app.js v0.1.6
+ * app.js v0.1.7
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -8,6 +8,11 @@ var _app;
 var _appView;
 var App = function (Vue, router, _config) {
     _app = _config;
+    Object.defineProperty(window, "App", {
+        get: function () {
+            return _app;
+        }
+    });
     if (typeof _appView == "undefined") {
         _appView = new Vue({
             name: "App",

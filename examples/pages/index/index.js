@@ -1,4 +1,4 @@
-import { Page, App } from "vwx";
+import { Page } from "vwx";
 import tpl from "./index.html";
 module.exports = Page({
     name: "index",
@@ -9,7 +9,7 @@ module.exports = Page({
     onLoad: function () {
     },
     onReady: function () {
-        var app = window.getApp();
+        console.log(App);
         wx.request({
             url: 'http://apiqa.ukitchenplus.com/v3/gclass/classlist?page=1&pagesize=30',
             success: function (data) {

@@ -3957,8 +3957,7 @@ module.exports = (0, _vwx.Page)({
     },
     onLoad: function onLoad() {},
     onReady: function onReady() {
-        var app = window.getApp();
-        console.log(app);
+        console.log(App);
         wx.request({
             url: 'http://apiqa.ukitchenplus.com/v3/gclass/classlist?page=1&pagesize=30',
             success: function success(data) {}

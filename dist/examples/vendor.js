@@ -501,7 +501,7 @@ var _lodash2 = _interopRequireDefault(_lodash);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var components = [_swiper2.default, _scrollView2.default]; /*
-                                                            * index.js v0.1.9
+                                                            * index.js v0.1.10
                                                             * (c) 2017 wangli
                                                             * Released under the MIT License.
                                                             */
@@ -32684,7 +32684,7 @@ module.exports = function spread(callback) {
 
 
 /*
- * app.js v0.1.5
+ * app.js v0.1.6
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -32693,6 +32693,11 @@ var _app;
 var _appView;
 var App = function App(Vue, router, _config) {
     _app = _config;
+    Object.defineProperty(window, "App", {
+        get: function get() {
+            return _app;
+        }
+    });
     if (typeof _appView == "undefined") {
         _appView = new Vue({
             name: "App",
