@@ -9,6 +9,7 @@ import { setStorage, setStorageSync, getStorage, getStorageSync } from "./storag
 import { showToast, hideToast } from "./modals";
 import login from "./login";
 import user from "./userInfo";
+import requestPayment from "./requestPayment"
 module.exports = {
     v: 0.1,
     request,
@@ -19,5 +20,6 @@ module.exports = {
     showToast,
     hideToast,
     login,
-    user
+    user,
+    requestPayment
 };
