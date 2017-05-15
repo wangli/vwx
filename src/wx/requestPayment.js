@@ -1,5 +1,5 @@
 /*
- * v0.1.0
+ * v0.1.1
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -7,16 +7,24 @@ import Axios from 'axios';
 import _ from 'lodash';
 
 var _o = {};
-var _success = null;
-var _fail = null;
+var _success = function () {
+
+};
+var _fail = function () {
+
+};
 var onBridgeReady = function () {
-    WeixinJSBridge.invoke('getBrandWCPayRequest', _o, function (res) {
-        if (res.err_msg == "get_brand_wcpay_request:ok") {
-            _success();
-        } else {
-            _fail();
-        }
-    });
+    if (typeof WeixinJSBridge == "undefined") {
+        WeixinJSBridge.invoke('getBrandWCPayRequest', _o, function (res) {
+            if (res.err_msg == "get_brand_wcpay_request:ok") {
+                _success();
+            } else {
+                _fail();
+            }
+        });
+    } else {
+        alert("打开微信支付失败");
+    }
 }
 var requestPayment = function (_obj) {
     var _oclone = _.clone(_obj);

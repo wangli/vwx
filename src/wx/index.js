@@ -1,5 +1,5 @@
 /*
- * v0.2.0
+ * v0.2.2
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -11,7 +11,7 @@ import login from "./login";
 import user from "./userInfo";
 import requestPayment from "./requestPayment"
 module.exports = {
-    v: 0.1,
+    v: "0.2.2",
     request,
     setStorage,
     setStorageSync,
