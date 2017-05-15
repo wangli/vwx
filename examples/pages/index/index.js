@@ -15,6 +15,15 @@ module.exports = Page({
             success: function (data) {
             }
         });
+        wx.login({
+            method: "POST",
+            data: {
+                type: 1,
+                account: "13567486258",
+                pwd: "123456"
+            }
+        });
+        App.config.accompany = wx.user.accompany();
     },
     onShow: function () {
     },

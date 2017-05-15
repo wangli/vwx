@@ -4,6 +4,7 @@ var _uid = 0;
 var _rt = "web";
 var _info = "web";
 var p = {
+    v: "3.0",
     notice: null,//提示信息
     login: false,//是否登陆
     accompany: function () {

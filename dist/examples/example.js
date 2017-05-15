@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 15:
+/***/ 17:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -3841,11 +3841,11 @@ webpackJsonp([0],{
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(16)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(18)(module)))
 
 /***/ }),
 
-/***/ 17:
+/***/ 19:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3853,11 +3853,11 @@ webpackJsonp([0],{
 
 var _vwx = __webpack_require__(1);
 
-var _core = __webpack_require__(15);
+var _core = __webpack_require__(17);
 
 var _core2 = _interopRequireDefault(_core);
 
-var _index = __webpack_require__(57);
+var _index = __webpack_require__(59);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -3890,7 +3890,7 @@ module.exports = (0, _vwx.Page)({
 
 /***/ }),
 
-/***/ 18:
+/***/ 20:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3898,11 +3898,11 @@ module.exports = (0, _vwx.Page)({
 
 var _vwx = __webpack_require__(1);
 
-var _core = __webpack_require__(15);
+var _core = __webpack_require__(17);
 
 var _core2 = _interopRequireDefault(_core);
 
-var _index = __webpack_require__(58);
+var _index = __webpack_require__(60);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -3935,7 +3935,7 @@ module.exports = (0, _vwx.Page)({
 
 /***/ }),
 
-/***/ 19:
+/***/ 21:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3943,7 +3943,7 @@ module.exports = (0, _vwx.Page)({
 
 var _vwx = __webpack_require__(1);
 
-var _index = __webpack_require__(59);
+var _index = __webpack_require__(61);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -3962,6 +3962,16 @@ module.exports = (0, _vwx.Page)({
             url: 'http://apiqa.ukitchenplus.com/v3/gclass/classlist?page=1&pagesize=30',
             success: function success(data) {}
         });
+        wx.login({
+            method: "POST",
+            data: {
+                type: 1,
+                account: "13567486258",
+                pwd: "123456"
+            }
+        });
+        App.config.accompany = wx.user.accompany();
+        console.log(App.config.accompany);
     },
     onShow: function onShow() {},
     closed: function closed() {
@@ -3974,20 +3984,6 @@ module.exports = (0, _vwx.Page)({
 
 /***/ }),
 
-/***/ 20:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 21:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ 22:
 /***/ (function(module, exports) {
 
@@ -3995,28 +3991,42 @@ module.exports = (0, _vwx.Page)({
 
 /***/ }),
 
-/***/ 57:
+/***/ 23:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"page\">\r\n    <div id=\"scroll\">\r\n        <scroll-view ref=\"childTime\" id=\"timelist\" scroll-id=\"#timelist\" class=\"wrapper\">\r\n            <div class=\"weui-cells\">\r\n                <a class=\"weui-cell weui-cell_access\" href=\"javascript:;\" v-for=\"(val,i) in list\" @click=\"closed\">\r\n                    <div class=\"weui-cell__bd\">\r\n                        <p>6666666666668432255{{val}}</p>\r\n                    </div>\r\n                    <div class=\"weui-cell__ft\">\r\n                    </div>\r\n                </a>\r\n            </div>\r\n        </scroll-view>\r\n    </div>\r\n</div>";
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 58:
+/***/ 24:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"page\">\r\n    <div id=\"scroll\">\r\n        <scroll-view ref=\"childTime\" id=\"timelist\" scroll-id=\"#timelist\" class=\"wrapper\">\r\n            <div class=\"weui-cells\">\r\n                <a class=\"weui-cell weui-cell_access\" href=\"javascript:;\" v-for=\"(val,i) in list\" @click=\"closed\">\r\n                    <div class=\"weui-cell__bd\">\r\n                        <p>00000000000000000{{val}}</p>\r\n                    </div>\r\n                    <div class=\"weui-cell__ft\">\r\n                    </div>\r\n                </a>\r\n            </div>\r\n        </scroll-view>\r\n    </div>\r\n</div>";
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 
 /***/ 59:
 /***/ (function(module, exports) {
 
+module.exports = "<div id=\"page\">\r\n    <div id=\"scroll\">\r\n        <scroll-view ref=\"childTime\" id=\"timelist\" scroll-id=\"#timelist\" class=\"wrapper\">\r\n            <div class=\"weui-cells\">\r\n                <a class=\"weui-cell weui-cell_access\" href=\"javascript:;\" v-for=\"(val,i) in list\" @click=\"closed\">\r\n                    <div class=\"weui-cell__bd\">\r\n                        <p>6666666666668432255{{val}}</p>\r\n                    </div>\r\n                    <div class=\"weui-cell__ft\">\r\n                    </div>\r\n                </a>\r\n            </div>\r\n        </scroll-view>\r\n    </div>\r\n</div>";
+
+/***/ }),
+
+/***/ 60:
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"page\">\r\n    <div id=\"scroll\">\r\n        <scroll-view ref=\"childTime\" id=\"timelist\" scroll-id=\"#timelist\" class=\"wrapper\">\r\n            <div class=\"weui-cells\">\r\n                <a class=\"weui-cell weui-cell_access\" href=\"javascript:;\" v-for=\"(val,i) in list\" @click=\"closed\">\r\n                    <div class=\"weui-cell__bd\">\r\n                        <p>00000000000000000{{val}}</p>\r\n                    </div>\r\n                    <div class=\"weui-cell__ft\">\r\n                    </div>\r\n                </a>\r\n            </div>\r\n        </scroll-view>\r\n    </div>\r\n</div>";
+
+/***/ }),
+
+/***/ 61:
+/***/ (function(module, exports) {
+
 module.exports = "<div id=\"page\">\r\n    <div id=\"swiper\">\r\n        <swiper :indicator-dots=\"true\" class=\"swipercon\">\r\n            <a class=\"swiper-slide blue-slide\"><img src=\"http://img.ukitchenplus.com/2017410122936771C7CD5B7838DE7EE5C562A246C96F8431.png\"></a>\r\n            <a class=\"swiper-slide blue-slide\"><img src=\"http://img.ukitchenplus.com/20174101229517242A88AEC89B92BF404B97A101B7A353AF.png\"></a>\r\n        </swiper>\r\n    </div>\r\n    <div id=\"scroll\">\r\n        <scroll-view ref=\"childTime\" id=\"timelist\" scroll-id=\"#timelist\" class=\"wrapper\">\r\n            <div class=\"weui-cells\">\r\n                <a class=\"weui-cell weui-cell_access\" href=\"javascript:;\" v-for=\"(val,i) in list\" @click=\"closed\">\r\n                    <div class=\"weui-cell__bd\">\r\n                        <p>{{val}}</p>\r\n                    </div>\r\n                    <div class=\"weui-cell__ft\">\r\n                    </div>\r\n                </a>\r\n            </div>\r\n        </scroll-view>\r\n    </div>\r\n    <div id=\"scroll2\">\r\n        <scroll-view ref=\"child2\" id=\"timelist2\" scroll-id=\"#timelist2\"  :scroll-x=\"true\" :scroll-y=\"false\" class=\"wrapper\">\r\n            <a class=\"weui-cell\" v-for=\"(val,i) in list\" @click=\"closed\">\r\n                {{val}}\r\n            </a>\r\n        </scroll-view>\r\n    </div>\r\n    <div><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p></div>\r\n</div>";
 
 /***/ }),
 
-/***/ 62:
+/***/ 64:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4024,31 +4034,34 @@ module.exports = "<div id=\"page\">\r\n    <div id=\"swiper\">\r\n        <swipe
 
 var _vwx = __webpack_require__(1);
 
-var _index = __webpack_require__(19);
+var _index = __webpack_require__(21);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _index3 = __webpack_require__(17);
+var _index3 = __webpack_require__(19);
 
 var _index4 = _interopRequireDefault(_index3);
 
-var _index5 = __webpack_require__(18);
+var _index5 = __webpack_require__(20);
 
 var _index6 = _interopRequireDefault(_index5);
 
+__webpack_require__(24);
+
+__webpack_require__(23);
+
 __webpack_require__(22);
-
-__webpack_require__(21);
-
-__webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _vwx.App)({
-    config: { host: "http://apiqa.ukitchenplus.com/" },
+    config: {
+        host: "http://apiqa.ukitchenplus.com",
+        accompany: ""
+    },
     pages: [{ path: '/', component: _index2.default }, { path: '/index', component: _index2.default }, { path: '/cook', component: _index4.default }, { path: '/cook2', component: _index6.default }]
 });
 
 /***/ })
 
-},[62]);
+},[64]);
