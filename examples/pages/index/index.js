@@ -9,12 +9,14 @@ module.exports = Page({
     onLoad: function () {
     },
     onReady: function () {
+        var app = window.getApp();
         wx.request({
             url: 'http://apiqa.ukitchenplus.com/v3/gclass/classlist?page=1&pagesize=30',
             success: function (data) {
-                console.log(data);
             }
         });
+    },
+    onShow: function () {
     },
     closed: function () {
         this.show = false;

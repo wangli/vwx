@@ -1,5 +1,5 @@
 /*
- * index.js v0.1.9
+ * index.js v0.1.10
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -22,20 +22,15 @@ const _app = function (_obj) {
         Vue.component(component.name, component);
     });
     var routes = _obj.pages;
-    var _data = { history: [] };
-    var _methods = {};
-    for (var key in routes) {
-        if (!_.has(routes[key], 'pages')) {
-            if (typeof routes[key] == "function") {
-                _methods[key] = routes[key];
-            } else if (typeof routes[key] == "object") {
-                _data[key] = routes[key];
-            }
+    var _appConfig = {};
+    for (var key in _obj) {
+        if (key !== 'pages') {
+            _appConfig[key] = _obj[key];
         }
     }
     //_.extend(routes, _obj.pages);
     var router = new VueRouter({ routes });
-    App(Vue, router, _data, _methods);
+    App(Vue, router, _appConfig);
 };
 module.exports = {
     v: '0.2',

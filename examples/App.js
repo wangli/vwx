@@ -7,6 +7,7 @@ import './css/wc.css';
 import './css/vwx.css';
 
 App({
+    config: { host: "http://apiqa.ukitchenplus.com/" },
     pages: [
         { path: '/', component: index },
         { path: '/index', component: index },
