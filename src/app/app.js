@@ -1,5 +1,5 @@
 /*
- * app.js v0.2.0
+ * app.js v0.2.1
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -15,12 +15,7 @@ var _app = {
     }
 };
 
-var App = function(Vue, VueRouter, _options) {
-    Object.defineProperty(window, "app", {
-        get: function() {
-            return _app;
-        }
-    });
+var App = function (Vue, VueRouter, _options) {
     if (_options.pages) {
         router = new VueRouter({
             routes: _options.pages
@@ -38,7 +33,6 @@ var App = function(Vue, VueRouter, _options) {
             _app[key] = _options[key];
         }
     }
-
     if (typeof _appView == "undefined") {
         _appView = new Vue({
             name: "App",
@@ -59,7 +53,7 @@ var App = function(Vue, VueRouter, _options) {
                     }
                 }
             },
-            created: function() {
+            created: function () {
                 this.history.push(this.$route.path);
                 if (_onLaunch) {
                     _onLaunch();
@@ -69,7 +63,8 @@ var App = function(Vue, VueRouter, _options) {
     }
 };
 if (typeof window !== 'undefined' && typeof window.getApp == 'undefined') {
-    window.getApp = function() {
+    window.app = _app;
+    window.getApp = function () {
         return _app;
     };
 }
