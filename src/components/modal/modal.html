@@ -1,0 +1,8 @@
+<div class="js_dialog" v-if="show">
+    <div class="weui-mask"></div>
+    <div class="weui-dialog">
+        <div class="weui-dialog__hd" v-if="title!=''"><strong class="weui-dialog__title">{{ title }}</strong></div>
+        <div class="weui-dialog__bd" v-html="content"></div>
+        <div class="weui-dialog__ft"><a href="javascript:;" @click="wxsuccess({confirm:false})" class="weui-dialog__btn weui-dialog__btn_default" v-if="showCancel">{{ cancelText }}</a> <a href="javascript:;" @click="wxsuccess({confirm:true})" class="weui-dialog__btn weui-dialog__btn_primary">{{ confirmText }}</a></div>
+    </div>
+</div>

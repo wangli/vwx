@@ -1,0 +1,13 @@
+<div id="iosActionsheet" v-if="show">
+    <div class="weui-mask" @click="cancel"></div>
+    <div class="weui-actionsheet" :class="{'weui-actionsheet_toggle':open}">
+        <div class="weui-actionsheet__menu">
+            <template v-for="(val,i) in itemList">
+                <div class="weui-actionsheet__cell" @click="selected({tapIndex:i})">{{val}}</div>
+            </template>
+        </div>
+        <div class="weui-actionsheet__action">
+            <div class="weui-actionsheet__cell" @click="cancel">取消</div>
+        </div>
+    </div>
+</div>

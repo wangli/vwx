@@ -1,18 +1,44 @@
 /*
- * app.js v0.1.7
+ * app.js v0.2.0
  * (c) 2017 wangli
  * Released under the MIT License.
  */
 /*创建APP根页面*/
-var _app;
-var _appView;
-var App = function (Vue, router, _config) {
-    _app = _config;
-    Object.defineProperty(window, "App", {
-        get: function () {
+
+var _config, router, _appView, _onLaunch;
+var _app = {
+    get config() {
+        return _config;
+    },
+    get view() {
+        return _appView;
+    }
+};
+
+var App = function(Vue, VueRouter, _options) {
+    Object.defineProperty(window, "app", {
+        get: function() {
             return _app;
         }
     });
+    if (_options.pages) {
+        router = new VueRouter({
+            routes: _options.pages
+        });
+    }
+    if (_options.config) {
+        _config = _options.config;
+    }
+    if (_options.onLaunch) {
+        _onLaunch = _options.onLaunch;
+    }
+
+    for (var key in _options) {
+        if (key != 'pages' && key != 'config' && key != 'onLaunch' && key != 'view') {
+            _app[key] = _options[key];
+        }
+    }
+
     if (typeof _appView == "undefined") {
         _appView = new Vue({
             name: "App",
@@ -33,16 +59,17 @@ var App = function (Vue, router, _config) {
                     }
                 }
             },
-            created: function () {
+            created: function() {
                 this.history.push(this.$route.path);
+                if (_onLaunch) {
+                    _onLaunch();
+                }
             }
         });
-
-        _app.view = _appView;
     }
 };
 if (typeof window !== 'undefined' && typeof window.getApp == 'undefined') {
-    window.getApp = function () {
+    window.getApp = function() {
         return _app;
     };
 }

@@ -27,6 +27,7 @@ var onBridgeReady = function () {
     }
 }
 var requestPayment = function (_obj) {
+    _o = {};
     var _oclone = _.clone(_obj);
     for (var k in _oclone) {
         if (k == "success") {

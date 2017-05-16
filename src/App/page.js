@@ -20,7 +20,9 @@ var _vueConfig = {
     beforeCreate: function () { },
     /*实例已经创建完成之后被调用。在这一步，实例已完成以下的配置：数据观测(data observer)，属性和方法的运算， watch/event 事件回调。然而，挂载阶段还没开始，$el 属性目前不可见。*/
     created: function () {
-        this.hlg = this.$parent.history.length;
+        if(this.$parent){
+            this.hlg = this.$parent.history.length;
+        }
     },
     /*在挂载开始之前被调用：相关的 render 函数首次被调用。*/
     beforeMount: function () { },

@@ -6,7 +6,7 @@
 /*wx接口*/
 import request from "./request";
 import { setStorage, setStorageSync, getStorage, getStorageSync } from "./storage";
-import { showToast, hideToast } from "./modals";
+import { showToast,hideToast,showModal,showActionSheet} from "./modal";
 import login from "./login";
 import user from "./userInfo";
 import requestPayment from "./requestPayment"
@@ -19,6 +19,8 @@ module.exports = {
     getStorageSync,
     showToast,
     hideToast,
+    showModal,
+    showActionSheet,
     login,
     user,
     requestPayment

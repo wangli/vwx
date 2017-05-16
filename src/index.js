@@ -1,5 +1,5 @@
 /*
- * index.js v0.1.10
+ * index.js v0.1.11
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -7,6 +7,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Swiper from "./components/swiper/swiper";
 import ScrollView from "./components/scroll-view/scroll-view";
+import modal from "./wx/modal";
 import wx from "./wx";
 import { App, Page } from "./app";
 import _ from 'lodash';
@@ -21,16 +22,8 @@ const _app = function (_obj) {
     components.map(component => {
         Vue.component(component.name, component);
     });
-    var routes = _obj.pages;
-    var _appConfig = {};
-    for (var key in _obj) {
-        if (key !== 'pages') {
-            _appConfig[key] = _obj[key];
-        }
-    }
-    //_.extend(routes, _obj.pages);
-    var router = new VueRouter({ routes });
-    App(Vue, router, _appConfig);
+    modal.install(Vue);
+    App(Vue, VueRouter, _obj);
 };
 module.exports = {
     v: '0.2',
