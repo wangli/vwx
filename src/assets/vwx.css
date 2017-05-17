@@ -14,3 +14,26 @@
 .hoverAct:active {
     background-color: #ECECEC;
 }
+.toast{
+    text-align: center;
+    color: #999;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    top: 0;
+    overflow: hidden;
+    top: 40%;
+    display: block;
+}
+.toast .txt{    
+    width: 60px;
+    margin: 0 auto;
+    padding: 12px 12px;
+    border-radius: 2px;
+    font-size: 12px;
+    line-height: 12px;
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #eee;
+    min-width: 80px;
+}

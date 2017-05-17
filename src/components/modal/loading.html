@@ -1,0 +1,8 @@
+<transition name="fade" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+    <div class="o_load" v-if="show">
+        <div class="loading08">
+            <div class="loader" v-if="loading"></div>
+            <div class="loadtxt">{{title}}</div>
+        </div>
+    </div>
+</transition>

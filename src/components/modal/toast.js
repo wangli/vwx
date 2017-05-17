@@ -3,9 +3,9 @@ import _tpl from './toast.html'
 export default {
     name:"toast",
     data: {
-        duration: 0,
+        duration: 2000,
         show: false,
-        title: '加载中...',
+        title: '......',
         loading: true
     },
     template: _tpl,

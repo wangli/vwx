@@ -14,7 +14,7 @@ module.exports = Page({
         });
 
         app.config.accompany = wx.user.accompany();
-        wx.showToast();
+        wx.showToast({title:"登陆错误"});
     },
     onShow: function() {},
     closed: function() {

@@ -3857,7 +3857,7 @@ var _core = __webpack_require__(18);
 
 var _core2 = _interopRequireDefault(_core);
 
-var _index = __webpack_require__(63);
+var _index = __webpack_require__(64);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -3902,7 +3902,7 @@ var _core = __webpack_require__(18);
 
 var _core2 = _interopRequireDefault(_core);
 
-var _index = __webpack_require__(64);
+var _index = __webpack_require__(65);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -3943,7 +3943,7 @@ module.exports = (0, _vwx.Page)({
 
 var _vwx = __webpack_require__(2);
 
-var _index = __webpack_require__(65);
+var _index = __webpack_require__(66);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -3963,7 +3963,7 @@ module.exports = (0, _vwx.Page)({
         });
 
         app.config.accompany = wx.user.accompany();
-        wx.showToast();
+        wx.showToast({ title: "登陆错误" });
     },
     onShow: function onShow() {},
     closed: function closed() {
@@ -3995,28 +3995,28 @@ module.exports = (0, _vwx.Page)({
 
 /***/ }),
 
-/***/ 63:
+/***/ 64:
 /***/ (function(module, exports) {
 
 module.exports = "<div id=\"page\">\r\n    <div id=\"scroll\">\r\n        <scroll-view ref=\"childTime\" id=\"timelist\" scroll-id=\"#timelist\" class=\"wrapper\">\r\n            <div class=\"weui-cells\">\r\n                <a class=\"weui-cell weui-cell_access\" href=\"javascript:;\" v-for=\"(val,i) in list\" @click=\"closed\">\r\n                    <div class=\"weui-cell__bd\">\r\n                        <p>6666666666668432255{{val}}</p>\r\n                    </div>\r\n                    <div class=\"weui-cell__ft\">\r\n                    </div>\r\n                </a>\r\n            </div>\r\n        </scroll-view>\r\n    </div>\r\n</div>";
 
 /***/ }),
 
-/***/ 64:
+/***/ 65:
 /***/ (function(module, exports) {
 
 module.exports = "<div id=\"page\">\r\n    <div id=\"scroll\">\r\n        <scroll-view ref=\"childTime\" id=\"timelist\" scroll-id=\"#timelist\" class=\"wrapper\">\r\n            <div class=\"weui-cells\">\r\n                <a class=\"weui-cell weui-cell_access\" href=\"javascript:;\" v-for=\"(val,i) in list\" @click=\"closed\">\r\n                    <div class=\"weui-cell__bd\">\r\n                        <p>00000000000000000{{val}}</p>\r\n                    </div>\r\n                    <div class=\"weui-cell__ft\">\r\n                    </div>\r\n                </a>\r\n            </div>\r\n        </scroll-view>\r\n    </div>\r\n</div>";
 
 /***/ }),
 
-/***/ 65:
+/***/ 66:
 /***/ (function(module, exports) {
 
 module.exports = "<div id=\"page\">\r\n    <div id=\"swiper\">\r\n        <swiper :indicator-dots=\"true\" class=\"swipercon\">\r\n            <a class=\"swiper-slide blue-slide\"><img src=\"http://img.ukitchenplus.com/2017410122936771C7CD5B7838DE7EE5C562A246C96F8431.png\"></a>\r\n            <a class=\"swiper-slide blue-slide\"><img src=\"http://img.ukitchenplus.com/20174101229517242A88AEC89B92BF404B97A101B7A353AF.png\"></a>\r\n        </swiper>\r\n    </div>\r\n    <div id=\"scroll\">\r\n        <scroll-view ref=\"childTime\" id=\"timelist\" scroll-id=\"#timelist\" class=\"wrapper\">\r\n            <div class=\"weui-cells\">\r\n                <a class=\"weui-cell weui-cell_access\" href=\"javascript:;\" v-for=\"(val,i) in list\" @click=\"closed\">\r\n                    <div class=\"weui-cell__bd\">\r\n                        <p>{{val}}</p>\r\n                    </div>\r\n                    <div class=\"weui-cell__ft\">\r\n                    </div>\r\n                </a>\r\n            </div>\r\n        </scroll-view>\r\n    </div>\r\n    <div id=\"scroll2\">\r\n        <scroll-view ref=\"child2\" id=\"timelist2\" scroll-id=\"#timelist2\"  :scroll-x=\"true\" :scroll-y=\"false\" class=\"wrapper\">\r\n            <a class=\"weui-cell\" v-for=\"(val,i) in list\" @click=\"closed\">\r\n                {{val}}\r\n            </a>\r\n        </scroll-view>\r\n    </div>\r\n    <div><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p></div>\r\n</div>";
 
 /***/ }),
 
-/***/ 71:
+/***/ 73:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4054,4 +4054,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ })
 
-},[71]);
+},[73]);

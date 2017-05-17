@@ -142,7 +142,7 @@
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 72);
+/******/ 	return __webpack_require__(__webpack_require__.s = 74);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -17572,11 +17572,11 @@ var _vueRouter = __webpack_require__(7);
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
-var _swiper = __webpack_require__(50);
+var _swiper = __webpack_require__(51);
 
 var _swiper2 = _interopRequireDefault(_swiper);
 
-var _scrollView = __webpack_require__(49);
+var _scrollView = __webpack_require__(50);
 
 var _scrollView2 = _interopRequireDefault(_scrollView);
 
@@ -17584,7 +17584,7 @@ var _modal = __webpack_require__(14);
 
 var _modal2 = _interopRequireDefault(_modal);
 
-var _wx = __webpack_require__(51);
+var _wx = __webpack_require__(52);
 
 var _wx2 = _interopRequireDefault(_wx);
 
@@ -30010,7 +30010,7 @@ module.exports = function bind(fn, thisArg) {
 "use strict";
 
 
-var _toast2 = __webpack_require__(48);
+var _toast2 = __webpack_require__(49);
 
 var _toast3 = _interopRequireDefault(_toast2);
 
@@ -30018,9 +30018,13 @@ var _actionSheet2 = __webpack_require__(46);
 
 var _actionSheet3 = _interopRequireDefault(_actionSheet2);
 
-var _modal2 = __webpack_require__(47);
+var _modal2 = __webpack_require__(48);
 
 var _modal3 = _interopRequireDefault(_modal2);
+
+var _loading2 = __webpack_require__(47);
+
+var _loading3 = _interopRequireDefault(_loading2);
 
 var _lodash = __webpack_require__(1);
 
@@ -30028,26 +30032,26 @@ var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var toast, modal, actionSheet;
+var toast, modal, actionSheet, loading;
 var install = function install(Vue, options) {
+    loading = new Vue(_loading3.default);
     toast = new Vue(_toast3.default);
     modal = new Vue(_modal3.default);
     actionSheet = new Vue(_actionSheet3.default);
     if (document.body) {
-        document.body.appendChild(toast.$mount().$el);
-        document.body.appendChild(modal.$mount().$el);
-        document.body.appendChild(actionSheet.$mount().$el);
+        addModal();
     } else {
-        window.addEventListener("load", function () {
-            document.body.appendChild(toast.$mount().$el);
-            document.body.appendChild(modal.$mount().$el);
-            document.body.appendChild(actionSheet.$mount().$el);
-        }, false);
+        window.addEventListener("load", addModal, false);
     }
+};
+var addModal = function addModal() {
+    document.body.appendChild(loading.$mount().$el);
+    document.body.appendChild(toast.$mount().$el);
+    document.body.appendChild(modal.$mount().$el);
+    document.body.appendChild(actionSheet.$mount().$el);
 };
 var showToast = function showToast(_obj) {
     if (!toast.show) {
-        toast.duration = 0;
         toast.title = '加载中...';
         var _o = _lodash2.default.clone(_obj);
         /*对象处理*/
@@ -30068,6 +30072,25 @@ var showToast = function showToast(_obj) {
 var hideToast = function hideToast() {
     if (toast.show) {
         toast.show = false;
+    }
+};
+var showLoading = function showLoading(_obj) {
+    if (!loading.show) {
+        loading.title = '加载中...';
+        var _o = _lodash2.default.clone(_obj);
+        /*对象处理*/
+        for (var k in _o) {
+            //数据对象转换
+            loading[k] = _o[k];
+        }
+        loading.show = true;
+    } else if (_lodash2.default.has(_obj, "title")) {
+        loading.title = _obj.title;
+    }
+};
+var hideLoading = function hideLoading() {
+    if (loading.show) {
+        loading.show = false;
     }
 };
 var showModal = function showModal(_obj) {
@@ -30091,6 +30114,8 @@ var showActionSheet = function showActionSheet(_obj) {
 module.exports = {
     showToast: showToast,
     hideToast: hideToast,
+    showLoading: showLoading,
+    hideLoading: hideLoading,
     showModal: showModal,
     showActionSheet: showActionSheet,
     install: install
@@ -30241,9 +30266,9 @@ module.exports = p;
 
 
 
-var base64 = __webpack_require__(55)
-var ieee754 = __webpack_require__(58)
-var isArray = __webpack_require__(59)
+var base64 = __webpack_require__(56)
+var ieee754 = __webpack_require__(59)
+var isArray = __webpack_require__(60)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -32903,7 +32928,7 @@ module.exports = function spread(callback) {
 
 
 /*
- * app.js v0.2.0
+ * app.js v0.2.1
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -32990,7 +33015,7 @@ var _app = __webpack_require__(43);
 
 var _app2 = _interopRequireDefault(_app);
 
-__webpack_require__(57);
+__webpack_require__(58);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33160,7 +33185,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _actionSheet = __webpack_require__(66);
+var _actionSheet = __webpack_require__(67);
 
 var _actionSheet2 = _interopRequireDefault(_actionSheet);
 
@@ -33204,7 +33229,35 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _modal = __webpack_require__(67);
+var _loading = __webpack_require__(68);
+
+var _loading2 = _interopRequireDefault(_loading);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+    name: "loading",
+    data: {
+        duration: 0,
+        show: false,
+        title: '加载中...',
+        loading: true
+    },
+    template: _loading2.default
+};
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _modal = __webpack_require__(69);
 
 var _modal2 = _interopRequireDefault(_modal);
 
@@ -33236,34 +33289,6 @@ exports.default = {
 };
 
 /***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _toast = __webpack_require__(68);
-
-var _toast2 = _interopRequireDefault(_toast);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-    name: "toast",
-    data: {
-        duration: 0,
-        show: false,
-        title: '加载中...',
-        loading: true
-    },
-    template: _toast2.default
-};
-
-/***/ }),
 /* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33274,11 +33299,39 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _iscroll = __webpack_require__(60);
+var _toast = __webpack_require__(70);
+
+var _toast2 = _interopRequireDefault(_toast);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+    name: "toast",
+    data: {
+        duration: 1500,
+        show: false,
+        title: '......',
+        loading: true
+    },
+    template: _toast2.default
+};
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _iscroll = __webpack_require__(61);
 
 var _iscroll2 = _interopRequireDefault(_iscroll);
 
-var _scroll_view = __webpack_require__(69);
+var _scroll_view = __webpack_require__(71);
 
 var _scroll_view2 = _interopRequireDefault(_scroll_view);
 
@@ -33369,7 +33422,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33379,15 +33432,15 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _swiper = __webpack_require__(62);
+var _swiper = __webpack_require__(63);
 
 var _swiper2 = _interopRequireDefault(_swiper);
 
-var _swiper3 = __webpack_require__(70);
+var _swiper3 = __webpack_require__(72);
 
 var _swiper4 = _interopRequireDefault(_swiper3);
 
-__webpack_require__(56);
+__webpack_require__(57);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33444,7 +33497,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33454,11 +33507,11 @@ var _request = __webpack_require__(15);
 
 var _request2 = _interopRequireDefault(_request);
 
-var _storage = __webpack_require__(54);
+var _storage = __webpack_require__(55);
 
 var _modal = __webpack_require__(14);
 
-var _login = __webpack_require__(52);
+var _login = __webpack_require__(53);
 
 var _login2 = _interopRequireDefault(_login);
 
@@ -33466,7 +33519,7 @@ var _userInfo = __webpack_require__(16);
 
 var _userInfo2 = _interopRequireDefault(_userInfo);
 
-var _requestPayment = __webpack_require__(53);
+var _requestPayment = __webpack_require__(54);
 
 var _requestPayment2 = _interopRequireDefault(_requestPayment);
 
@@ -33495,7 +33548,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33536,7 +33589,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 ;
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33600,7 +33653,7 @@ var requestPayment = function requestPayment(_obj) {
 module.exports = requestPayment;
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33707,7 +33760,7 @@ var getKeyData = function getKeyData(_key, _data) {
 module.exports = { setStorage: setStorage, setStorageSync: setStorageSync, getStorage: getStorage, getStorageSync: getStorageSync };
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33828,12 +33881,6 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 56 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
 /* 57 */
 /***/ (function(module, exports) {
 
@@ -33841,6 +33888,12 @@ function fromByteArray (uint8) {
 
 /***/ }),
 /* 58 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 59 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -33930,7 +33983,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -33941,7 +33994,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*! iScroll v5.2.0-snapshot ~ (c) 2008-2017 Matteo Spinelli ~ http://cubiq.org/license */
@@ -36145,7 +36198,7 @@ if ( typeof module != 'undefined' && module.exports ) {
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports) {
 
 
@@ -36240,7 +36293,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -41600,19 +41653,13 @@ else if (typeof define === 'function' && define.amd) {
 
 
 /***/ }),
-/* 63 */,
 /* 64 */,
 /* 65 */,
-/* 66 */
-/***/ (function(module, exports) {
-
-module.exports = "<div id=\"iosActionsheet\" v-if=\"show\">\r\n    <div class=\"weui-mask\" @click=\"cancel\"></div>\r\n    <div class=\"weui-actionsheet\" :class=\"{'weui-actionsheet_toggle':open}\">\r\n        <div class=\"weui-actionsheet__menu\">\r\n            <template v-for=\"(val,i) in itemList\">\r\n                <div class=\"weui-actionsheet__cell\" @click=\"selected({tapIndex:i})\">{{val}}</div>\r\n            </template>\r\n        </div>\r\n        <div class=\"weui-actionsheet__action\">\r\n            <div class=\"weui-actionsheet__cell\" @click=\"cancel\">取消</div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
-
-/***/ }),
+/* 66 */,
 /* 67 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"js_dialog\" v-if=\"show\">\r\n    <div class=\"weui-mask\"></div>\r\n    <div class=\"weui-dialog\">\r\n        <div class=\"weui-dialog__hd\" v-if=\"title!=''\"><strong class=\"weui-dialog__title\">{{ title }}</strong></div>\r\n        <div class=\"weui-dialog__bd\" v-html=\"content\"></div>\r\n        <div class=\"weui-dialog__ft\"><a href=\"javascript:;\" @click=\"wxsuccess({confirm:false})\" class=\"weui-dialog__btn weui-dialog__btn_default\" v-if=\"showCancel\">{{ cancelText }}</a> <a href=\"javascript:;\" @click=\"wxsuccess({confirm:true})\" class=\"weui-dialog__btn weui-dialog__btn_primary\">{{ confirmText }}</a></div>\r\n    </div>\r\n</div>\r\n";
+module.exports = "<div id=\"iosActionsheet\" v-if=\"show\">\r\n    <div class=\"weui-mask\" @click=\"cancel\"></div>\r\n    <div class=\"weui-actionsheet\" :class=\"{'weui-actionsheet_toggle':open}\">\r\n        <div class=\"weui-actionsheet__menu\">\r\n            <template v-for=\"(val,i) in itemList\">\r\n                <div class=\"weui-actionsheet__cell\" @click=\"selected({tapIndex:i})\">{{val}}</div>\r\n            </template>\r\n        </div>\r\n        <div class=\"weui-actionsheet__action\">\r\n            <div class=\"weui-actionsheet__cell\" @click=\"cancel\">取消</div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
 
 /***/ }),
 /* 68 */
@@ -41624,17 +41671,29 @@ module.exports = "<transition name=\"fade\" enter-active-class=\"animated fadeIn
 /* 69 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"scrollView\" v-bind:class=\"{ scrollbottom: lowerY<0 }\">\r\n    <div v-bind:class=\"{ scroller_h: scrollX }\">\r\n        <slot></slot>\r\n    </div>\r\n</div>";
+module.exports = "<div class=\"js_dialog\" v-if=\"show\">\r\n    <div class=\"weui-mask\"></div>\r\n    <div class=\"weui-dialog\">\r\n        <div class=\"weui-dialog__hd\" v-if=\"title!=''\"><strong class=\"weui-dialog__title\">{{ title }}</strong></div>\r\n        <div class=\"weui-dialog__bd\" v-html=\"content\"></div>\r\n        <div class=\"weui-dialog__ft\"><a href=\"javascript:;\" @click=\"wxsuccess({confirm:false})\" class=\"weui-dialog__btn weui-dialog__btn_default\" v-if=\"showCancel\">{{ cancelText }}</a> <a href=\"javascript:;\" @click=\"wxsuccess({confirm:true})\" class=\"weui-dialog__btn weui-dialog__btn_primary\">{{ confirmText }}</a></div>\r\n    </div>\r\n</div>\r\n";
 
 /***/ }),
 /* 70 */
 /***/ (function(module, exports) {
 
+module.exports = "<transition name=\"fade\" enter-active-class=\"animated fadeIn\" leave-active-class=\"animated fadeOut\">\r\n    <div class=\"toast\" v-if=\"show\">\r\n        <div class=\"txt\">\r\n            {{title}}\r\n        </div>\r\n    </div>\r\n</transition>";
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"scrollView\" v-bind:class=\"{ scrollbottom: lowerY<0 }\">\r\n    <div v-bind:class=\"{ scroller_h: scrollX }\">\r\n        <slot></slot>\r\n    </div>\r\n</div>";
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports) {
+
 module.exports = "<div class=\"swiper\">\r\n    <div class=\"swiper-wrapper\">\r\n        <slot></slot>\r\n    </div>\r\n    <div class=\"swiper-pagination\"></div>\r\n</div>";
 
 /***/ }),
-/* 71 */,
-/* 72 */
+/* 73 */,
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(8);
@@ -41643,7 +41702,7 @@ module.exports = __webpack_require__(2);
 
 
 /***/ }),
-/* 73 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {/*
@@ -41725,7 +41784,7 @@ function toComment(sourceMap) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(17).Buffer))
 
 /***/ }),
-/* 74 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -41762,7 +41821,7 @@ var stylesInDom = {},
 	singletonElement = null,
 	singletonCounter = 0,
 	styleElementsInsertedAtTop = [],
-	fixUrls = __webpack_require__(61);
+	fixUrls = __webpack_require__(62);
 
 module.exports = function(list, options) {
 	if(typeof DEBUG !== "undefined" && DEBUG) {

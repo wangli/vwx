@@ -1,6 +1,6 @@
 {
   "name": "vwx",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "description": "vwx",
   "main": "src/index.js",
   "dependencies": {
