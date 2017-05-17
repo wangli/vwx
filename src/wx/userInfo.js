@@ -2,7 +2,7 @@
 var _token = "";
 var _uid = 0;
 var _rt = "web";
-var _info = "web";
+var _info = "";
 var p = {
     v: "3.0",
     notice: null,//提示信息
@@ -24,14 +24,14 @@ Object.defineProperty(p, "info", {
         return _info;
     },
     set: function (_val) {
-        _info = _val;
-        localStorage.uinfo = JSON.stringify(_val);
+        _info = JSON.stringify(_val);
+        localStorage.uinfo = _info;
     }
 });
 Object.defineProperty(p, "uid", {
     get: function () {
         if (localStorage.uid) {
-            _token = localStorage.uid;
+            _uid = localStorage.uid;
         }
         return _uid;
     },
