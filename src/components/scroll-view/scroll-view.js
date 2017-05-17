@@ -8,7 +8,8 @@ export default {
     data: function () {
         return {
             lowerY: 1,
-            readyRen: false
+            readyRen: false,
+            isover: false
         }
     },
     props: {
