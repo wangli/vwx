@@ -1,17 +1,17 @@
 /*
- * v0.2.2
+ * v0.2.3
  * (c) 2017 wangli
  * Released under the MIT License.
  */
 /*wx接口*/
 import request from "./request";
 import { setStorage, setStorageSync, getStorage, getStorageSync } from "./storage";
-import { showToast,hideToast,showModal,showActionSheet} from "./modal";
+import { showToast, hideToast, showLoading, hideLoading, showModal, showActionSheet } from "./modal";
 import login from "./login";
 import user from "./userInfo";
 import requestPayment from "./requestPayment"
 module.exports = {
-    v: "0.2.2",
+    v: "0.2.3",
     request,
     setStorage,
     setStorageSync,
@@ -19,6 +19,8 @@ module.exports = {
     getStorageSync,
     showToast,
     hideToast,
+    showLoading,
+    hideLoading,
     showModal,
     showActionSheet,
     login,

@@ -30032,7 +30032,13 @@ var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var toast, modal, actionSheet, loading;
+var toast, modal, actionSheet, loading; /*
+                                         * v0.2.0
+                                         * (c) 2017 wangli
+                                         * Released under the MIT License.
+                                         */
+/*用户交互操作*/
+
 var install = function install(Vue, options) {
     loading = new Vue(_loading3.default);
     toast = new Vue(_toast3.default);
@@ -30052,7 +30058,7 @@ var addModal = function addModal() {
 };
 var showToast = function showToast(_obj) {
     if (!toast.show) {
-        toast.title = '加载中...';
+        toast.title = '......';
         var _o = _lodash2.default.clone(_obj);
         /*对象处理*/
         for (var k in _o) {
@@ -33308,7 +33314,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = {
     name: "toast",
     data: {
-        duration: 1500,
+        duration: 2000,
         show: false,
         title: '......',
         loading: true
@@ -33526,13 +33532,13 @@ var _requestPayment2 = _interopRequireDefault(_requestPayment);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /*
- * v0.2.2
+ * v0.2.3
  * (c) 2017 wangli
  * Released under the MIT License.
  */
 /*wx接口*/
 module.exports = {
-    v: "0.2.2",
+    v: "0.2.3",
     request: _request2.default,
     setStorage: _storage.setStorage,
     setStorageSync: _storage.setStorageSync,
@@ -33540,6 +33546,8 @@ module.exports = {
     getStorageSync: _storage.getStorageSync,
     showToast: _modal.showToast,
     hideToast: _modal.hideToast,
+    showLoading: _modal.showLoading,
+    hideLoading: _modal.hideLoading,
     showModal: _modal.showModal,
     showActionSheet: _modal.showActionSheet,
     login: _login2.default,

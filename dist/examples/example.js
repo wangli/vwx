@@ -3963,7 +3963,7 @@ module.exports = (0, _vwx.Page)({
         });
 
         app.config.accompany = wx.user.accompany();
-        wx.showToast({ title: "登陆错误" });
+        wx.showLoading();
     },
     onShow: function onShow() {},
     closed: function closed() {
