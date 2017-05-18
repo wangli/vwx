@@ -1,5 +1,5 @@
 /*
- * v0.1.1
+ * v0.1.3
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -14,7 +14,7 @@ var _fail = function () {
 
 };
 var onBridgeReady = function () {
-    if (typeof WeixinJSBridge == "undefined") {
+    if (typeof WeixinJSBridge != "undefined") {
         WeixinJSBridge.invoke('getBrandWCPayRequest', _o, function (res) {
             if (res.err_msg == "get_brand_wcpay_request:ok") {
                 _success();
@@ -24,6 +24,7 @@ var onBridgeReady = function () {
         });
     } else {
         alert("打开微信支付失败");
+        _fail();
     }
 }
 var requestPayment = function (_obj) {
