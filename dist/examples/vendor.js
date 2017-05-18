@@ -30191,7 +30191,7 @@ var count = 0;
 var _token = "";
 var _uid = 0;
 var _rt = "web";
-var _info = "web";
+var _info = "";
 var p = {
     v: "3.0",
     notice: null, //提示信息
@@ -30213,14 +30213,14 @@ Object.defineProperty(p, "info", {
         return _info;
     },
     set: function set(_val) {
-        _info = _val;
-        localStorage.uinfo = JSON.stringify(_val);
+        _info = JSON.stringify(_val);
+        localStorage.uinfo = _info;
     }
 });
 Object.defineProperty(p, "uid", {
     get: function get() {
         if (localStorage.uid) {
-            _token = localStorage.uid;
+            _uid = localStorage.uid;
         }
         return _uid;
     },
@@ -33350,7 +33350,8 @@ exports.default = {
     data: function data() {
         return {
             lowerY: 1,
-            readyRen: false
+            readyRen: false,
+            isover: false
         };
     },
     props: {
@@ -33568,7 +33569,6 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (_obj) {
     var obj = {
-        url: App.config.host + "/account/login?" + App.config.accompany,
         success: function success(data) {
             if (data.state == 1) {
                 _userInfo2.default.uid = data.result.uid;
@@ -41691,7 +41691,7 @@ module.exports = "<transition name=\"fade\" enter-active-class=\"animated fadeIn
 /* 71 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"scrollView\" v-bind:class=\"{ scrollbottom: lowerY<0 }\">\r\n    <div v-bind:class=\"{ scroller_h: scrollX }\">\r\n        <slot></slot>\r\n    </div>\r\n</div>";
+module.exports = "<div class=\"scrollView\" v-bind:class=\"{ scrollbottom: lowerY<0,nodata:isover }\">\r\n    <div v-bind:class=\"{ scroller_h: scrollX }\">\r\n        <slot></slot>\r\n    </div>\r\n</div>";
 
 /***/ }),
 /* 72 */

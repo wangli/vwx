@@ -1,7 +1,12 @@
+/*
+ * swiper.js v0.1.2
+ * (c) 2017 wangli
+ * Released under the MIT License.
+ */
 import Swiper from 'swiper';
 import _tpl from './swiper.html';
 import 'swiper/dist/css/swiper.css';
-let vSwiper = null;
+var vSwiper = null;
 export default {
 	name: 'swiper',
 	template: _tpl,
@@ -48,7 +53,7 @@ export default {
 	},
 	methods: {
 		refresh: function () {
-			mySwiper.update();
+			vSwiper.update();
 		}
 	}
 };

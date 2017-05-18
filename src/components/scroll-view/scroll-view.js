@@ -37,7 +37,7 @@ export default {
             disableMouse: true,
             disablePointer: true,
             eventPassthrough: that.scrollX,
-            click: false,
+            click: true,
             tap: true
         });
         //滚动监听
