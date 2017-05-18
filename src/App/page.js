@@ -1,5 +1,5 @@
 /*
- * app.js v0.1.9
+ * app.js v0.1.10
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -108,7 +108,7 @@ export default function (_option) {
     }
     //模板处理
     var _template = "";
-    _template += "<div class='cxPage animated' v-if='show'><slot>";
+    _template += "<div class='vwxPage' v-if='show'><slot>";
     _template += _wxCfg.template;
     _template += "</slot></div>";
     _template += "";
