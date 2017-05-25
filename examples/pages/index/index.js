@@ -14,7 +14,6 @@ module.exports = Page({
         });
 
         app.config.accompany = wx.user.accompany();
-        wx.showLoading();
     },
     onShow: function() {},
     closed: function() {

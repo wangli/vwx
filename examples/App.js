@@ -2,6 +2,7 @@ import { App } from "vwx";
 import index from './pages/index/index.js';
 import cook from './pages/cook/index.js';
 import cook2 from './pages/cook/index2.js';
+import cook3 from './pages/cook/index3.js';
 import './css/weui.min.css';
 import './css/wc.css';
 import './css/vwx.css';
@@ -15,6 +16,8 @@ App({
         { path: '/', component: index },
         { path: '/index', component: index },
         { path: '/cook', component: cook },
-        { path: '/cook2', component: cook2 }
+        { path: '/cook2', component: cook2 },
+        { path: '/cook2/:id', component: cook2 },
+        { path: '/cook3', component: cook3 }
     ]
 });

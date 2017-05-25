@@ -8,7 +8,7 @@
     <div id="scroll">
         <scroll-view ref="childTime" id="timelist" scroll-id="#timelist" class="wrapper">
             <div class="weui-cells">
-                <a class="weui-cell weui-cell_access" href="javascript:;" v-for="(val,i) in list" @click="closed">
+                <a class="weui-cell weui-cell_access" v-for="(val,i) in list"  href="#/cook">
                     <div class="weui-cell__bd">
                         <p>{{val}}</p>
                     </div>
@@ -20,7 +20,7 @@
     </div>
     <div id="scroll2">
         <scroll-view ref="child2" id="timelist2" scroll-id="#timelist2"  :scroll-x="true" :scroll-y="false" class="wrapper">
-            <a class="weui-cell" v-for="(val,i) in list" @click="closed">
+            <a class="weui-cell" v-for="(val,i) in list" href="#/cook" >
                 {{val}}
             </a>
         </scroll-view>

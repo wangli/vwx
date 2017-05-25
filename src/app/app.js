@@ -1,5 +1,5 @@
 /*
- * app.js v0.2.1
+ * app.js v0.3.0
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -20,6 +20,25 @@ var App = function (Vue, VueRouter, _options) {
         router = new VueRouter({
             routes: _options.pages
         });
+        router.beforeEach((to, from, next) => {
+            var _rApp = router.app;
+            if (_rApp.history) {
+                /*from离开页面处理*/
+                var fromChildren = _rApp.$children[0];
+                var _sub = _rApp.history.lastIndexOf(to.path);
+                if (_sub < 0) {
+                    _rApp.history.push(to.path);
+                    fromChildren.animName = "animLeft";
+                } else {
+                    _rApp.history.pop();
+                    fromChildren.animName = "animRight";
+                }
+                setTimeout(() => { next(); }, 1);
+            } else {
+                next();
+            }
+        });
+        router.afterEach(to => { });
     }
     if (_options.config) {
         _config = _options.config;
@@ -44,12 +63,8 @@ var App = function (Vue, VueRouter, _options) {
             },
             watch: {
                 $route(to, from) {
-                    var nChildren = this.$children[0];
-                    var i = (this.history.length > 1) ? this.history.length - 2 : 0;
-                    if (this.history[i] != to.path) {
+                    if (this.history == 0) {
                         this.history.push(to.path);
-                    } else {
-                        this.history.pop();
                     }
                 }
             },

@@ -1,6 +1,228 @@
 webpackJsonp([0],{
 
-/***/ 18:
+/***/ 20:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _vwx = __webpack_require__(1);
+
+var _core = __webpack_require__(7);
+
+var _core2 = _interopRequireDefault(_core);
+
+var _index = __webpack_require__(65);
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = (0, _vwx.Page)({
+    name: "cook",
+    template: _index2.default,
+    data: {
+        list: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20]
+    },
+    onReady: function onReady() {
+        wx.request({
+            url: 'http://apiqa.ukitchenplus.com/v3/gclass/packagelist?page=1&pagesize=30',
+            complete: function complete(data) {
+                _core2.default.forEach(data, function (val, key) {
+
+                    //this[key] = val;
+                });
+            }
+        });
+    },
+    closed: function closed() {
+        this.show = false;
+    },
+    onscroll: function onscroll() {
+        console.log("ttttttttttt");
+    }
+});
+
+/***/ }),
+
+/***/ 21:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _vwx = __webpack_require__(1);
+
+var _core = __webpack_require__(7);
+
+var _core2 = _interopRequireDefault(_core);
+
+var _index = __webpack_require__(66);
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = (0, _vwx.Page)({
+    name: "cook2",
+    template: _index2.default,
+    data: {
+        list: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20]
+    },
+    onReady: function onReady() {
+        wx.request({
+            url: 'http://apiqa.ukitchenplus.com/v3/gclass/packagelist?page=1&pagesize=30',
+            complete: function complete(data) {
+                _core2.default.forEach(data, function (val, key) {
+
+                    //this[key] = val;
+                });
+            }
+        });
+    },
+    closed: function closed() {
+        this.show = false;
+    },
+    onscroll: function onscroll() {
+        console.log("ttttttttttt");
+    }
+});
+
+/***/ }),
+
+/***/ 22:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _vwx = __webpack_require__(1);
+
+var _core = __webpack_require__(7);
+
+var _core2 = _interopRequireDefault(_core);
+
+var _index = __webpack_require__(67);
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = (0, _vwx.Page)({
+    name: "cook3",
+    template: _index2.default,
+    data: {
+        list: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20]
+    },
+    onReady: function onReady() {
+        wx.request({
+            url: 'http://apiqa.ukitchenplus.com/v3/gclass/packagelist?page=1&pagesize=30',
+            complete: function complete(data) {
+                _core2.default.forEach(data, function (val, key) {
+
+                    //this[key] = val;
+                });
+            }
+        });
+    },
+    closed: function closed() {
+        this.show = false;
+    },
+    onscroll: function onscroll() {
+        console.log("ttttttttttt");
+    }
+});
+
+/***/ }),
+
+/***/ 23:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _vwx = __webpack_require__(1);
+
+var _index = __webpack_require__(68);
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = (0, _vwx.Page)({
+    name: "index",
+    template: _index2.default,
+    data: {
+        list: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20]
+    },
+    onLoad: function onLoad() {},
+    onReady: function onReady() {
+        wx.request({
+            url: 'http://apiqa.ukitchenplus.com/v3/gclass/classlist?page=1&pagesize=30',
+            success: function success(data) {}
+        });
+
+        app.config.accompany = wx.user.accompany();
+    },
+    onShow: function onShow() {},
+    closed: function closed() {
+        this.show = false;
+    },
+    onscroll: function onscroll() {}
+});
+
+/***/ }),
+
+/***/ 24:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 25:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 26:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 65:
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"page\">\r\n    <div id=\"scroll\">\r\n        <scroll-view ref=\"childTime\" id=\"timelist\" scroll-id=\"#timelist\" class=\"wrapper\">\r\n            <div class=\"weui-cells\">\r\n                <a class=\"weui-cell weui-cell_access\" v-for=\"(val,i) in list\"  href=\"#/cook2\">\r\n                    <div class=\"weui-cell__bd\">\r\n                        <p>11111111111111111{{val}}</p>\r\n                    </div>\r\n                    <div class=\"weui-cell__ft\">\r\n                    </div>\r\n                </a>\r\n            </div>\r\n        </scroll-view>\r\n    </div>\r\n</div>";
+
+/***/ }),
+
+/***/ 66:
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"page\">\r\n    <div id=\"scroll\">\r\n        <scroll-view ref=\"childTime\" id=\"timelist\" scroll-id=\"#timelist\" class=\"wrapper\">\r\n            <div class=\"weui-cells\">\r\n                <a class=\"weui-cell weui-cell_access\" v-for=\"(val,i) in list\"   href=\"#/cook3\">\r\n                    <div class=\"weui-cell__bd\">\r\n                        <p>22222222222222222{{val}}</p>\r\n                    </div>\r\n                    <div class=\"weui-cell__ft\">\r\n                    </div>\r\n                </a>\r\n            </div>\r\n        </scroll-view>\r\n    </div>\r\n</div>";
+
+/***/ }),
+
+/***/ 67:
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"page\">\r\n    <div id=\"scroll\">\r\n        <scroll-view ref=\"childTime\" id=\"timelist\" scroll-id=\"#timelist\" class=\"wrapper\">\r\n            <div class=\"weui-cells\">\r\n                <a class=\"weui-cell weui-cell_access\" href=\"javascript:;\" v-for=\"(val,i) in list\">\r\n                    <div class=\"weui-cell__bd\">\r\n                        <p>3333333333333333333{{val}}</p>\r\n                    </div>\r\n                    <div class=\"weui-cell__ft\">\r\n                    </div>\r\n                </a>\r\n            </div>\r\n        </scroll-view>\r\n    </div>\r\n</div>";
+
+/***/ }),
+
+/***/ 68:
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"page\">\r\n    <div id=\"swiper\">\r\n        <swiper :indicator-dots=\"true\" class=\"swipercon\">\r\n            <a class=\"swiper-slide blue-slide\"><img src=\"http://img.ukitchenplus.com/2017410122936771C7CD5B7838DE7EE5C562A246C96F8431.png\"></a>\r\n            <a class=\"swiper-slide blue-slide\"><img src=\"http://img.ukitchenplus.com/20174101229517242A88AEC89B92BF404B97A101B7A353AF.png\"></a>\r\n        </swiper>\r\n    </div>\r\n    <div id=\"scroll\">\r\n        <scroll-view ref=\"childTime\" id=\"timelist\" scroll-id=\"#timelist\" class=\"wrapper\">\r\n            <div class=\"weui-cells\">\r\n                <a class=\"weui-cell weui-cell_access\" v-for=\"(val,i) in list\"  href=\"#/cook\">\r\n                    <div class=\"weui-cell__bd\">\r\n                        <p>{{val}}</p>\r\n                    </div>\r\n                    <div class=\"weui-cell__ft\">\r\n                    </div>\r\n                </a>\r\n            </div>\r\n        </scroll-view>\r\n    </div>\r\n    <div id=\"scroll2\">\r\n        <scroll-view ref=\"child2\" id=\"timelist2\" scroll-id=\"#timelist2\"  :scroll-x=\"true\" :scroll-y=\"false\" class=\"wrapper\">\r\n            <a class=\"weui-cell\" v-for=\"(val,i) in list\" href=\"#/cook\" >\r\n                {{val}}\r\n            </a>\r\n        </scroll-view>\r\n    </div>\r\n    <div><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p></div>\r\n</div>";
+
+/***/ }),
+
+/***/ 7:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -3845,186 +4067,15 @@ webpackJsonp([0],{
 
 /***/ }),
 
-/***/ 20:
+/***/ 75:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _vwx = __webpack_require__(2);
+var _vwx = __webpack_require__(1);
 
-var _core = __webpack_require__(18);
-
-var _core2 = _interopRequireDefault(_core);
-
-var _index = __webpack_require__(64);
-
-var _index2 = _interopRequireDefault(_index);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-module.exports = (0, _vwx.Page)({
-    name: "cook",
-    template: _index2.default,
-    data: {
-        list: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20]
-    },
-    onReady: function onReady() {
-        wx.request({
-            url: 'http://apiqa.ukitchenplus.com/v3/gclass/packagelist?page=1&pagesize=30',
-            complete: function complete(data) {
-                _core2.default.forEach(data, function (val, key) {
-
-                    //this[key] = val;
-                });
-            }
-        });
-    },
-    closed: function closed() {
-        this.show = false;
-    },
-    onscroll: function onscroll() {
-        console.log("ttttttttttt");
-    }
-});
-
-/***/ }),
-
-/***/ 21:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _vwx = __webpack_require__(2);
-
-var _core = __webpack_require__(18);
-
-var _core2 = _interopRequireDefault(_core);
-
-var _index = __webpack_require__(65);
-
-var _index2 = _interopRequireDefault(_index);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-module.exports = (0, _vwx.Page)({
-    name: "cook2",
-    template: _index2.default,
-    data: {
-        list: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20]
-    },
-    onReady: function onReady() {
-        wx.request({
-            url: 'http://apiqa.ukitchenplus.com/v3/gclass/packagelist?page=1&pagesize=30',
-            complete: function complete(data) {
-                _core2.default.forEach(data, function (val, key) {
-
-                    //this[key] = val;
-                });
-            }
-        });
-    },
-    closed: function closed() {
-        this.show = false;
-    },
-    onscroll: function onscroll() {
-        console.log("ttttttttttt");
-    }
-});
-
-/***/ }),
-
-/***/ 22:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _vwx = __webpack_require__(2);
-
-var _index = __webpack_require__(66);
-
-var _index2 = _interopRequireDefault(_index);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-module.exports = (0, _vwx.Page)({
-    name: "index",
-    template: _index2.default,
-    data: {
-        list: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20]
-    },
-    onLoad: function onLoad() {},
-    onReady: function onReady() {
-        wx.request({
-            url: 'http://apiqa.ukitchenplus.com/v3/gclass/classlist?page=1&pagesize=30',
-            success: function success(data) {}
-        });
-
-        app.config.accompany = wx.user.accompany();
-        wx.showLoading();
-    },
-    onShow: function onShow() {},
-    closed: function closed() {
-        this.show = false;
-    },
-    onscroll: function onscroll() {}
-});
-
-/***/ }),
-
-/***/ 23:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 24:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 25:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 64:
-/***/ (function(module, exports) {
-
-module.exports = "<div id=\"page\">\r\n    <div id=\"scroll\">\r\n        <scroll-view ref=\"childTime\" id=\"timelist\" scroll-id=\"#timelist\" class=\"wrapper\">\r\n            <div class=\"weui-cells\">\r\n                <a class=\"weui-cell weui-cell_access\" href=\"javascript:;\" v-for=\"(val,i) in list\" @click=\"closed\">\r\n                    <div class=\"weui-cell__bd\">\r\n                        <p>6666666666668432255{{val}}</p>\r\n                    </div>\r\n                    <div class=\"weui-cell__ft\">\r\n                    </div>\r\n                </a>\r\n            </div>\r\n        </scroll-view>\r\n    </div>\r\n</div>";
-
-/***/ }),
-
-/***/ 65:
-/***/ (function(module, exports) {
-
-module.exports = "<div id=\"page\">\r\n    <div id=\"scroll\">\r\n        <scroll-view ref=\"childTime\" id=\"timelist\" scroll-id=\"#timelist\" class=\"wrapper\">\r\n            <div class=\"weui-cells\">\r\n                <a class=\"weui-cell weui-cell_access\" href=\"javascript:;\" v-for=\"(val,i) in list\" @click=\"closed\">\r\n                    <div class=\"weui-cell__bd\">\r\n                        <p>00000000000000000{{val}}</p>\r\n                    </div>\r\n                    <div class=\"weui-cell__ft\">\r\n                    </div>\r\n                </a>\r\n            </div>\r\n        </scroll-view>\r\n    </div>\r\n</div>";
-
-/***/ }),
-
-/***/ 66:
-/***/ (function(module, exports) {
-
-module.exports = "<div id=\"page\">\r\n    <div id=\"swiper\">\r\n        <swiper :indicator-dots=\"true\" class=\"swipercon\">\r\n            <a class=\"swiper-slide blue-slide\"><img src=\"http://img.ukitchenplus.com/2017410122936771C7CD5B7838DE7EE5C562A246C96F8431.png\"></a>\r\n            <a class=\"swiper-slide blue-slide\"><img src=\"http://img.ukitchenplus.com/20174101229517242A88AEC89B92BF404B97A101B7A353AF.png\"></a>\r\n        </swiper>\r\n    </div>\r\n    <div id=\"scroll\">\r\n        <scroll-view ref=\"childTime\" id=\"timelist\" scroll-id=\"#timelist\" class=\"wrapper\">\r\n            <div class=\"weui-cells\">\r\n                <a class=\"weui-cell weui-cell_access\" href=\"javascript:;\" v-for=\"(val,i) in list\" @click=\"closed\">\r\n                    <div class=\"weui-cell__bd\">\r\n                        <p>{{val}}</p>\r\n                    </div>\r\n                    <div class=\"weui-cell__ft\">\r\n                    </div>\r\n                </a>\r\n            </div>\r\n        </scroll-view>\r\n    </div>\r\n    <div id=\"scroll2\">\r\n        <scroll-view ref=\"child2\" id=\"timelist2\" scroll-id=\"#timelist2\"  :scroll-x=\"true\" :scroll-y=\"false\" class=\"wrapper\">\r\n            <a class=\"weui-cell\" v-for=\"(val,i) in list\" @click=\"closed\">\r\n                {{val}}\r\n            </a>\r\n        </scroll-view>\r\n    </div>\r\n    <div><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p></div>\r\n</div>";
-
-/***/ }),
-
-/***/ 73:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _vwx = __webpack_require__(2);
-
-var _index = __webpack_require__(22);
+var _index = __webpack_require__(23);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -4036,11 +4087,15 @@ var _index5 = __webpack_require__(21);
 
 var _index6 = _interopRequireDefault(_index5);
 
+var _index7 = __webpack_require__(22);
+
+var _index8 = _interopRequireDefault(_index7);
+
+__webpack_require__(26);
+
 __webpack_require__(25);
 
 __webpack_require__(24);
-
-__webpack_require__(23);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4049,9 +4104,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
         host: "http://apiqa.ukitchenplus.com",
         accompany: ""
     },
-    pages: [{ path: '/', component: _index2.default }, { path: '/index', component: _index2.default }, { path: '/cook', component: _index4.default }, { path: '/cook2', component: _index6.default }]
+    pages: [{ path: '/', component: _index2.default }, { path: '/index', component: _index2.default }, { path: '/cook', component: _index4.default }, { path: '/cook2', component: _index6.default }, { path: '/cook2/:id', component: _index6.default }, { path: '/cook3', component: _index8.default }]
 });
 
 /***/ })
 
-},[73]);
+},[75]);

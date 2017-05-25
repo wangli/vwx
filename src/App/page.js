@@ -10,9 +10,10 @@ import _ from 'lodash';
 var _vueConfig = {
     name: "page",
     data: {
-        animName: "",
+        animName: "animRight",
         show: true,
         hlg: 0,
+        leave: "into"
     },
     watch: {},
     computed: {},
@@ -20,7 +21,7 @@ var _vueConfig = {
     beforeCreate: function () { },
     /*实例已经创建完成之后被调用。在这一步，实例已完成以下的配置：数据观测(data observer)，属性和方法的运算， watch/event 事件回调。然而，挂载阶段还没开始，$el 属性目前不可见。*/
     created: function () {
-        if(this.$parent){
+        if (this.$parent) {
             this.hlg = this.$parent.history.length;
         }
     },
@@ -37,8 +38,7 @@ var _vueConfig = {
     /*keep-alive 组件停用时调用*/
     deactivated: function () { },
     /*实例销毁之前调用。在这一步，实例仍然完全可用。*/
-    beforeDestroy: function () {
-    },
+    beforeDestroy: function () { },
     /*Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。*/
     destroyed: function () { }
 };
@@ -107,11 +107,11 @@ export default function (_option) {
         return _vueCfgData;
     }
     //模板处理
-    var _template = "";
-    _template += "<div class='vwxPage' v-if='show'><slot>";
+    var _template = '<transition :name="animName" >';
+    _template += "<div class='vwxPage animated' v-if='show'><slot>";
     _template += _wxCfg.template;
     _template += "</slot></div>";
-    _template += "";
+    _template += "</transition>";
     _vueCfg.template = _template;
 
     _vueCfg.computed = {
