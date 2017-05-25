@@ -1,5 +1,5 @@
 /*
- * swiper.js v0.1.2
+ * swiper.js v0.1.3
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -39,11 +39,18 @@ export default {
 		},
 		intval: function () {
 			return (this.autoplay) ? this.interval : 0;
+		},
+		swid:function(){
+			if(this.swiperId.indexOf('.')==0){
+				return this.swiperId;
+			}else{
+				return "#"+this.swiperId;
+			}
 		}
 	},
 	mounted: function () {
 		//创建滚动
-		vSwiper = new Swiper(this.swiperId, {
+		vSwiper = new Swiper(this.swid, {
 			autoplay: this.intval,
 			pagination: this.pagination,
 			speed: this.duration,
@@ -53,7 +60,9 @@ export default {
 	},
 	methods: {
 		refresh: function () {
-			vSwiper.update();
+			if(vSwiper){
+				vSwiper.update();
+			}
 		}
 	}
 };

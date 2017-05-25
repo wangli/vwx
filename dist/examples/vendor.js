@@ -32935,7 +32935,7 @@ module.exports = function spread(callback) {
 
 
 /*
- * app.js v0.2.1
+ * app.js v0.3.0
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -32962,7 +32962,6 @@ var App = function App(Vue, VueRouter, _options) {
                 /*from离开页面处理*/
                 var fromChildren = _rApp.$children[0];
                 var _sub = _rApp.history.lastIndexOf(to.path);
-                console.log(_sub);
                 if (_sub < 0) {
                     _rApp.history.push(to.path);
                     fromChildren.animName = "animLeft";
@@ -33472,7 +33471,7 @@ __webpack_require__(58);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var vSwiper = null; /*
-                     * swiper.js v0.1.2
+                     * swiper.js v0.1.3
                      * (c) 2017 wangli
                      * Released under the MIT License.
                      */
@@ -33508,11 +33507,18 @@ exports.default = {
 		},
 		intval: function intval() {
 			return this.autoplay ? this.interval : 0;
+		},
+		swid: function swid() {
+			if (this.swiperId.indexOf('.') == 0) {
+				return this.swiperId;
+			} else {
+				return "#" + this.swiperId;
+			}
 		}
 	},
 	mounted: function mounted() {
 		//创建滚动
-		vSwiper = new _swiper2.default(this.swiperId, {
+		vSwiper = new _swiper2.default(this.swid, {
 			autoplay: this.intval,
 			pagination: this.pagination,
 			speed: this.duration,
@@ -33522,7 +33528,9 @@ exports.default = {
 	},
 	methods: {
 		refresh: function refresh() {
-			vSwiper.update();
+			if (vSwiper) {
+				vSwiper.update();
+			}
 		}
 	}
 };
@@ -41723,7 +41731,7 @@ module.exports = "<div class=\"scrollView\" v-bind:class=\"{ scrollbottom: lower
 /* 74 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"swiper\">\r\n    <div class=\"swiper-wrapper\">\r\n        <slot></slot>\r\n    </div>\r\n    <div class=\"swiper-pagination\"></div>\r\n</div>";
+module.exports = "<div class=\"swiper\" :id=\"swiperId\">\r\n    <div class=\"swiper-wrapper\">\r\n        <slot></slot>\r\n    </div>\r\n    <div class=\"swiper-pagination\"></div>\r\n</div>";
 
 /***/ }),
 /* 75 */,
