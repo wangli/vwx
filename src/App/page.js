@@ -10,7 +10,7 @@ import _ from 'lodash';
 var _vueConfig = {
     name: "page",
     data: {
-        animName: "animRight",
+        animName: "",
         show: true,
         hlg: 0,
         leave: "into"
@@ -107,11 +107,10 @@ export default function (_option) {
         return _vueCfgData;
     }
     //模板处理
-    var _template = '<transition :name="animName" >';
+    var _template = '';
     _template += "<div class='vwxPage animated' v-if='show'><slot>";
     _template += _wxCfg.template;
     _template += "</slot></div>";
-    _template += "</transition>";
     _vueCfg.template = _template;
 
     _vueCfg.computed = {

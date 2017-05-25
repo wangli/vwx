@@ -32958,7 +32958,7 @@ var App = function App(Vue, VueRouter, _options) {
         });
         router.beforeEach(function (to, from, next) {
             var _rApp = router.app;
-            if (_rApp.history) {
+            if (_rApp.history && _rApp.anim) {
                 /*from离开页面处理*/
                 var fromChildren = _rApp.$children[0];
                 var _sub = _rApp.history.lastIndexOf(to.path);
@@ -32997,7 +32997,8 @@ var App = function App(Vue, VueRouter, _options) {
             router: router,
             template: '<router-view></router-view>',
             data: {
-                history: []
+                history: [],
+                anim: false
             },
             watch: {
                 $route: function $route(to, from) {
@@ -33081,11 +33082,10 @@ exports.default = function (_option) {
         return _vueCfgData;
     };
     //模板处理
-    var _template = '<transition :name="animName" >';
+    var _template = '';
     _template += "<div class='vwxPage animated' v-if='show'><slot>";
     _template += _wxCfg.template;
     _template += "</slot></div>";
-    _template += "</transition>";
     _vueCfg.template = _template;
 
     _vueCfg.computed = {
@@ -33121,7 +33121,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _vueConfig = {
     name: "page",
     data: {
-        animName: "animRight",
+        animName: "",
         show: true,
         hlg: 0,
         leave: "into"
