@@ -1,5 +1,5 @@
 /*
- * app.js v0.3.1
+ * app.js v0.4.0
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -18,11 +18,18 @@ var _app = {
 var App = function (Vue, VueRouter, _options) {
     if (_options.pages) {
         router = new VueRouter({
-            routes: _options.pages
+            routes: _options.pages,
+            scrollBehavior: function (to, from, savedPosition) {
+                if (savedPosition) {
+                    return savedPosition
+                } else {
+                    return { x: 0, y: 0 }
+                }
+            }
         });
         router.beforeEach((to, from, next) => {
             var _rApp = router.app;
-            if (_rApp.history&&_rApp.anim) {
+            if (_rApp.history && _rApp.anim) {
                 /*from离开页面处理*/
                 var fromChildren = _rApp.$children[0];
                 var _sub = _rApp.history.lastIndexOf(to.path);
@@ -60,7 +67,7 @@ var App = function (Vue, VueRouter, _options) {
             template: '<router-view></router-view>',
             data: {
                 history: [],
-                anim:false
+                anim: false
             },
             watch: {
                 $route(to, from) {
