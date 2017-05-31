@@ -32935,7 +32935,7 @@ module.exports = function spread(callback) {
 
 
 /*
- * app.js v0.3.0
+ * app.js v0.4.0
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -33113,7 +33113,7 @@ var _lodash2 = _interopRequireDefault(_lodash);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /*
- * app.js v0.1.10
+ * app.js v0.1.11
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -33124,7 +33124,8 @@ var _vueConfig = {
         animName: "",
         show: true,
         hlg: 0,
-        leave: "into"
+        leave: "into",
+        scrollTop: 0
     },
     watch: {},
     computed: {},
@@ -33134,6 +33135,9 @@ var _vueConfig = {
     created: function created() {
         if (this.$parent) {
             this.hlg = this.$parent.history.length;
+            if (this.scrollTop || this.scrollTop === 0) {
+                if (window.document) window.document.body.scrollTop = this.scrollTop;
+            }
         }
     },
     /*在挂载开始之前被调用：相关的 render 函数首次被调用。*/
@@ -33455,7 +33459,7 @@ exports.default = {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+    value: true
 });
 
 var _swiper = __webpack_require__(64);
@@ -33471,68 +33475,86 @@ __webpack_require__(58);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var vSwiper = null; /*
-                     * swiper.js v0.1.3
+                     * swiper.js v0.1.4
                      * (c) 2017 wangli
                      * Released under the MIT License.
                      */
 exports.default = {
-	name: 'swiper',
-	template: _swiper4.default,
-	props: {
-		indicatorDots: {
-			default: false
-		},
-		autoplay: {
-			default: false
-		},
-		current: {
-			default: 0
-		},
-		interval: {
-			default: 300
-		},
-		duration: {
-			default: 500
-		},
-		circular: {
-			default: false
-		},
-		swiperId: {
-			default: ".swiper"
-		}
-	},
-	computed: {
-		pagination: function pagination() {
-			return this.indicatorDots ? ".swiper-pagination" : "";
-		},
-		intval: function intval() {
-			return this.autoplay ? this.interval : 0;
-		},
-		swid: function swid() {
-			if (this.swiperId.indexOf('.') == 0) {
-				return this.swiperId;
-			} else {
-				return "#" + this.swiperId;
-			}
-		}
-	},
-	mounted: function mounted() {
-		//创建滚动
-		vSwiper = new _swiper2.default(this.swid, {
-			autoplay: this.intval,
-			pagination: this.pagination,
-			speed: this.duration,
-			initialSlide: this.current,
-			loop: this.circular
-		});
-	},
-	methods: {
-		refresh: function refresh() {
-			if (vSwiper) {
-				vSwiper.update();
-			}
-		}
-	}
+    name: 'swiper',
+    template: _swiper4.default,
+    props: {
+        indicatorDots: {
+            type: Boolean,
+            default: function _default() {
+                return false;
+            }
+        },
+        autoplay: {
+            type: Boolean,
+            default: function _default() {
+                return false;
+            }
+        },
+        current: {
+            type: Number,
+            default: function _default() {
+                return 0;
+            }
+        },
+        interval: {
+            type: Number,
+            default: function _default() {
+                return 300;
+            }
+        },
+        duration: {
+            type: Number,
+            default: function _default() {
+                return 500;
+            }
+        },
+        circular: {
+            type: Boolean,
+            default: function _default() {
+                return false;
+            }
+        },
+        swiperId: {
+            default: ".swiper"
+        }
+    },
+    computed: {
+        pagination: function pagination() {
+            return this.indicatorDots ? ".swiper-pagination" : "";
+        },
+        intval: function intval() {
+            return this.autoplay ? this.interval : 0;
+        },
+        swid: function swid() {
+            if (this.swiperId.indexOf('.') == 0) {
+                return this.swiperId;
+            } else {
+                return "#" + this.swiperId;
+            }
+        }
+    },
+    mounted: function mounted() {
+        //创建滚动
+        vSwiper = new _swiper2.default(this.swid, {
+            autoplay: this.intval,
+            pagination: this.pagination,
+            speed: this.duration,
+            initialSlide: this.current,
+            loop: this.circular
+        });
+    },
+    methods: {
+        refresh: function refresh() {
+            if (vSwiper) {
+                vSwiper.update();
+            }
+        }
+    }
 };
 
 /***/ }),

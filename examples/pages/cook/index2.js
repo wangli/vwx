@@ -5,7 +5,8 @@ module.exports = Page({
     name:"cook2",
     template: tpl,
     data: {
-        list: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20]
+        list: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20,21,22,23,24,25,26,27,28,29,30],
+        scrollTop:false
     },
     onReady: function () {
         wx.request({
@@ -16,7 +17,7 @@ module.exports = Page({
                     //this[key] = val;
                 });
             }
-        })
+        });
     },
     closed: function () {
         this.show = false;

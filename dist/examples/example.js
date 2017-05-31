@@ -67,7 +67,8 @@ module.exports = (0, _vwx.Page)({
     name: "cook2",
     template: _index2.default,
     data: {
-        list: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20]
+        list: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
+        scrollTop: false
     },
     onReady: function onReady() {
         wx.request({
@@ -197,14 +198,14 @@ module.exports = (0, _vwx.Page)({
 /***/ 65:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"page\">\r\n    <div id=\"scroll\">\r\n        <scroll-view ref=\"childTime\" id=\"timelist\" scroll-id=\"#timelist\" class=\"wrapper\">\r\n            <div class=\"weui-cells\">\r\n                <a class=\"weui-cell weui-cell_access\" v-for=\"(val,i) in list\"  href=\"#/cook2\">\r\n                    <div class=\"weui-cell__bd\">\r\n                        <p>11111111111111111{{val}}</p>\r\n                    </div>\r\n                    <div class=\"weui-cell__ft\">\r\n                    </div>\r\n                </a>\r\n            </div>\r\n        </scroll-view>\r\n    </div>\r\n</div>";
+module.exports = "<div id=\"page\">\r\n    <div id=\"scroll\">\r\n        <div class=\"weui-cells\">\r\n            <a class=\"weui-cell weui-cell_access\" v-for=\"(val,i) in list\" href=\"#/cook2\">\r\n                <div class=\"weui-cell__bd\">\r\n                    <p>11111111111111111{{val}}</p>\r\n                </div>\r\n                <div class=\"weui-cell__ft\">\r\n                </div>\r\n            </a>\r\n        </div>\r\n    </div>\r\n</div>";
 
 /***/ }),
 
 /***/ 66:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"page\">\r\n    <div id=\"scroll\">\r\n        <scroll-view ref=\"childTime\" id=\"timelist\" scroll-id=\"#timelist\" class=\"wrapper\">\r\n            <div class=\"weui-cells\">\r\n                <a class=\"weui-cell weui-cell_access\" v-for=\"(val,i) in list\"   href=\"#/cook3\">\r\n                    <div class=\"weui-cell__bd\">\r\n                        <p>22222222222222222{{val}}</p>\r\n                    </div>\r\n                    <div class=\"weui-cell__ft\">\r\n                    </div>\r\n                </a>\r\n            </div>\r\n        </scroll-view>\r\n    </div>\r\n</div>";
+module.exports = "<div id=\"page\">\r\n    <div id=\"scroll\">\r\n        <div class=\"weui-cells\">\r\n            <a class=\"weui-cell weui-cell_access\" v-for=\"(val,i) in list\" href=\"#/cook3\">\r\n                <div class=\"weui-cell__bd\">\r\n                    <p>22222222222222222{{val}}</p>\r\n                </div>\r\n                <div class=\"weui-cell__ft\">\r\n                </div>\r\n            </a>\r\n        </div>\r\n    </div>\r\n</div>";
 
 /***/ }),
 

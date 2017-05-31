@@ -1,15 +1,13 @@
 <div id="page">
     <div id="scroll">
-        <scroll-view ref="childTime" id="timelist" scroll-id="#timelist" class="wrapper">
-            <div class="weui-cells">
-                <a class="weui-cell weui-cell_access" v-for="(val,i) in list"   href="#/cook3">
-                    <div class="weui-cell__bd">
-                        <p>22222222222222222{{val}}</p>
-                    </div>
-                    <div class="weui-cell__ft">
-                    </div>
-                </a>
-            </div>
-        </scroll-view>
+        <div class="weui-cells">
+            <a class="weui-cell weui-cell_access" v-for="(val,i) in list" href="#/cook3">
+                <div class="weui-cell__bd">
+                    <p>22222222222222222{{val}}</p>
+                </div>
+                <div class="weui-cell__ft">
+                </div>
+            </a>
+        </div>
     </div>
 </div>

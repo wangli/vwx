@@ -1,5 +1,5 @@
 /*
- * app.js v0.1.10
+ * app.js v0.1.11
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -13,7 +13,8 @@ var _vueConfig = {
         animName: "",
         show: true,
         hlg: 0,
-        leave: "into"
+        leave: "into",
+        scrollTop: 0,
     },
     watch: {},
     computed: {},
@@ -23,6 +24,9 @@ var _vueConfig = {
     created: function () {
         if (this.$parent) {
             this.hlg = this.$parent.history.length;
+            if (this.scrollTop || this.scrollTop === 0) {
+                if (window.document) window.document.body.scrollTop = this.scrollTop;
+            }
         }
     },
     /*在挂载开始之前被调用：相关的 render 函数首次被调用。*/

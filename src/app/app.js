@@ -18,14 +18,7 @@ var _app = {
 var App = function (Vue, VueRouter, _options) {
     if (_options.pages) {
         router = new VueRouter({
-            routes: _options.pages,
-            scrollBehavior: function (to, from, savedPosition) {
-                if (savedPosition) {
-                    return savedPosition
-                } else {
-                    return { x: 0, y: 0 }
-                }
-            }
+            routes: _options.pages
         });
         router.beforeEach((to, from, next) => {
             var _rApp = router.app;
