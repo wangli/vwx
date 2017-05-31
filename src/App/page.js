@@ -1,5 +1,5 @@
 /*
- * app.js v0.1.11
+ * app.js v0.1.12
  * (c) 2017 wangli
  * Released under the MIT License.
  */
