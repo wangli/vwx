@@ -4,7 +4,9 @@ module.exports = Page({
     name: "index",
     template: tpl,
     data: {
-        list: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20]
+        list: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20],
+        isover:false,
+        wait:false,
     },
     onLoad: function() {},
     onReady: function() {
@@ -16,8 +18,13 @@ module.exports = Page({
         app.config.accompany = wx.user.accompany();
     },
     onShow: function() {},
-    closed: function() {
-        this.show = false;
+    additem: function() {
+        var that=this;
+        this.wait=true;
+        setTimeout(function(){
+            that.list.push(99);
+            that.wait=false;
+        },11000);
     },
     onscroll: function() {
 

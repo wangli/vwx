@@ -33113,7 +33113,7 @@ var _lodash2 = _interopRequireDefault(_lodash);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /*
- * app.js v0.1.11
+ * app.js v0.1.12
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -33366,7 +33366,6 @@ var _scroll_view2 = _interopRequireDefault(_scroll_view);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var vScroll = null;
 exports.default = {
     name: "scroll-view",
     template: _scroll_view2.default,
@@ -33374,7 +33373,7 @@ exports.default = {
         return {
             lowerY: 1,
             readyRen: false,
-            isover: false
+            vScroll: null
         };
     },
     props: {
@@ -33386,14 +33385,32 @@ exports.default = {
             type: Boolean,
             default: true
         },
+        isover: {
+            type: Boolean,
+            default: false
+        },
+        wait: {
+            type: Boolean,
+            default: false
+        },
         scrollId: {
             default: ".scrollView"
+        }
+    },
+    watch: {
+        wait: function wait(val, oldVal) {
+            var _this = this;
+
+            setTimeout(function () {
+                _this.refresh();
+                _this.vScroll.scrollTo(0, _this.vScroll.maxScrollY, 200);
+            }, 1);
         }
     },
     mounted: function mounted() {
         var that = this;
         //创建滚动
-        vScroll = new _iscroll2.default(this.scrollId, {
+        this.vScroll = new _iscroll2.default(this.scrollId, {
             scrollX: that.scrollX,
             scrollY: that.scrollY,
             probeType: 3,
@@ -33406,25 +33423,29 @@ exports.default = {
             tap: true
         });
         //滚动监听
-        vScroll.on('scrollStart', function () {
-            that.bindscrollstart(this);
+        this.vScroll.on('scrollStart', function () {
+            that.vbindscrollstart(this);
         });
         //滚动监听
-        vScroll.on('scrollEnd', function () {
-            that.bindscrollend(this);
+        this.vScroll.on('scrollEnd', function () {
+            that.vbindscrollend(this);
             if (this.y == this.maxScrollY) {
-                that.bindscrolltolower(this);
+                that.vbindscrolltolower(this);
             } else if (this.y == 0) {
-                that.bindscrolltoupper(this);
+                that.vbindscrolltoupper(this);
             }
         });
         //滚动监听
-        vScroll.on('scroll', function () {
-            that.bindscroll(this);
+        this.vScroll.on('scroll', function () {
+            that.vbindscroll(this);
         });
+        if (window.document) {
+            document.querySelector(this.scrollId).addEventListener("DOMNodeInserted", that.refresh, false);
+            document.querySelector(this.scrollId).addEventListener("DOMNodeRemoved", that.refresh, false);
+        }
     },
     methods: {
-        bindscrollstart: function bindscrollstart(evt) {
+        vbindscrollstart: function vbindscrollstart(evt) {
             if (this.lowerY <= 0) {
                 this.readyRen = true;
             } else {
@@ -33432,21 +33453,21 @@ exports.default = {
             }
             this.$emit('bindscrollstart', evt);
         },
-        bindscrollend: function bindscrollend(evt) {
+        vbindscrollend: function vbindscrollend(evt) {
             this.$emit('bindscrollend', evt);
         },
-        bindscrolltoupper: function bindscrolltoupper(evt) {
+        vbindscrolltoupper: function vbindscrolltoupper(evt) {
             this.$emit('bindscrolltoupper', evt);
         },
-        bindscrolltolower: function bindscrolltolower(evt) {
+        vbindscrolltolower: function vbindscrolltolower(evt) {
             this.$emit('bindscrolltolower', evt);
         },
-        bindscroll: function bindscroll(evt) {
+        vbindscroll: function vbindscroll(evt) {
             this.lowerY = parseInt(evt.y - evt.maxScrollY);
             this.$emit('bindscroll', evt);
         },
-        refresh: function refresh() {
-            vScroll.refresh();
+        refresh: function refresh(evt) {
+            this.vScroll.refresh();
         }
     }
 };
@@ -41747,7 +41768,7 @@ module.exports = "<transition name=\"fade\" enter-active-class=\"animated fadeIn
 /* 73 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"scrollView\" v-bind:class=\"{ scrollbottom: lowerY<0,nodata:isover }\">\r\n    <div v-bind:class=\"{ scroller_h: scrollX }\">\r\n        <slot></slot>\r\n    </div>\r\n</div>";
+module.exports = "<div class=\"scrollView\" v-bind:class=\"{ scrollbottom: lowerY<0,nodata:isover,wait:wait }\">\r\n    <div v-bind:class=\"{ scroller_h: scrollX }\">\r\n        <slot></slot>\r\n    </div>\r\n</div>";
 
 /***/ }),
 /* 74 */

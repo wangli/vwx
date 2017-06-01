@@ -1,4 +1,4 @@
-<div class="scrollView" v-bind:class="{ scrollbottom: lowerY<0,nodata:isover }">
+<div class="scrollView" v-bind:class="{ scrollbottom: lowerY<0,nodata:isover,wait:wait }">
     <div v-bind:class="{ scroller_h: scrollX }">
         <slot></slot>
     </div>
