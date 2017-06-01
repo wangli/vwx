@@ -173,7 +173,7 @@ module.exports = (0, _vwx.Page)({
         this.wait = true;
         setTimeout(function () {
             that.list.push(99);
-            that.wait = true;
+            that.wait = false;
         }, 11000);
     },
     onscroll: function onscroll() {}
