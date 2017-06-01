@@ -4,12 +4,15 @@ import _tpl from './scroll_view.html';
 export default {
     name: "scroll-view",
     template: _tpl,
-    data: function () {
+    data: function() {
         return {
             lowerY: 1,
+            scrollTop: 0,
             readyRen: false,
-            vScroll:null
-        } 
+            vScroll: null,
+            waitBottom: false,
+            waitTop: false
+        }
     },
     props: {
         scrollX: {
@@ -33,14 +36,30 @@ export default {
         }
     },
     watch: {
-        wait: function (val, oldVal) {
-            setTimeout(()=>{
-                this.refresh();
-                this.vScroll.scrollTo(0,this.vScroll.maxScrollY,200);
-            },1);
+        wait: function(val, oldVal) {
+            if (val) {
+                if (this.scrollTop >= 0) {
+                    this.waitTop = true;
+                    this.waitBottom = false;
+                    setTimeout(() => {
+                        this.refresh();
+                        this.vScroll.scrollTo(0, 0, 200);
+                    }, 1);
+                } else if (this.lowerY <= 0) {
+                    this.waitTop = false;
+                    this.waitBottom = true;
+                    setTimeout(() => {
+                        this.refresh();
+                        this.vScroll.scrollTo(0, this.vScroll.maxScrollY, 200);
+                    }, 1);
+                }
+            } else {
+                this.waitTop = false;
+                this.waitBottom = false;
+            }
         }
     },
-    mounted: function () {
+    mounted: function() {
         let that = this;
         //创建滚动
         this.vScroll = new IScroll(this.scrollId, {
@@ -56,11 +75,11 @@ export default {
             tap: true
         });
         //滚动监听
-        this.vScroll.on('scrollStart', function () {
+        this.vScroll.on('scrollStart', function() {
             that.vbindscrollstart(this);
         });
         //滚动监听
-        this.vScroll.on('scrollEnd', function () {
+        this.vScroll.on('scrollEnd', function() {
             that.vbindscrollend(this);
             if (this.y == this.maxScrollY) {
                 that.vbindscrolltolower(this);
@@ -69,16 +88,16 @@ export default {
             }
         });
         //滚动监听
-        this.vScroll.on('scroll', function () {
+        this.vScroll.on('scroll', function() {
             that.vbindscroll(this);
         });
-        if(window.document){
+        if (window.document) {
             document.querySelector(this.scrollId).addEventListener("DOMNodeInserted", that.refresh, false);
             document.querySelector(this.scrollId).addEventListener("DOMNodeRemoved", that.refresh, false);
         }
     },
     methods: {
-        vbindscrollstart: function (evt) {
+        vbindscrollstart: function(evt) {
             if (this.lowerY <= 0) {
                 this.readyRen = true;
             } else {
@@ -86,20 +105,21 @@ export default {
             }
             this.$emit('bindscrollstart', evt);
         },
-        vbindscrollend: function (evt) {
+        vbindscrollend: function(evt) {
             this.$emit('bindscrollend', evt);
         },
-        vbindscrolltoupper: function (evt) {
+        vbindscrolltoupper: function(evt) {
             this.$emit('bindscrolltoupper', evt);
         },
-        vbindscrolltolower: function (evt) {
+        vbindscrolltolower: function(evt) {
             this.$emit('bindscrolltolower', evt);
         },
-        vbindscroll: function (evt) {
+        vbindscroll: function(evt) {
+            this.scrollTop = parseInt(evt.y);
             this.lowerY = parseInt(evt.y - evt.maxScrollY);
             this.$emit('bindscroll', evt);
         },
-        refresh: function (evt) {
+        refresh: function(evt) {
             this.vScroll.refresh();
         }
     }

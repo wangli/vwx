@@ -33372,8 +33372,11 @@ exports.default = {
     data: function data() {
         return {
             lowerY: 1,
+            scrollTop: 0,
             readyRen: false,
-            vScroll: null
+            vScroll: null,
+            waitBottom: false,
+            waitTop: false
         };
     },
     props: {
@@ -33401,10 +33404,26 @@ exports.default = {
         wait: function wait(val, oldVal) {
             var _this = this;
 
-            setTimeout(function () {
-                _this.refresh();
-                _this.vScroll.scrollTo(0, _this.vScroll.maxScrollY, 200);
-            }, 1);
+            if (val) {
+                if (this.scrollTop >= 0) {
+                    this.waitTop = true;
+                    this.waitBottom = false;
+                    setTimeout(function () {
+                        _this.refresh();
+                        _this.vScroll.scrollTo(0, 0, 200);
+                    }, 1);
+                } else if (this.lowerY <= 0) {
+                    this.waitTop = false;
+                    this.waitBottom = true;
+                    setTimeout(function () {
+                        _this.refresh();
+                        _this.vScroll.scrollTo(0, _this.vScroll.maxScrollY, 200);
+                    }, 1);
+                }
+            } else {
+                this.waitTop = false;
+                this.waitBottom = false;
+            }
         }
     },
     mounted: function mounted() {
@@ -33463,6 +33482,7 @@ exports.default = {
             this.$emit('bindscrolltolower', evt);
         },
         vbindscroll: function vbindscroll(evt) {
+            this.scrollTop = parseInt(evt.y);
             this.lowerY = parseInt(evt.y - evt.maxScrollY);
             this.$emit('bindscroll', evt);
         },
@@ -41768,7 +41788,7 @@ module.exports = "<transition name=\"fade\" enter-active-class=\"animated fadeIn
 /* 73 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"scrollView\" v-bind:class=\"{ scrollbottom: lowerY<0,nodata:isover,wait:wait }\">\r\n    <div v-bind:class=\"{ scroller_h: scrollX }\">\r\n        <slot></slot>\r\n    </div>\r\n</div>";
+module.exports = "<div class=\"scrollView\" v-bind:class=\"{ scrollbottom: lowerY<0, scrollTop: scrollTop>0,nodata:isover,waitTop:waitTop,waitBottom:waitBottom }\">\r\n    <div v-bind:class=\"{ scroller_h: scrollX }\">\r\n        <slot></slot>\r\n    </div>\r\n</div>";
 
 /***/ }),
 /* 74 */

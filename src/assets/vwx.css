@@ -14,7 +14,7 @@
     position:absolute;
     overflow: hidden;
 }
-.scrollView:after{
+.scrollView:after,.scrollView:before{
     content: " ";
     width: 8px;
     height: 8px;
@@ -23,12 +23,17 @@
     -webkit-animation: typing 1s linear infinite alternate;
     position: absolute;
     left: 50%;
-    bottom: 2px;
     opacity:0;
     transition: all .6s;
     text-align: center;
     font-size: 12px;
     margin-left: -16px;
+}
+.scrollView:after{
+    bottom: 2px;
+}
+.scrollView:before{
+    top: 2px;
 }
 @-webkit-keyframes typing{
     0%{
@@ -66,7 +71,7 @@
         box-shadow: 12px 0px 0px 0px rgba(0,0,0,0.4),24px 0px 0px 0px rgba(0,0,0,0.6);
     }
 }
-.scrollView.scrollbottom:after{
+.scrollView.scrollbottom:after,.scrollView.scrollTop:before{
     opacity:0.5;
 }
 .scrollView.nodata:after{
@@ -79,10 +84,13 @@
     width: 100%;
     left: 0;
 }
-.scrollView.wait>div{
+.scrollView.waitBottom>div{
     padding-bottom: 30px;
 }
-.scrollView.wait:after{
+.scrollView.waitTop>div{
+    padding-top: 30px;
+}
+.scrollView.waitBottom:after,.scrollView.waitTop:before{
     opacity:0.5;
 }
 .scroller_h{
