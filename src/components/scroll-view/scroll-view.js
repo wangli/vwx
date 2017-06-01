@@ -8,7 +8,8 @@ export default {
         return {
             lowerY: 1,
             scrollTop: 0,
-            readyRen: false,
+            readyRenT: false,
+            readyRenB: false,
             vScroll: null,
             waitBottom: false,
             waitTop: false
@@ -83,7 +84,7 @@ export default {
             that.vbindscrollend(this);
             if (this.y == this.maxScrollY) {
                 that.vbindscrolltolower(this);
-            } else if (this.y == 0) {
+            } else if (this.y == 0&&!this.readyRenA) {
                 that.vbindscrolltoupper(this);
             }
         });
@@ -99,9 +100,14 @@ export default {
     methods: {
         vbindscrollstart: function(evt) {
             if (this.lowerY <= 0) {
-                this.readyRen = true;
+                this.readyRenB = true;
             } else {
-                this.readyRen = false;
+                this.readyRenB = false;
+            }
+            if(this.scrollTop>=0){
+                this.readyRenA = true;
+            }else{
+                this.readyRenA = false;
             }
             this.$emit('bindscrollstart', evt);
         },
@@ -116,6 +122,9 @@ export default {
         },
         vbindscroll: function(evt) {
             this.scrollTop = parseInt(evt.y);
+            if(this.scrollTop<0){
+                this.waitTop=false;
+            }
             this.lowerY = parseInt(evt.y - evt.maxScrollY);
             this.$emit('bindscroll', evt);
         },
