@@ -33366,6 +33366,11 @@ var _scroll_view2 = _interopRequireDefault(_scroll_view);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/*
+ * scroll-view.js v0.2
+ * (c) 2017 wangli
+ * Released under the MIT License.
+ */
 exports.default = {
     name: "scroll-view",
     template: _scroll_view2.default,
@@ -33373,8 +33378,6 @@ exports.default = {
         return {
             lowerY: 1,
             scroll_top: 0,
-            readyRenT: false,
-            readyRenB: false,
             vScroll: null,
             waitBottom: false,
             waitTop: false,
@@ -33430,7 +33433,6 @@ exports.default = {
                     this.waitBottom = true;
                     setTimeout(function () {
                         _this.refresh();
-                        _this.vScroll.scrollTo(0, _this.vScroll.maxScrollY, 200);
                     }, 1);
                 }
             } else {
@@ -33474,16 +33476,6 @@ exports.default = {
     },
     methods: {
         vbindscrollstart: function vbindscrollstart(evt) {
-            if (this.lowerY <= 0) {
-                this.readyRenB = true;
-            } else {
-                this.readyRenB = false;
-            }
-            if (this.scroll_top >= 0) {
-                this.readyRenA = true;
-            } else {
-                this.readyRenA = false;
-            }
             this.$emit('bindscrollstart', evt);
         },
         vbindscrollend: function vbindscrollend(evt) {
@@ -33498,15 +33490,18 @@ exports.default = {
         },
         vbindscroll: function vbindscroll(evt) {
             this.scroll_top = parseInt(evt.y);
-            if (this.scroll_top < 0) {
+            this.lowerY = parseInt(evt.y - evt.maxScrollY);
+            if (this.scroll_top < 0 && !this.wait) {
                 this.waitTop = false;
             }
-            this.lowerY = parseInt(evt.y - evt.maxScrollY);
+            if (this.lowerY > -this.lowerThreshold && !this.wait) {
+                this.waitBottom = false;
+            }
 
             if (this.lowerY <= -this.lowerThreshold && !this.threshold) {
                 this.threshold = true;
                 this.vbindscrolltolower(this);
-            } else if (this.y >= this.upperThreshold && !this.threshold) {
+            } else if (this.scroll_top >= this.upperThreshold && !this.threshold) {
                 this.threshold = true;
                 this.vbindscrolltoupper(this);
             }

@@ -13,8 +13,6 @@ export default {
         return {
             lowerY: 1,
             scroll_top: 0,
-            readyRenT: false,
-            readyRenB: false,
             vScroll: null,
             waitBottom: false,
             waitTop: false,
@@ -36,11 +34,11 @@ export default {
         },
         upperThreshold: {
             type: Number,
-            default: 20
+            default: 50
         },
         lowerThreshold: {
             type: Number,
-            default: 20
+            default: 50
         },
         isover: {
             type: Boolean,
@@ -68,7 +66,6 @@ export default {
                     this.waitBottom = true;
                     setTimeout(() => {
                         this.refresh();
-                        this.vScroll.scrollTo(0, this.vScroll.maxScrollY, 200);
                     }, 1);
                 }
             } else {
@@ -112,16 +109,6 @@ export default {
     },
     methods: {
         vbindscrollstart: function(evt) {
-            if (this.lowerY <= 0) {
-                this.readyRenB = true;
-            } else {
-                this.readyRenB = false;
-            }
-            if(this.scroll_top>=0){
-                this.readyRenA = true;
-            }else{
-                this.readyRenA = false;
-            }
             this.$emit('bindscrollstart', evt);
         },
         vbindscrollend: function(evt) {
@@ -136,15 +123,17 @@ export default {
         },
         vbindscroll: function(evt) {
             this.scroll_top = parseInt(evt.y);
-            if(this.scroll_top<0){
+            this.lowerY = parseInt(evt.y - evt.maxScrollY);
+            if(this.scroll_top<0&&!this.wait){
                 this.waitTop=false;
             }
-            this.lowerY = parseInt(evt.y - evt.maxScrollY);
-
-            if (this.lowerY <= -this.lowerThreshold&&!this.threshold) {
+            if(this.lowerY>(-this.lowerThreshold)&&!this.wait){
+                this.waitBottom=false;
+            }
+            if (this.lowerY <= (-this.lowerThreshold)&&!this.threshold) {
                 this.threshold=true;
                 this.vbindscrolltolower(this);
-            } else if (this.y >=this.upperThreshold&&!this.threshold) {
+            } else if (this.scroll_top >=this.upperThreshold&&!this.threshold) {
                 this.threshold=true;
                 this.vbindscrolltoupper(this);
             }

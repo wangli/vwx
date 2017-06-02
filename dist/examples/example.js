@@ -178,6 +178,13 @@ module.exports = (0, _vwx.Page)({
     },
     onscrolltolower: function onscrolltolower() {
         console.log("onscrolltolower");
+        var that = this;
+        this.wait = true;
+    },
+    onscrolltoupper: function onscrolltoupper() {
+        console.log("onscrolltoupper");
+        var that = this;
+        this.wait = true;
     }
 });
 
@@ -228,7 +235,7 @@ module.exports = "<div id=\"page\">\r\n    <div id=\"scroll\">\r\n        <scrol
 /***/ 68:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"page\">\r\n    <div id=\"swiper\">\r\n        <swiper :indicator-dots=\"true\" class=\"swipercon\" swiperId=\"sssid\">\r\n            <a class=\"swiper-slide blue-slide\"><img src=\"http://img.ukitchenplus.com/2017410122936771C7CD5B7838DE7EE5C562A246C96F8431.png\"></a>\r\n            <a class=\"swiper-slide blue-slide\"><img src=\"http://img.ukitchenplus.com/20174101229517242A88AEC89B92BF404B97A101B7A353AF.png\"></a>\r\n        </swiper>\r\n    </div>\r\n    <div id=\"scroll\">\r\n        <scroll-view ref=\"childTime\" id=\"timelist\" scroll-id=\"#timelist\" class=\"wrapper\" :isover=\"isover\" v-on:bindscrolltolower=\"onscrolltolower\" :wait=\"wait\">\r\n            <div class=\"weui-cells\">\r\n                <a class=\"weui-cell weui-cell_access\" v-for=\"(val,i) in list\"  href=\"#/cook\">\r\n                    <div class=\"weui-cell__bd\">\r\n                        <p>{{val}}</p>\r\n                    </div>\r\n                    <div class=\"weui-cell__ft\">\r\n                    </div>\r\n                </a>\r\n            </div>\r\n        </scroll-view>\r\n    </div>\r\n    <div id=\"scroll2\">\r\n        <scroll-view ref=\"child2\" id=\"timelist2\" scroll-id=\"#timelist2\"  :scroll-x=\"true\" :scroll-y=\"false\" class=\"wrapper\">\r\n            <a class=\"weui-cell\" v-for=\"(val,i) in list\" @click=\"additem\">\r\n                {{val}}\r\n            </a>\r\n        </scroll-view>\r\n    </div>\r\n    <div><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p></div>\r\n</div>";
+module.exports = "<div id=\"page\">\r\n    <div id=\"swiper\">\r\n        <swiper :indicator-dots=\"true\" class=\"swipercon\" swiperId=\"sssid\">\r\n            <a class=\"swiper-slide blue-slide\"><img src=\"http://img.ukitchenplus.com/2017410122936771C7CD5B7838DE7EE5C562A246C96F8431.png\"></a>\r\n            <a class=\"swiper-slide blue-slide\"><img src=\"http://img.ukitchenplus.com/20174101229517242A88AEC89B92BF404B97A101B7A353AF.png\"></a>\r\n        </swiper>\r\n    </div>\r\n    <div id=\"scroll\">\r\n        <scroll-view ref=\"childTime\" id=\"timelist\" scroll-id=\"#timelist\" class=\"wrapper\" :isover=\"isover\" v-on:bindscrolltoupper=\"onscrolltoupper\" v-on:bindscrolltolower=\"onscrolltolower\" :wait=\"wait\">\r\n            <div class=\"weui-cells\">\r\n                <a class=\"weui-cell weui-cell_access\" v-for=\"(val,i) in list\"  href=\"#/cook\">\r\n                    <div class=\"weui-cell__bd\">\r\n                        <p>{{val}}</p>\r\n                    </div>\r\n                    <div class=\"weui-cell__ft\">\r\n                    </div>\r\n                </a>\r\n            </div>\r\n        </scroll-view>\r\n    </div>\r\n    <div id=\"scroll2\">\r\n        <scroll-view ref=\"child2\" id=\"timelist2\" scroll-id=\"#timelist2\"  :scroll-x=\"true\" :scroll-y=\"false\" class=\"wrapper\">\r\n            <a class=\"weui-cell\" v-for=\"(val,i) in list\" @click=\"additem\">\r\n                {{val}}\r\n            </a>\r\n        </scroll-view>\r\n    </div>\r\n    <div><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p><p>ss</p></div>\r\n</div>";
 
 /***/ }),
 

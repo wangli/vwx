@@ -663,7 +663,6 @@ button.swiper-pagination-bullet {
     padding-bottom: 30px;
 }
 .scrollView.waitTop>div{
-    transition: all .6s;
     padding-top: 30px;
 }
 .scrollView.waitBottom:after,.scrollView.waitTop:before{

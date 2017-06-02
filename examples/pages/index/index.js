@@ -28,5 +28,12 @@ module.exports = Page({
     },
     onscrolltolower: function() {
         console.log("onscrolltolower");
+        var that=this;
+        this.wait=true;
+    },
+    onscrolltoupper: function() {
+        console.log("onscrolltoupper");
+        var that=this;
+        this.wait=true;
     }
 });

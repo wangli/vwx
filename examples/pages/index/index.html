@@ -6,7 +6,7 @@
         </swiper>
     </div>
     <div id="scroll">
-        <scroll-view ref="childTime" id="timelist" scroll-id="#timelist" class="wrapper" :isover="isover" v-on:bindscrolltolower="onscrolltolower" :wait="wait">
+        <scroll-view ref="childTime" id="timelist" scroll-id="#timelist" class="wrapper" :isover="isover" v-on:bindscrolltoupper="onscrolltoupper" v-on:bindscrolltolower="onscrolltolower" :wait="wait">
             <div class="weui-cells">
                 <a class="weui-cell weui-cell_access" v-for="(val,i) in list"  href="#/cook">
                     <div class="weui-cell__bd">
