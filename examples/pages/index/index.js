@@ -27,13 +27,20 @@ module.exports = Page({
         },11000);
     },
     onscrolltolower: function() {
-        console.log("onscrolltolower");
         var that=this;
         this.wait=true;
+        setTimeout(function(){
+            that.list.push(99);
+            that.wait=false;
+        },2000);
     },
     onscrolltoupper: function() {
         console.log("onscrolltoupper");
         var that=this;
         this.wait=true;
+        setTimeout(function(){
+            that.list.shift();
+            that.wait=false;
+        },2000);
     }
 });

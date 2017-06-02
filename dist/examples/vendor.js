@@ -33367,7 +33367,7 @@ var _scroll_view2 = _interopRequireDefault(_scroll_view);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /*
- * scroll-view.js v0.2
+ * scroll-view.js v0.2.1
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -33399,11 +33399,11 @@ exports.default = {
         },
         upperThreshold: {
             type: Number,
-            default: 20
+            default: 50
         },
         lowerThreshold: {
             type: Number,
-            default: 20
+            default: 50
         },
         isover: {
             type: Boolean,
@@ -33419,25 +33419,8 @@ exports.default = {
     },
     watch: {
         wait: function wait(val, oldVal) {
-            var _this = this;
-
-            if (val) {
-                if (this.scroll_top >= 0) {
-                    this.waitTop = true;
-                    this.waitBottom = false;
-                    setTimeout(function () {
-                        _this.refresh();
-                    }, 1);
-                } else if (this.lowerY <= 0) {
-                    this.waitTop = false;
-                    this.waitBottom = true;
-                    setTimeout(function () {
-                        _this.refresh();
-                    }, 1);
-                }
-            } else {
-                this.waitTop = false;
-                this.waitBottom = false;
+            if (!val) {
+                this.waitBottom = this.waitTop = false;
             }
         }
     },
@@ -33481,6 +33464,7 @@ exports.default = {
         vbindscrollend: function vbindscrollend(evt) {
             this.threshold = false;
             this.$emit('bindscrollend', evt);
+            this.refresh();
         },
         vbindscrolltoupper: function vbindscrolltoupper(evt) {
             this.$emit('bindscrolltoupper', evt);
@@ -33491,17 +33475,19 @@ exports.default = {
         vbindscroll: function vbindscroll(evt) {
             this.scroll_top = parseInt(evt.y);
             this.lowerY = parseInt(evt.y - evt.maxScrollY);
-            if (this.scroll_top < 0 && !this.wait) {
+
+            if (this.scroll_top < 0) {
                 this.waitTop = false;
-            }
-            if (this.lowerY > -this.lowerThreshold && !this.wait) {
+            } else if (this.lowerY > -this.lowerThreshold) {
                 this.waitBottom = false;
             }
 
             if (this.lowerY <= -this.lowerThreshold && !this.threshold) {
+                this.waitBottom = true;
                 this.threshold = true;
                 this.vbindscrolltolower(this);
             } else if (this.scroll_top >= this.upperThreshold && !this.threshold) {
+                this.waitTop = true;
                 this.threshold = true;
                 this.vbindscrolltoupper(this);
             }
@@ -41809,7 +41795,7 @@ module.exports = "<transition name=\"fade\" enter-active-class=\"animated fadeIn
 /* 73 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"scrollView\" v-bind:class=\"{ scrollbottom: lowerY<-lowerThreshold, scrollTop: scroll_top>upperThreshold,nodata:isover,waitTop:waitTop,waitBottom:waitBottom }\">\r\n    <div v-bind:class=\"{ scroller_h: scrollX }\">\r\n        <slot></slot>\r\n    </div>\r\n</div>";
+module.exports = "<div class=\"scrollView\" v-bind:class=\"{ scrollbottom: lowerY<0, scrollTop: scroll_top>upperThreshold,nodata:isover,waitTop:waitTop,waitBottom:waitBottom }\">\r\n    <div v-bind:class=\"{ scroller_h: scrollX }\">\r\n        <slot></slot>\r\n    </div>\r\n</div>";
 
 /***/ }),
 /* 74 */

@@ -85,7 +85,7 @@
     left: 0;
 }
 .scrollView.waitBottom>div{
-    padding-bottom: 30px;
+    
 }
 .scrollView.waitTop>div{
     padding-top: 30px;

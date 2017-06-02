@@ -1,5 +1,5 @@
 /*
- * scroll-view.js v0.2
+ * scroll-view.js v0.2.2
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -53,24 +53,9 @@ export default {
         }
     },
     watch: {
-        wait: function(val, oldVal) {
-            if (val) {
-                if (this.scroll_top >= 0) {
-                    this.waitTop = true;
-                    this.waitBottom = false;
-                    setTimeout(() => {
-                        this.refresh();
-                    }, 1);
-                } else if (this.lowerY <= 0) {
-                    this.waitTop = false;
-                    this.waitBottom = true;
-                    setTimeout(() => {
-                        this.refresh();
-                    }, 1);
-                }
-            } else {
-                this.waitTop = false;
-                this.waitBottom = false;
+        wait: function (val, oldVal) {
+            if(!val){
+                this.waitBottom=this.waitTop=false;
             }
         }
     },
@@ -114,6 +99,7 @@ export default {
         vbindscrollend: function(evt) {
             this.threshold=false;
             this.$emit('bindscrollend', evt);
+            this.refresh();
         },
         vbindscrolltoupper: function(evt) {
             this.$emit('bindscrolltoupper', evt);
@@ -124,16 +110,19 @@ export default {
         vbindscroll: function(evt) {
             this.scroll_top = parseInt(evt.y);
             this.lowerY = parseInt(evt.y - evt.maxScrollY);
-            if(this.scroll_top<0&&!this.wait){
+
+            if(this.scroll_top<0){
                 this.waitTop=false;
-            }
-            if(this.lowerY>(-this.lowerThreshold)&&!this.wait){
+            }else if(this.lowerY>(-this.lowerThreshold)){
                 this.waitBottom=false;
             }
+
             if (this.lowerY <= (-this.lowerThreshold)&&!this.threshold) {
+                this.waitBottom=true;
                 this.threshold=true;
                 this.vbindscrolltolower(this);
             } else if (this.scroll_top >=this.upperThreshold&&!this.threshold) {
+                this.waitTop=true;
                 this.threshold=true;
                 this.vbindscrolltoupper(this);
             }
