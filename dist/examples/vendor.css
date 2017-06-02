@@ -605,10 +605,10 @@ button.swiper-pagination-bullet {
     margin-left: -16px;
 }
 .scrollView:after{
-    bottom: 2px;
+    bottom: 5px;
 }
 .scrollView:before{
-    top: 2px;
+    top: 5px;
 }
 @-webkit-keyframes typing{
     0%{
@@ -663,6 +663,7 @@ button.swiper-pagination-bullet {
     padding-bottom: 30px;
 }
 .scrollView.waitTop>div{
+    transition: all .6s;
     padding-top: 30px;
 }
 .scrollView.waitBottom:after,.scrollView.waitTop:before{

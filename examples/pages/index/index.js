@@ -26,7 +26,7 @@ module.exports = Page({
             that.wait=false;
         },11000);
     },
-    onscroll: function() {
-
+    onscrolltolower: function() {
+        console.log("onscrolltolower");
     }
 });

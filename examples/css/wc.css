@@ -751,7 +751,10 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
 }
 /**用户中心**************************************/
 #ucenter .weui-cells{
-    margin-top: 0.5em;
+    /*margin-top: 0.5em;*/
+}
+.weui-cells{
+    margin-top: 0;
 }
 #ucenter .weui-cells:after,#ucenter  .weui-cells:before{
     border: none;

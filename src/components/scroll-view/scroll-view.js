@@ -1,3 +1,8 @@
+/*
+ * scroll-view.js v0.2
+ * (c) 2017 wangli
+ * Released under the MIT License.
+ */
 import IScroll from 'iscroll';
 import _tpl from './scroll_view.html';
 
@@ -7,12 +12,13 @@ export default {
     data: function() {
         return {
             lowerY: 1,
-            scrollTop: 0,
+            scroll_top: 0,
             readyRenT: false,
             readyRenB: false,
             vScroll: null,
             waitBottom: false,
-            waitTop: false
+            waitTop: false,
+            threshold:false
         }
     },
     props: {
@@ -23,6 +29,18 @@ export default {
         scrollY: {
             type: Boolean,
             default: true
+        },
+        scrollTop: {
+            type: Number,
+            default: 0
+        },
+        upperThreshold: {
+            type: Number,
+            default: 20
+        },
+        lowerThreshold: {
+            type: Number,
+            default: 20
         },
         isover: {
             type: Boolean,
@@ -39,12 +57,11 @@ export default {
     watch: {
         wait: function(val, oldVal) {
             if (val) {
-                if (this.scrollTop >= 0) {
+                if (this.scroll_top >= 0) {
                     this.waitTop = true;
                     this.waitBottom = false;
                     setTimeout(() => {
                         this.refresh();
-                        this.vScroll.scrollTo(0, 0, 200);
                     }, 1);
                 } else if (this.lowerY <= 0) {
                     this.waitTop = false;
@@ -62,6 +79,7 @@ export default {
     },
     mounted: function() {
         let that = this;
+        this.scroll_top=this.scrollTop;
         //创建滚动
         this.vScroll = new IScroll(this.scrollId, {
             scrollX: that.scrollX,
@@ -82,11 +100,6 @@ export default {
         //滚动监听
         this.vScroll.on('scrollEnd', function() {
             that.vbindscrollend(this);
-            if (this.y == this.maxScrollY) {
-                that.vbindscrolltolower(this);
-            } else if (this.y == 0&&!this.readyRenA) {
-                that.vbindscrolltoupper(this);
-            }
         });
         //滚动监听
         this.vScroll.on('scroll', function() {
@@ -104,7 +117,7 @@ export default {
             } else {
                 this.readyRenB = false;
             }
-            if(this.scrollTop>=0){
+            if(this.scroll_top>=0){
                 this.readyRenA = true;
             }else{
                 this.readyRenA = false;
@@ -112,6 +125,7 @@ export default {
             this.$emit('bindscrollstart', evt);
         },
         vbindscrollend: function(evt) {
+            this.threshold=false;
             this.$emit('bindscrollend', evt);
         },
         vbindscrolltoupper: function(evt) {
@@ -121,11 +135,19 @@ export default {
             this.$emit('bindscrolltolower', evt);
         },
         vbindscroll: function(evt) {
-            this.scrollTop = parseInt(evt.y);
-            if(this.scrollTop<0){
+            this.scroll_top = parseInt(evt.y);
+            if(this.scroll_top<0){
                 this.waitTop=false;
             }
             this.lowerY = parseInt(evt.y - evt.maxScrollY);
+
+            if (this.lowerY <= -this.lowerThreshold&&!this.threshold) {
+                this.threshold=true;
+                this.vbindscrolltolower(this);
+            } else if (this.y >=this.upperThreshold&&!this.threshold) {
+                this.threshold=true;
+                this.vbindscrolltoupper(this);
+            }
             this.$emit('bindscroll', evt);
         },
         refresh: function(evt) {

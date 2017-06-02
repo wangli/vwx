@@ -33372,11 +33372,13 @@ exports.default = {
     data: function data() {
         return {
             lowerY: 1,
-            scrollTop: 0,
-            readyRen: false,
+            scroll_top: 0,
+            readyRenT: false,
+            readyRenB: false,
             vScroll: null,
             waitBottom: false,
-            waitTop: false
+            waitTop: false,
+            threshold: false
         };
     },
     props: {
@@ -33387,6 +33389,18 @@ exports.default = {
         scrollY: {
             type: Boolean,
             default: true
+        },
+        scrollTop: {
+            type: Number,
+            default: 0
+        },
+        upperThreshold: {
+            type: Number,
+            default: 20
+        },
+        lowerThreshold: {
+            type: Number,
+            default: 20
         },
         isover: {
             type: Boolean,
@@ -33405,12 +33419,11 @@ exports.default = {
             var _this = this;
 
             if (val) {
-                if (this.scrollTop >= 0) {
+                if (this.scroll_top >= 0) {
                     this.waitTop = true;
                     this.waitBottom = false;
                     setTimeout(function () {
                         _this.refresh();
-                        _this.vScroll.scrollTo(0, 0, 200);
                     }, 1);
                 } else if (this.lowerY <= 0) {
                     this.waitTop = false;
@@ -33428,6 +33441,7 @@ exports.default = {
     },
     mounted: function mounted() {
         var that = this;
+        this.scroll_top = this.scrollTop;
         //创建滚动
         this.vScroll = new _iscroll2.default(this.scrollId, {
             scrollX: that.scrollX,
@@ -33448,11 +33462,6 @@ exports.default = {
         //滚动监听
         this.vScroll.on('scrollEnd', function () {
             that.vbindscrollend(this);
-            if (this.y == this.maxScrollY) {
-                that.vbindscrolltolower(this);
-            } else if (this.y == 0) {
-                that.vbindscrolltoupper(this);
-            }
         });
         //滚动监听
         this.vScroll.on('scroll', function () {
@@ -33466,13 +33475,19 @@ exports.default = {
     methods: {
         vbindscrollstart: function vbindscrollstart(evt) {
             if (this.lowerY <= 0) {
-                this.readyRen = true;
+                this.readyRenB = true;
             } else {
-                this.readyRen = false;
+                this.readyRenB = false;
+            }
+            if (this.scroll_top >= 0) {
+                this.readyRenA = true;
+            } else {
+                this.readyRenA = false;
             }
             this.$emit('bindscrollstart', evt);
         },
         vbindscrollend: function vbindscrollend(evt) {
+            this.threshold = false;
             this.$emit('bindscrollend', evt);
         },
         vbindscrolltoupper: function vbindscrolltoupper(evt) {
@@ -33482,8 +33497,19 @@ exports.default = {
             this.$emit('bindscrolltolower', evt);
         },
         vbindscroll: function vbindscroll(evt) {
-            this.scrollTop = parseInt(evt.y);
+            this.scroll_top = parseInt(evt.y);
+            if (this.scroll_top < 0) {
+                this.waitTop = false;
+            }
             this.lowerY = parseInt(evt.y - evt.maxScrollY);
+
+            if (this.lowerY <= -this.lowerThreshold && !this.threshold) {
+                this.threshold = true;
+                this.vbindscrolltolower(this);
+            } else if (this.y >= this.upperThreshold && !this.threshold) {
+                this.threshold = true;
+                this.vbindscrolltoupper(this);
+            }
             this.$emit('bindscroll', evt);
         },
         refresh: function refresh(evt) {
@@ -41788,7 +41814,7 @@ module.exports = "<transition name=\"fade\" enter-active-class=\"animated fadeIn
 /* 73 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"scrollView\" v-bind:class=\"{ scrollbottom: lowerY<0, scrollTop: scrollTop>0,nodata:isover,waitTop:waitTop,waitBottom:waitBottom }\">\r\n    <div v-bind:class=\"{ scroller_h: scrollX }\">\r\n        <slot></slot>\r\n    </div>\r\n</div>";
+module.exports = "<div class=\"scrollView\" v-bind:class=\"{ scrollbottom: lowerY<-lowerThreshold, scrollTop: scroll_top>upperThreshold,nodata:isover,waitTop:waitTop,waitBottom:waitBottom }\">\r\n    <div v-bind:class=\"{ scroller_h: scrollX }\">\r\n        <slot></slot>\r\n    </div>\r\n</div>";
 
 /***/ }),
 /* 74 */
