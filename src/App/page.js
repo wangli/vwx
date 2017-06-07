@@ -23,9 +23,11 @@ var _vueConfig = {
     /*实例已经创建完成之后被调用。在这一步，实例已完成以下的配置：数据观测(data observer)，属性和方法的运算， watch/event 事件回调。然而，挂载阶段还没开始，$el 属性目前不可见。*/
     created: function () {
         if (this.$parent) {
-            this.hlg = this.$parent.history.length;
-            if (this.scrollTop || this.scrollTop === 0) {
-                if (window.document) window.document.body.scrollTop = this.scrollTop;
+            if (this.$parent.history) {
+                this.hlg = this.$parent.history.length;
+                if (this.scrollTop || this.scrollTop === 0) {
+                    if (window.document) window.document.body.scrollTop = this.scrollTop;
+                }
             }
         }
     },

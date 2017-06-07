@@ -87,16 +87,3 @@ img {
     position: relative;
     overflow: hidden;
 }
-#timelist {
-    position: relative;
-    height: 200px;
-}
-#timelist2 {
-    position: relative;
-    height: 200px;
-}
-#scroll2 .weui-cell{
-  display: inline-block;
-  width: 100px;
-  height: 100px;
-}
