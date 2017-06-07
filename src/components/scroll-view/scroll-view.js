@@ -1,5 +1,5 @@
 /*
- * scroll-view.js v0.2.2
+ * scroll-view.js v0.2.3
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -48,6 +48,10 @@ export default {
             type: Boolean,
             default: false
         },
+        more: {
+            type: Boolean,
+            default: false
+        },
         scrollId: {
             default: ".scrollView"
         }
@@ -83,10 +87,12 @@ export default {
         this.vScroll.on('scrollEnd', function() {
             that.vbindscrollend(this);
         });
-        //滚动监听
-        this.vScroll.on('scroll', function() {
-            that.vbindscroll(this);
-        });
+        if(this.more){
+            //滚动监听
+            this.vScroll.on('scroll', function() {
+                that.vbindscroll(this);
+            });
+        }
         if (window.document) {
             document.querySelector(this.scrollId).addEventListener("DOMNodeInserted", that.refresh, false);
             document.querySelector(this.scrollId).addEventListener("DOMNodeRemoved", that.refresh, false);

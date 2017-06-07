@@ -33367,7 +33367,7 @@ var _scroll_view2 = _interopRequireDefault(_scroll_view);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /*
- * scroll-view.js v0.2.1
+ * scroll-view.js v0.2.2
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -33413,6 +33413,10 @@ exports.default = {
             type: Boolean,
             default: false
         },
+        more: {
+            type: Boolean,
+            default: false
+        },
         scrollId: {
             default: ".scrollView"
         }
@@ -33448,10 +33452,12 @@ exports.default = {
         this.vScroll.on('scrollEnd', function () {
             that.vbindscrollend(this);
         });
-        //滚动监听
-        this.vScroll.on('scroll', function () {
-            that.vbindscroll(this);
-        });
+        if (this.more) {
+            //滚动监听
+            this.vScroll.on('scroll', function () {
+                that.vbindscroll(this);
+            });
+        }
         if (window.document) {
             document.querySelector(this.scrollId).addEventListener("DOMNodeInserted", that.refresh, false);
             document.querySelector(this.scrollId).addEventListener("DOMNodeRemoved", that.refresh, false);

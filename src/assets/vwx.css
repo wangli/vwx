@@ -33,7 +33,7 @@
     bottom: 5px;
 }
 .scrollView:before{
-    top: 5px;
+    top: 15px;
 }
 @-webkit-keyframes typing{
     0%{
