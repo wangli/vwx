@@ -1,0 +1,20 @@
+
+#timelist {
+    position: relative;
+    height: 200px;
+}
+#timelist2 {
+    position: relative;
+    height: 100px;
+}
+#timelist2 .weui-btn+.weui-btn{
+  margin: 5px;
+}
+#timelist2 .weui-btn{
+  margin: 5px;
+}
+#scroll2 .weui-cell{
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}

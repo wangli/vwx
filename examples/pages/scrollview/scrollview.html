@@ -4,12 +4,19 @@
             <div class="weui-cells">
                 <a class="weui-cell weui-cell_access" href="javascript:;" v-for="(val,i) in list">
                     <div class="weui-cell__bd">
-                        <p>3333333333333333333{{val}}</p>
+                        <p>{{val}}</p>
                     </div>
                     <div class="weui-cell__ft">
                     </div>
                 </a>
             </div>
+        </scroll-view>
+    </div>
+    <div id="scroll2">
+        <scroll-view ref="child2" id="timelist2" scroll-id="#timelist2"  :scroll-x="true" :scroll-y="false" class="wrapper">
+            <a class="weui-btn weui-btn_plain-primary" v-for="(val,i) in list" >
+                {{val}}
+            </a>
         </scroll-view>
     </div>
 </div>
