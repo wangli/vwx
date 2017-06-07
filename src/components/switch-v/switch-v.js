@@ -1,58 +1,47 @@
 import _tpl from './switch-v.html';
 
 export default {
+    name: 'switch-v',
     template: _tpl,
     props : {
-        checked    : Boolean,
-        bindchange : Function,
-        color      : null
+        checked    : {
+            type   : Boolean,
+            default: false
+        },
+        color      : {
+            type   : String,
+            default: '#04BE02'
+        }
     },
-    onReady: function () {
+    data:function () {
         let nowColor;
 
-        if( typeof this.checked != 'boolean') {
-            throw new Error('checked请传入ture或false');
-        }
-
-        //创建colors保存颜色
-        if(!this.color) {
-            this.colors = '#04BE02';//赋予默认颜色
-        }else {
-            this.colors = this.color;//否则获取颜色
-        }
-
-        //初始化颜色
         if(this.checked) {
-            nowColor = this.colors;
+            nowColor = this.color;
         }else {
             nowColor = '#DFDFDF';
         }
 
-        //添加check属性和iColor属性
-        this.check = this.checked;
-        this.iColor = {
-            backgroundColor : nowColor,
-            borderColor     : nowColor
+        return {
+            check  : this.checked,
+            iColor : {
+                backgroundColor : nowColor,
+                borderColor     : nowColor
+            }
         };
-
     },
     watch: {
         check : function () {
 
             //响应事件
-            this.$emit('bindchange');
+            this.$emit('bindchange',this);
 
             if(this.check) {
-                this.iColor.backgroundColor = this.colors;
+                this.iColor.backgroundColor = this.color;
             }else{
                 this.iColor.backgroundColor = '#DFDFDF';
             }
             this.iColor.borderColor  = this.iColor.backgroundColor
-        }
-    },
-    methods: {
-        refresh: function () {
-
         }
     }
 };
