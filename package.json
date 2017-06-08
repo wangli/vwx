@@ -9,7 +9,8 @@
     "lodash": "^4.17.4",
     "swiper": "^3.4.2",
     "vue": "^2.2.6",
-    "vue-router": "^2.5.2"
+    "vue-router": "^2.5.2",
+    "weui.js": "^1.1.1"
   },
   "devDependencies": {
     "babel": "^6.23.0",
