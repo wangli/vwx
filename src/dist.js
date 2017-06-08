@@ -5,7 +5,7 @@
  */
 
 import Swiper from "./components/swiper/swiper";
-import Switchv from "./components/switch-v/switch-v";
+import SwitchView from "./components/switch-view/switch-view";
 import ScrollView from "./components/scroll-view/scroll-view";
 import modal from "./wx/modal";
 import wx from "./wx";
@@ -33,5 +33,5 @@ module.exports = {
     wx,
     Swiper,
     ScrollView,
-    Switchv
+    SwitchView
 };

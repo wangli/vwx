@@ -1,8 +1,8 @@
 import { Page } from "vwx";
-import _tpl from './switch-v.html';
+import _tpl from './switchview.html';
 
 module.exports = Page({
-    name: "switch_V",
+    name: "switchview",
     template: _tpl,
     data: {
         isover: false,

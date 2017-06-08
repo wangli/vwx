@@ -3,7 +3,7 @@ import index from './pages/index/index.js';
 import modal from './pages/modal/modal.js';
 import swiper from './pages/swiper/swiper.js';
 import scrollview from './pages/scrollview/scrollview.js';
-import switchv from './pages/switch-v/switch-v.js';
+import switchview from './pages/switchview/switchview.js';
 
 import './css/weui.min.css';
 import './css/wc.css';
@@ -21,6 +21,6 @@ App({
         { path: '/modal', component: modal },
         { path: '/swiper', component: swiper },
         { path: '/scrollview', component: scrollview },
-        { path: '/switchv', component: switchv }
+        { path: '/switchview', component: switchview }
     ]
 });

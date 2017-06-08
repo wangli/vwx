@@ -7,7 +7,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Swiper from "./components/swiper/swiper";
 import ScrollView from "./components/scroll-view/scroll-view";
-import SwitchV from "./components/switch-v/switch-v";
+import SwitchView from "./components/switch-view/switch-view";
 
 import modal from "./wx/modal";
 import wx from "./wx";
@@ -16,7 +16,7 @@ import _ from 'lodash';
 const components = [
     Swiper,
     ScrollView,
-    SwitchV
+    SwitchView
 ];
 
 const _app = function (_obj) {
@@ -35,5 +35,5 @@ module.exports = {
     wx,
     Swiper,
     ScrollView,
-    SwitchV
+    SwitchView
 };

@@ -1,7 +1,7 @@
-import _tpl from './switch-v.html';
+import _tpl from './switch-view.html';
 
 export default {
-    name: 'switch-v',
+    name: 'switch-view',
     template: _tpl,
     props : {
         checked    : {
