@@ -7,6 +7,8 @@
 import Swiper from "./components/swiper/swiper";
 import SwitchView from "./components/switch-view/switch-view";
 import ScrollView from "./components/scroll-view/scroll-view";
+
+
 import modal from "./wx/modal";
 import wx from "./wx";
 import { Page } from "./app";

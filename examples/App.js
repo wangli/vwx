@@ -4,6 +4,7 @@ import modal from './pages/modal/modal.js';
 import swiper from './pages/swiper/swiper.js';
 import scrollview from './pages/scrollview/scrollview.js';
 import switchview from './pages/switchview/switchview.js';
+import pickerview from './pages/pickerview/pickerview.js';
 
 import './css/weui.min.css';
 import './css/wc.css';
@@ -21,6 +22,7 @@ App({
         { path: '/modal', component: modal },
         { path: '/swiper', component: swiper },
         { path: '/scrollview', component: scrollview },
-        { path: '/switchview', component: switchview }
+        { path: '/switchview', component: switchview },
+        { path: '/pickerview', component: pickerview },
     ]
 });
