@@ -104,144 +104,139 @@ export default {
             let that = this;
 
             //是否禁用
-            if(this.display) {
-                return;
+            if(!this.display) {
+
+                weui.picker( that.range, {
+
+                    defaultValue: [that.value], //默认选择项
+                    onChange: function (result) {
+                    },
+                    onConfirm: function (result) {
+                        that.$emit('bindchange', result);//响应回调函数
+                    }
+                });
             }
 
-            //如果结果为空weui.js会报错
-            if (this.range.length == 0) {
-                alert('空');
-                return;
-            }
-            weui.picker( that.range, {
-
-                defaultValue: [that.value], //默认选择项
-                onChange: function (result) {
-                    that.$emit('bindchange');//响应回调函数
-                    console.log(result);
-                },
-                onConfirm: function (result) {
-                    console.log(result);
-                }
-            });
         },
         openTime : function () {
 
             //是否禁用
-            if(this.display) {
-                return;
-            }
+            if(!this.display) {
 
-            let TimeArr   = [], //小时数组
-                that      = this,
-                TimeStart = {   // 开始时间
-                    hour : parseInt(this.start.split(':')[0], 10),
-                    min   : parseInt(this.start.split(':')[1], 10)
-                },
-                TimeEnd   = {   // 结束时间
-                    hour : parseInt(this.end.split(':')[0], 10),
-                    min   : parseInt(this.end.split(':')[1], 10)
-                };
+                let TimeArr   = [], //小时数组
+                    that      = this,
+                    TimeStart = {   // 开始时间
+                        hour  : parseInt(this.start.split(':')[0], 10),
+                        min   : parseInt(this.start.split(':')[1], 10)
+                    },
+                    TimeEnd   = {   // 结束时间
+                        hour : parseInt(this.end.split(':')[0], 10),
+                        min   : parseInt(this.end.split(':')[1], 10)
+                    };
 
-            /*
-             *  i 开始小时
-             *  j 记录当前index
-             */
-            for(let i = TimeStart.hour; i<=TimeEnd.hour; i++) {
+                /*
+                 *  i 开始小时
+                 *  j 记录当前index
+                 */
+                for(let i = TimeStart.hour; i<=TimeEnd.hour; i++) {
 
-                let Min = [];
+                    let Min = [];
 
-                //如果起始小时 == 结束小时
-                if( TimeStart.hour == TimeEnd.hour ) {
+                    //如果起始小时 == 结束小时
+                    if( TimeStart.hour == TimeEnd.hour ) {
 
-                    // 起止分钟 到 结束分钟
-                    Min = this.forTime( TimeStart.min, TimeEnd.min );
-                }else {
-
-                    //如果当前小时 = 起始小时
-                    if( i == TimeStart.hour ) {
-
-                        Min = this.forTime( TimeStart.min, 59 );
-                    }else if( i == TimeEnd.hour ){
-
-                        //如果当前小时 = 结束小时
-                        Min = this.forTime( 0, TimeEnd.min );
+                        // 起止分钟 到 结束分钟
+                        Min = this.forTime( TimeStart.min, TimeEnd.min );
                     }else {
-                        Min = this.forTime( 0, 59 );
+
+                        //如果当前小时 = 起始小时
+                        if( i == TimeStart.hour ) {
+
+                            Min = this.forTime( TimeStart.min, 59 );
+                        }else if( i == TimeEnd.hour ){
+
+                            //如果当前小时 = 结束小时
+                            Min = this.forTime( 0, TimeEnd.min );
+                        }else {
+                            Min = this.forTime( 0, 59 );
+                        }
                     }
+
+                    TimeArr.push({
+                        label : i+'时',
+                        value : i,
+                        children : Min
+                    })
                 }
 
-                TimeArr.push({
-                    label : i+'时',
-                    value : i,
-                    children : Min
-                })
-            }
+                //默认时间参数
+                let defaultHouse = parseInt( this.value.split(':')[0], 10),
+                    defaultMin   = parseInt( this.value.split(':')[1], 10);
 
-            //默认时间参数
-            let defaultHouse = parseInt( this.value.split(':')[0], 10),
-                defaultMin   = parseInt( this.value.split(':')[1], 10);
+                weui.picker(TimeArr, {
+                    depth: 2,
+                    defaultValue: [defaultHouse, defaultMin],
+                    onChange: function (result) {
+                    },
+                    onConfirm: function (result) {
+                        that.$emit('bindchange', result);//响应回调函数
+                    },
+                    id: 'timeId'
+                });
+            }// end 禁用 display
 
-            weui.picker(TimeArr, {
-                depth: 2,
-                defaultValue: [defaultHouse, defaultMin],
-                onChange: function (result) {
-                    that.$emit('bindchange');//响应回调函数
-                    console.log(result);
-                },
-                onConfirm: function (result) {
-                    console.log(result);
-                },
-                id: 'timeId'
-            });
+
         },
         openDate : function () {
-            let that     = this,
-                TS       = { // 起始日期
-                    Year : parseInt( this.start.split('-')[0] ),
-                    Mon  : parseInt( this.start.split('-')[1] ),
-                    Day  : parseInt( this.start.split('-')[2] )
-                },
-                TE       = { // 结束日期
-                    Year : parseInt( this.end.split('-')[0] ),
-                    Mon  : parseInt( this.end.split('-')[1] ),
-                    Day  : parseInt( this.end.split('-')[2] )
-                },
-                YearArr  = [], // 用于储存结果集
-                Field    = { //用于取fields等级
-                    'day'   : 3,
-                    'month' : 2,
-                    'year'  : 1
-                };
 
-            // i = 当前年
-            for(let i = TS.Year; i <= TE.Year; i++) {
-                let MonArr = []; // 用于储存月份，月份在下一集合中添加日
+            //是否禁用
+            if(!this.display) {
 
-                //至少为月
-                if( Field[this.fields] > 1 ) {
-                    MonArr = this.forMonth( i, TS, TE);
+                let that     = this,
+                    TS       = { // 起始日期
+                        Year : parseInt( this.start.split('-')[0] ),
+                        Mon  : parseInt( this.start.split('-')[1] ),
+                        Day  : parseInt( this.start.split('-')[2] )
+                    },
+                    TE       = { // 结束日期
+                        Year : parseInt( this.end.split('-')[0] ),
+                        Mon  : parseInt( this.end.split('-')[1] ),
+                        Day  : parseInt( this.end.split('-')[2] )
+                    },
+                    YearArr  = [], // 用于储存结果集
+                    Field    = { //用于取fields等级
+                        'day'   : 3,
+                        'month' : 2,
+                        'year'  : 1
+                    };
+
+                // i = 当前年
+                for(let i = TS.Year; i <= TE.Year; i++) {
+                    let MonArr = []; // 用于储存月份，月份在下一集合中添加日
+
+                    //至少为月
+                    if( Field[this.fields] > 1 ) {
+                        MonArr = this.forMonth( i, TS, TE);
+                    }
+
+                    YearArr.push({
+                        label    : i+'年',
+                        value    : i,
+                        children : MonArr
+                    })
                 }
 
-                YearArr.push({
-                    label    : i+'年',
-                    value    : i,
-                    children : MonArr
-                })
-            }
-
-            weui.picker(YearArr, {
-                depth: 3,
-                defaultValue: [this.value.split('-')[0], this.value.split('-')[1], this.value.split('-')[2]],
-                onChange: function (result) {
-                    that.$emit('bindchange');//响应回调函数
-                    console.log(result);
-                },
-                onConfirm: function (result) {
-                    console.log(result);
-                },
-                id: 'dateId'
-            });
+                weui.picker(YearArr, {
+                    depth: 3,
+                    defaultValue: [this.value.split('-')[0], this.value.split('-')[1], this.value.split('-')[2]],
+                    onChange: function (result) {
+                    },
+                    onConfirm: function (result) {
+                        that.$emit('bindchange', result);//响应回调函数
+                    },
+                    id: 'dateId'
+                });
+            }// end display
 
         },
         forMonth : function (year, start, end) {
