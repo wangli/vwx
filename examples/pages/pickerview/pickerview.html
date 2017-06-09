@@ -1,5 +1,17 @@
-<picker-view :range="range">多项选择</picker-view>
-<br>
-<picker-view mode="time" value="14:57" start="10:27">时间选择</picker-view>
-<br>
-<picker-view mode="date" start="2016-05-01">月份选择</picker-view>
+<div class="page picker js_show">
+    <div class="page__bd page__bd_spacing">
+
+            <picker-view :range="range" style="display: block">
+                <a href="javascript:;" class="weui-btn weui-btn_default" >单列选择器</a>
+            </picker-view>
+
+            <picker-view mode="time" value="14:57" start="10:27" style="display: block">
+                <a href="javascript:;" class="weui-btn weui-btn_default" >时间选择器</a>
+            </picker-view>
+
+            <picker-view mode="date" start="2016-05-01" style="display: block">
+                <a href="javascript:;" class="weui-btn weui-btn_default" >日期选择</a>
+            </picker-view>
+
+    </div>
+</div>

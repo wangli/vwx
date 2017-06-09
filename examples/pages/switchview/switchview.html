@@ -1,4 +1,20 @@
-<switch-view :checked="true"  v-on:bindchange="acb"></switch-view>
-<switch-view :checked="false" v-on:bindchange="acb"></switch-view>
-<switch-view :checked="true" color="red" v-on:bindchange="acb"></switch-view>
-<switch-view :checked="false" color="#287492" v-on:bindchange="acb"></switch-view>
+<div class="weui-cell weui-cell_switch">
+    <div class="weui-cell__bd">默认按钮样式</div>
+    <div class="weui-cell__ft">
+        <switch-view :checked="true"  v-on:bindchange="acb"></switch-view>
+    </div>
+</div>
+<div class="weui-cell weui-cell_switch">
+    <div class="weui-cell__bd">标题文字</div>
+    <div class="weui-cell__ft">
+        <switch-view :checked="false" color="#287492" v-on:bindchange="acb"></switch-view>
+    </div>
+</div>
+<div class="weui-cell weui-cell_switch">
+    <div class="weui-cell__bd">标题文字</div>
+    <div class="weui-cell__ft">
+        <switch-view :checked="true" color="red" v-on:bindchange="acb"></switch-view>
+    </div>
+</div>
+
+
