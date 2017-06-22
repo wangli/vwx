@@ -1,6 +1,6 @@
 <div id="iosActionsheet" v-if="show">
-    <div class="weui-mask" @click="cancel"></div>
-    <div class="weui-actionsheet" :class="{'weui-actionsheet_toggle':open}">
+    <div class="weui-mask  weui-animate-fade-in" @click="cancel"></div>
+    <div class="weui-actionsheet weui-animate-slide-up" :class="{'weui-actionsheet_toggle':open}">
         <div class="weui-actionsheet__menu">
             <template v-for="(val,i) in itemList">
                 <div class="weui-actionsheet__cell" @click="selected({tapIndex:i})">{{val}}</div>

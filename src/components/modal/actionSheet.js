@@ -1,5 +1,4 @@
-import _tpl from './actionSheet.html'
-
+import _tpl from './actionSheet.html';
 export default {
     name: "actionSheet",
     data: {
