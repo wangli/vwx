@@ -1,5 +1,15 @@
 # vwx
-项目依赖vue和vue-router 使用webpack打包
+项目依赖
+vue
+vue-router
+weui.js
+weui
+axios
+iscroll
+lodash
+swiper
+使用webpack打包
+
 # 安装
 
 ## Npm
