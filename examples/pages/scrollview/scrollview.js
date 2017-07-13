@@ -1,7 +1,7 @@
 import { Page, App } from "vwx";
 import tpl from "./scrollview.html";
 module.exports = Page({
-    name:"scrollview",
+    name: "scrollview",
     template: tpl,
     data: {
         list: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20]
@@ -10,5 +10,8 @@ module.exports = Page({
     },
     onscroll: function () {
         console.log("ttttttttttt");
+    },
+    goback: function () {
+        wx.navigateBack();
     }
 });

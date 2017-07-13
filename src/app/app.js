@@ -1,27 +1,30 @@
 /*
- * app.js v0.4.0
+ * app.js v0.4.1
  * (c) 2017 wangli
  * Released under the MIT License.
  */
 /*创建APP根页面*/
 
-var _config, router, _appView, _onLaunch;
+var _config, _router, _appView, _onLaunch;
 var _app = {
     get config() {
         return _config;
     },
     get view() {
         return _appView;
+    },
+    get router() {
+        return _router;
     }
 };
 
 var App = function (Vue, VueRouter, _options) {
     if (_options.pages) {
-        router = new VueRouter({
+        _router = new VueRouter({
             routes: _options.pages
         });
-        router.beforeEach((to, from, next) => {
-            var _rApp = router.app;
+        _router.beforeEach((to, from, next) => {
+            var _rApp = _router.app;
             if (_rApp.history && _rApp.anim) {
                 /*from离开页面处理*/
                 var fromChildren = _rApp.$children[0];
@@ -38,7 +41,7 @@ var App = function (Vue, VueRouter, _options) {
                 next();
             }
         });
-        router.afterEach(to => { });
+        _router.afterEach(to => { });
     }
     if (_options.config) {
         _config = _options.config;
@@ -56,7 +59,7 @@ var App = function (Vue, VueRouter, _options) {
         _appView = new Vue({
             name: "App",
             el: '#app',
-            router,
+            router:_router,
             template: '<router-view></router-view>',
             data: {
                 history: [],

@@ -1,5 +1,5 @@
 /*
- * v0.2.3
+ * v0.3.0
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -9,7 +9,8 @@ import { setStorage, setStorageSync, getStorage, getStorageSync } from "./storag
 import { showToast, hideToast, showLoading, hideLoading, showModal, showActionSheet } from "./modal";
 import login from "./login";
 import user from "./userInfo";
-import requestPayment from "./requestPayment"
+import requestPayment from "./requestPayment";
+import { navigateTo, redirectTo, navigateBack } from "./navigate";
 module.exports = {
     v: "0.2.3",
     request,
@@ -25,5 +26,8 @@ module.exports = {
     showActionSheet,
     login,
     user,
-    requestPayment
+    requestPayment,
+    navigateTo,
+    redirectTo,
+    navigateBack
 };
