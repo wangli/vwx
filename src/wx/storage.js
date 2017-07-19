@@ -1,5 +1,5 @@
 /*
- * v0.1.1
+ * v0.1.2
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -88,4 +88,4 @@ var getKeyData = function (_key, _data) {
 }
 
 
-export default { setStorage, setStorageSync, getStorage, getStorageSync };
+module.exports =  { setStorage, setStorageSync, getStorage, getStorageSync };

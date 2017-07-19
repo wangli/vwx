@@ -12,6 +12,6 @@ module.exports = Page({
         console.log("ttttttttttt");
     },
     goback: function () {
-        wx.navigateBack();
+        wx.redirectTo({url:"switchview"});
     }
 });
