@@ -1,10 +1,10 @@
 /*
- * v0.3.0
+ * v0.3.1
  * (c) 2017 wangli
  * Released under the MIT License.
  */
 /*wx接口*/
-import request from "./request";
+import { request,rmsg } from "./request";
 import { setStorage, setStorageSync, getStorage, getStorageSync } from "./storage";
 import { showToast, hideToast, showLoading, hideLoading, showModal, showActionSheet } from "./modal";
 import login from "./login";
@@ -14,6 +14,7 @@ import { navigateTo, redirectTo, navigateBack } from "./navigate";
 module.exports = {
     v: "0.2.3",
     request,
+    rmsg,
     setStorage,
     setStorageSync,
     getStorage,

@@ -1,7 +1,15 @@
 import Axios from 'axios';
 import _ from 'lodash';
 var count = 0;
-export default function (_obj) {
+var _rqData=[];
+var _rpData=[];
+var rmsg=function(){
+    return {
+        q:_rqData,
+        p:_rpData
+    }
+}
+var request=function (_obj) {
 
     /*默认参数配置*/
     var _defObj = {};
@@ -20,13 +28,18 @@ export default function (_obj) {
     }
     _.extend(_reqObj, _obj);
     /*发送数据*/
+    _rqData.push(_defObj);
     Axios(_reqObj).then(function (res) {
+        _rpData.push(res);
         _reqObj.success(res.data);
         _reqObj.complete(res.data);
     }).catch(function (err) {
+        _rpData.push(err);
         if (err.response) {
             _reqObj.fail(err);
             _reqObj.complete(err);
         }
     });
 };
+
+module.exports =  { request,rmsg };
