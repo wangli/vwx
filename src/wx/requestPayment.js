@@ -17,9 +17,9 @@ var onBridgeReady = function () {
     if (typeof WeixinJSBridge != "undefined") {
         WeixinJSBridge.invoke('getBrandWCPayRequest', _o, function (res) {
             if (res.err_msg == "get_brand_wcpay_request:ok") {
-                _success();
+                _success(res);
             } else {
-                _fail();
+                _fail(res);
             }
         });
     } else {
