@@ -11,6 +11,8 @@ import './css/wc.css';
 import './css/vwx.css';
 import './css/examples.css';
 
+var coms=[{name: "com-footbar",template: "<div>out coms</div>"}]
+
 App({
     config: {
         host: "http://apiqa.ukitchenplus.com",
@@ -24,5 +26,8 @@ App({
         { path: '/scrollview', component: scrollview },
         { path: '/switchview', component: switchview },
         { path: '/pickerview', component: pickerview },
-    ]
-});
+    ],
+    rBefore:function(){
+        
+    }
+},coms);

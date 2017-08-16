@@ -24,6 +24,10 @@ var App = function (Vue, VueRouter, _options) {
             routes: _options.pages
         });
         _router.beforeEach((to, from, next) => {
+            console.log(typeof _options.rBefore);
+            if(_options.rBefore){
+                //_options.rBefore();
+            }
             var _rApp = _router.app;
             if (_rApp.history && _rApp.anim) {
                 /*from离开页面处理*/
@@ -41,7 +45,9 @@ var App = function (Vue, VueRouter, _options) {
                 next();
             }
         });
-        _router.afterEach(to => { });
+        _router.afterEach(to => { 
+            console.log(_router);
+        });
     }
     if (_options.config) {
         _config = _options.config;

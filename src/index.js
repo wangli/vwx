@@ -1,5 +1,5 @@
 /*
- * index.js v0.1.11
+ * index.js v0.3.0
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -14,16 +14,19 @@ import modal from "./wx/modal";
 import wx from "./wx";
 import { App, Page } from "./app";
 import _ from 'lodash';
-const components = [
+var components = [
     Swiper,
     ScrollView,
     SwitchView,
     pickerView
 ];
 
-const _app = function (_obj) {
+const _app = function (_obj,_coms) {
     window.wx = wx;
     Vue.use(VueRouter);
+    if(_coms instanceof Array){
+        components=components.concat(_coms);
+    }
     components.map(component => {
         Vue.component(component.name, component);
     });
@@ -31,7 +34,8 @@ const _app = function (_obj) {
     App(Vue, VueRouter, _obj);
 };
 module.exports = {
-    v: '0.2',
+    v: '0.3',
+    Vue:Vue,
     App: _app,
     Page,
     wx,
