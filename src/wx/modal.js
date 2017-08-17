@@ -78,6 +78,9 @@ var showModal = function (_obj) {
         modal.showCancel=false;
         modal.cancelText='取消';
         modal.confirmText='知道了';
+        modal.success=function(res) {};
+        modal.fail=function() {};
+        modal.complete=function() {};
 
         var _o = _.clone(_obj);
         /*对象处理*/
