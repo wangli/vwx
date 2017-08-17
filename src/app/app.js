@@ -1,5 +1,5 @@
 /*
- * app.js v0.4.1
+ * app.js v0.4.2
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -24,7 +24,6 @@ var App = function (Vue, VueRouter, _options) {
             routes: _options.pages
         });
         _router.beforeEach((to, from, next) => {
-            console.log(typeof _options.rBefore);
             if(_options.rBefore){
                 //_options.rBefore();
             }
@@ -46,7 +45,7 @@ var App = function (Vue, VueRouter, _options) {
             }
         });
         _router.afterEach(to => { 
-            console.log(_router);
+
         });
     }
     if (_options.config) {

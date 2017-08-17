@@ -1,5 +1,5 @@
 /*
- * v0.2.0
+ * v0.2.1
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -73,6 +73,12 @@ var hideLoading = function () {
 }
 var showModal = function (_obj) {
     if (!modal.show) {
+        modal.title='';
+        modal.content='';
+        modal.showCancel=false;
+        modal.cancelText='取消';
+        modal.confirmText='知道了';
+
         var _o = _.clone(_obj);
         /*对象处理*/
         for (var k in _o) {

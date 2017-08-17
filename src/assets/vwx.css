@@ -104,7 +104,7 @@
     color: #999;
     position: fixed;
     width: 100%;
-    z-index: 1000;
+    z-index: 10000;
     top: 0;
     overflow: hidden;
     top: 40%;
