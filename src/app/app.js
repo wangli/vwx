@@ -1,5 +1,5 @@
 /*
- * app.js v0.5.1
+ * app.js v0.5.2
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -62,7 +62,7 @@ var App = function (Vue, VueRouter, _options) {
         _store={}
     }
     for (var key in _options) {
-        if (key != 'pages' && key != 'config' && key != 'onLaunch' && key != 'view' && key != 'store') {
+        if (key != 'pages' && key != 'config' && key != 'onLaunch' && key != 'view' && key != 'store'&& key != 'rBefore'&& key != 'rAfter') {
             _app[key] = _options[key];
         }
     }
