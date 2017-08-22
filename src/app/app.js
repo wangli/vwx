@@ -1,17 +1,17 @@
 /*
- * app.js v0.4.2
+ * app.js v0.5.1
  * (c) 2017 wangli
  * Released under the MIT License.
  */
 /*创建APP根页面*/
 
-var _config, _router, _appView, _onLaunch;
+var _config, _router, _appvm, _onLaunch,_store;
 var _app = {
     get config() {
         return _config;
     },
     get view() {
-        return _appView;
+        return _appvm;
     },
     get router() {
         return _router;
@@ -25,7 +25,7 @@ var App = function (Vue, VueRouter, _options) {
         });
         _router.beforeEach((to, from, next) => {
             if(_options.rBefore){
-                //_options.rBefore();
+                _options.rBefore(o, from, next);
             }
             var _rApp = _router.app;
             if (_rApp.history && _rApp.anim) {
@@ -45,7 +45,9 @@ var App = function (Vue, VueRouter, _options) {
             }
         });
         _router.afterEach(to => { 
-
+            if(_options.rAfter){
+                _options.rAfter(to);
+            }
         });
     }
     if (_options.config) {
@@ -54,16 +56,21 @@ var App = function (Vue, VueRouter, _options) {
     if (_options.onLaunch) {
         _onLaunch = _options.onLaunch;
     }
-
+    if(_options.store){
+        _store=_options.store;
+    }else{
+        _store={}
+    }
     for (var key in _options) {
-        if (key != 'pages' && key != 'config' && key != 'onLaunch' && key != 'view') {
+        if (key != 'pages' && key != 'config' && key != 'onLaunch' && key != 'view' && key != 'store') {
             _app[key] = _options[key];
         }
     }
-    if (typeof _appView == "undefined") {
-        _appView = new Vue({
+    if (typeof _appvm == "undefined") {
+        _appvm = new Vue({
             name: "App",
             el: '#app',
+            store:_store,
             router:_router,
             template: '<router-view></router-view>',
             data: {

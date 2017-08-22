@@ -123,11 +123,11 @@ export default {
                 this.waitBottom=false;
             }
 
-            if (this.lowerY <= (-this.lowerThreshold)&&!this.threshold) {
+            if (this.lowerY <= (-this.lowerThreshold)&&!this.threshold&&!this.waitBottom) {
                 this.waitBottom=true;
                 this.threshold=true;
                 this.vbindscrolltolower(this);
-            } else if (this.scroll_top >=this.upperThreshold&&!this.threshold) {
+            } else if (this.scroll_top >=this.upperThreshold&&!this.threshold&&!this.waitTop) {
                 this.waitTop=true;
                 this.threshold=true;
                 this.vbindscrolltoupper(this);

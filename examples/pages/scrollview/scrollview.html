@@ -1,6 +1,6 @@
 <div id="page">
     <div id="scroll">
-        <scroll-view ref="childTime" id="timelist" scroll-id="#timelist" class="wrapper" :more="true">
+        <scroll-view ref="childTime" id="timelist" scroll-id="#timelist" class="wrapper" v-on:bindscrolltoupper="scrolltop" :wait="loading" :more="true">
             <div class="weui-cells">
                 <a class="weui-cell weui-cell_access" href="javascript:;" @click="goback" v-for="(val,i) in list">
                     <div class="weui-cell__bd">
