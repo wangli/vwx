@@ -3,8 +3,10 @@ import index from './pages/index/index.js';
 import modal from './pages/modal/modal.js';
 import swiper from './pages/swiper/swiper.js';
 import scrollview from './pages/scrollview/scrollview.js';
-import switchview from './pages/switchview/switchview.js';
-import pickerview from './pages/pickerview/pickerview.js';
+const switchview = () => import('./pages/switchview/switchview.js');
+const pickerview = () => import('./pages/pickerview/pickerview.js');
+//import switchview from './pages/switchview/switchview.js';
+//import pickerview from './pages/pickerview/pickerview.js';
 
 import './css/weui.min.css';
 import './css/wc.css';

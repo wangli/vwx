@@ -3,6 +3,7 @@ var _token = "";
 var _uid = 0;
 var _rt = "web";
 var _info = "";
+var _openId="";
 var p = {
     v: "3.0",
     notice: null,//提示信息
@@ -62,6 +63,22 @@ Object.defineProperty(p, "token", {
             localStorage.removeItem("token");
         } else {
             localStorage.token = _val;
+        }
+        this.accompany();
+    }
+});
+Object.defineProperty(p, "openId", {
+    get: function () {
+        if (localStorage.openId) {
+            _openId = localStorage.openId;
+        }
+        return _openId;
+    },
+    set: function (_val) {
+        if (_val == "") {
+            localStorage.removeItem("openId");
+        } else {
+            localStorage.openId = _val;
         }
         this.accompany();
     }

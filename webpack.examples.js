@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+//const SyntaxDynamicImport = require("babel-plugin-syntax-dynamic-import");
 module.exports = {
     entry: {
         example: "./examples/App.js",
@@ -18,7 +19,8 @@ module.exports = {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 options: {
-                    presets: ['es2015']
+                    presets: ['es2015'],
+                    plugins: ['syntax-dynamic-import']
                 },
                 exclude: /node_modules/
             },

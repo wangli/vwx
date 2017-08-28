@@ -25,7 +25,7 @@ var App = function (Vue, VueRouter, _options) {
         });
         _router.beforeEach((to, from, next) => {
             if(_options.rBefore){
-                _options.rBefore(o, from, next);
+                _options.rBefore(to, from, next);
             }
             var _rApp = _router.app;
             if (_rApp.history && _rApp.anim) {
