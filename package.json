@@ -1,6 +1,6 @@
 {
   "name": "vwx",
-  "version": "0.3.14",
+  "version": "0.3.15",
   "description": "vwx",
   "main": "src/index.js",
   "dependencies": {
@@ -8,8 +8,8 @@
     "iscroll": "^5.2.0",
     "lodash": "^4.17.4",
     "swiper": "^3.4.2",
-    "vue": "^2.2.6",
-    "vue-router": "^2.5.2",
+    "vue": "^2.5.2",
+    "vue-router": "^2.8.1",
     "weui.js": "^1.1.1"
   },
   "devDependencies": {
@@ -27,7 +27,7 @@
     "style-loader": "^0.16.1",
     "url-loader": "^0.5.8",
     "vue-html-loader": "^1.2.4",
-    "webpack": "^2.2.1"
+    "webpack": "^2.7.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
