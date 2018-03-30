@@ -28,6 +28,7 @@ const _app = function (_obj,_coms) {
         components=components.concat(_coms);
     }
     components.map(component => {
+        console.log(component.name);
         Vue.component(component.name, component);
     });
     modal.install(Vue);

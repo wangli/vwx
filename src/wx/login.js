@@ -1,7 +1,7 @@
 import request from './request';
 import _ from 'lodash';
 import user from './userInfo';
-export default function (_obj) {
+module.exports =  function (_obj) {
     var obj = {
         success: function (data) {
             if (data.state == 1) {

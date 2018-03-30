@@ -1,6 +1,6 @@
 import _tpl from './switch-view.html';
 
-export default {
+module.exports =  {
     name: 'switch-view',
     template: _tpl,
     props : {

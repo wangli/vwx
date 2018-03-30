@@ -1,7 +1,7 @@
 import { Page } from "vwx";
 import tpl from "./modal.html";
 module.exports = Page({
-    name: "modal_ep",
+    name: "modal-exp",
     template: tpl,
     onLoad: function () { },
     onReady: function () { },

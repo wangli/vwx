@@ -1,7 +1,7 @@
 import { Page } from "vwx";
 import tpl from "./swiper.html";
 module.exports = Page({
-    name: "swiper_ep",
+    name: "swiper-exp",
     template: tpl,
     data: {
         isover: false,

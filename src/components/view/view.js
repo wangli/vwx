@@ -6,7 +6,7 @@ var indicatorDots = false;
 var interval = 3000;
 var swiperId = ".swiper";
 
-var v = {
+module.exports = {
     template: _tpl,
     props: {
         hover: {
@@ -32,4 +32,3 @@ var v = {
         }
     }
 };
-export default v;

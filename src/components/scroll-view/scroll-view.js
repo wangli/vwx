@@ -6,7 +6,7 @@
 import IScroll from 'iscroll';
 import _tpl from './scroll_view.html';
 
-export default {
+module.exports =  {
     name: "scroll-view",
     template: _tpl,
     data: function() {

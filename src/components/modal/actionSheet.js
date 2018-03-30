@@ -1,5 +1,5 @@
 import _tpl from './actionSheet.html';
-export default {
+module.exports =  {
     name: "actionSheet",
     data: {
         show: false,

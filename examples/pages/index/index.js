@@ -10,6 +10,14 @@ module.exports = Page({
         isover: false,
         wait: false,
     },
+    watch: {
+        '$route'(to, from) {
+            console.log("onload");
+        }
+    },
+    created:function(){
+        console.log("created");
+    },
     onLoad: function () { },
     onReady: function () {
         wx.request({

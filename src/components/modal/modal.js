@@ -1,6 +1,6 @@
 import _tpl from './modal.html'
 
-export default {
+module.exports =  {
     name: "modal",
     data: {
         show: false,

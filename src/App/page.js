@@ -1,5 +1,5 @@
 /*
- * app.js v0.1.12
+ * app.js v0.1.13
  * (c) 2017 wangli
  * Released under the MIT License.
  */
@@ -54,6 +54,7 @@ var _weixConfig = {
     template: "<div><slot></slot></div>",
     data: {},
     watch: {},
+    computed: {},
     onLoad: function (options) {
         // 生命周期函数--监听页面加载
     },
@@ -92,14 +93,14 @@ var _weixConfig = {
     leaveCancelled: function () { },
 };
 
-export default function (_option) {
+module.exports = function (_option) {
     var _vueCfg = _.cloneDeep(_vueConfig);
     var _wxCfg = _.cloneDeep(_weixConfig);
     if (typeof _option != "undefined") {
         _.extend(_wxCfg, _option);
     }
     //提取所有非微信方法到methods对象
-    var unMethodArr = ["onLoad", "onReady", "onUnload", "onPullDownRefresh", "onReachBottom", "onShareAppMessage", "data", "watch"];
+    var unMethodArr = ["onLoad", "onReady", "onUnload", "onPullDownRefresh", "onReachBottom", "onShareAppMessage", "data", "watch", "computed"];
     var methods = {};
     for (var k in _wxCfg) {
         if (_.indexOf(unMethodArr, k) == -1) {
@@ -119,15 +120,15 @@ export default function (_option) {
     _template += "</slot></div>";
     _vueCfg.template = _template;
 
-    _vueCfg.computed = {
-        name: function () {
-            return _wxCfg.name;
-        }
+
+    if (typeof _wxCfg.created != "undefined") {
+        _vueCfg.created = _wxCfg.created;
     }
     _vueCfg.name = _wxCfg.name;
     _vueCfg.beforeMount = _wxCfg.onLoad;
     _vueCfg.mounted = _wxCfg.onReady;
     _vueCfg.destroyed = _wxCfg.onUnload;
+    _vueCfg.computed = _wxCfg.computed;
     _.assign(_vueCfg.watch, _wxCfg.watch);
     _vueCfg.methods = methods;
     return _vueCfg;

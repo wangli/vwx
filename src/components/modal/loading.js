@@ -1,6 +1,6 @@
 import _tpl from './loading.html'
 
-export default {
+module.exports =  {
     name:"loading",
     data: {
         duration: 0,

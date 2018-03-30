@@ -5,7 +5,7 @@
  */
 import _tpl from './trace-view.html';
 var vSwiper = null;
-export default {
+module.exports =  {
     name: 'trace-view',
     template: _tpl,
     props: {

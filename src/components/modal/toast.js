@@ -1,6 +1,6 @@
 import _tpl from './toast.html'
 
-export default {
+module.exports =  {
     name:"toast",
     data: {
         duration: 2000,

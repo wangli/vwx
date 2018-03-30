@@ -7,7 +7,7 @@ import Swiper from 'swiper';
 import _tpl from './swiper.html';
 import 'swiper/dist/css/swiper.css';
 var vSwiper = null;
-export default {
+module.exports =  {
     name: 'swiper',
     template: _tpl,
     props: {
@@ -67,6 +67,7 @@ export default {
         }
     },
     mounted: function () {
+        console.log(this.swid);
         //创建滚动
         vSwiper = new Swiper(this.swid, {
             autoplay: this.intval,
